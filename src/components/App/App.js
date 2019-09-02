@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,22 +6,37 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
+// Importing Components
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+import CalendarView from '../CalendarView/CalendarView';
+import CreateRequest from '../CreateRequest/CreateRequest';
+import EditMyProfilePage from '../EditMyProfilePage/EditMyProfilePage';
+import FamilyProfilePage from '../FamilyProfilePage/FamilyProfilePage';
+import GroupView from '../GroupView/GroupView';
 import InfoPage from '../InfoPage/InfoPage';
+import KidPage from '../KidPage/KidPage';
+import MyProfilePage from '../MyProfilePage/MyProfilePage';
+import NewUserForm from '../NewUserForm/NewUserForm';
+import UserPage from '../UserPage/UserPage';
 
 import './App.css';
 
+
+
+
+
+
+
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
@@ -55,13 +70,63 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
+
+            <ProtectedRoute
+              exact
+              path="/new-user-form"
+              component={NewUserForm}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/my-profile-page"
+              component={MyProfilePage}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/calendar"
+              component={CalendarView}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/create-request"
+              component={CreateRequest}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/family-profile-page"
+              component={FamilyProfilePage}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/edit-my-profile"
+              component={EditMyProfilePage}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/group-view"
+              component={GroupView}
+            />
+
+            <ProtectedRoute
+              exact
+              path="/kid-page"
+              component={KidPage}
+            />
+
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);
