@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 class RegisterPage extends Component {
   state = {
@@ -41,37 +43,31 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+          <h1>Choose a Username and Password</h1>
           <div>
-            <label htmlFor="username">
-              Username:
               <input
                 type="text"
                 name="username"
+                placeholder="Username (Required)"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
-            </label>
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
               <input
                 type="password"
                 name="password"
+                placeholder="Password (Required)"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
-            </label>
           </div>
-          <div>
-            <input
+            <Link to="/new-user-form"
               className="register"
               type="submit"
-              name="submit"
-              value="Register"
-            />
-          </div>
+              name="submit">
+                Next
+            </Link>    
         </form>
         <center>
           <button
