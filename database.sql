@@ -43,7 +43,7 @@ CREATE TABLE "groups" (
     "family_id" INTEGER NOT NULL,
     "group_name" VARCHAR NOT NULL,
     "passcode" VARCHAR NOT NULL,
-    "family_passcode" VARCHAR NOT NULL
+    "family_passcode" VARCHAR 
 );
 CREATE TABLE "feed" (
     "id" SERIAL PRIMARY KEY,
