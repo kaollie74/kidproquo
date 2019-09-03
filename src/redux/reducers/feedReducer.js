@@ -1,6 +1,6 @@
 const feedReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_FEED':
+    case 'SET_YOUE_FEED':
       return action.payload;
     default:
       return state;
