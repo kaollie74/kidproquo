@@ -7,8 +7,10 @@ function* feedSaga () {
 
 function* getYourFeed () {
   try {
-    const response = yield axios.get('/feed');
-    yield put ({type: 'SET_YOUR_FEED'})
+    const response = yield axios.get('/feed/needed');
+    yield put ({type: 'SET_YOUR_NEEDED_FEED'});
+    const response = yield axios.get('/feed/offered');
+    yield put ({type: 'SET_YOUR_OFFERED_FEED'});
   }
   catch(error) {
     console.log('Error with getting your feed from Server/DB', error);
