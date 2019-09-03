@@ -7,7 +7,8 @@ import user from './userReducer';
 import kid from './kidReducer';
 import family from './familyReducer';
 import calendar from './calendarReducer';
-import feed from './feedReducer';
+import feedNeed from './feedNeedReducer';
+import feedOffered from './feedOfferedReducer';
 import hour from './hourReducer';
 import profile from './profileReducer';
 import group from './profileReducer';
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   kid,
   family,
   calendar,
-  feed,
+  feedNeed,
+  feedOffered,
   hour,
   profile,
   group
