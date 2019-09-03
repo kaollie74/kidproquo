@@ -9,7 +9,7 @@ function* addNewFamily(action) {
         console.log('in addNewFamily action.payload:', action.payload);
 
         //This post should post new family data to DB referenceing new user id and payload will have family data
-        const response = yield Axios.post(`/family/${action.payload.id}`, action.payload);
+        const response = yield Axios.post(`/family/${action.payload.user_id}`, action.payload);
         console.log('addNewFamily back from server response:', response.data);
         yield put({ type: 'SET_NEW_FAMILY', payload: response.data })
 
