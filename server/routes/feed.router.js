@@ -27,8 +27,13 @@ router.get('/offered', rejectUnauthenticated,   (req,res)=> {
   WHERE requester_id= $1;`;
   const value = [req.user.id];
   pool.query(sqlText, value)
-  .then((respnse)=> {
-    console.log('Error with getting event_offered from DB', error);
+  .then((response)=> {
+    console.log('respnse from DB', response);
+    res.send(response.rows);
+    
+  })
+  .catch((error) => {
+    console.log('Error getting from event_offered table', error);
     res.sendStatus(500);
     
   })
