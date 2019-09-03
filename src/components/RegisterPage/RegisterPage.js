@@ -20,6 +20,7 @@ class RegisterPage extends Component {
           password: this.state.password,
         },
       });
+      this.props.history.push('/new-user-form');
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
@@ -62,21 +63,21 @@ class RegisterPage extends Component {
                 onChange={this.handleInputChangeFor('password')}
               />
           </div>
-            <Link to="/new-user-form"
+            <button
               className="register"
               type="submit"
               name="submit">
                 Next
-            </Link>    
+            </button>    
         </form>
         <center>
-          <button
+          <Link to="/login"
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
           >
             Login
-          </button>
+          </Link>
         </center>
       </div>
     );

@@ -22,6 +22,13 @@ function* registerUser(action) {
   }
 }
 
+// function* addNewUserInfo(action) {
+//   try{
+//     yield axios.post('/api/user/new-user-info', action.payload)
+//   }
+
+// }
+
 function* registrationSaga() {
   yield takeLatest('REGISTER', registerUser);
 }
