@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 class RegisterPage extends Component {
   state = {
@@ -18,6 +20,7 @@ class RegisterPage extends Component {
           password: this.state.password,
         },
       });
+      this.props.history.push('/new-user-form');
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
@@ -41,46 +44,40 @@ class RegisterPage extends Component {
           </h2>
         )}
         <form onSubmit={this.registerUser}>
-          <h1>Register User</h1>
+          <h1>Choose a Username and Password</h1>
           <div>
-            <label htmlFor="username">
-              Username:
               <input
                 type="text"
                 name="username"
+                placeholder="Username (Required)"
                 value={this.state.username}
                 onChange={this.handleInputChangeFor('username')}
               />
-            </label>
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
               <input
                 type="password"
                 name="password"
+                placeholder="Password (Required)"
                 value={this.state.password}
                 onChange={this.handleInputChangeFor('password')}
               />
-            </label>
           </div>
-          <div>
-            <input
+            <button
               className="register"
               type="submit"
-              name="submit"
-              value="Register"
-            />
-          </div>
+              name="submit">
+                Next
+            </button>    
         </form>
         <center>
-          <button
+          <Link to="/login"
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
           >
             Login
-          </button>
+          </Link>
         </center>
       </div>
     );
