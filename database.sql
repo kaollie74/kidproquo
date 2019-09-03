@@ -26,7 +26,7 @@ CREATE TABLE "family" (
     "phone_number" VARCHAR NOT NULL,
     "image" VARCHAR,
     "user_id" INTEGER NOT NULL,
-    "family_passcode" VARCHAR NOT NULL
+    "family_passcode" VARCHAR 
 );
 CREATE TABLE "kid" (
     "id" SERIAL PRIMARY KEY,
@@ -43,7 +43,7 @@ CREATE TABLE "groups" (
     "family_id" INTEGER NOT NULL,
     "group_name" VARCHAR NOT NULL,
     "passcode" VARCHAR NOT NULL,
-    "family_passcode" VARCHAR NOT NULL
+    "family_passcode" VARCHAR 
 );
 CREATE TABLE "feed" (
     "id" SERIAL PRIMARY KEY,
@@ -57,9 +57,10 @@ CREATE TABLE "event_needed" (
     "event_time_end" TIME NOT NULL,
     "total_hours" INTEGER NOT NULL,
     "event_confirmed" BOOLEAN,
-    "requester_id" INTEGER NOT NULL,
-    "claimer_id" INTEGER NOT NULL,
+    "requester_id" INT REFERENCES "user",
+    "claimer_id" INT REFERENCES "user",
     "group_id" INTEGER NOT NULL,
+    "event_offered_id" INT REFERENCES "event_needed"
 );
 CREATE TABLE "event_offered" (
     "id" SERIAL PRIMARY KEY,
@@ -68,9 +69,10 @@ CREATE TABLE "event_offered" (
     "event_time_end" TIME NOT NULL,
     "total_hours" INTEGER NOT NULL,
     "event_confirmed" BOOLEAN,
-    "requester_id" INTEGER NOT NULL,
-    "claimer_id" INTEGER NOT NULL,
-    "group_id" INTEGER NOT NULL
+    "requester_id" INT REFERENCES "user",
+    "claimer_id" INT REFERENCES "user",
+    "group_id" INTEGER NOT NULL,
+    "event_needed_id" INT REFERENCES "event_offered"
 );
 CREATE TABLE "hours" (
     "id" SERIAL PRIMARY KEY,

@@ -25,6 +25,8 @@ import KidPage from '../KidPage/KidPage';
 import MyProfilePage from '../MyProfilePage/MyProfilePage';
 import NewUserForm from '../NewUserForm/NewUserForm';
 import UserPage from '../UserPage/UserPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+import LoginPage from '../LoginPage/LoginPage';
 
 import './App.css';
 
@@ -70,8 +72,15 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
-
-            <ProtectedRoute
+            <Route 
+              exact path="/login"
+              component={LoginPage}
+            />
+            <Route 
+              exact path="/register"
+              component={RegisterPage}
+            />
+            <Route
               exact
               path="/new-user-form"
               component={NewUserForm}
