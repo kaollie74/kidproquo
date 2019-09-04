@@ -5,9 +5,9 @@ import 'semantic-ui-css/semantic.min.css';
 
 class GroupView extends Component {
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_GROUP' });
-    }
+    // componentDidMount() {
+    //     this.props.dispatch({ type: 'FETCH_GROUP' });
+    // }
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
@@ -79,12 +79,7 @@ class GroupView extends Component {
                     <Image src='/images/family.jpg' wrapped ui={false} />
                     <Card.Content>
                         <Card.Header>Johnson Family</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>Joined in 2019</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            The Johnson's are a family and stuff.
-      </Card.Description>
+                        
                     </Card.Content>
                     <Card.Content extra>
                         <a>
