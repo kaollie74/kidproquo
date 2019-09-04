@@ -4,6 +4,9 @@ import { Card, Image, Icon, Button, Feed } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
 class GroupView extends Component {
+
+    seeCalendar = () => { this.props.history.push('/calendar') }
+
     render() {
         return (
             <div>
@@ -63,7 +66,7 @@ class GroupView extends Component {
                     </Feed>
                 </div>
                 <div>
-                    <Button icon labelPosition='right'>
+                    <Button onClick={(event) => this.seeCalendar()} icon labelPosition='right'>
                         View Calendar
       <Icon name='calendar' />
                     </Button>
