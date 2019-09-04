@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Feed, Container, Header, Label, Progress } from 'semantic-ui-react';
+import { Feed, Container, Header, Label, Progress, FeedContent } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Moment from 'react-moment';
 
- const image = '/images/family.jpg'
-const date = '3 days ago'
-const summary = 'Sitting:'
-const extraText = "9/20 Johnson's 5-9 PM"
+
 
 class MyProfilePage extends Component {
 
@@ -21,10 +18,11 @@ class MyProfilePage extends Component {
     }
 
     progressBar = () => {
-        let needHours = this.props.reduxStore.feedNeed.total_hours;
-        let offeredHours = this.props.reduxStore.feedOffered.total_hours;
-        let total = (offeredHours - needHours);
 
+        let needHours = this.props.reduxStore.feedNeed.needed_total_hours;
+        let offeredHours = this.props.reduxStore.feedNeed.offered_total_hours;
+        let total = ( needHours - offeredHours );
+    
         return total;
     }
 
@@ -34,6 +32,10 @@ class MyProfilePage extends Component {
 
         let need = this.props.reduxStore.feedNeed;
         let offered = this.props.reduxStore.feedOffered;
+        let image = '/images/avatar/small/jenny.jpg'
+        let date = <Moment format="MM/DD/YYYY">{need.offered_date}</Moment>;
+        let summary = need.need_start
+        let summary2 = need.need_end
 
         console.log('this is state', this.state)
 
@@ -47,7 +49,7 @@ class MyProfilePage extends Component {
                     color={this.progressBar() > 50 ? 'green' : 'red'}
                 />
 
-                <Container text>
+                <Container text className='my_feed'>
                     <Header as='h1'>Johnson Family</Header>
                     <Label>
                         Hours Used:
@@ -61,28 +63,13 @@ class MyProfilePage extends Component {
                     </Label>
                     <div>
                         <Feed size='large'>
-                            <Feed.Event
-                                image={image}
-                                date= {<Moment format="MM/DD/YYYY">{offered.event_date}</Moment>}
-
-                                summary={summary}
-
-                                extraText= {offered.event_time_start} 
-                                
-
-                            />
 
                             <Feed.Event>
-                                <Feed.Label image={image} />
-                                <Feed.Content  date= {<Moment format="MM/DD/YYYY">{offered.event_date}</Moment>}  summary={summary} extraText={offered.event_time_start} />
-                            </Feed.Event>
-
-                            <Feed.Event>
-                                <Feed.Label image={image} />
+                                <Feed.Label />
                                 <Feed.Content>
                                     <Feed.Date content={date} />
-                                    <Feed.Summary content={summary} />
-                                    <Feed.Extra text content={extraText} />
+                                    <Feed.Summary> Sitting: {summary} - {summary2}</Feed.Summary>
+    
                                 </Feed.Content>
                             </Feed.Event>
                         </Feed>
