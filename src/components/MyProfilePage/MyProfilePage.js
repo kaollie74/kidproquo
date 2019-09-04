@@ -48,7 +48,7 @@ class MyProfilePage extends Component {
                     label='Hours'
                     color={this.progressBar() > 50 ? 'green' : 'red'}
                 />
-
+                
                 <Container text className='my_feed'>
                     <Header as='h1'>Johnson Family</Header>
                     <Label>
