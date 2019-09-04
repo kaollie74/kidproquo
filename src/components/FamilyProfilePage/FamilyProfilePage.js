@@ -23,15 +23,49 @@ class FamilyProfilePage extends Component {
         return (
             <>
             <div>
-                {JSON.stringify(this.props.reduxStore)}
-                <h1>
+                {/* {JSON.stringify(this.props.reduxStore)} */}
+                    <h1 align="center">
                    This is Family Profile Page
                 </h1>
             </div>
+             &nbsp;
+            <div align="center">
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>Kyle</Card.Header>
+                            <Card.Meta><span>The Olson family</span></Card.Meta>
+                            <Image className='ui centered medium image' src="https://www.roundlakedentistry.com/wp-content/uploads/2016/09/generic-family-at-table.jpg" alt="img 1" />
+                            <Card.Description>
+                                Kyle is allergic to bullshit
+                            </Card.Description>
+                        </Card.Content>
+                    </Card>
+            </div>
+            &nbsp;
+                <div align="center">
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>Info</Card.Header>
+                            <Card.Description>
+                               {this.props.reduxStore.family.street_address} < br/>
+                                {this.props.reduxStore.family.city}  <></>
+                                {this.props.reduxStore.family.state}, <></>
+                                {this.props.reduxStore.family.zip_code}< br />
+                                {this.props.reduxStore.family.phone_number}
+                            </Card.Description>
+                        </Card.Content>
+                    </Card>
+                </div>
+                &nbsp;
+                <div align="center">
+                <Card>
+                <h4 align="center">
+                   Kids
+                </h4>
             <div>
                 <Coverflow
-                    width={960}
-                    height={480}
+                    width={300}
+                    height={300}
                     displayQuantityOfSide={2}
                     navigation={true}
                     enableHeading={false}
@@ -43,20 +77,57 @@ class FamilyProfilePage extends Component {
                         role="menuitem"
                         tabIndex="0"
                     ></div>
-                    <Card>
-                        <Image className='ui centered small image' src="images/logo192.png" alt="img 1" />
-                        <Card.Content>
-                            <Card.Header>Kyle</Card.Header>
-                            <Card.Meta><span>The Olson family</span></Card.Meta>
-                            <Card.Description>
-                                Kyle is allergic to nothing
-                            </Card.Description>
-                        </Card.Content>
-                    </Card>
-                    <img src="images/logo192.png" alt="img 1" />
+                                <Card>
+                                    <Image className='ui centered small image' src="images/logo192.png" alt="img 1" />
+                                    <Card.Content>
+                                        <Card.Header align="center">Jimmy</Card.Header>
+                                        <Modal trigger={<Button align="center"></Button>}>
+                                            <Modal.Header>Jimmy </Modal.Header>
+                                            <Modal.Content image>
+                                                <Image wrapped size='medium' src='https://allgroanup.com/wp-content/uploads/2012/02/Picture-of-kid-smoking-a-cigarette.jpg' />
+                                                <Modal.Description>
+                                                    <p>I am allergic to peanuts.</p>
+                                                </Modal.Description>
+                                            </Modal.Content>
+                                        </Modal>
+                                    </Card.Content>
+                                </Card>
+                                <Card>
+                                    <Image className='ui centered small image' src="images/logo192.png" alt="img 1" />
+                                    <Card.Content>
+                                        <Card.Header align="center">Jimmy</Card.Header>
+                                        <Modal trigger={<Button align="center"></Button>}>
+                                            <Modal.Header>Jimmy </Modal.Header>
+                                            <Modal.Content image>
+                                                <Image wrapped size='medium' src='https://allgroanup.com/wp-content/uploads/2012/02/Picture-of-kid-smoking-a-cigarette.jpg' />
+                                                <Modal.Description>
+                                                    <p>I am allergic to peanuts.</p>
+                                                </Modal.Description>
+                                            </Modal.Content>
+                                        </Modal>
+                                    </Card.Content>
+                                </Card>
+                        <Card>
+                            <Image className='ui centered small image' src="images/logo192.png" alt="img 1" />
+                            <Card.Content>
+                                <Card.Header align="center">Jimmy</Card.Header>
+                                <Modal trigger={<Button align="center"></Button>}>
+                                    <Modal.Header>Jimmy </Modal.Header>
+                                    <Modal.Content image>
+                                        <Image wrapped size='medium' src='https://allgroanup.com/wp-content/uploads/2012/02/Picture-of-kid-smoking-a-cigarette.jpg' />
+                                        <Modal.Description>
+                                            <p>I am allergic to peanuts.</p>
+                                        </Modal.Description>
+                                    </Modal.Content>
+                                </Modal>
+                            </Card.Content>
+                        </Card>
+                    {/* <img src="images/logo192.png" alt="img 1" />
                     <img src="images/logo192.png" alt='img2' />
-                    <img src="images/logo192.png" alt='img3' />
+                    <img src="images/logo192.png" alt='img3' /> */}
                 </Coverflow>
+            </div>
+            </Card>
             </div>
             </>
         )
