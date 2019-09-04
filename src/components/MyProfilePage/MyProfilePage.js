@@ -23,7 +23,7 @@ class MyProfilePage extends Component {
         let offeredHours = 0
         for(let hour of feedNeed){
             // console.log(`this is hour, ${hour.needed_total_hours}` )
-            if(hour === 'needed_total_hours'){
+            if(hour === 'hour.needed_total_hours'){
                 needHours += Number(hour.needed_total_hours)
             }
             if (hour.offered_totalhours) {

@@ -1,6 +1,6 @@
-const calendarReducer = (state = {}, action) => {
+const calendarReducer = (state = [], action) => {
   switch (action.type) {
-    case 'SET_CALENDAR':
+    case 'SET_CALENDAR_EVENTS':
       return action.payload;
     default:
       return state;

@@ -52,7 +52,7 @@ CREATE TABLE "feed" (
 );
 CREATE TABLE "event_needed" (
     "id" SERIAL PRIMARY KEY,
-    "event_date" DATE NOT NULL,
+    "event_date" Varchar NOT NULL,
     "event_time_start" TIME NOT NULL,
     "event_time_end" TIME NOT NULL,
     "total_hours" INTEGER NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE "event_needed" (
 );
 CREATE TABLE "event_offered" (
     "id" SERIAL PRIMARY KEY,
-    "event_date" DATE NOT NULL,
+    "event_date" VARCHAR NOT NULL,
     "event_time_start" TIME NOT NULL,
     "event_time_end" TIME NOT NULL,
     "total_hours" INTEGER NOT NULL,
