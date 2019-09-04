@@ -5,6 +5,10 @@ import 'semantic-ui-css/semantic.min.css';
 
 class GroupView extends Component {
 
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_GROUP' });
+    }
+
     seeCalendar = () => { this.props.history.push('/calendar') }
 
     render() {
