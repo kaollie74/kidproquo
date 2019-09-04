@@ -24,7 +24,7 @@ router.get('/needed', rejectUnauthenticated,   (req,res)=> {
   pool.query(sqlText, value)
   .then((response)=> {
     console.log('response.rows', response.rows)
-    res.send(response.rows[0])
+    res.send(response.rows)
   })
   .catch((error)=> {
     console.log('Error getting from event_needed table', error);
