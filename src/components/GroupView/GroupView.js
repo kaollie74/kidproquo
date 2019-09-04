@@ -5,9 +5,9 @@ import 'semantic-ui-css/semantic.min.css';
 
 class GroupView extends Component {
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_GROUP' });
-    }
+    // componentDidMount() {
+    //     this.props.dispatch({ type: 'FETCH_GROUP' });
+    // }
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
@@ -28,10 +28,10 @@ class GroupView extends Component {
                     <Feed>
                         <Feed.Event>
                             <Feed.Label>
-                                <img src='/images/family.jpg' />
+                                <img src='/images/family.jpg' alt="lol" />
                             </Feed.Label>
                             <Feed.Content>
-                                Johnson Family needs a sitter on 10/2/19 from 5:00pm - 9:00pm <a>Whittier Group</a> 
+                                Johnson Family needs a sitter on 10/2/19 from 5:00pm - 9:00pm <p>Whittier Group</p> 
                                 <Button basic color='blue'>
                                     CLAIM
                                 </Button>
@@ -43,10 +43,10 @@ class GroupView extends Component {
                     <Feed>
                         <Feed.Event>
                             <Feed.Label>
-                                <img src='/images/family.jpg' />
+                                <img src='/images/family.jpg' alt="lol"/>
                             </Feed.Label>
                             <Feed.Content>
-                                Olson Family needs a sitter on 10/9/19 from 5:00pm - 9:00pm <a>Whittier Group</a>
+                                Olson Family needs a sitter on 10/9/19 from 5:00pm - 9:00pm <p>Whittier Group</p>
                                 <Button basic color='blue'>
                                     CLAIM
                                 </Button>
@@ -58,10 +58,10 @@ class GroupView extends Component {
                     <Feed>
                         <Feed.Event>
                             <Feed.Label>
-                                <img src='/images/family.jpg' />
+                                <img src='/images/family.jpg' alt="lol"/>
                             </Feed.Label>
                             <Feed.Content>
-                                Flavin Family needs a sitter on 10/16/19 from 5:00pm - 9:00pm <a>Whittier Group</a>
+                                Flavin Family needs a sitter on 10/16/19 from 5:00pm - 9:00pm <p>Whittier Group</p>
                                 <Button basic color='blue'>
                                     CLAIM
                                 </Button>
@@ -79,18 +79,13 @@ class GroupView extends Component {
                     <Image src='/images/family.jpg' wrapped ui={false} />
                     <Card.Content>
                         <Card.Header>Johnson Family</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>Joined in 2019</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            The Johnson's are a family and stuff.
-      </Card.Description>
+                        
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
+                        <p>
                             <Icon name='user' />
                             Whittier Group
-      </a>
+      </p>
                     </Card.Content>
                 </Card>
 
@@ -106,10 +101,10 @@ class GroupView extends Component {
       </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
+                        <p>
                             <Icon name='user' />
                             Whittier Group
-      </a>
+      </p>
                     </Card.Content>
                 </Card>
 
