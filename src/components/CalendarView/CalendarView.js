@@ -16,12 +16,7 @@ class CalendarView extends Component {
             <Calendar
               onChange={this.onChange}
               value={this.state.date}
-            >
-                <Modal trigger={<Button align="center"></Button>}>
-                    <Modal.header>{this.state.date}</Modal.header>
-                    <Modal.content></Modal.content>
-                </Modal>
-            </Calendar>
+            />
           </div>
         );
       }
