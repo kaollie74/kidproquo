@@ -28,10 +28,10 @@ class GroupView extends Component {
                     <Feed>
                         <Feed.Event>
                             <Feed.Label>
-                                <img src='/images/family.jpg' />
+                                <img src='/images/family.jpg' alt="lol" />
                             </Feed.Label>
                             <Feed.Content>
-                                Johnson Family needs a sitter on 10/2/19 from 5:00pm - 9:00pm <a>Whittier Group</a> 
+                                Johnson Family needs a sitter on 10/2/19 from 5:00pm - 9:00pm <p>Whittier Group</p> 
                                 <Button basic color='blue'>
                                     CLAIM
                                 </Button>
@@ -43,10 +43,10 @@ class GroupView extends Component {
                     <Feed>
                         <Feed.Event>
                             <Feed.Label>
-                                <img src='/images/family.jpg' />
+                                <img src='/images/family.jpg' alt="lol"/>
                             </Feed.Label>
                             <Feed.Content>
-                                Olson Family needs a sitter on 10/9/19 from 5:00pm - 9:00pm <a>Whittier Group</a>
+                                Olson Family needs a sitter on 10/9/19 from 5:00pm - 9:00pm <p>Whittier Group</p>
                                 <Button basic color='blue'>
                                     CLAIM
                                 </Button>
@@ -58,10 +58,10 @@ class GroupView extends Component {
                     <Feed>
                         <Feed.Event>
                             <Feed.Label>
-                                <img src='/images/family.jpg' />
+                                <img src='/images/family.jpg' alt="lol"/>
                             </Feed.Label>
                             <Feed.Content>
-                                Flavin Family needs a sitter on 10/16/19 from 5:00pm - 9:00pm <a>Whittier Group</a>
+                                Flavin Family needs a sitter on 10/16/19 from 5:00pm - 9:00pm <p>Whittier Group</p>
                                 <Button basic color='blue'>
                                     CLAIM
                                 </Button>
@@ -82,10 +82,10 @@ class GroupView extends Component {
                         
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
+                        <p>
                             <Icon name='user' />
                             Whittier Group
-      </a>
+      </p>
                     </Card.Content>
                 </Card>
 
@@ -101,10 +101,10 @@ class GroupView extends Component {
       </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <a>
+                        <p>
                             <Icon name='user' />
                             Whittier Group
-      </a>
+      </p>
                     </Card.Content>
                 </Card>
 
