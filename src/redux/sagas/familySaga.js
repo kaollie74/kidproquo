@@ -25,9 +25,21 @@ function* fetchFamily(action) {
         console.log('error fetching family data', error)
     }
 }
+//Get kid info
+function* fetchKids(action) {
+    try {
+        console.log(action.payload)
+        const response = yield Axios.get(`/kid/${action.payload}`);
+        console.log(response.data);
+        yield put({ type: 'SET_KID', payload: response.data })
+    } catch (error) {
+        console.log('error fetching kid data', error)
+    }
+}
 
 function* familySaga() {
     yield takeEvery('FETCH_FAMILY', fetchFamily)
+    yield takeEvery('FETCH_KIDS', fetchKids)
     yield takeEvery('ADD_NEW_FAMILY', addNewFamily)
 }
 
