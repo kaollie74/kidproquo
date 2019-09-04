@@ -1,20 +1,119 @@
 import React, { Component } from 'react';
-
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+import { connect } from 'react-redux';
+import { Card, Image, Icon, Button, Feed } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 class GroupView extends Component {
     render() {
         return (
             <div>
                 <h1>
-                   This is Group View Page
+                    Whittier Group
                 </h1>
+                <div>
+                    <Button.Group size='small'>
+                        <Button>EDIT</Button>
+                        <Button.Or />
+                        <Button>ADD MEMBERS</Button>
+                    </Button.Group>
+                </div>
+                <div>
+                    <Feed>
+                        <Feed.Event>
+                            <Feed.Label>
+                                <img src='/images/family.jpg' />
+                            </Feed.Label>
+                            <Feed.Content>
+                                Johnson Family needs a sitter on 10/2/19 from 5:00pm - 9:00pm <a>Whittier Group</a> 
+                                <Button basic color='blue'>
+                                    CLAIM
+                                </Button>
+                            </Feed.Content>
+                        </Feed.Event>
+                    </Feed>
+                </div>
+                <div>
+                    <Feed>
+                        <Feed.Event>
+                            <Feed.Label>
+                                <img src='/images/family.jpg' />
+                            </Feed.Label>
+                            <Feed.Content>
+                                Olson Family needs a sitter on 10/9/19 from 5:00pm - 9:00pm <a>Whittier Group</a>
+                                <Button basic color='blue'>
+                                    CLAIM
+                                </Button>
+                            </Feed.Content>
+                        </Feed.Event>
+                    </Feed>
+                </div>
+                <div>
+                    <Feed>
+                        <Feed.Event>
+                            <Feed.Label>
+                                <img src='/images/family.jpg' />
+                            </Feed.Label>
+                            <Feed.Content>
+                                Flavin Family needs a sitter on 10/16/19 from 5:00pm - 9:00pm <a>Whittier Group</a>
+                                <Button basic color='blue'>
+                                    CLAIM
+                                </Button>
+                            </Feed.Content>
+                        </Feed.Event>
+                    </Feed>
+                </div>
+                <div>
+                    <Button icon labelPosition='right'>
+                        View Calendar
+      <Icon name='calendar' />
+                    </Button>
+                </div>
+                <Card>
+                    <Image src='/images/family.jpg' wrapped ui={false} />
+                    <Card.Content>
+                        <Card.Header>Johnson Family</Card.Header>
+                        <Card.Meta>
+                            <span className='date'>Joined in 2019</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            The Johnson's are a family and stuff.
+      </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                        <a>
+                            <Icon name='user' />
+                            Whittier Group
+      </a>
+                    </Card.Content>
+                </Card>
+
+                <Card>
+                    <Image src='/images/family2.jpg' wrapped ui={false} />
+                    <Card.Content>
+                        <Card.Header>Olson Family</Card.Header>
+                        <Card.Meta>
+                            <span className='date'>Joined in 2019</span>
+                        </Card.Meta>
+                        <Card.Description>
+                            The Olson's are a family and stuff.
+      </Card.Description>
+                    </Card.Content>
+                    <Card.Content extra>
+                        <a>
+                            <Icon name='user' />
+                            Whittier Group
+      </a>
+                    </Card.Content>
+                </Card>
+
+
             </div>
         )
     }
 };
 
-export default GroupView;
+const mapReduxStoreToProps = (reduxStore) => ({
+    reduxStore
+})
+
+export default connect(mapReduxStoreToProps)(GroupView);

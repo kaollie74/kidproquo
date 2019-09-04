@@ -60,7 +60,7 @@ CREATE TABLE "event_needed" (
     "requester_id" INT REFERENCES "user",
     "claimer_id" INT REFERENCES "user",
     "group_id" INT REFERENCES "group",
-    "event_offered_id" INT REFERENCES "event_needed"
+    "event_offered_id" INT REFERENCES "event_offered"
 );
 CREATE TABLE "event_offered" (
     "id" SERIAL PRIMARY KEY,
@@ -72,7 +72,7 @@ CREATE TABLE "event_offered" (
     "requester_id" INT REFERENCES "user",
     "claimer_id" INT REFERENCES "user",
     "group_id" INT REFERENCES "group",
-    "event_needed_id" INT REFERENCES "event_offered"
+    "event_needed_id" INT REFERENCES "event_needed"
 );
 CREATE TABLE "hours" (
     "id" SERIAL PRIMARY KEY,
