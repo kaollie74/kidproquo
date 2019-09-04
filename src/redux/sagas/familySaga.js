@@ -18,7 +18,7 @@ function* addNewFamily(action) {
 function* fetchFamily(action) {
     try{
         console.log(action.payload)
-        const response = yield Axios.get(`/user/family/${action.payload}`);
+        const response = yield Axios.get(`/family/user/${action.payload}`);
         console.log(response.data);
         yield put({ type: 'SET_FAMILY', payload: response.data})
     } catch(error) {

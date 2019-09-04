@@ -1,4 +1,4 @@
-const feedOfferedReducer = (state = [], action) => {
+const feedOfferedReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_YOUR_OFFERED_FEED':
       return action.payload;
