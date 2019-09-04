@@ -15,6 +15,8 @@ class FamilyProfilePage extends Component {
 
     componentDidMount(){
         this.props.dispatch({ type:'FETCH_FAMILY', payload: this.props.reduxStore.user.id})
+        this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.reduxStore.user.id })
+
     }
 
 
@@ -23,7 +25,7 @@ class FamilyProfilePage extends Component {
         return (
             <>
             <div>
-                {/* {JSON.stringify(this.props.reduxStore)} */}
+                {JSON.stringify(this.props.reduxStore)}
                     <h1 align="center">
                    This is Family Profile Page
                 </h1>
@@ -77,6 +79,32 @@ class FamilyProfilePage extends Component {
                         role="menuitem"
                         tabIndex="0"
                     ></div>
+                    {this.props.reduxStore.kid.map((item, i)=> {
+                        console.log(item)
+                        return (
+                            <>
+                            <Card key={item.id}>
+                                <Card.Content>
+                                        <Image className='ui centered small image' src={item.image} alt="img 1" />
+                                    <Card.Header align="center">{item.first_name}</Card.Header>
+                                    <Modal trigger={<Button align="center"></Button>}>
+                                        <Modal.Header>{item.first_name}</Modal.Header>
+                                        <Modal.Content image>
+                                            <Image wrapped size='medium' src={item.image} />
+                                            <Modal.Description>
+                                                <h4>Allergies:</h4>
+                                                <p>{item.allergies}</p>
+                                                <h4>Medicine:</h4>
+                                                <p>{item.medication}</p>
+                                            </Modal.Description>
+                                        </Modal.Content>
+                                    </Modal>
+                                </Card.Content>
+                            </Card>
+                            </>
+
+                        )
+                    })}
                                 <Card>
                                     <Image className='ui centered small image' src="images/logo192.png" alt="img 1" />
                                     <Card.Content>
