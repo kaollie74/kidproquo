@@ -12,7 +12,7 @@ router.get('/needed', rejectUnauthenticated,   (req,res)=> {
   pool.query(sqlText, value)
   .then((response)=> {
     console.log('response.rows', response.rows)
-    res.send(response.rows)
+    res.send(response.rows[0])
   })
   .catch((error)=> {
     console.log('Error getting from event_needed table', error);
@@ -29,7 +29,7 @@ router.get('/offered', rejectUnauthenticated,   (req,res)=> {
   pool.query(sqlText, value)
   .then((response)=> {
     console.log('respnse from DB', response);
-    res.send(response.rows);
+    res.send(response.rows[0]);
     
   })
   .catch((error) => {
