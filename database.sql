@@ -36,7 +36,7 @@ CREATE TABLE "kid" (
     "allergies" VARCHAR,
     "medication" VARCHAR,
     "image" VARCHAR,
-    "family_id" INTEGER NOT NULL
+    "family_id" INT REFERENCES "family"
 );
 CREATE TABLE "groups" (
     "id" SERIAL PRIMARY KEY,
