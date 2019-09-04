@@ -9,8 +9,9 @@ function* getYourFeed () {
   try {
     const response = yield axios.get('/feed/needed');
     yield put ({type: 'SET_YOUR_NEEDED_FEED', payload: response.data});
-    const responseTwo= yield axios.get('/feed/offered');
-    yield put ({type: 'SET_YOUR_OFFERED_FEED', payload: responseTwo.data});
+    // const responseTwo= yield axios.get('/feed/offered');
+    // yield put ({type: 'SET_YOUR_OFFERED_FEED', payload: responseTwo.data});
+   
   }
   catch(error) {
     console.log('Error with getting your feed from Server/DB', error);
