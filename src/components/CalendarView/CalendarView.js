@@ -18,7 +18,7 @@ class CalendarView extends Component {
       getEvents =  () => {
         console.log('in get events');
         
-        this.props.dispatch({type: 'FETCH_EVENTS', payload: this.state})
+        //this.props.dispatch({type: 'FETCH_EVENTS', payload: this.state})
         
       }
      
@@ -26,8 +26,13 @@ class CalendarView extends Component {
 
       formatDate =(value)=>{
         console.log('in format date', value)
-       let newDate = ( value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear());
-       this.setState({ date: newDate})
+       //let newDate = ( value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear());
+        let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
+        
+      let newObjectToSend = {date: newDate}
+      console.log ('this is newObjectToSend', newObjectToSend)
+      this.props.dispatch({type: 'FETCH_EVENTS', payload: newObjectToSend})
+       //this.setState({ date: newDate})
       }
      
       render() {
