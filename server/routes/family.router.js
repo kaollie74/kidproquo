@@ -1,11 +1,13 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+
 
 
 
 //Posts new family to the
-router.post('/:id', (req, res) => {
+router.post('/:id', rejectUnauthenticated, (req, res) => {
     console.log(req.params.id)
     console.log('In family router, adding new family, req.body:', req.body)
     const sqlText = `INSERT INTO family ("first_name1", "last_name1", "first_name2", "last_name2", "email",
@@ -24,7 +26,7 @@ router.post('/:id', (req, res) => {
         })
 });
 
-router.get('/user/:id', (req, res) => {
+router.get('/user/:id', rejectUnauthenticated, (req, res) => {
     console.log('in /family with this id:', req.params.id);
     const values = req.params.id;
     const sqlText = `SELECT * FROM family where user_id=$1`;
