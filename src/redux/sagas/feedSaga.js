@@ -22,9 +22,15 @@ function* getYourFeed () {
 
 function* claimEvent (action) {
   console.log('this is action.payload', action.payload)
+
   try {
     yield axios.put(`/feed/update/${action.payload.id}`, action.payload)
-    yield put({type: 'FETCH_EVENTS', payload: action.payload.event_date})
+    
+    let event_date = {
+      event_date: action.payload.event_date
+    }
+    console.log('this is action.payload.event_date', action.payload.event_date);
+    yield put({type: 'FETCH_EVENTS', payload: event_date})
 
   }
   catch(error) {

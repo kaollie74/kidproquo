@@ -46,7 +46,7 @@ handleClaim = (event, item) => {
               <Table.Cell>{item.last_name1}</Table.Cell>
               <Table.Cell> {item.event_time_start} - {item.event_time_end} </Table.Cell>
               <Table.Cell>{item.notes}</Table.Cell>
-              <Table.Cell className= {item.status ? 'orange' :'blue'} > </Table.Cell>
+              <Table.Cell className= {item.offer_needed ? 'orange' :'blue'} > </Table.Cell>
               <Table.Cell><Button onClick={(event) => this.handleClaim(event, item)}>Claim</Button></Table.Cell>
             </Table.Row>         
   ))}
