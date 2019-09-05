@@ -6,26 +6,19 @@ import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form } from 'sem
 
 
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
-
 class FamilyProfilePage extends Component {
 
     componentDidMount(){
         this.props.dispatch({ type:'FETCH_FAMILY', payload: this.props.reduxStore.user.id})
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.reduxStore.user.id })
-
     }
-
 
 
     render() {
         return (
             <>
             <div>
-                {JSON.stringify(this.props.reduxStore)}
+                {/* {JSON.stringify(this.props.reduxStore)} */}
                     <h1 align="center">
                    This is Family Profile Page
                 </h1>
@@ -88,10 +81,12 @@ class FamilyProfilePage extends Component {
                                         <Image className='ui centered small image' src={item.image} alt="img 1" />
                                     <Card.Header align="center">{item.first_name}</Card.Header>
                                     <Modal trigger={<Button align="center"></Button>}>
-                                        <Modal.Header>{item.first_name}</Modal.Header>
+                                            <Modal.Header>{item.first_name} {item.last_name}</Modal.Header>
                                         <Modal.Content image>
                                             <Image wrapped size='medium' src={item.image} />
                                             <Modal.Description>
+                                                <h4>Birthdate:</h4>
+                                                <p>{item.birthdate}</p>
                                                 <h4>Allergies:</h4>
                                                 <p>{item.allergies}</p>
                                                 <h4>Medicine:</h4>
@@ -105,54 +100,7 @@ class FamilyProfilePage extends Component {
 
                         )
                     })}
-                                <Card>
-                                    <Image className='ui centered small image' src="images/logo192.png" alt="img 1" />
-                                    <Card.Content>
-                                        <Card.Header align="center">Jimmy</Card.Header>
-                                        <Modal trigger={<Button align="center"></Button>}>
-                                            <Modal.Header>Jimmy </Modal.Header>
-                                            <Modal.Content image>
-                                                <Image wrapped size='medium' src='https://allgroanup.com/wp-content/uploads/2012/02/Picture-of-kid-smoking-a-cigarette.jpg' />
-                                                <Modal.Description>
-                                                    <p>I am allergic to peanuts.</p>
-                                                </Modal.Description>
-                                            </Modal.Content>
-                                        </Modal>
-                                    </Card.Content>
-                                </Card>
-                                <Card>
-                                    <Image className='ui centered small image' src="images/logo192.png" alt="img 1" />
-                                    <Card.Content>
-                                        <Card.Header align="center">Jimmy</Card.Header>
-                                        <Modal trigger={<Button align="center"></Button>}>
-                                            <Modal.Header>Jimmy </Modal.Header>
-                                            <Modal.Content image>
-                                                <Image wrapped size='medium' src='https://allgroanup.com/wp-content/uploads/2012/02/Picture-of-kid-smoking-a-cigarette.jpg' />
-                                                <Modal.Description>
-                                                    <p>I am allergic to peanuts.</p>
-                                                </Modal.Description>
-                                            </Modal.Content>
-                                        </Modal>
-                                    </Card.Content>
-                                </Card>
-                        <Card>
-                            <Image className='ui centered small image' src="images/logo192.png" alt="img 1" />
-                            <Card.Content>
-                                <Card.Header align="center">Jimmy</Card.Header>
-                                <Modal trigger={<Button align="center"></Button>}>
-                                    <Modal.Header>Jimmy </Modal.Header>
-                                    <Modal.Content image>
-                                        <Image wrapped size='medium' src='https://allgroanup.com/wp-content/uploads/2012/02/Picture-of-kid-smoking-a-cigarette.jpg' />
-                                        <Modal.Description>
-                                            <p>I am allergic to peanuts.</p>
-                                        </Modal.Description>
-                                    </Modal.Content>
-                                </Modal>
-                            </Card.Content>
-                        </Card>
-                    {/* <img src="images/logo192.png" alt="img 1" />
-                    <img src="images/logo192.png" alt='img2' />
-                    <img src="images/logo192.png" alt='img3' /> */}
+                               
                 </Coverflow>
             </div>
             </Card>
