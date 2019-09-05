@@ -24,7 +24,7 @@ router.get('/needed', rejectUnauthenticated,   (req,res)=> {
   pool.query(sqlText, value)
   .then((response)=> {
     console.log('response.rows', response.rows)
-    res.send(response.rows[0])
+    res.send(response.rows)
   })
   .catch((error)=> {
     console.log('Error getting from event_needed table', error);
@@ -51,8 +51,18 @@ router.get('/offered', rejectUnauthenticated,   (req,res)=> {
   })
 })
 
-router.get('/start', (req,res)=> {
-
+router.put('/update/:id', (req,res)=> {
+  const sqlText = `UPDATE "event" SET "event_claimed"=$1
+  WHERE id =$2;`;
+  values = [req.body.event_claimed, req.params.id];
+  pool.query(sqlText, values)
+  .then((response) => {
+    res.sendStatus(200);
+  })
+  .catch((error)=> {
+    console.log('Error with UPDATING the DB', error);
+    res.sendStatus(500);
+  })
 })
 
 module.exports = router;

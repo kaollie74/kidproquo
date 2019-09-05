@@ -18,11 +18,24 @@ class MyProfilePage extends Component {
     }
 
     progressBar = () => {
+        let feedNeed= this.props.reduxStore.feedNeed;
+        let needHours = 0
+        let offeredHours = 0
+        for(let hour of feedNeed){
+            // console.log(`this is hour, ${hour.needed_total_hours}` )
+            if(hour === 'hour.needed_total_hours'){
+                needHours += Number(hour.needed_total_hours)
+            }
+            if (hour.offered_totalhours) {
+                offeredHours += Number(hour.offered_total_hours)
+            }
+        }
 
-        let needHours = this.props.reduxStore.feedNeed.needed_total_hours;
-        let offeredHours = this.props.reduxStore.feedNeed.offered_total_hours;
+        
+        console.log(needHours)
+        console.log(offeredHours)
         let total = ( needHours - offeredHours );
-    
+        console.log('total', total)
         return total;
     }
 
@@ -30,17 +43,11 @@ class MyProfilePage extends Component {
 
     render() {
 
-        let need = this.props.reduxStore.feedNeed;
-        let offered = this.props.reduxStore.feedOffered;
-        let image = '/images/avatar/small/jenny.jpg'
-        let date = <Moment format="MM/DD/YYYY">{need.offered_date}</Moment>;
-        let summary = need.need_start
-        let summary2 = need.need_end
-
         console.log('this is state', this.state)
 
         return (
             <>
+            {JSON.stringify(this.props.reduxStore)}
                 <Progress
                     value={this.progressBar()}
                     total='100'
@@ -48,7 +55,7 @@ class MyProfilePage extends Component {
                     label='Hours'
                     color={this.progressBar() > 50 ? 'green' : 'red'}
                 />
-
+                
                 <Container text className='my_feed'>
                     <Header as='h1'>Johnson Family</Header>
                     <Label>
@@ -61,19 +68,21 @@ class MyProfilePage extends Component {
                         Hours Banked:
     <Label.Detail>23</Label.Detail>
                     </Label>
+                    {this.props.reduxStore.feedNeed.map(item => (
                     <div>
+                    
                         <Feed size='large'>
-
                             <Feed.Event>
                                 <Feed.Label />
                                 <Feed.Content>
-                                    <Feed.Date content={date} />
-                                    <Feed.Summary> Sitting: {summary} - {summary2}</Feed.Summary>
+                    <Feed.Date content= {<Moment format="MM/DD/YYYY">{item.offered_date}</Moment>} />
+                                    <Feed.Summary> Sitting: {item.need_start} - {item.need_end}</Feed.Summary>
     
                                 </Feed.Content>
                             </Feed.Event>
                         </Feed>
                     </div>
+                    ))}
                 </Container>
             </>
 
