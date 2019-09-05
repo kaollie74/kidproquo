@@ -25,7 +25,7 @@ where "groups"."id"=$1;`;
 //gets groups that user belongs to upon login
 router.get('/', (req, res) => {
     console.log('getting user groups by user id:',req.user.id)
-    const sqlText = `select "groups"."id" from groups
+    const sqlText = `select "groups"."id", "groups"."group_name" from groups
 join family on
 "family"."group_id" = "groups"."id"
 Join "user" on
@@ -34,7 +34,7 @@ where "user"."id"=$1;
 `;
     pool.query(sqlText, [req.user.id])
         .then((response) => {
-            console.log('back from  users group db response.rows:', response.rows[0]);
+            console.log('back from  users group db response.rows:', response.rows);
             res.send(response.rows)
         }).catch((error) => {
             console.log('error getting users group data', error);

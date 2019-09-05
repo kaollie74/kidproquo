@@ -11,19 +11,23 @@ class GroupView extends Component {
 
     }
 
-
-    componentDidUpdate(){
-
+    grabName = (object) => {
+    console.log(object)
     }
+    
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
     render() {
         console.log('family.id:',this.props.reduxStore.family.id)
+        console.log('family.id:' + this.props.reduxStore.userGroups)
+
+        
         return (
             <div>
                 <h1>
-                    Whittier Group
+                   Welcome to the {this.props.reduxStore.userGroups && this.props.reduxStore.userGroups.length > 0 ?
+                     this.props.reduxStore.userGroups[0].group_name : <p></p>} group!
                 </h1>
                 <div>
                     <Button.Group size='small'>
@@ -32,7 +36,7 @@ class GroupView extends Component {
                         <Button>ADD MEMBERS</Button>
                     </Button.Group>
                 </div>
-               {JSON.stringify(this.props.reduxStore)}
+                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
                 <div>
                     <Feed>
                         <Feed.Event>
@@ -84,38 +88,27 @@ class GroupView extends Component {
       <Icon name='calendar' />
                     </Button>
                 </div>
-                <Card>
-                    <Image src='/images/family.jpg' wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>Johnson Family</Card.Header>
-                        
-                    </Card.Content>
-                    <Card.Content extra>
-                        <p>
-                            <Icon name='user' />
-                            Whittier Group
-      </p>
-                    </Card.Content>
-                </Card>
+                
+                {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
+                    
+                    
+                    
+                        this.props.reduxStore.group.map((item) => {
+                            console.log(item)
+                            return (
+                                <>
+                                    <Card key={item.id}>
+                                        <Image wrapped size='medium' src={item.image} />
+                                    <Card.Content>
+                                        <Card.Header>{item.last_name1} Family</Card.Header>
+                                    </Card.Content>
+                                    </Card>
+                                </>
 
-                <Card>
-                    <Image src='/images/family2.jpg' wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>Olson Family</Card.Header>
-                        <Card.Meta>
-                            <span className='date'>Joined in 2019</span>
-                        </Card.Meta>
-                        <Card.Description>
-                            The Olson's are a family and stuff.
-      </Card.Description>
-                    </Card.Content>
-                    <Card.Content extra>
-                        <p>
-                            <Icon name='user' />
-                            Whittier Group
-      </p>
-                    </Card.Content>
-                </Card>
+                            )
+                        })
+                    
+                    : <p></p>} 
 
 
             </div>
