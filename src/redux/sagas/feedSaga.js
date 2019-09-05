@@ -3,6 +3,7 @@ import axios from 'axios';
 
 function* feedSaga () {
   yield takeEvery('FETCH_YOUR_FEED', getYourFeed)
+  yield takeEvery('CLAIM_EVENT', claimEvent)
 }
 
 function* getYourFeed () {
@@ -16,6 +17,16 @@ function* getYourFeed () {
   catch(error) {
     console.log('Error with getting your feed from Server/DB', error);
     
+  }
+}
+
+function* claimEvent (action) {
+  try {
+    yield axios.put(`/feed/update/${action.payload.id}`, action.payload)
+
+  }
+  catch(error) {
+    console.log('Error with updating event in the DB', error);
   }
 }
 export default feedSaga;
