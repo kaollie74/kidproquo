@@ -5,14 +5,17 @@ const router = express.Router();
 router.get('/:id', (req, res) => {
     console.log('in /group with this id:', req.params.id);
     const values = req.params.id;
-    const sqlText = `select * from groups
-join event_needed on
-"groups"."id" = "event_needed"."group_id"
-join event_offered on
-"groups"."id" = "event_offered"."group_id"
-join family on
-"family"."group_id" = "groups"."id"
-where "groups"."id"=$1;`;
+    const sqlText = `begin transaction;
+
+select event_date, event_time_start, event_time_end, claimer_id, requester_id, first_name1 as requester_name1 into temp_table from "event" 
+join family on "event".requester_id = family.id where event.group_id=$1;
+
+select event_date, event_time_start, event_time_end, claimer_id, first_name1 as claimer_name1, requester_id, requester_name1 from temp_table 
+join family on temp_table.claimer_id = family.id;
+
+drop table temp_table;
+
+commit;`;
     pool.query(sqlText, [values])
         .then((response) => {
             console.log('back from group db response.rows:', response.rows);

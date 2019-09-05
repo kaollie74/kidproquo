@@ -44,7 +44,7 @@ class GroupView extends Component {
                                 <img src='/images/family.jpg' alt="lol" />
                             </Feed.Label>
                             <Feed.Content>
-                                Johnson Family needs a sitter on 10/2/19 from 5:00pm - 9:00pm <p>Whittier Group</p> 
+                                 Family needs a sitter on 10/2/19 from 5:00pm - 9:00pm <p>Whittier Group</p> 
                                 <Button basic color='blue'>
                                     CLAIM
                                 </Button>
