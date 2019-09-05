@@ -65,5 +65,19 @@ router.put('/update/:id', (req,res)=> {
   })
 })
 
+// router.post('/addRequest', (req,res)=> {
+//   const sqlText = `INSERT INTO 
+//   values = [req.body.event_claimed, req.params.id];
+//   pool.query(sqlText, values)
+//   .then((response) => {
+//     res.sendStatus(200);
+//   })
+//   .catch((error)=> {
+//     console.log('Error with UPDATING the DB', error);
+//     res.sendStatus(500);
+//   })
+// })
+
+
 module.exports = router;
 
