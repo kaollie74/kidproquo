@@ -10,6 +10,7 @@ class AboutPage extends Component {
     return (
       <div>
         <div>
+          
           <p>
             This about page is for anyone to read!
           </p>
