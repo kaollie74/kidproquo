@@ -11,7 +11,8 @@ import feedNeed from './feedNeedReducer';
 import feedOffered from './feedOfferedReducer';
 import hour from './hourReducer';
 import profile from './profileReducer';
-import group from './profileReducer';
+import group from './groupReducer';
+import userGroups from './userGroupsReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   feedOffered,
   hour,
   profile,
-  group
+  group,
+  userGroups
 
 });
 

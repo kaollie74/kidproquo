@@ -19,6 +19,11 @@ function* fetchUser() {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
+    //getting user groups for later user i.e. 'group view'
+    const responseTwo = yield axios.get('/group');
+    console.log('user groups responseTwo:',responseTwo.data)
+    yield put({ type: 'SET_GROUPS', payload: responseTwo.data });
+
   } catch (error) {
     console.log('User get request failed', error);
   }
