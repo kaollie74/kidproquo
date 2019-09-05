@@ -5,13 +5,21 @@ import 'semantic-ui-css/semantic.min.css';
 
 class GroupView extends Component {
 
-    // componentDidMount() {
-    //     this.props.dispatch({ type: 'FETCH_GROUP' });
-    // }
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
+        this.props.dispatch({ type: 'FETCH_GROUP', payload: this.props.reduxStore.userGroups[0]});
+
+    }
+
+
+    componentDidUpdate(){
+
+    }
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
     render() {
+        console.log('family.id:',this.props.reduxStore.family.id)
         return (
             <div>
                 <h1>
@@ -24,6 +32,7 @@ class GroupView extends Component {
                         <Button>ADD MEMBERS</Button>
                     </Button.Group>
                 </div>
+               {JSON.stringify(this.props.reduxStore)}
                 <div>
                     <Feed>
                         <Feed.Event>
