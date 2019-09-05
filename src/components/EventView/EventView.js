@@ -23,11 +23,16 @@ handleClaim = (event, item) => {
   
 }
 
+handleCreateRequest = () => {
+  
+}
+
 
   render() {
     return (
       <>
       <h1>Events </h1>
+      <Button onClick={this.handleCreateRequest}>Create Request</Button>
       <Table>
         <Table.Header>
           <Table.Row>
