@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import 'semantic-ui-css/semantic.min.css'
 import '../App/App.css';
+import { withStyles } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
 
-import { Table, Icon, Button } from 'semantic-ui-react';
+import { Table, Icon } from 'semantic-ui-react';
 
 class EventView extends Component {
 
@@ -52,7 +60,7 @@ handleCreateRequest = () => {
               <Table.Cell> {item.event_time_start} - {item.event_time_end} </Table.Cell>
               <Table.Cell>{item.notes}</Table.Cell>
               <Table.Cell className= {item.offer_needed ? 'orange' :'blue'} > </Table.Cell>
-              <Table.Cell><Button onClick={(event) => this.handleClaim(event, item)}>Claim</Button></Table.Cell>
+              <Table.Cell><Icon plus square onClick={(event) => this.handleClaim(event, item)}>Claim</Icon></Table.Cell>
             </Table.Row>         
   ))}
             
