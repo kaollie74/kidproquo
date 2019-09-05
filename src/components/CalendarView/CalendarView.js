@@ -33,7 +33,7 @@ class CalendarView extends Component {
        //let newDate = ( value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear());
       let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
         
-      let newObjectToSend = {date: newDate}
+      let newObjectToSend = {event_date: newDate}
       this.props.dispatch({type: 'FETCH_EVENTS', payload: newObjectToSend})
        
       }
