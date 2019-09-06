@@ -37,6 +37,35 @@ class GroupView extends Component {
                     </Button.Group>
                 </div>
                 <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
+{this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
+
+
+
+                    this.props.reduxStore.group.map((item) => {
+                        console.log(item.requester_image)
+                       
+                        return (
+                            <>
+                            <Feed>
+                        <Feed.Event>
+                            <Feed.Label>
+                            </Feed.Label>
+                            <Feed.Content>
+                                <Feed.Label>
+                                 <img src='https://www.carters.com/on/demandware.static/-/Sites-Carters-Library/default/dw7a7f95ac/content/carters/images/nav/KG_Fall_2019.jpg' alt="lol" />
+                                </Feed.Label>
+                                 {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                                 <></><Button basic color='blue'>
+                                    CLAIM
+                                </Button>
+                            </Feed.Content>
+                        </Feed.Event>
+                    </Feed>
+                            </>
+                        )
+                    })
+                    : <p></p>} 
+
                 <div>
                     <Feed>
                         <Feed.Event>
@@ -100,7 +129,7 @@ class GroupView extends Component {
                                     <Card key={item.id}>
                                         <Image wrapped size='medium' src={item.image} />
                                     <Card.Content>
-                                        <Card.Header>{item.last_name1} Family</Card.Header>
+                                        <Card.Header>{item.requester_name} Family</Card.Header>
                                     </Card.Content>
                                     </Card>
                                 </>
