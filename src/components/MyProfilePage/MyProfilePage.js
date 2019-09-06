@@ -47,7 +47,7 @@ class MyProfilePage extends Component {
 
         return (
             <>
-            {JSON.stringify(this.props.reduxStore)}
+            {/* {JSON.stringify(this.props.reduxStore)} */}
                 <Progress
                     value={this.progressBar()}
                     total='100'
@@ -59,7 +59,7 @@ class MyProfilePage extends Component {
                 <Container text className='my_feed'>
                     <Header as='h1'>Johnson Family</Header>
                     <Label>
-                        Hours Used:
+                        Hours Used: 
                         <Label.Detail>
                             20
                         </Label.Detail>
@@ -68,15 +68,19 @@ class MyProfilePage extends Component {
                         Hours Banked:
     <Label.Detail>23</Label.Detail>
                     </Label>
-                    {this.props.reduxStore.feedNeed.map(item => (
-                    <div>
-                    
+                    {this.props.reduxStore.feedNeed.map((item, i) => (
+                    <div key={i}>
                         <Feed size='large'>
                             <Feed.Event>
                                 <Feed.Label />
                                 <Feed.Content>
-                    <Feed.Date content= {<Moment format="MM/DD/YYYY">{item.offered_date}</Moment>} />
-                                    <Feed.Summary> Sitting: {item.need_start} - {item.need_end}</Feed.Summary>
+                    <Feed.Date content= {<Moment format="MM/DD/YYYY">{item.event_date}</Moment>} />
+                                    <Feed.Summary>
+                                    {item.id === this.props.reduxStore.user.id ? 
+                                    <p>{item.event_time_start} - {item.event_time_end}</p> 
+                                    : 
+                                    <p>{item.first_name1} is sitting for you at {item.event_time_start} - {item.event_time_end} </p> }
+                                    </Feed.Summary>
     
                                 </Feed.Content>
                             </Feed.Event>
