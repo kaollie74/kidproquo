@@ -26,7 +26,8 @@ CREATE TABLE "family" (
     "phone_number" VARCHAR NOT NULL,
     "image" VARCHAR,
     "user_id" INT REFERENCES "user",
-    "family_passcode" VARCHAR 
+    "family_passcode" VARCHAR,
+    "group_id" INT REFERENCES "groups"
 );
 CREATE TABLE "kid" (
     "id" SERIAL PRIMARY KEY,
@@ -40,7 +41,6 @@ CREATE TABLE "kid" (
 );
 CREATE TABLE "groups" (
     "id" SERIAL PRIMARY KEY,
-    "family_id" INT REFERENCES "family",
     "group_name" VARCHAR NOT NULL,
     "passcode" VARCHAR NOT NULL,
     "family_passcode" VARCHAR 
