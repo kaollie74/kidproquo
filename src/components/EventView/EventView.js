@@ -93,7 +93,7 @@ class EventView extends Component {
 
   render() {
 
-
+    console.log('this is state', this.state)
     const { classes } = this.props;
     if (this.props.reduxStore.calendar.length !== 0) {
       return (
@@ -116,19 +116,19 @@ class EventView extends Component {
                     <DatePicker
                       margin="normal"
                       label="Date picker"
-                      value={this.state.selectedDate}
+                      value={this.state.event_date}
                       onChange={(event) => this.handleDateChange(event, 'event_date')}
                     />
                     <TimePicker
                       margin="normal"
                       label="Time Start"
-                      value={this.state.selectedTimeStart}
+                      value={this.state.event_time_start}
                       onChange={(event) => this.handleDateChange(event, 'event_time_start')}
                     />
                     <TimePicker
                       margin="normal"
                       label="Time end"
-                      value={this.state.selectedTimeEnd}
+                      value={this.state.event_time_end}
                       onChange={(event) => this.handleDateChange(event, 'event_time_end')}
                     />
                     <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
