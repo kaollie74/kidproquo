@@ -96,4 +96,14 @@ INSERT INTO "family"
 VALUES('Steve', 'Harrington', 'Nancy', 'Harrington', 'steve@hawkins.com', '500 Maple Drive', 'Hawkins', 'IN', '34567', '984-494-2943', 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjr3YX3vLzkAhULrZ4KHZ1lDS4QjRx6BAgBEAQ&url=https%3A%2F%2Ffromthehipphoto.com%2Ffocus%2Fwhat-to-wear-for-family-photos%2F&psig=AOvVaw1VXCz5TYPl0zh-PAKohEEu&ust=1567868897232577', '1', '1234', '1'),
     ('Joyce', 'Byers', 'Jim', 'Byers', 'joyce@hawkins.com', '333 Dungeon Drive', 'Hawkins', 'IN', '34567', '984-345-3464', 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiWsq-WvbzkAhUCj54KHYJQC68QjRx6BAgBEAQ&url=http%3A%2F%2Fwww.priyagoswami.com%2Fworks%2Ffamily-portraits%2F&psig=AOvVaw1VXCz5TYPl0zh-PAKohEEu&ust=1567868897232577', '2', '2222', '1');
 
+INSERT INTO "kid"
+    ("first_name","last_name", "birthdate", "allergies", "medication", "image", "family_id")
+Values
+    ('Maxine', 'Harrington', '01-05-91', 'Pollen, peanuts,', 'Penecillin',
+        'https://www.carters.com/on/demandware.static/-/Sites-Carters-Library/default/dw7a7f95ac/content/carters/images/nav/KG_Fall_2019.jpg', 3);
 
+INSERT INTO "kid"
+    ("first_name","last_name", "birthdate", "allergies", "medication", "image", "family_id")
+Values
+    ('Bill', 'Byers', '01-05-91', 'dust', 'Tylenol',
+        'https://cdn.pixabay.com/photo/2014/07/11/22/05/baby-390555_960_720.jpg', 4);
