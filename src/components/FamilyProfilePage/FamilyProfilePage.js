@@ -14,14 +14,8 @@ class FamilyProfilePage extends Component {
     }
 
     editFamilyProfile = () => {
-        let family = this.props.reduxStore.family;
-
-        let newObjectToSend = {
-            id: family.id
-        
-    }
-    console.log('newObjectToSend', newObjectToSend)
-    //this.props.history.push('/edit-my-profile');
+  
+    this.props.history.push('/edit-my-profile');
 }
 
 
