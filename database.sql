@@ -47,7 +47,7 @@ CREATE TABLE "groups" (
 );
 CREATE TABLE "feed" (
     "id" SERIAL PRIMARY KEY,
-    "event_id" INT REFERENCES "event",
+    "event_id" INT REFERENCES "event"
     
 );
 
