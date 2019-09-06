@@ -80,8 +80,10 @@ CREATE TABLE "hours"
 
 INSERT INTO "user"
     ("id", "username", "password")
-VALUES('501', 'steve', '1234'),
-    ('500', 'joyce', '4321');
+VALUES('501', 'steve', '$2b$10$jekveyQAbYGyRsl8z1pRT
+.nFdIqxcHHif3APhrhHMos8r7.EPZQdi'),
+    ('500', 'joyce', '$2b$10$jekveyQAbYGyRsl8z1pRT
+.nFdIqxcHHif3APhrhHMos8r7.EPZQdi');
 
 INSERT INTO "groups"
     ("id","group_name", "passcode", "family_passcode")
