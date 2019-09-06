@@ -71,18 +71,19 @@ router.put('/update/:id', (req,res)=> {
   })
 })
 
-// router.post('/addRequest', (req,res)=> {
-//   const sqlText = `INSERT INTO 
-//   values = [req.body.event_claimed, req.params.id];
-//   pool.query(sqlText, values)
-//   .then((response) => {
-//     res.sendStatus(200);
-//   })
-//   .catch((error)=> {
-//     console.log('Error with UPDATING the DB', error);
-//     res.sendStatus(500);
-//   })
-// })
+router.post('/addRequest', (req,res)=> {
+  const sqlText = `insert into "event" ("event_date", "event_time_start", "event_time_end", "group_id", "notes", "requester_id")
+  values($1, $2, $3, $4, $5, $6)`;
+  values = [req.body.event_date, req.body.event_time_start, req.body.event_time_end, req.body.group_id, req.body.notes, req.body.requester_id];
+  pool.query(sqlText, values)
+  .then((response) => {
+    res.sendStatus(201);
+  })
+  .catch((error)=> {
+    console.log('Error with UPDATING the DB', error);
+    res.sendStatus(500);
+  })
+})
 
 
 module.exports = router;

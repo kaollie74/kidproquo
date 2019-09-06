@@ -7,11 +7,13 @@ import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pic
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
 import { Table, Icon } from 'semantic-ui-react';
+import { getThemeProps } from '@material-ui/styles';
 
 const styles = theme => ({
   grid: {
@@ -25,6 +27,10 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4,
     outline: 'none',
   },
+  textField: {
+    margin: '0px 0px 10px 0px',
+    maxWidth: '400px'
+  },
 });
 
 class EventView extends Component {
@@ -35,6 +41,7 @@ class EventView extends Component {
     event_time_end: new Date(),
     open: false,
     request_id: '',
+    notes: ''
   };
 
   componentDidMount() {
@@ -48,6 +55,13 @@ class EventView extends Component {
       [propsName]: event
     });
   };
+
+  handleChange = (event, propertyToChange) => {
+    this.setState({
+      ...this.state, 
+      [propertyToChange]: event.target.value
+    })
+  }
 
   handleClaim = (event, item) => {
     console.log('in handle Claim', item);
@@ -70,12 +84,14 @@ class EventView extends Component {
     let timeEnd = this.state.event_time_end.toTimeString();
     let newTimeEnd = timeEnd.substring(0, 5);
     let newDate = (this.state.event_date.getFullYear() + "-" + 0 + Number(this.state.event_date.getMonth() + 1) + "-" + this.state.event_date.getDate())
+    let notes = this.state.notes;
     let newEventToSend = {
       event_date: newDate,
       event_time_start: newTimeStart,
       event_time_end: newTimeEnd,
       requester_id: this.props.reduxStore.family.id,
-      // group_id: this.props.reduxStore.userGroups[0].id
+      group_id: this.props.reduxStore.userGroups[0].id,
+      notes: notes
     }
     console.log(newDate);
     console.log(newTimeStart);
@@ -110,9 +126,9 @@ class EventView extends Component {
               <Typography variant="h6" id="modal-title">
                 Text in a modal
             </Typography>
-              <Typography variant="subtitle1" id="simple-modal-description">
+            <Grid container className={classes.grid} justify="space-around">
+              {/* <Typography variant="subtitle1" id="simple-modal-description"> */}
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Grid container className={classes.grid} justify="space-around">
                     <DatePicker
                       margin="normal"
                       label="Date picker"
@@ -130,11 +146,16 @@ class EventView extends Component {
                       label="Time end"
                       value={this.state.event_time_end}
                       onChange={(event) => this.handleDateChange(event, 'event_time_end')}
-                    />
-                    <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
-                  </Grid>
-                </MuiPickersUtilsProvider>
-              </Typography>
+                    />   
+                    <TextField multiline
+                        rowsMax="6" 
+                        onChange={event => this.handleChange(event, 'notes')} label="Notes"
+                        value={this.state.notes}
+                      ></TextField>
+                </MuiPickersUtilsProvider>      
+                  <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
+                  {/* </Typography> */}
+                </Grid>
             </div>
           </Modal>
           <Table>
@@ -203,6 +224,13 @@ class EventView extends Component {
                         value={this.state.selectedTimeEnd}
                         onChange={(event) => this.handleDateChange(event, 'event_time_end')}
                       />
+                      <TextField
+                      className = {classes.textField}
+                       multiline
+                        rowsMax="6" 
+                        onChange={event => this.handleChange(event, 'notes')} label="Notes"
+                        value={this.state.notes}
+                      ></TextField>
                       <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
                     </Grid>
                   </MuiPickersUtilsProvider>
