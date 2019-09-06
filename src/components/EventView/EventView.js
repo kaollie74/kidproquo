@@ -71,16 +71,16 @@ class EventView extends Component {
 
   handleChange = (event, propertyToChange) => {
     this.setState({
-      ...this.state, 
+      ...this.state,
       [propertyToChange]: event.target.value
     })
   }
 
   handleRequestStatus = (event) => {
     this.setState({
-        offer_needed: event.target.value
-    }) 
-}
+      offer_needed: event.target.value
+    })
+  }
 
   handleClaim = (event, item) => {
     console.log('in handle Claim', item);
@@ -113,13 +113,15 @@ class EventView extends Component {
       group_id: this.props.reduxStore.userGroups[0].id,
       notes: notes,
       offer_needed: offer_needed,
-      
+
     }
     console.log(newDate);
     console.log(newTimeStart);
     console.log(newTimeEnd);
     console.log('THIS IS THE OBJECT TO SEND TO SAGA!!!!!!!!!', newEventToSend);
     this.props.dispatch({ type: 'ADD_REQUEST', payload: newEventToSend })
+    
+
   }
 
   openModal = () => {
@@ -142,66 +144,69 @@ class EventView extends Component {
             aria-labelledby="simple-modal-title"
             arai-describedby="simple-modal-description"
             open={this.state.open}
-            onClose={this.openModal}
+            //onClose={this.openModal}
           >
             <div className={classes.paper}>
               <Typography variant="h6" id="modal-title">
-                Select Time/Date 
+                Select Time/Date
             </Typography>
-            <Grid container className={classes.grid} justify="space-around">
-              {/* <Typography variant="subtitle1" id="simple-modal-description"> */}
+              <Grid container className={classes.grid} justify="space-around">
+                {/* <Typography variant="subtitle1" id="simple-modal-description"> */}
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <DatePicker
-                      margin="normal"
-                      label="Date picker"
-                      value={this.state.event_date}
-                      onChange={(event) => this.handleDateChange(event, 'event_date')}
-                    />
-                    <TimePicker
-                      margin="normal"
-                      label="Time Start"
-                      value={this.state.event_time_start}
-                      onChange={(event) => this.handleDateChange(event, 'event_time_start')}
-                    />
-                    <TimePicker
-                      margin="normal"
-                      label="Time end"
-                      value={this.state.event_time_end}
-                      onChange={(event) => this.handleDateChange(event, 'event_time_end')}
-                    />   
-                    <TextField multiline
-                        rowsMax="6" 
-                        onChange={event => this.handleChange(event, 'notes')} label="Notes"
-                        value={this.state.notes}
-                      ></TextField>
-                      <form className={classes.radio}>
-                        Offer
+                  <DatePicker
+                    margin="normal"
+                    label="Date picker"
+                    value={this.state.event_date}
+                    onChange={(event) => this.handleDateChange(event, 'event_date')}
+                  />
+                  <TimePicker
+                    margin="normal"
+                    label="Time Start"
+                    value={this.state.event_time_start}
+                    onChange={(event) => this.handleDateChange(event, 'event_time_start')}
+                  />
+                  <TimePicker
+                    margin="normal"
+                    label="Time end"
+                    value={this.state.event_time_end}
+                    onChange={(event) => this.handleDateChange(event, 'event_time_end')}
+                  />
+                  <TextField multiline
+                    rowsMax="6"
+                    onChange={event => this.handleChange(event, 'notes')} label="Notes"
+                    value={this.state.notes}
+                  ></TextField>
+                  <form className={classes.radio}>
+                    Offer
                       <Radio
-                        label="Offer"
-                        labelPlacement="top"
-                        checked={this.state.offer_needed === 'true'}
-                        onChange={this.handleRequestStatus}
-                        value='offer'
-                        color= "primary"
-                        name="radio-button-demo"
-                        aria-label='offer'
-                      />
-                        Need
+                      label="Offer"
+                      labelPlacement="top"
+                      checked={this.state.offer_needed === 'true'}
+                      onChange={this.handleRequestStatus}
+                      value='offer'
+                      color="primary"
+                      name="radio-button-demo"
+                      aria-label='offer'
+                    />
+                    Need
                       <Radio
-                        label="Need"
-                        labelPlacement="top"
-                        checked={this.state.offer_needed === 'false'}
-                        onChange={this.handleRequestStatus}
-                        value='needed'
-                        color= "primary"
-                        name="radio-button-demo"
-                        aria-label='needed'
-                      />
-                      </form>
-                </MuiPickersUtilsProvider>      
-                  <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
-                  {/* </Typography> */}
-                </Grid>
+                      label="Need"
+                      labelPlacement="top"
+                      checked={this.state.offer_needed === 'false'}
+                      onChange={this.handleRequestStatus}
+                      value='needed'
+                      color="primary"
+                      name="radio-button-demo"
+                      aria-label='needed'
+                    />
+                  </form>
+                </MuiPickersUtilsProvider>
+                
+                <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
+                <Button variant="contained" color="secondary" onClick={this.openModal}> Cancel</Button>
+
+                {/* </Typography> */}
+              </Grid>
             </div>
           </Modal>
           <Table>
@@ -243,11 +248,11 @@ class EventView extends Component {
               aria-labelledby="simple-modal-title"
               arai-describedby="simple-modal-description"
               open={this.state.open}
-              onClose={this.openModal}
+              //onClose={this.openModal}
             >
               <div className={classes.paper}>
                 <Typography variant="h6" id="modal-title">
-                  Select Time/Date 
+                  Select Time/Date
             </Typography>
                 <Typography variant="subtitle1" id="simple-modal-description">
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -271,37 +276,38 @@ class EventView extends Component {
                         onChange={(event) => this.handleDateChange(event, 'event_time_end')}
                       />
                       <TextField
-                      className = {classes.textField}
-                       multiline
-                        rowsMax="6" 
+                        className={classes.textField}
+                        multiline
+                        rowsMax="6"
                         onChange={event => this.handleChange(event, 'notes')} label="Notes"
                         value={this.state.notes}
                       ></TextField>
                       <form className={classes.radio}>
                         Offer
                       <Radio
-                        label="Offer"
-                        labelPlacement="top"
-                        checked={this.state.offer_needed === 'true'}
-                        onChange={this.handleRequestStatus}
-                        value='true'
-                        color= "primary"
-                        name="radio-button-demo"
-                        aria-label='true'
-                      />
+                          label="Offer"
+                          labelPlacement="top"
+                          checked={this.state.offer_needed === 'true'}
+                          onChange={this.handleRequestStatus}
+                          value='true'
+                          color="primary"
+                          name="radio-button-demo"
+                          aria-label='true'
+                        />
                         Need
                       <Radio
-                        label="Need"
-                        labelPlacement="top"
-                        checked={this.state.offer_needed === 'false'}
-                        onChange={this.handleRequestStatus}
-                        value='false'
-                        color= "primary"
-                        name="radio-button-demo"
-                        aria-label=''
-                      />
+                          label="Need"
+                          labelPlacement="top"
+                          checked={this.state.offer_needed === 'false'}
+                          onChange={this.handleRequestStatus}
+                          value='false'
+                          color="primary"
+                          name="radio-button-demo"
+                          aria-label=''
+                        />
                       </form>
                       <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
+                      <Button variant="contained" color="secondary" onClick={this.openModal}> Cancel</Button>
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Typography>
