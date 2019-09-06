@@ -48,10 +48,10 @@ input {
     cursor: pointer;
 }
 
-.blue {
-    background-color: blue;
+.Offering {
+    color: rgb(12, 12, 122);
 }
 
-.orange {
-    background-color: orange;
+.Needed {
+   color: rgb(230, 149, 0);
 }
