@@ -144,7 +144,7 @@ class EventView extends Component {
                 <Table.HeaderCell>Time</Table.HeaderCell>
                 <Table.HeaderCell>Notes</Table.HeaderCell>
                 <Table.HeaderCell>N/O</Table.HeaderCell>
-                <Table.HeaderCell>Button</Table.HeaderCell>
+                <Table.HeaderCell>Claim</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
 
