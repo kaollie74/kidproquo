@@ -92,7 +92,7 @@ CREATE TABLE "event" (
 CREATE TABLE "hours" (
     "id" SERIAL PRIMARY KEY,
     "hours_banked" INT REFERENCES "event",
-    "hours_used" INT REFERENCES "event_needed",
+    "hours_used" INT REFERENCES "event",
     "user_id" INT REFERENCES "user"
 );
 
