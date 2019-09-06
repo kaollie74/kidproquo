@@ -47,8 +47,8 @@ CREATE TABLE "groups" (
 );
 CREATE TABLE "feed" (
     "id" SERIAL PRIMARY KEY,
-    "event_offered_id" INT REFERENCES "event_offered",
-    "event_needed_id" INT REFERENCES "event_needed"
+    "event_id" INT REFERENCES "event",
+    
 );
 
 CREATE TABLE "event" (
@@ -91,7 +91,8 @@ CREATE TABLE "event" (
 -- );
 CREATE TABLE "hours" (
     "id" SERIAL PRIMARY KEY,
-    "hours_banked" INT REFERENCES "event_offered",
+    "hours_banked" INT REFERENCES "event",
     "hours_used" INT REFERENCES "event_needed",
     "user_id" INT REFERENCES "user"
 );
+
