@@ -8,16 +8,22 @@ router.get('/needed', rejectUnauthenticated,   (req,res)=> {
   // const sqlText = `SELECT * from "event_needed"
   // WHERE requester_id = $1;`;
 
-  const sqlText = `SELECT "event_needed"."id", "event_offered"."id", "event_needed"."event_date" as need_date,
-  "event_offered"."event_date" as offered_date, to_char("event_needed"."event_time_start", 'HH:MI') as need_start, 
-  to_char("event_offered"."event_time_start", 'HH:MI') as offered_start, to_char("event_needed"."event_time_end", 'HH:MI') as need_end, 
-  to_char("event_offered"."event_time_end", 'HH:MI') as offered_end, "event_needed"."total_hours" as needed_total_hours, "event_offered"."total_hours" as offered_total_hours, 
-  "event_needed"."event_confirmed", "event_offered"."event_confirmed", "event_needed"."requester_id", "event_offered"."requester_id", 
-  "event_needed"."claimer_id", "event_needed"."claimer_id","event_offered"."group_id", "event_needed"."event_offered_id", 
-  "event_offered"."event_needed_id"  FROM "event_needed"
-  JOIN "event_offered" on "event_needed_id" = "event_needed"."id"
-  WHERE "event_needed"."requester_id" = $1
-  ORDER BY "event_needed"."id";`;
+  // const sqlText = `SELECT "event_needed"."id", "event_offered"."id", "event_needed"."event_date" as need_date,
+  // "event_offered"."event_date" as offered_date, to_char("event_needed"."event_time_start", 'HH:MI') as need_start, 
+  // to_char("event_offered"."event_time_start", 'HH:MI') as offered_start, to_char("event_needed"."event_time_end", 'HH:MI') as need_end, 
+  // to_char("event_offered"."event_time_end", 'HH:MI') as offered_end, "event_needed"."total_hours" as needed_total_hours, "event_offered"."total_hours" as offered_total_hours, 
+  // "event_needed"."event_confirmed", "event_offered"."event_confirmed", "event_needed"."requester_id", "event_offered"."requester_id", 
+  // "event_needed"."claimer_id", "event_needed"."claimer_id","event_offered"."group_id", "event_needed"."event_offered_id", 
+  // "event_offered"."event_needed_id"  FROM "event_needed"
+  // JOIN "event_offered" on "event_needed_id" = "event_needed"."id"
+  // WHERE "event_needed"."requester_id" = $1
+  // ORDER BY "event_needed"."id";`;
+
+  const sqlText = `SELECT * from "event"
+  join "family" on "family"."id" = "requester_id" 
+  join "family" as "family2" on "family2"."id" = "claimer_id" 
+  where "requester_id" = $1
+  ORDER By "event_date";`;
 
   const value = [req.user.id];
 
@@ -65,18 +71,19 @@ router.put('/update/:id', (req,res)=> {
   })
 })
 
-// router.post('/addRequest', (req,res)=> {
-//   const sqlText = `INSERT INTO 
-//   values = [req.body.event_claimed, req.params.id];
-//   pool.query(sqlText, values)
-//   .then((response) => {
-//     res.sendStatus(200);
-//   })
-//   .catch((error)=> {
-//     console.log('Error with UPDATING the DB', error);
-//     res.sendStatus(500);
-//   })
-// })
+router.post('/addRequest', (req,res)=> {
+  const sqlText = `insert into "event" ("event_date", "event_time_start", "event_time_end", "group_id", "notes", "requester_id", "offer_needed")
+  values($1, $2, $3, $4, $5, $6, $7)`;
+  values = [req.body.event_date, req.body.event_time_start, req.body.event_time_end, req.body.group_id, req.body.notes, req.body.requester_id, req.body.offer_needed];
+  pool.query(sqlText, values)
+  .then((response) => {
+    res.sendStatus(201);
+  })
+  .catch((error)=> {
+    console.log('Error with UPDATING the DB', error);
+    res.sendStatus(500);
+  })
+})
 
 
 module.exports = router;
