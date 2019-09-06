@@ -3,6 +3,8 @@ import axios from 'axios';
 
 function* feedSaga () {
   yield takeEvery('FETCH_YOUR_FEED', getYourFeed)
+  yield takeEvery('CLAIM_EVENT', claimEvent)
+  yield takeEvery('ADD_REQUEST', addRequest)
 }
 
 function* getYourFeed () {
@@ -18,4 +20,36 @@ function* getYourFeed () {
     
   }
 }
+
+function* claimEvent (action) {
+  console.log('this is action.payload', action.payload)
+
+  try {
+    yield axios.put(`/feed/update/${action.payload.id}`, action.payload)
+    
+    let event_date = {
+      event_date: action.payload.event_date
+    }
+    console.log('this is action.payload.event_date', action.payload.event_date);
+    yield put({type: 'FETCH_EVENTS', payload: event_date})
+
+  }
+  catch(error) {
+    console.log('Error with updating event in the DB', error);
+  }
+}
+
+function* addRequest (action) {
+  console.log('this is action.payload', action.payload)
+
+  try {
+    yield axios.post(`/feed/addRequest`, action.payload)
+    console.log('in ADD REQUEST - FEEDSAGA with:', action.payload);
+    yield put({type: 'FETCH_EVENTS', payload: action.payload.event_date})
+  }
+  catch(error) {
+    console.log('Error with adding request to the DB', error);
+  }
+}
+
 export default feedSaga;

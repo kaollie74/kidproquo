@@ -51,9 +51,33 @@ router.get('/offered', rejectUnauthenticated,   (req,res)=> {
   })
 })
 
-router.get('/start', (req,res)=> {
-
+router.put('/update/:id', (req,res)=> {
+  const sqlText = `UPDATE "event" SET "event_claimed"=$1
+  WHERE id =$2;`;
+  values = [req.body.event_claimed, req.params.id];
+  pool.query(sqlText, values)
+  .then((response) => {
+    res.sendStatus(200);
+  })
+  .catch((error)=> {
+    console.log('Error with UPDATING the DB', error);
+    res.sendStatus(500);
+  })
 })
+
+// router.post('/addRequest', (req,res)=> {
+//   const sqlText = `INSERT INTO 
+//   values = [req.body.event_claimed, req.params.id];
+//   pool.query(sqlText, values)
+//   .then((response) => {
+//     res.sendStatus(200);
+//   })
+//   .catch((error)=> {
+//     console.log('Error with UPDATING the DB', error);
+//     res.sendStatus(500);
+//   })
+// })
+
 
 module.exports = router;
 
