@@ -10,7 +10,7 @@ router.get('/:id', (req, res) => {
                     "event"."claimer_id" = "family"."id"
                     left join "family" as "family2" on
                     "event"."requester_id" = "family2"."id"
-                    where "event"."group_id"=$1;`;
+                    where "event"."group_id"=$1 order by id desc;`;
     pool.query(sqlText, [values])
         .then((response) => {
             console.log('back from group db response.rows:', response.rows);
