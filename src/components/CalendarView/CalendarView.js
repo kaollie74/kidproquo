@@ -7,12 +7,19 @@ import EventView from '../EventView/EventView';
 class CalendarView extends Component {
     state = {
         date: new Date(),
-        event: false
+        event: false,
+        dateToSend: '',
       }
 
-      handleChange = () => {
+      handleChange = (value) => {
         this.setState({
           event: !this.state.event
+        })
+        let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
+        let newObjectToSend = {event_date: newDate}
+        console.log('IN HANDLE CHANGE WITH NEW DATE:', newObjectToSend);
+        this.setState({
+          dateToSend: newObjectToSend
         })
       }
 
@@ -35,7 +42,13 @@ class CalendarView extends Component {
         
       let newObjectToSend = {event_date: newDate}
       this.props.dispatch({type: 'FETCH_EVENTS', payload: newObjectToSend})
-       
+      console.log(newDate);
+      }
+
+      newDayToSend = (value) => {
+        let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
+        let newObjectToSend = {event_date: newDate}
+        console.log('IN NEW DAY TO SEND WITH NEW DATE:', newObjectToSend);
       }
      
       render() {
@@ -48,10 +61,11 @@ class CalendarView extends Component {
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}
+              onClick={this.newDayToSend}
             />
           </div>
           <div>
-            <EventView/>
+            <EventView date={this.state.dateToSend.event_date}/>
           </div>
           </>
           
