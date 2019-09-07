@@ -57,7 +57,7 @@ class MyProfilePage extends Component {
                 />
                 
                 <Container text className='my_feed'>
-                    <Header as='h1'>Johnson Family</Header>
+                    <Header as='h1'> {this.props.reduxStore.family.last_name1} Family</Header>
                     <Label>
                         Hours Used: 
                         <Label.Detail>
