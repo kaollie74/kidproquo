@@ -25,7 +25,7 @@ class FamilyProfilePage extends Component {
                 <div>
                     {/* {JSON.stringify(this.props.reduxStore)} */}
                     <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1}
+                        The {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
