@@ -58,8 +58,17 @@ class EventView extends Component {
   };
 
   componentDidMount() {
+    console.log('DATE TO SEND TO SAGA (EVENT VIEW):', this.props.dateToSendToSaga)
     this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
     this.props.dispatch({ type: 'FETCH_GROUP', payload: this.props.reduxStore.userGroups[0] });
+    // this.props.dispatch({ type: 'FETCH_EVENTS', payload: this.props.dateToSendToSaga })
+    this.setState({
+      event_date: new Date()
+    })
+    // for (let i=0; i < this.props.reduxStore.calendar.length; i++) {
+    //  console.log('IN COMP DID MOUNT (EVENT VIEW) WITH:', this.props.reduxStore.calendar)
+    // }
+      
   }
 
   handleDateChange = (event, propsName) => {
@@ -67,6 +76,7 @@ class EventView extends Component {
     this.setState({
       [propsName]: event
     });
+    console.log('IN HANDLE DATE CHANGE WITH:', this.state)
   };
 
   handleChange = (event, propertyToChange) => {
@@ -120,7 +130,7 @@ class EventView extends Component {
     console.log(newTimeEnd);
     console.log('THIS IS THE OBJECT TO SEND TO SAGA!!!!!!!!!', newEventToSend);
     this.props.dispatch({ type: 'ADD_REQUEST', payload: newEventToSend })
-    
+    this.openModal();
 
   }
 
@@ -130,16 +140,22 @@ class EventView extends Component {
     })
   }
 
+  handleSubmit = (event) => {
+    this.setState({
+      event_date: this.state.event_date
+    })
+  }
 
   render() {
-
     console.log('this is state', this.state)
     const { classes } = this.props;
     if (this.props.reduxStore.calendar.length !== 0) {
       return (
         <>
-          <h1>Events </h1>
+          <h2> {this.props.date}</h2>
+          {/* <Typography>{this.props.date}</Typography> */}
           <Button variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
+          <h3> Open Requests </h3>
           <Modal
             aria-labelledby="simple-modal-title"
             arai-describedby="simple-modal-description"
@@ -170,6 +186,7 @@ class EventView extends Component {
                     label="Time end"
                     value={this.state.event_time_end}
                     onChange={(event) => this.handleDateChange(event, 'event_time_end')}
+                    onSubmit={(event) => this.handleSubmit}
                   />
                   <TextField multiline
                     rowsMax="6"
@@ -210,7 +227,7 @@ class EventView extends Component {
             </div>
           </Modal>
           <Table>
-            <Table.Header>
+            {/* <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Family</Table.HeaderCell>
                 <Table.HeaderCell>Time</Table.HeaderCell>
@@ -218,7 +235,7 @@ class EventView extends Component {
                 <Table.HeaderCell>N/O</Table.HeaderCell>
                 <Table.HeaderCell>Claim</Table.HeaderCell>
               </Table.Row>
-            </Table.Header>
+            </Table.Header> */}
 
             <Table.Body>
               {this.props.reduxStore.calendar.map(item => (
@@ -228,7 +245,7 @@ class EventView extends Component {
                   <Table.Cell> {item.event_time_start} - {item.event_time_end} </Table.Cell>
                   <Table.Cell>{item.notes}</Table.Cell>
                   <Table.Cell className={item.offer_needed ? 'Offering' : 'Needed'}><p>{item.offer_needed ? 'Offering' : 'Needed'}</p></Table.Cell>
-                  <Table.Cell><Icon name="plus square" size="large" onClick={(event) => this.handleClaim(event, item)}></Icon></Table.Cell>
+                  <Table.Cell><Icon name="plus circle" size="large" color="green" onClick={(event) => this.handleClaim(event, item)}></Icon></Table.Cell>
                 </Table.Row>
               ))}
 
@@ -241,9 +258,10 @@ class EventView extends Component {
     } else {
       return (
         <>
-          <h1>No Events Scheduled</h1>
+          <h2>{this.props.date}</h2>
           <div>
             <Button variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
+            <h3>No Requests</h3>
             <Modal
               aria-labelledby="simple-modal-title"
               arai-describedby="simple-modal-description"
@@ -260,19 +278,19 @@ class EventView extends Component {
                       <DatePicker
                         margin="normal"
                         label="Date picker"
-                        value={this.state.selectedDate}
+                        value={this.state.event_date}
                         onChange={(event) => this.handleDateChange(event, 'event_date')}
                       />
                       <TimePicker
                         margin="normal"
                         label="Time Start"
-                        value={this.state.selectedTimeStart}
+                        value={this.state.event_time_start}
                         onChange={(event) => this.handleDateChange(event, 'event_time_start')}
                       />
                       <TimePicker
                         margin="normal"
                         label="Time end"
-                        value={this.state.selectedTimeEnd}
+                        value={this.state.event_time_end}
                         onChange={(event) => this.handleDateChange(event, 'event_time_end')}
                       />
                       <TextField

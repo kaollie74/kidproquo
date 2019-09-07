@@ -3,25 +3,50 @@ import Calendar from 'react-calendar'
 import 'semantic-ui-css/semantic.min.css'
 import {connect} from 'react-redux';
 import EventView from '../EventView/EventView';
-  
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import { Day } from 'material-ui-pickers';
+
 class CalendarView extends Component {
     state = {
         date: new Date(),
-        event: false
+        event_date:{event_date: new Date().getFullYear() + "-" +  0+Number(new Date().getMonth()+1) + "-" + new Date().getDate()},
+        dateToSend: '',
+        dateToDisplay: '',
       }
 
-      handleChange = () => {
+      componentDidMount() {
+        let day = new Date();
+        let newDayToDisplay = ( day.getFullYear() + "-" +  0+Number(day.getMonth()+1) + "-" + day.getDate())
+        // newDayToDisplay.toString().substring(1,10)
+        this.setState({
+          dateToDisplay: newDayToDisplay
+        })
+        let newDate = ( day.getFullYear() + "-" +  0+Number(day.getMonth()+1) + "-" + day.getDate())
+        let newObjectToSend = {event_date: newDate}
+        console.log('IN HANDLE CHANGE WITH NEW DATE:', newObjectToSend);
+        this.setState({
+          dateToSend: newObjectToSend
+        })
+        this.props.dispatch({type: 'FETCH_EVENTS', payload: this.state.event_date})
+      }
+
+      handleChange = (value) => {
         this.setState({
           event: !this.state.event
         })
+        let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
+        let newObjectToSend = {event_date: newDate}
+        console.log('IN HANDLE CHANGE WITH NEW DATE:', newObjectToSend);
+        this.setState({
+          dateToSend: newObjectToSend
+        })
       }
 
-      getEvents =  () => {
-        console.log('in get events');
-        
+      // getEvents =  () => {
+      //   console.log('in get events');
         //this.props.dispatch({type: 'FETCH_EVENTS', payload: this.state})
-        
-      }
+      // }
      
       //onChange = date => this.setState({ date })
 
@@ -35,12 +60,19 @@ class CalendarView extends Component {
         
       let newObjectToSend = {event_date: newDate}
       this.props.dispatch({type: 'FETCH_EVENTS', payload: newObjectToSend})
-       
+      console.log('NEW OBJECT TO SEND (CALENDAR VIEW):', newObjectToSend);
+      }
+
+      newDayToSend = (value) => {
+        let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
+        let newObjectToSend = {event_date: newDate}
+        console.log('IN NEW DAY TO SEND WITH NEW DATE:', newObjectToSend);
       }
      
       render() {
 
           console.log('this is state', this.state)
+        if (this.state.dateToDisplay === this.state.dateToSend) {
         return (
           <>
           <div>
@@ -48,19 +80,35 @@ class CalendarView extends Component {
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}
+              onClick={this.newDayToSend}
             />
+            {/* <Typography>
+            {this.state.dateToDisplay.toString().substring(0, 10)}
+            </Typography> */}
           </div>
           <div>
-            <EventView/>
+            <EventView date={this.state.dateToSend.event_date}
+            //  dateToSendToSaga={this.state.dateToSendToSaga}
+            />
           </div>
           </>
-          
-          
-
-        );
+        )} else {
+          return (
+          <>
+          <div>
+            <Calendar
+              onChange={(event) => this.formatDate(event)}
+              value={this.state.date}
+              onClickDay={this.handleChange}
+              onClick={this.newDayToSend}
+            />
+            </div>
+            <div>
+            <EventView date={this.state.dateToSend.event_date}/>
+          </div>
+          </>
+          )}
       }
-
-      
 }
 
 export default connect()(CalendarView);
