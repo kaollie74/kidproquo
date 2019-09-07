@@ -1,3 +1,5 @@
+
+// Actually named group and holds group feed info
 const groupReducer = (state = {}, action) => {
   switch (action.type) {
     case 'SET_GROUP':

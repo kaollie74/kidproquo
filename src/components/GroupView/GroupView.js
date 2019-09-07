@@ -6,23 +6,22 @@ import 'semantic-ui-css/semantic.min.css';
 class GroupView extends Component {
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
+        // this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
         this.props.dispatch({ type: 'FETCH_GROUP', payload: this.props.reduxStore.userGroups[0]});
-
+        this.props.dispatch({ type: 'FETCH_FAM_GROUP', payload: this.props.reduxStore.userGroups[0] });
     }
 
-    grabName = (object) => {
-    console.log(object)
+    viewFam = (item) => {
+        console.log('view fam item', item)
+        this.props.history.push(`/view/${item.user_id}`);
+        
     }
     
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
     render() {
-        console.log('family.id:',this.props.reduxStore.family.id)
-        console.log('family.id:' + this.props.reduxStore.userGroups)
-
-        
+    
         return (
             <div>
                 <h1>
@@ -36,13 +35,11 @@ class GroupView extends Component {
                         <Button>ADD MEMBERS</Button>
                     </Button.Group>
                 </div>
-                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
-{this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
-
-
-
+                {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
+                
+                {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
-                        console.log(item.requester_image)
+                        if (item.event_claimed === false) {
                        
                         return (
                             <>
@@ -62,55 +59,28 @@ class GroupView extends Component {
                         </Feed.Event>
                     </Feed>
                             </>
-                        )
+                        )}
+                        else {
+                            return(
+                            <>
+                                <Feed>
+                                    <Feed.Event>
+                                        <Feed.Label>
+                                        </Feed.Label>
+                                        <Feed.Content>
+                                            <Feed.Label>
+                                                <img src='https://www.carters.com/on/demandware.static/-/Sites-Carters-Library/default/dw7a7f95ac/content/carters/images/nav/KG_Fall_2019.jpg' alt="lol" />
+                                            </Feed.Label>
+                                                {item.claimer_name} has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                    
+                                        </Feed.Content>
+                                    </Feed.Event>
+                                </Feed>
+                            </>
+                    )}
                     })
                     : <p></p>} 
-
-                <div>
-                    <Feed>
-                        <Feed.Event>
-                            <Feed.Label>
-                                <img src='/images/family.jpg' alt="lol" />
-                            </Feed.Label>
-                            <Feed.Content>
-                                 Family needs a sitter on 10/2/19 from 5:00pm - 9:00pm <p>Whittier Group</p> 
-                                <Button basic color='blue'>
-                                    CLAIM
-                                </Button>
-                            </Feed.Content>
-                        </Feed.Event>
-                    </Feed>
-                </div>
-                <div>
-                    <Feed>
-                        <Feed.Event>
-                            <Feed.Label>
-                                <img src='/images/family.jpg' alt="lol"/>
-                            </Feed.Label>
-                            <Feed.Content>
-                                Olson Family needs a sitter on 10/9/19 from 5:00pm - 9:00pm <p>Whittier Group</p>
-                                <Button basic color='blue'>
-                                    CLAIM
-                                </Button>
-                            </Feed.Content>
-                        </Feed.Event>
-                    </Feed>
-                </div>
-                <div>
-                    <Feed>
-                        <Feed.Event>
-                            <Feed.Label>
-                                <img src='/images/family.jpg' alt="lol"/>
-                            </Feed.Label>
-                            <Feed.Content>
-                                Flavin Family needs a sitter on 10/16/19 from 5:00pm - 9:00pm <p>Whittier Group</p>
-                                <Button basic color='blue'>
-                                    CLAIM
-                                </Button>
-                            </Feed.Content>
-                        </Feed.Event>
-                    </Feed>
-                </div>
+               
                 <div>
                     <Button onClick={(event) => this.seeCalendar()} icon labelPosition='right'>
                         View Calendar
@@ -118,18 +88,17 @@ class GroupView extends Component {
                     </Button>
                 </div>
                 
-                {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
+                {this.props.reduxStore.groupFam && this.props.reduxStore.groupFam.length > 0 ?
                     
                     
                     
-                        this.props.reduxStore.group.map((item) => {
-                            console.log(item)
+                        this.props.reduxStore.groupFam.map((item) => {
                             return (
                                 <>
-                                    <Card key={item.id}>
+                                    <Card key={item.id} onClick={() => this.viewFam(item)}>
                                         <Image wrapped size='medium' src={item.image} />
                                     <Card.Content>
-                                        <Card.Header>{item.requester_name} Family</Card.Header>
+                                        <Card.Header>{item.last_name1} Family</Card.Header>
                                     </Card.Content>
                                     </Card>
                                 </>

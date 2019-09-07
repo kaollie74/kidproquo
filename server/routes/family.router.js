@@ -40,4 +40,19 @@ router.get('/user/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+router.put('/update/:id', rejectUnauthenticated, (req,res) => {
+    console.log('IN ROUTER.PUT', req.params.id)
+    console.log('IN ROUTER.PUT', req.body)
+    const sqlText = `UPDATE "family" SET "image"=$1, "last_name1"=$2 WHERE "id"=$3;`;
+    values=[req.body.family_image, req.body.family_last_name, req.params.id ]
+    pool.query(sqlText, values)
+    .then((response)=> {
+        res.sendStatus(201);
+    })
+    .catch((error)=> {
+        console.log('Error with updating FAMILY in the DB', error)
+        res.sendStatus(500);
+    })
+})
+
 module.exports = router;

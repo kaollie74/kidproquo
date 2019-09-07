@@ -58,8 +58,17 @@ class EventView extends Component {
   };
 
   componentDidMount() {
+    console.log('DATE TO SEND TO SAGA (EVENT VIEW):', this.props.dateToSendToSaga)
     this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
     this.props.dispatch({ type: 'FETCH_GROUP', payload: this.props.reduxStore.userGroups[0] });
+    // this.props.dispatch({ type: 'FETCH_EVENTS', payload: this.props.dateToSendToSaga })
+    this.setState({
+      event_date: new Date()
+    })
+    // for (let i=0; i < this.props.reduxStore.calendar.length; i++) {
+    //  console.log('IN COMP DID MOUNT (EVENT VIEW) WITH:', this.props.reduxStore.calendar)
+    // }
+      
   }
 
   handleDateChange = (event, propsName) => {
@@ -143,9 +152,10 @@ class EventView extends Component {
     if (this.props.reduxStore.calendar.length !== 0) {
       return (
         <>
-          <h1>Events | {this.props.date}</h1>
+          <h2> {this.props.date}</h2>
           {/* <Typography>{this.props.date}</Typography> */}
           <Button variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
+          <h3> Open Requests </h3>
           <Modal
             aria-labelledby="simple-modal-title"
             arai-describedby="simple-modal-description"
@@ -235,7 +245,7 @@ class EventView extends Component {
                   <Table.Cell> {item.event_time_start} - {item.event_time_end} </Table.Cell>
                   <Table.Cell>{item.notes}</Table.Cell>
                   <Table.Cell className={item.offer_needed ? 'Offering' : 'Needed'}><p>{item.offer_needed ? 'Offering' : 'Needed'}</p></Table.Cell>
-                  <Table.Cell><Icon name="plus square" size="large" onClick={(event) => this.handleClaim(event, item)}></Icon></Table.Cell>
+                  <Table.Cell><Icon name="plus circle" size="large" color="green" onClick={(event) => this.handleClaim(event, item)}></Icon></Table.Cell>
                 </Table.Row>
               ))}
 
@@ -248,9 +258,10 @@ class EventView extends Component {
     } else {
       return (
         <>
-          <h1>No Events Scheduled</h1>
+          <h2>{this.props.date}</h2>
           <div>
             <Button variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
+            <h3>No Requests</h3>
             <Modal
               aria-labelledby="simple-modal-title"
               arai-describedby="simple-modal-description"
