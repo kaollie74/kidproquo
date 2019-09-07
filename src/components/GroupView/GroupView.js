@@ -6,7 +6,7 @@ import 'semantic-ui-css/semantic.min.css';
 class GroupView extends Component {
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
+        // this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
         this.props.dispatch({ type: 'FETCH_GROUP', payload: this.props.reduxStore.userGroups[0]});
 
     }
