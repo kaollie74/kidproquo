@@ -8,21 +8,20 @@ class GroupView extends Component {
     componentDidMount() {
         // this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
         this.props.dispatch({ type: 'FETCH_GROUP', payload: this.props.reduxStore.userGroups[0]});
-
+        this.props.dispatch({ type: 'FETCH_FAM_GROUP', payload: this.props.reduxStore.userGroups[0] });
     }
 
-    grabName = (object) => {
-    console.log(object)
+    viewFam = (item) => {
+        console.log('view fam item', item)
+        this.props.history.push(`/view/${item.user_id}`);
+        
     }
     
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
     render() {
-        console.log('family.id:',this.props.reduxStore.family.id)
-        console.log('family.id:' + this.props.reduxStore.userGroups)
-
-        
+    
         return (
             <div>
                 <h1>
@@ -89,18 +88,17 @@ class GroupView extends Component {
                     </Button>
                 </div>
                 
-                {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
+                {this.props.reduxStore.groupFam && this.props.reduxStore.groupFam.length > 0 ?
                     
                     
                     
-                        this.props.reduxStore.group.map((item) => {
-                            console.log(item)
+                        this.props.reduxStore.groupFam.map((item) => {
                             return (
                                 <>
-                                    <Card key={item.id}>
+                                    <Card key={item.id} onClick={() => this.viewFam(item)}>
                                         <Image wrapped size='medium' src={item.image} />
                                     <Card.Content>
-                                        <Card.Header>{item.requester_name} Family</Card.Header>
+                                        <Card.Header>{item.last_name1} Family</Card.Header>
                                     </Card.Content>
                                     </Card>
                                 </>
