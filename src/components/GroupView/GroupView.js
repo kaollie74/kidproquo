@@ -49,7 +49,7 @@ class GroupView extends Component {
                             </Feed.Label>
                             <Feed.Content>
                                 <Feed.Label>
-                                 <img src='https://www.carters.com/on/demandware.static/-/Sites-Carters-Library/default/dw7a7f95ac/content/carters/images/nav/KG_Fall_2019.jpg' alt="lol" />
+                                 <img src={item.requester_image? item.requester_image : <>No</>} alt="lol" />
                                 </Feed.Label>
                                  {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
                                  <></><Button basic color='blue'>
@@ -69,7 +69,7 @@ class GroupView extends Component {
                                         </Feed.Label>
                                         <Feed.Content>
                                             <Feed.Label>
-                                                <img src='https://www.carters.com/on/demandware.static/-/Sites-Carters-Library/default/dw7a7f95ac/content/carters/images/nav/KG_Fall_2019.jpg' alt="lol" />
+                                                <img src={item.claimer_image} alt="lol" />
                                             </Feed.Label>
                                                 {item.claimer_name} has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
                     
