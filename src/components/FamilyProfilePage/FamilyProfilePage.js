@@ -3,22 +3,15 @@ import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form } from 'semantic-ui-react';
-
-
-
 class FamilyProfilePage extends Component {
-
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.reduxStore.user.id })
     }
-
     editFamilyProfile = () => {
-  
-    this.props.history.push('/edit-my-profile');
-}
 
-
+        this.props.history.push('/edit-my-profile');
+    }
     render() {
         return (
             <>
@@ -33,9 +26,6 @@ class FamilyProfilePage extends Component {
                     <Card>
                         <Card.Content>
                             <Card.Header> </Card.Header>
-
-
-
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
                             <Image className='ui centered medium image' src="https://www.roundlakedentistry.com/wp-content/uploads/2016/09/generic-family-at-table.jpg" alt="img 1" />
                             <Icon name='pencil alternate' onClick={this.editFamilyProfile} />
@@ -67,10 +57,13 @@ class FamilyProfilePage extends Component {
                             <Coverflow
                                 width={300}
                                 height={300}
-                                displayQuantityOfSide={2}
-                                navigation={true}
+                                displayQuantityOfSide={1}
+                                navigation={false}
                                 enableHeading={false}
                                 swipeable={true}
+                                enableScroll={true}
+                                clickable={true}
+                                infiniteScroll={true}
                             >
                                 <div
                                     onClick={() => this.handleChangeFor()}
@@ -103,10 +96,8 @@ class FamilyProfilePage extends Component {
                                                 </Card.Content>
                                             </Card>
                                         </>
-
                                     )
                                 })}
-
                             </Coverflow>
                         </div>
                     </Card>
@@ -115,9 +106,7 @@ class FamilyProfilePage extends Component {
         )
     }
 };
-
 const mapStateToProps = reduxStore => ({
     reduxStore
 });
-
 export default connect(mapStateToProps)(FamilyProfilePage);
