@@ -51,7 +51,7 @@ class FamilyProfilePage extends Component {
                         <Card.Content>
                             <Card.Header> </Card.Header>
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
-                            <Image className='ui centered medium image' src="https://www.roundlakedentistry.com/wp-content/uploads/2016/09/generic-family-at-table.jpg" alt="img 1" />
+                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : <>no</>} alt="img 1" />
                             <Icon name='pencil alternate' onClick={this.editFamilyProfile} />
                         </Card.Content>
                     </Card>
