@@ -6,6 +6,18 @@ import EventView from '../EventView/EventView';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { Day } from 'material-ui-pickers';
+import { withStyles } from '@material-ui/core/styles';
+
+
+const styles = theme => ({
+  grid: {
+    width: '60%',
+  },
+  calendar: {
+    width: '375px',
+    border: 'solid black 2px'
+  },
+});
 
 class CalendarView extends Component {
     state = {
@@ -70,13 +82,14 @@ class CalendarView extends Component {
       }
      
       render() {
-
-          console.log('this is state', this.state)
+        const { classes } = this.props;
+        console.log('this is state', this.state)
         if (this.state.dateToDisplay === this.state.dateToSend) {
         return (
           <>
           <div>
             <Calendar
+              className={classes.calendar}
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}
@@ -97,6 +110,7 @@ class CalendarView extends Component {
           <>
           <div>
             <Calendar
+              className={classes.calendar}
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}
@@ -104,11 +118,11 @@ class CalendarView extends Component {
             />
             </div>
             <div>
-            <EventView date={this.state.dateToSend.event_date}/>
+            <EventView date={this.state.dateToSend.event_date} history={this.props.history}/>
           </div>
           </>
           )}
       }
 }
 
-export default connect()(CalendarView);
+export default withStyles(styles)(connect()(CalendarView));

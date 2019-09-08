@@ -85,7 +85,7 @@ class App extends Component {
               path="/new-user-form"
               component={NewUserForm}
             />
-
+            
             <ProtectedRoute
               exact
               path="/my-profile-page"

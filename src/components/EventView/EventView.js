@@ -6,15 +6,19 @@ import { withStyles } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
-
+import { Link } from 'react-router-dom';
+import { Iconbutton } from 'semantic-ui-react';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
-import { Table, Icon } from 'semantic-ui-react';
+import { Table, Card} from 'semantic-ui-react';
 import { getThemeProps } from '@material-ui/styles';
 
 const styles = theme => ({
@@ -43,6 +47,47 @@ const styles = theme => ({
     height: '50px',
     backgroundColor: 'white'
   },
+  date: {
+    textAlign: 'center',
+  },
+  openRequests: {
+    textAlign: 'center'
+  },
+  button: {
+    textAlign: 'center',
+    margin: '20px 113px 0px 113px'
+  },
+  eventsRows: {
+    maxWidth: '186px',
+  },
+  eventsBody: {
+    maxWidth: '186px',
+    display: 'inline-block'
+  },
+  card: {
+    color: 'blue'
+  }, 
+  hr: {
+    backgroundColor: '#8298ca',
+    borderRadius: '5px',
+    height: '5px',
+    border: 'none',
+  },
+  claimButton: {
+    borderRadius: '3px',
+    width: '10px'
+  },
+  fab: {
+    borderRadius: '5px'
+  },
+  add: {
+    border: 'solid 1px white',
+    backgroundColor: '#89E894',
+    borderRadius: '3px'
+  },
+  addButton: {
+    fontWeight: 'bold'
+  }
 });
 
 class EventView extends Component {
@@ -123,15 +168,26 @@ class EventView extends Component {
       group_id: this.props.reduxStore.userGroups[0].id,
       notes: notes,
       offer_needed: offer_needed,
-
     }
     console.log(newDate);
     console.log(newTimeStart);
     console.log(newTimeEnd);
     console.log('THIS IS THE OBJECT TO SEND TO SAGA!!!!!!!!!', newEventToSend);
     this.props.dispatch({ type: 'ADD_REQUEST', payload: newEventToSend })
+    this.props.dispatch({ type: 'FETCH_EVENTS', payload: newEventToSend.event_date})
+    this.setState({
+      event_date: new Date (),
+      event_time_start: new Date (), 
+      event_time_end: new Date (),
+      notes: '',
+    })
     this.openModal();
+    this.confirmRequest();
+  }
 
+  confirmRequest = () => {
+    this.props.history.push('/calendar');
+    console.log('IN CONFIRM REQUEST WITH')
   }
 
   openModal = () => {
@@ -146,16 +202,27 @@ class EventView extends Component {
     })
   }
 
+  handleCancel = () => {
+    this.setState({
+      event_date: new Date(), 
+      event_time_start: new Date(), 
+      event_time_end: new Date(),
+      notes: ''
+    })
+    this.openModal();
+  }
+
   render() {
     console.log('this is state', this.state)
+    console.log('THIS IS THIS.PROPS.DATE:', this.props.date)
     const { classes } = this.props;
     if (this.props.reduxStore.calendar.length !== 0) {
       return (
         <>
-          <h2> {this.props.date}</h2>
-          {/* <Typography>{this.props.date}</Typography> */}
-          <Button variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
-          <h3> Open Requests </h3>
+        <Button className={classes.button} variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
+          <h2 className={classes.date}> {this.props.date}</h2>
+          <hr className={classes.hr}/>
+          <h3 className={classes.openRequests}> Open Requests </h3>
           <Modal
             aria-labelledby="simple-modal-title"
             arai-describedby="simple-modal-description"
@@ -200,7 +267,7 @@ class EventView extends Component {
                       labelPlacement="top"
                       checked={this.state.offer_needed === 'true'}
                       onChange={this.handleRequestStatus}
-                      value='offer'
+                      value='true'
                       color="primary"
                       name="radio-button-demo"
                       aria-label='offer'
@@ -211,22 +278,23 @@ class EventView extends Component {
                       labelPlacement="top"
                       checked={this.state.offer_needed === 'false'}
                       onChange={this.handleRequestStatus}
-                      value='needed'
+                      value='false'
                       color="primary"
                       name="radio-button-demo"
                       aria-label='needed'
                     />
                   </form>
                 </MuiPickersUtilsProvider>
-                
+                <Link to ='/calendar'>
                 <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
-                <Button variant="contained" color="secondary" onClick={this.openModal}> Cancel</Button>
-
+                </Link>
+                <Button variant="contained" color="secondary" onClick={this.handleCancel}> Cancel</Button>
+                
                 {/* </Typography> */}
               </Grid>
             </div>
           </Modal>
-          <Table>
+          <Card.Group className="ui grid container">
             {/* <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Family</Table.HeaderCell>
@@ -237,31 +305,48 @@ class EventView extends Component {
               </Table.Row>
             </Table.Header> */}
 
-            <Table.Body>
+            
               {this.props.reduxStore.calendar.map(item => (
-
-                <Table.Row key={item.id}>
-                  <Table.Cell>{item.last_name1}</Table.Cell>
-                  <Table.Cell> {item.event_time_start} - {item.event_time_end} </Table.Cell>
-                  <Table.Cell>{item.notes}</Table.Cell>
-                  <Table.Cell className={item.offer_needed ? 'Offering' : 'Needed'}><p>{item.offer_needed ? 'Offering' : 'Needed'}</p></Table.Cell>
-                  <Table.Cell><Icon name="plus circle" size="large" color="green" onClick={(event) => this.handleClaim(event, item)}></Icon></Table.Cell>
-                </Table.Row>
+                <Card 
+                className="seven wide column" 
+                key={item.id}
+                >
+                <Card.Content className="ui orange card">
+                  <Card.Header>{item.last_name1} </Card.Header>
+                  <Card.Meta>{item.event_time_start} - {item.event_time_end}</Card.Meta>
+                  <Card.Description>{item.notes}</Card.Description>
+                  <Card.Description className={item.offer_needed ? "ui blue label" : "ui orange label"}><p>{item.offer_needed ? 'Offering' : 'Needed'}</p></Card.Description>
+                  {/* <div className={classes.claimRequestButton}>
+                  <Button className={classes.claimRequestButton} color="green"  onClick={(event) => this.handleClaim(event, item)}>
+                  <Icon floated="right" name="plus circle" size="large" basic color="white"></Icon>
+                  </Button>
+                  </div> */}
+                  {/* <Button className={classes.claimButton} positive icon="plus circle">
+                    
+                  </Button> */}
+                  <br/>
+                  <Button className={classes.addButton}>
+                  CLAIM
+                  <AddIcon className={classes.add}></AddIcon>
+                  </Button>
+                </Card.Content>
+                </Card>
               ))}
 
 
-            </Table.Body>
-          </Table>
+            
+          </Card.Group>
         </>
 
       ) // return
     } else {
       return (
         <>
-          <h2>{this.props.date}</h2>
           <div>
-            <Button variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
-            <h3>No Requests</h3>
+            <Button className={classes.button} variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
+            <h2 className={classes.date}> {this.props.date}</h2>
+            <hr className={classes.hr}/>
+            <h3 className={classes.openRequests}> No Requests </h3>
             <Modal
               aria-labelledby="simple-modal-title"
               arai-describedby="simple-modal-description"
@@ -324,8 +409,10 @@ class EventView extends Component {
                           aria-label=''
                         />
                       </form>
+                      <Link to = '/calendar'>
                       <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
-                      <Button variant="contained" color="secondary" onClick={this.openModal}> Cancel</Button>
+                      </Link>
+                      <Button variant="contained" color="secondary" onClick={this.handleCancel}> Cancel</Button>
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Typography>
