@@ -40,11 +40,11 @@ function* claimEvent (action) {
 }
 
 function* addRequest (action) {
-  console.log('this is action.payload', action.payload)
+  console.log('IN FEED SAGA: this is action.payload', action.payload)
   try {
     yield axios.post(`/feed/addRequest`, action.payload)
     console.log('in ADD REQUEST - FEEDSAGA with:', action.payload);
-    yield put({type: 'FETCH_EVENTS', payload: action.payload.event_date})
+    yield put({type: 'FETCH_EVENTS', payload: action.payload})
   }
   catch(error) {
     console.log('Error with adding request to the DB', error);
