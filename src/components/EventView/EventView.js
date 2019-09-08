@@ -87,6 +87,9 @@ const styles = theme => ({
   },
   addButton: {
     fontWeight: 'bold'
+  }, 
+  offering_needed: { 
+    textAlign: 'center'
   }
 });
 
@@ -315,7 +318,7 @@ class EventView extends Component {
                   <Card.Header>{item.last_name1} </Card.Header>
                   <Card.Meta>{item.event_time_start} - {item.event_time_end}</Card.Meta>
                   <Card.Description>{item.notes}</Card.Description>
-                  <Card.Description className={item.offer_needed ? "ui blue label" : "ui orange label"}><p>{item.offer_needed ? 'Offering' : 'Needed'}</p></Card.Description>
+                  <Card.Description className={item.offer_needed ? "ui blue label" : "ui orange label"}><p className={classes.offering_needed}>{item.offer_needed ? 'Offering' : 'Needed'}</p></Card.Description>
                   {/* <div className={classes.claimRequestButton}>
                   <Button className={classes.claimRequestButton} color="green"  onClick={(event) => this.handleClaim(event, item)}>
                   <Icon floated="right" name="plus circle" size="large" basic color="white"></Icon>
