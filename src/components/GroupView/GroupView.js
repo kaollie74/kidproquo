@@ -18,6 +18,21 @@ class GroupView extends Component {
         
     }
     
+    handleClaim = (item) => {
+            let newObject = {
+                id: item.id,
+                claimer_id: this.props.reduxStore.user.id,
+                event_claimed: true,
+            }
+
+            console.log('newObject', newObject)
+            this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject });
+            this.props.history.push(`/my-profile-page`);
+
+
+    }
+
+    
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
@@ -60,7 +75,7 @@ class GroupView extends Component {
                                                             <Image wrapped size='facebook' src={item.requester_image ? item.requester_image : <>No</>}/>
                                                             
                                                                 <h5>Are you sure you want to deal with us?</h5>
-                                                            <Button basic color='green'>CONFIRM</Button><Button basic color='red'>CANCEL</Button>
+                                                            <Button class="circular icon" size="mini" basic color='green' onClick={() => this.handleClaim(item)}>CLAIM</Button><br/><Button size="mini"  basic color='red'>CANCEL</Button>
                                                         
                                                         </Modal.Content>
                                                     </Modal>
