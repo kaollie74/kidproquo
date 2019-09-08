@@ -55,3 +55,15 @@ input {
 .Needed {
    color: rgb(230, 149, 0);
 }
+
+.saveChangesBtn {
+    padding-top: 10%;
+}
+
+.addKidBtn {
+   padding-top: 20%;
+}
+
+.editProfileBtns {
+    display: inline-block;
+}

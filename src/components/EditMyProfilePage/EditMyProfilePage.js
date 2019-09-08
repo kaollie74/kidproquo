@@ -17,16 +17,24 @@ class EditMyProfilePage extends Component {
     state = {
         open: false,
         open2: false,
-        family_last_name: '',
-        first_name: '',
-        last_name: '',
+        family_last_name1: this.props.reduxStore.family.last_name1,
+        family_first_name1: this.props.reduxStore.family.first_name1,
+        family_first_name2: this.props.reduxStore.family.first_name2 ,
+        family_last_name2: this.props.reduxStore.family.last_name2,
+        email: this.props.reduxStore.family.email,
+        street_address: this.props.reduxStore.family.street_address,
+        city: this.props.reduxStore.family.city,
+        state: this.props.reduxStore.family.state,
+        zip_code: this.props.reduxStore.family.zip_code,
+        phone_number: this.props.reduxStore.family.phone_number,
         birthdate: '',
         allergies: '',
         medication: '',
         notes: '',
         image: '',
-        family_id: '',
-        family_image: this.props.reduxStore.family.image
+        family_id: this.props.reduxStore.family.id,
+        family_image: this.props.reduxStore.family.image,
+        user_id: this.props.reduxStore.user.id
 
     }
 
@@ -47,14 +55,22 @@ class EditMyProfilePage extends Component {
 
     editFamilyProfile = () => {
         this.setState({
-            ...this.state,
             open2: !this.state.open2,
             family_id: this.props.reduxStore.family.id,
-            family_image: this.props.reduxStore.family.image
+            family_image: this.state.family_image
         })
     }
 
+    setLocalImage = () => {
+        this.setState({
+            family_image: this.state.family_image,
+            open2: false
+        })
+    }
+    
+
     updateFamily = () => {
+
         let newObjectToSend = {
             id: this.state.family_id,
             family_image: this.state.family_image,
@@ -62,37 +78,107 @@ class EditMyProfilePage extends Component {
             user_id: this.props.reduxStore.user.id
         }
 
-        console.log('this is newObjectToSend', newObjectToSend)
+        console.log('this is newObjectToSend', this.state)
 
-        this.props.dispatch({ type: 'UPDATE_FAMILY', payload: newObjectToSend })
+        this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
     }
 
     render() {
         console.log('THIS IS STATE', this.state)
         return (
-            <div>
-
-                <Card className="align">
-                    <Card.Content>
-                        <Card.Header></Card.Header>
-                        <Image
-                            className="ui fluid image"
-                            src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : ''}
-                            alt="img 1"
-                        />
-                        <Icon name='pencil alternate' size="large" onClick={this.editFamilyProfile} />
-                    </Card.Content>
-                </Card>
+            <div className="ui container center aligned">
+                <div className="ui container center aligned">
+                    <Card className="ui container center aligned" >
+                        <Card.Content>
+                            <Card.Header></Card.Header>
+                            <Image
+                                className="ui fluid image"
+                                src={this.state.family_image ? this.state.family_image : ''}
+                                alt="img 1"
+                            />
+                            <div>
+                                <Icon
+                                    name='pencil alternate'
+                                    size="large"
+                                    onClick={this.editFamilyProfile}>
+                                    Edit Image
+                                </Icon>
+                            </div>
+                        </Card.Content>
+                    </Card>
+                </div>
                 <div>
+                    <Input
+                            placholder='Last Name'
+                            value={this.state.family_first_name1}
+                            onChange={(event) => this.handleChangeFor(event, 'family_first_name1')}
+
+                        />
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.family_last_name1}
+                            onChange={(event) => this.handleChangeFor(event, 'family_last_name1')}
+
+                        />
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.family_first_name2}
+                            onChange={(event) => this.handleChangeFor(event, 'family_first_name2')}
+
+                        />
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.family_last_name2}
+                            onChange={(event) => this.handleChangeFor(event, 'family_last_name2')}
+
+                        />
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.email}
+                            onChange={(event) => this.handleChangeFor(event, 'email')}
+
+                        />
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.street_address}
+                            onChange={(event) => this.handleChangeFor(event, 'street_address')}
+
+                        />
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.city}
+                            onChange={(event) => this.handleChangeFor(event, 'city')}
+
+                        />
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.state}
+                            onChange={(event) => this.handleChangeFor(event, 'state')}
+
+                        />
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.zip_code}
+                            onChange={(event) => this.handleChangeFor(event, 'zip_code')}
+
+                        />
+
+                         <Input
+                            placholder='Last Name'
+                            value={this.state.phone_number}
+                            onChange={(event) => this.handleChangeFor(event, 'phone_number')}
+
+                        />
+
+                </div>
+
+                <div>
+                    {/* Edit Family Pic -------------------------------------------------------------------------------------- */}
                     <Modal
                         open={this.state.open2}
                         onClose={this.state.open2}
                     >
-                        <Input
-                            value={this.state.family_last_name}
-                            onChange={(event) => this.handleChangeFor(event, 'family_last_name')}
 
-                        />
                         <Image
                             className='ui fluid image'
                             src={this.state.family_image}
@@ -103,79 +189,120 @@ class EditMyProfilePage extends Component {
                             value={this.state.family_image}
                             onChange={(event) => this.handleChangeFor(event, 'family_image')}
                         />
-                        <Button onClick={this.updateFamily}>Submit</Button>
-                        <Button onClick={this.editFamilyProfile}>Cancel</Button>
+                        <Button
+                            size='small'
+                            onClick={this.setLocalImage}>
+                            Ok
+                            </Button>
+                        <Button
+                            size='small'
+                            onClick={this.editFamilyProfile}>
+                            Cancel
+                            </Button>
 
 
                     </Modal>
                 </div>
                 <div>
-                    <Button onClick={this.addKidModal}>Add Kid</Button>
+                    <div className='editProfileBtns'>
+                        <div className='addKidBtn'>
+                            <Button
+                                size='mini'
+                                onClick={this.addKidModal}>
+                                Add Kid
+                             </Button>
+                        </div>
+                        <div className='saveChangesBtn'>
+                            <Button
+                                onClick={this.updateFamily}
+                                size='mini'>
+                                Save Changes
+                                </Button>
+                        </div>
+
+                    </div>
                     <div>
                         <Modal
                             open={this.state.open}
                             onClose={this.state.open}
 
                         >
-                            <Modal.Header>Add Kid</Modal.Header>
-                            <Modal.Content>
-                                <Form className="ui fluid">
-                                    <Form.Field>
-                                        <Input
-                                            placeholder="First Name(50 character max)"
-                                            value={this.state.first_name}
-                                            onChange={(event) => this.handleChangeFor(event, 'first_name')}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <Input
-                                            placeholder="Last Name(50 character max)"
-                                            value={this.state.last_name}
-                                            onChange={(event) => this.handleChangeFor(event, 'last_name')}
-                                        />
-                                    </Form.Field>
+                            <Modal.Header
+                                className="ui container center aligned"
+                            >
+                                Add Kid
+                            </Modal.Header>
+                            <Modal.Content
+                                className="ui container center aligned"
+                            >
+
+                                <Form.Field>
                                     <Input
-                                        placeholder="Birthday(MM-DD-YYYY)"
-                                        value={this.state.birthdate}
-                                        onChange={(event) => this.handleChangeFor(event, 'birthdate')}
+                                        placeholder="First Name(50 character max)"
+                                        value={this.state.first_name}
+                                        onChange={(event) => this.handleChangeFor(event, 'first_name')}
                                     />
-
+                                </Form.Field>
+                                <Form.Field>
                                     <Input
-                                        placeholder="Image"
-                                        value={this.state.image}
-                                        onChange={(event) => this.handleChangeFor(event, 'image')}
+                                        placeholder="Last Name(50 character max)"
+                                        value={this.state.last_name}
+                                        onChange={(event) => this.handleChangeFor(event, 'last_name')}
                                     />
+                                </Form.Field>
+                                <Input
+                                    placeholder="Birthday (MM-DD-YYYY)"
+                                    value={this.state.birthdate}
+                                    onChange={(event) => this.handleChangeFor(event, 'birthdate')}
+                                />
 
-                                    <Input
-                                        placeholder="Medication"
-                                        value={this.state.medication}
-                                        onChange={(event) => this.handleChangeFor(event, 'medication')}
-                                    />
+                                <Input
+                                    placeholder="Image"
+                                    value={this.state.image}
+                                    onChange={(event) => this.handleChangeFor(event, 'image')}
+                                />
 
-                                    <Form.TextArea
-                                        placeholder="Allergies (500 characters max)"
-                                        value={this.state.allergies}
-                                        onChange={(event) => this.handleChangeFor(event, 'allergies')}
+                                <Input
+                                    placeholder="Medication"
+                                    value={this.state.medication}
+                                    onChange={(event) => this.handleChangeFor(event, 'medication')}
+                                />
 
-                                    />
+                                <Form.TextArea
+                                    placeholder="Allergies (500 characters max)"
+                                    value={this.state.allergies}
+                                    onChange={(event) => this.handleChangeFor(event, 'allergies')}
 
-                                    <Form.TextArea
-                                        placeholder="Other Info (300 characters max)"
-                                        value={this.state.notes}
-                                        onChange={(event) => this.handleChangeFor(event, 'notes')}
-                                    />
+                                />
 
-                                </Form>
-
+                                <Form.TextArea
+                                    placeholder="Other Info (300 characters max)"
+                                    value={this.state.notes}
+                                    onChange={(event) => this.handleChangeFor(event, 'notes')}
+                                />
 
                             </Modal.Content>
-                            <Button onClick={this.addKidModal}>Cancel</Button>
-                            <Button onClick={this.submitNewKid}>Submit</Button>
+                            <div>
+                                <Button
+                                    color='red'
+                                    floated='right'
+                                    size='mini'
+                                    onClick={this.addKidModal}>
+                                    Cancel
+                                </Button>
+                                <Button
+                                    color='blue'
+                                    floated='right'
+                                    size='mini'
+                                    onClick={this.submitNewKid}>
+                                    Submit
+                                </Button>
+                            </div>
                         </Modal>
 
 
                     </div>
-                    <Button>Save Changes</Button>
+
 
                 </div>
 

@@ -28,7 +28,7 @@ function* fetchFamily(action) {
 
 function* updateFamily(action){
     try{
-        yield Axios.put(`/family/update/${action.payload.id}`, action.payload);
+        yield Axios.put(`/family/update/${action.payload.family_id}`, action.payload);
         yield put ({type: 'FETCH_FAMILY', payload: action.payload.user_id})
     }
     catch(error){
