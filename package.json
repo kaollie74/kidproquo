@@ -20,6 +20,7 @@
     "prop-types": "^15.7.2",
     "pure-react-carousel": "^1.22.0",
     "react": "^16.9.0",
+    "react-awesome-slider": "^1.0.1",
     "react-calendar": "^2.19.1",
     "react-coverflow": "^0.2.20",
     "react-dom": "^16.8.6",

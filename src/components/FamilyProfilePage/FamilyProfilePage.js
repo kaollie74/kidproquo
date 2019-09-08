@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form } from 'semantic-ui-react';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+import AwesomeSlider from 'react-awesome-slider';
+import 'react-awesome-slider/dist/styles.css';
+
+
 class FamilyProfilePage extends Component {
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
@@ -15,10 +21,28 @@ class FamilyProfilePage extends Component {
     render() {
         return (
             <>
+            <div>
+                <CarouselProvider
+                naturalSlideWidth={100}
+                naturalSlideHeight={125}
+                totalSlides={3}
+                dotNumbers={true}
+                >
+                
+                
+            <Slider>
+                <Slide index={0}>#1</Slide>
+                <Slide index={1}>#2</Slide>
+                <Slide index={2}>#3</Slide>
+            </Slider>
+            <ButtonBack>Back</ButtonBack>
+            <ButtonNext>Next</ButtonNext>
+                    </CarouselProvider>
+            </div>
                 <div>
                     {/* {JSON.stringify(this.props.reduxStore)} */}
                     <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1}
+                        The {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
@@ -63,7 +87,8 @@ class FamilyProfilePage extends Component {
                                 swipeable={true}
                                 enableScroll={true}
                                 clickable={true}
-                                infiniteScroll={true}
+                                infiniteScroll={false}
+                                dots={true}
                             >
                                 <div
                                     onClick={() => this.handleChangeFor()}
