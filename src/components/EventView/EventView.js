@@ -5,21 +5,24 @@ import '../App/App.css';
 import { withStyles } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider, TimePicker, DatePicker } from 'material-ui-pickers';
 import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
+// import AddIcon from '@material-ui/icons/Add';
+// import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import Radio from '@material-ui/core/Radio';
+import yellow from '@material-ui/core/colors/yellow';
 import { Link } from 'react-router-dom';
 import { Iconbutton } from 'semantic-ui-react';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
-import { Table, Card} from 'semantic-ui-react';
+import { Table, Icon, Button, Card} from 'semantic-ui-react';
 import { getThemeProps } from '@material-ui/styles';
+
+const offeringColor = yellow['500']; 
 
 const styles = theme => ({
   grid: {
@@ -30,8 +33,10 @@ const styles = theme => ({
     width: theme.spacing * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    paddingLeft: '90px',
     outline: 'none',
+    margin: '140px 14px',
+
   },
   textField: {
     margin: '0px 0px 10px 0px',
@@ -41,9 +46,9 @@ const styles = theme => ({
     color: '#033076',
     fontWeight: '900',
     display: 'inline-block',
-    padding: '0',
-    marginLeft: '20px',
-    width: '200px',
+    padding: '0px',
+    marginLeft: '3px',
+    width: '250px',
     height: '50px',
     backgroundColor: 'white'
   },
@@ -81,15 +86,19 @@ const styles = theme => ({
     borderRadius: '5px'
   },
   add: {
-    border: 'solid 1px white',
     backgroundColor: '#89E894',
-    borderRadius: '3px'
+    borderRadius: '3px',
+    paddingTop: '-30px'
   },
   addButton: {
     fontWeight: 'bold'
   }, 
   offering_needed: { 
-    textAlign: 'center'
+    textAlign: 'center',
+    marginLeft: '20px'
+  }, 
+  cards: {
+    width: '375px'
   }
 });
 
@@ -222,7 +231,13 @@ class EventView extends Component {
     if (this.props.reduxStore.calendar.length !== 0) {
       return (
         <>
-        <Button className={classes.button} variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
+          <Button 
+          // className={classes.button} 
+          variant="contained" color="primary" onClick={this.openModal}
+          style={{marginLeft: '108px', marginTop: '30px'}}
+          >
+          CREATE REQUEST
+          </Button>
           <h2 className={classes.date}> {this.props.date}</h2>
           <hr className={classes.hr}/>
           <h3 className={classes.openRequests}> Open Requests </h3>
@@ -233,7 +248,7 @@ class EventView extends Component {
             //onClose={this.openModal}
           >
             <div className={classes.paper}>
-              <Typography variant="h6" id="modal-title">
+              <Typography style={{marginLeft: '5px', marginTop: '30px'}} variant="h6" id="modal-title">
                 Select Time/Date
             </Typography>
               <Grid container className={classes.grid} justify="space-around">
@@ -271,7 +286,7 @@ class EventView extends Component {
                       checked={this.state.offer_needed === 'true'}
                       onChange={this.handleRequestStatus}
                       value='true'
-                      color="primary"
+                      color= "primary"
                       name="radio-button-demo"
                       aria-label='offer'
                     />
@@ -288,16 +303,22 @@ class EventView extends Component {
                     />
                   </form>
                 </MuiPickersUtilsProvider>
-                <Link to ='/calendar'>
-                <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
-                </Link>
-                <Button variant="contained" color="secondary" onClick={this.handleCancel}> Cancel</Button>
+                <Link to = '/calendar'>
+                      <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}
+                      style={{width: '140px', margin: '5px 0px 0px 0px'}}
+                      >SUBMIT</Button>
+                      </Link>
+                      <Button variant="contained" color="red" onClick={this.handleCancel} style={{width: '140px', margin: '5px 0px 30px 0px'}}> CANCEL </Button>
                 
                 {/* </Typography> */}
               </Grid>
             </div>
           </Modal>
-          <Card.Group className="ui grid container">
+          <div className={classes.cards}>
+          <Card.Group
+          itemsPerRow={2}
+          style={{margin: '15px'}}
+          >
             {/* <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Family</Table.HeaderCell>
@@ -310,35 +331,40 @@ class EventView extends Component {
 
             
               {this.props.reduxStore.calendar.map(item => (
-                <Card 
-                className="seven wide column" 
-                key={item.id}
-                >
-                <Card.Content className="ui orange card">
+                <Card
+                 className="ui centered cards" 
+                 raised key={item.id}>
+                <Card.Content>
                   <Card.Header>{item.last_name1} </Card.Header>
                   <Card.Meta>{item.event_time_start} - {item.event_time_end}</Card.Meta>
                   <Card.Description>{item.notes}</Card.Description>
-                  <Card.Description className={item.offer_needed ? "ui blue label" : "ui orange label"}><p className={classes.offering_needed}>{item.offer_needed ? 'Offering' : 'Needed'}</p></Card.Description>
+                  <Card.Description className={item.offer_needed ? "ui yellow label" : "ui orange label"}
+                  style={{width: '110px'}}>
+                    <p 
+                    // className={classes.offering_needed}
+                    style={{marginLeft: '20px', marginRight: '20px', color: 'black', fontWeight: '600'}}
+                    >
+                    {item.offer_needed ? 'Offering' : 'Needed'}</p>
+                  </Card.Description>
                   {/* <div className={classes.claimRequestButton}>
                   <Button className={classes.claimRequestButton} color="green"  onClick={(event) => this.handleClaim(event, item)}>
                   <Icon floated="right" name="plus circle" size="large" basic color="white"></Icon>
                   </Button>
                   </div> */}
                   {/* <Button className={classes.claimButton} positive icon="plus circle">
-                    
                   </Button> */}
                   <br/>
-                  <Button className={classes.addButton}>
-                  CLAIM
-                  <AddIcon className={classes.add}></AddIcon>
+                  <Button onClick={(event) => this.handleClaim(event, item)} 
+                  // className={classes.addButton}
+                  style={{fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid green 2px', borderRadius: '3px', backgroundColor: '#89E894', paddingTop: '-30px'}}
+                  >
+                  CLAIM +
                   </Button>
                 </Card.Content>
                 </Card>
               ))}
-
-
-            
           </Card.Group>
+          </div>
         </>
 
       ) // return
@@ -346,7 +372,9 @@ class EventView extends Component {
       return (
         <>
           <div>
-            <Button className={classes.button} variant="contained" color="primary" onClick={this.openModal}>Create Request</Button>
+            <Button className={classes.button} variant="contained" color="primary" onClick={this.openModal}
+            style={{marginLeft: '108px', marginTop: '30px'}}
+            >CREATE REQUEST</Button>
             <h2 className={classes.date}> {this.props.date}</h2>
             <hr className={classes.hr}/>
             <h3 className={classes.openRequests}> No Requests </h3>
@@ -357,7 +385,7 @@ class EventView extends Component {
               //onClose={this.openModal}
             >
               <div className={classes.paper}>
-                <Typography variant="h6" id="modal-title">
+                <Typography style={{marginLeft: '5px', marginTop: '30px'}} variant="h6" id="modal-title">
                   Select Time/Date
             </Typography>
                 <Typography variant="subtitle1" id="simple-modal-description">
@@ -413,9 +441,11 @@ class EventView extends Component {
                         />
                       </form>
                       <Link to = '/calendar'>
-                      <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}>Submit Request</Button>
+                      <Button variant="contained" color="primary" onClick={(event) => this.handleCreateRequest()}
+                      style={{width: '140px', margin: '5px 0px 0px 0px'}}
+                      >SUBMIT</Button>
                       </Link>
-                      <Button variant="contained" color="secondary" onClick={this.handleCancel}> Cancel</Button>
+                      <Button variant="contained" color="red" onClick={this.handleCancel} style={{width: '140px', margin: '5px 0px 30px 0px'}}> CANCEL </Button>
                     </Grid>
                   </MuiPickersUtilsProvider>
                 </Typography>
