@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Image, Icon, Button, Feed } from 'semantic-ui-react';
+import { Card, Image, Icon, Button, Feed, Modal, Form } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
+
 
 class GroupView extends Component {
 
@@ -17,14 +18,29 @@ class GroupView extends Component {
         
     }
     
+    handleClaim = (item) => {
+            let newObject = {
+                id: item.id,
+                claimer_id: this.props.reduxStore.user.id,
+                event_claimed: true,
+            }
+
+            console.log('newObject', newObject)
+            this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject });
+            this.props.history.push(`/my-profile-page`);
+
+
+    }
+
+    
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
     render() {
     
         return (
-            <div>
-                <h1>
+            <div align="center">
+                <h1 align="center">
                    Welcome to the {this.props.reduxStore.userGroups && this.props.reduxStore.userGroups.length > 0 ?
                      this.props.reduxStore.userGroups[0].group_name : <p></p>} group!
                 </h1>
@@ -43,39 +59,53 @@ class GroupView extends Component {
                        
                         return (
                             <>
+                            <Card>
+                                    <Card.Content>
+
                             <Feed>
                         <Feed.Event>
                             <Feed.Label>
                             </Feed.Label>
                             <Feed.Content>
-                                <Feed.Label>
-                                 <img src='https://www.carters.com/on/demandware.static/-/Sites-Carters-Library/default/dw7a7f95ac/content/carters/images/nav/KG_Fall_2019.jpg' alt="lol" />
-                                </Feed.Label>
-                                 {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                 <></><Button basic color='blue'>
-                                    CLAIM
-                                </Button>
+                                 The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                                 <></>             
+                                                    <Modal trigger={<Button basic color='blue'>CLAIM</Button>}>
+                                                        <Modal.Header>{item.event_time_start} - {item.event_time_end} on {item.event_date}</Modal.Header>
+                                                        <Modal.Content image>
+                                                            <Image wrapped size='facebook' src={item.requester_image ? item.requester_image : <>No</>}/>
+                                                            
+                                                                <h5>Are you sure you want to deal with us?</h5>
+                                                            <Button class="circular icon" size="mini" basic color='green' onClick={() => this.handleClaim(item)}>CLAIM</Button><br/><Button size="mini"  basic color='red'>CANCEL</Button>
+                                                        
+                                                        </Modal.Content>
+                                                    </Modal>
+                                                    
                             </Feed.Content>
                         </Feed.Event>
                     </Feed>
+                                        </Card.Content>
+
+                     </Card>
                             </>
                         )}
                         else {
                             return(
                             <>
+                            <Card>
                                 <Feed>
                                     <Feed.Event>
                                         <Feed.Label>
                                         </Feed.Label>
                                         <Feed.Content>
                                             <Feed.Label>
-                                                <img src='https://www.carters.com/on/demandware.static/-/Sites-Carters-Library/default/dw7a7f95ac/content/carters/images/nav/KG_Fall_2019.jpg' alt="lol" />
+                                                {/* <img src={item.claimer_image} alt="lol" /> */}
                                             </Feed.Label>
-                                                {item.claimer_name} has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                                               The {item.claimer_name} family has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
                     
                                         </Feed.Content>
                                     </Feed.Event>
                                 </Feed>
+                                </Card>
                             </>
                     )}
                     })
