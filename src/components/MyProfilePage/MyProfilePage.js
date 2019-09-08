@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Feed, Container, Header, Label, Progress, FeedContent } from 'semantic-ui-react';
+import { Feed, Container, Header, Label, Progress, Card, FeedContent } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Moment from 'react-moment';
 
@@ -15,6 +15,10 @@ class MyProfilePage extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_YOUR_FEED' });
+        this.props.dispatch({ type: 'FETCH_GROUP_NOTIFICATIONS',
+         payload: {group_id: this.props.reduxStore.userGroups[0],
+                    user_id: this. props.reduxStore.user.id} });
+
     }
 
     progressBar = () => {
@@ -32,10 +36,10 @@ class MyProfilePage extends Component {
         }
 
         
-        console.log(needHours)
-        console.log(offeredHours)
+        // console.log(needHours)
+        // console.log(offeredHours)
         let total = ( needHours - offeredHours );
-        console.log('total', total)
+        // console.log('total', total)
         return total;
     }
 
@@ -43,7 +47,7 @@ class MyProfilePage extends Component {
 
     render() {
 
-        console.log('this is state', this.state)
+        // console.log('this is state', this.state)
 
         return (
             <>
@@ -71,6 +75,30 @@ class MyProfilePage extends Component {
     <Label.Detail>23</Label.Detail>
 
                     </Label>
+
+
+                       {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
+                    this.props.reduxStore.notifications.map((item) => {
+                        if (item.event_claimed === true && item.event_confirmed === false) {
+                       
+                        return (
+                            <>
+                            <Card>
+                             You have a notification!
+
+                     </Card>
+                            </>
+                        )}
+                        else {
+                            return(
+                            <>
+                            <Card>
+                              No New Notifications
+                                </Card>
+                            </>
+                    )}
+                    })
+                    : <p></p>} 
                     {this.props.reduxStore.feedNeed.map((item, i) => (
                     <div key={i}>
                         <Feed size='large'>
