@@ -72,7 +72,7 @@ class MyProfilePage extends Component {
 
         return (
             <>
-                {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
+                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
                 <Progress
                     value={this.progressBar()}
                     total='100'
@@ -128,7 +128,7 @@ class MyProfilePage extends Component {
                                     {item.id === this.props.reduxStore.user.id ? 
                                     <p>{item.event_time_start} - {item.event_time_end}</p> 
                                     : 
-                                    <p>{item.first_name1} is sitting for you at {item.event_time_start} - {item.event_time_end} </p> }
+                                    <p>The {item.claimer_name} family is sitting for you on {item.event_date} at {item.event_time_start} - {item.event_time_end}.</p> }
                                     </Feed.Summary>
     
                                 </Feed.Content>
