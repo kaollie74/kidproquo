@@ -17,16 +17,24 @@ class EditMyProfilePage extends Component {
     state = {
         open: false,
         open2: false,
-        family_last_name: '',
-        first_name: '',
-        last_name: '',
+        family_last_name1: this.props.reduxStore.family.last_name1,
+        family_first_name1: this.props.reduxStore.family.first_name1,
+        family_first_name2: this.props.reduxStore.family.first_name2,
+        family_last_name2: this.props.reduxStore.family.last_name2,
+        email: this.props.reduxStore.family.email,
+        street_address: this.props.reduxStore.family.street_address,
+        city: this.props.reduxStore.family.city,
+        state: this.props.reduxStore.family.state,
+        zip_code: this.props.reduxStore.family.zip_code,
+        phone_number: this.props.reduxStore.family.phone_number,
         birthdate: '',
         allergies: '',
         medication: '',
         notes: '',
         image: '',
-        family_id: '',
-        family_image: this.props.reduxStore.family.image
+        family_id: this.props.reduxStore.family.id,
+        family_image: this.props.reduxStore.family.image,
+        user_id: this.props.reduxStore.user.id
 
     }
 
@@ -43,18 +51,30 @@ class EditMyProfilePage extends Component {
     submitNewKid = () => {
 
         this.props.dispatch({ type: 'ADD_NEW_KID', payload: this.state })
+
+        this.setState({
+            open: false
+        })
     }
 
     editFamilyProfile = () => {
         this.setState({
-            ...this.state,
             open2: !this.state.open2,
             family_id: this.props.reduxStore.family.id,
-            family_image: this.props.reduxStore.family.image
+            family_image: this.state.family_image
         })
     }
 
+    setLocalImage = () => {
+        this.setState({
+            family_image: this.state.family_image,
+            open2: false
+        })
+    }
+
+
     updateFamily = () => {
+
         let newObjectToSend = {
             id: this.state.family_id,
             family_image: this.state.family_image,
@@ -62,37 +82,155 @@ class EditMyProfilePage extends Component {
             user_id: this.props.reduxStore.user.id
         }
 
-        console.log('this is newObjectToSend', newObjectToSend)
+        console.log('this is newObjectToSend', this.state)
 
-        this.props.dispatch({ type: 'UPDATE_FAMILY', payload: newObjectToSend })
+        this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
     }
 
     render() {
         console.log('THIS IS STATE', this.state)
         return (
-            <div>
+          
+            
+            
+            <div className="ui container center aligned" className='formBackground'>
+                <div className='editProfileHeader'>
+                    <h2>Edit Profile</h2>
+                </div>
 
-                <Card className="align">
-                    <Card.Content>
-                        <Card.Header></Card.Header>
-                        <Image
-                            className="ui fluid image"
-                            src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : ''}
-                            alt="img 1"
-                        />
-                        <Icon name='pencil alternate' size="large" onClick={this.editFamilyProfile} />
-                    </Card.Content>
-                </Card>
+
+                <div className="ui container center aligned" className="card">
+                    <Card className="ui container center aligned" >
+                        <Card.Content>
+                            <Card.Header></Card.Header>
+                            <Image
+                                size='huge'
+                                className="ui fluid image"
+                                src={this.state.family_image ? this.state.family_image : ''}
+                                alt="img 1"
+                            />
+                            <div className='editIcon'>
+                                <a>
+                                    <Icon
+                                        name='pencil alternate'
+                                        size="large"
+                                        onClick={this.editFamilyProfile}
+
+                                    />
+                                    Edit Pic
+                            </a>
+                            </div>
+
+
+                        </Card.Content>
+                    </Card>
+                </div>
+                <div className='formInputsBtns'>
+                    <Form.Input
+                        className='editInputs'
+                        placholder='Last Name'
+                        fluid label='First name 1'
+                        value={this.state.family_first_name1}
+                        onChange={(event) => this.handleChangeFor(event, 'family_first_name1')}
+
+
+                    />
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='Last Name 1'
+                        value={this.state.family_last_name1}
+                        onChange={(event) => this.handleChangeFor(event, 'family_last_name1')}
+
+                    />
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='First Name 2'
+                        value={this.state.family_first_name2}
+                        onChange={(event) => this.handleChangeFor(event, 'family_first_name2')}
+
+                    />
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='Last Name 2'
+                        value={this.state.family_last_name2}
+                        onChange={(event) => this.handleChangeFor(event, 'family_last_name2')}
+
+                    />
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='Email'
+                        value={this.state.email}
+                        onChange={(event) => this.handleChangeFor(event, 'email')}
+
+                    />
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='Street Address'
+                        value={this.state.street_address}
+                        onChange={(event) => this.handleChangeFor(event, 'street_address')}
+
+                    />
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='City'
+                        value={this.state.city}
+                        onChange={(event) => this.handleChangeFor(event, 'city')}
+
+                    />
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='State'
+                        value={this.state.state}
+                        onChange={(event) => this.handleChangeFor(event, 'state')}
+
+                    />
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='Zip Code'
+                        value={this.state.zip_code}
+                        onChange={(event) => this.handleChangeFor(event, 'zip_code')}
+
+                    />
+
+                    <Form.Input
+                        className='editInputs'
+                        fluid label='Phone Number'
+                        value={this.state.phone_number}
+                        onChange={(event) => this.handleChangeFor(event, 'phone_number')}
+
+                    />
+                    <div className='editProfileBtns'>
+
+                        <div className='addKidBtn'>
+                            <Button
+                                color='blue'
+                                size='mini'
+                                onClick={this.addKidModal}>
+                                Add Kid
+                             </Button>
+                        </div>
+
+                        <div className='saveChangesBtn'>
+                            <Button
+                                color='green'
+                                onClick={this.updateFamily}
+                                size='mini'>
+                                Save Changes
+                                </Button>
+                        </div>
+
+                    </div>
+                </div>
+               
+            
+
                 <div>
+                    {/************************************** Edit Profile Pic ************************************************/}
                     <Modal
                         open={this.state.open2}
                         onClose={this.state.open2}
                     >
-                        <Input
-                            value={this.state.family_last_name}
-                            onChange={(event) => this.handleChangeFor(event, 'family_last_name')}
 
-                        />
                         <Image
                             className='ui fluid image'
                             src={this.state.family_image}
@@ -103,79 +241,128 @@ class EditMyProfilePage extends Component {
                             value={this.state.family_image}
                             onChange={(event) => this.handleChangeFor(event, 'family_image')}
                         />
-                        <Button onClick={this.updateFamily}>Submit</Button>
-                        <Button onClick={this.editFamilyProfile}>Cancel</Button>
+                        <div className='modalBtns'>
+                            <div className='modalOkBtn'>
+                                <Button
+                                    color='blue'
+                                    size='small'
+                                    onClick={this.setLocalImage}>
+                                    Ok
+                            </Button>
+                            </div>
+                            <div>
+                                <Button
+                                    color='red'
+                                    size='small'
+                                    onClick={this.editFamilyProfile}>
+                                    Cancel
+                            </Button>
+                            </div>
+                        </div>
 
 
                     </Modal>
                 </div>
                 <div>
-                    <Button onClick={this.addKidModal}>Add Kid</Button>
+                    {/*************************************** Add Kid Modal ********************************************/}
                     <div>
-                        <Modal
-                            open={this.state.open}
-                            onClose={this.state.open}
+                        <Responsive>
+                            <Modal
+                                open={this.state.open}
+                                onClose={this.state.open}
+                                className='.addKidModal'
+                            >
+                                <Modal.Header
+                                    className="ui container center aligned"
+                                >
+                                    Add Kid
+                            </Modal.Header>
 
-                        >
-                            <Modal.Header>Add Kid</Modal.Header>
-                            <Modal.Content>
-                                <Form className="ui fluid">
+                                <Image
+                                    className='ui fluid image'
+
+                                    src={this.state.image}
+
+                                />
+                                <Modal.Content
+                                    className="ui container center aligned"
+                                >
+
                                     <Form.Field>
-                                        <Input
-                                            placeholder="First Name(50 character max)"
+                                        <Form.Input
+                                            fluid label='First Name'
+                                            placeholder="(50 character max)"
                                             value={this.state.first_name}
                                             onChange={(event) => this.handleChangeFor(event, 'first_name')}
                                         />
                                     </Form.Field>
                                     <Form.Field>
-                                        <Input
-                                            placeholder="Last Name(50 character max)"
+                                        <Form.Input
+                                            fluid label='Last Name'
+                                            placeholder="(50 character max)"
                                             value={this.state.last_name}
                                             onChange={(event) => this.handleChangeFor(event, 'last_name')}
                                         />
                                     </Form.Field>
-                                    <Input
-                                        placeholder="Birthday(MM-DD-YYYY)"
+                                    <Form.Input
+                                        fluid label='Birthday'
+                                        placeholder="(MM-DD-YYYY)"
                                         value={this.state.birthdate}
                                         onChange={(event) => this.handleChangeFor(event, 'birthdate')}
                                     />
 
-                                    <Input
-                                        placeholder="Image"
+                                    <Form.Input
+                                        fluid label='Image'
+                                        placeholder="URL"
                                         value={this.state.image}
                                         onChange={(event) => this.handleChangeFor(event, 'image')}
                                     />
 
-                                    <Input
-                                        placeholder="Medication"
+                                    <Form.Input
+                                        fluid label='Medication'
+                                        placeholder="(100 character max)"
                                         value={this.state.medication}
                                         onChange={(event) => this.handleChangeFor(event, 'medication')}
                                     />
 
-                                    <Form.TextArea
+                                    <Form.Input
+                                        fluid label="Allergies"
                                         placeholder="Allergies (500 characters max)"
                                         value={this.state.allergies}
                                         onChange={(event) => this.handleChangeFor(event, 'allergies')}
 
                                     />
 
-                                    <Form.TextArea
+                                    <Form.Input
+                                        fluid label="Other Information"
                                         placeholder="Other Info (300 characters max)"
                                         value={this.state.notes}
                                         onChange={(event) => this.handleChangeFor(event, 'notes')}
                                     />
 
-                                </Form>
-
-
-                            </Modal.Content>
-                            <Button onClick={this.addKidModal}>Cancel</Button>
-                            <Button onClick={this.submitNewKid}>Submit</Button>
-                        </Modal>
+                                </Modal.Content>
+                                <div>
+                                    <Button
+                                        color='red'
+                                        floated='right'
+                                        size='mini'
+                                        onClick={this.addKidModal}>
+                                        Cancel
+                                </Button>
+                                    <Button
+                                        color='blue'
+                                        floated='right'
+                                        size='mini'
+                                        onClick={this.submitNewKid}>
+                                        Submit
+                                </Button>
+                                </div>
+                            </Modal>
+                        </Responsive>
 
 
                     </div>
-                    <Button>Save Changes</Button>
+
 
                 </div>
 

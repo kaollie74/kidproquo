@@ -70,10 +70,13 @@ class GroupFamPage extends Component {
                             <Coverflow
                                 width={300}
                                 height={300}
-                                displayQuantityOfSide={2}
-                                navigation={true}
+                                displayQuantityOfSide={1}
+                                navigation={false}
                                 enableHeading={false}
                                 swipeable={true}
+                                enableScroll={true}
+                                clickable={true}
+                                infiniteScroll={false}
                             >
                                 <div
                                     onClick={() => this.handleChangeFor()}

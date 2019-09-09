@@ -1,6 +1,12 @@
+
+.addKidModal {
+    background-color: #8298ca !important;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background-color: #fa8072;
 }
 
 .alert {
@@ -55,3 +61,58 @@ input {
 .Needed {
    color: rgb(230, 149, 0);
 }
+
+.saveChangesBtn {
+    padding-top: 1vh;
+}
+
+.addKidBtn {
+   padding-top: 1vh;
+}
+
+.editProfileBtns {
+    display: inline-flex;
+    padding: 2vh;
+}
+
+.editProfileHeader {
+    margin: 1vh;
+    padding: 1vh;
+    text-align: center;
+}
+
+ .card{
+    padding: 2vh;
+
+}
+
+.editIcon {
+    padding-top: 6%;
+}
+
+.editInputs {
+    padding-top: 1vh;
+    width: 30vh
+
+}
+
+.formBackground {
+    background-color: #8298ca;
+    margin-top: 1vh;
+    margin-left: 3vh;
+    width: 50vh
+}
+
+.formInputsBtns{
+    margin-left: 10vh
+
+}
+
+.modalBtns {
+    display: inline-flex;
+    padding: 2vh;
+}
+
+
+
+
