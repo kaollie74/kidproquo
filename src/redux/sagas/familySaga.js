@@ -1,5 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import Axios from 'axios';
+import Swal from 'sweetalert2';
 
 
 //Post new user's family info to the DB
@@ -30,6 +31,15 @@ function* updateFamily(action){
     try{
         yield Axios.put(`/family/update/${action.payload.family_id}`, action.payload);
         yield put ({type: 'FETCH_FAMILY', payload: action.payload.user_id})
+        
+        yield put(Swal.fire({
+            position: 'center',
+            type: 'success',
+            title: `Your profile has been updated`,
+            showConfirmButton: false,
+            timer: 1500
+          }))
+        
     }
     catch(error){
         console.log('Error with UPDATE family in the DB', error)
