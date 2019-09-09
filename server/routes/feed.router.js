@@ -58,9 +58,9 @@ router.get('/offered', rejectUnauthenticated,   (req,res)=> {
 })
 //updates event to claimed
 router.put('/update/:id', (req,res)=> {
-  const sqlText = `UPDATE "event" SET "event_claimed"=$1, "claimer_notes"=$2 WHERE id =$3;`;
+  const sqlText = `UPDATE "event" SET "event_claimed"=$1, "claimer_id"=$2, "claimer_notes"=$3 WHERE id =$4;`;
   console.log(req.body.event_claimed)
-  values = [req.body.event_claimed, req.body.claimer_notes, req.params.id];
+  values = [req.body.event_claimed, req.body.claimer_id, req.body.claimer_notes, req.params.id];
   pool.query(sqlText, values)
   .then((response) => {
     res.sendStatus(200);
