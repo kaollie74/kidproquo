@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-//gets all relevant info for group view
+//gets all relevant info for feed group view
 router.get('/:id', (req, res) => {
     console.log('in /group with this id:', req.params.id);
     const values = req.params.id;
@@ -20,6 +20,23 @@ router.get('/:id', (req, res) => {
             res.sendStatus(500);
         })
 })
+
+//gets all families in group to display in group view
+router.get('/fam/:id', (req, res) => {
+    console.log('in /fam/group with this id:', req.params.id);
+    const values = req.params.id;
+    const sqlText = `select last_name1, image, id, user_id from "family"
+                    where family.group_id =$1 order by last_name1 asc;`;
+    pool.query(sqlText, [values])
+        .then((response) => {
+            console.log('back from  fam group db response.rows:', response.rows);
+            res.send(response.rows)
+        }).catch((error) => {
+            console.log('error getting fam group data', error);
+            res.sendStatus(500);
+        })
+})
+
 //gets groups that user belongs to upon login
 router.get('/', (req, res) => {
     console.log('getting user groups by user id:',req.user.id)

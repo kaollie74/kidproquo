@@ -27,6 +27,7 @@ import NewUserForm from '../NewUserForm/NewUserForm';
 import UserPage from '../UserPage/UserPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import LoginPage from '../LoginPage/LoginPage';
+import GroupFamPage from '../GroupFamPage/GroupFamPage';
 
 import './App.css';
 
@@ -109,6 +110,10 @@ class App extends Component {
               path="/family-profile"
               component={FamilyProfilePage}
             />
+            <ProtectedRoute 
+              exact
+              path="/view/:id" 
+              component={GroupFamPage} />
 
             <ProtectedRoute
               exact

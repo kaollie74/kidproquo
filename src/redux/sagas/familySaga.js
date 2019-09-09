@@ -25,6 +25,17 @@ function* fetchFamily(action) {
         console.log('error fetching family data', error)
     }
 }
+
+function* updateFamily(action){
+    try{
+        yield Axios.put(`/family/update/${action.payload.family_id}`, action.payload);
+        yield put ({type: 'FETCH_FAMILY', payload: action.payload.user_id})
+    }
+    catch(error){
+        console.log('Error with UPDATE family in the DB', error)
+    }
+}
+
 //Get kid info
 function* fetchKids(action) {
     try {
@@ -41,6 +52,7 @@ function* familySaga() {
     yield takeEvery('FETCH_FAMILY', fetchFamily)
     yield takeEvery('FETCH_KIDS', fetchKids)
     yield takeEvery('ADD_NEW_FAMILY', addNewFamily)
+    yield takeEvery('UPDATE_FAMILY', updateFamily)
 }
 
 

@@ -47,6 +47,8 @@ class MyProfilePage extends Component {
 
         return (
             <>
+                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
+
             {/* {JSON.stringify(this.props.reduxStore)} */}
                 <Progress
                     value={this.progressBar()}
@@ -57,7 +59,7 @@ class MyProfilePage extends Component {
                 />
                 
                 <Container text className='my_feed'>
-                    <Header as='h1'>Johnson Family</Header>
+                    <Header as='h1'> {this.props.reduxStore.family.last_name1} Family</Header>
                     <Label>
                         Hours Used: 
                         <Label.Detail>
@@ -67,6 +69,7 @@ class MyProfilePage extends Component {
                     <Label>
                         Hours Banked:
     <Label.Detail>23</Label.Detail>
+
                     </Label>
                     {this.props.reduxStore.feedNeed.map((item, i) => (
                     <div key={i}>

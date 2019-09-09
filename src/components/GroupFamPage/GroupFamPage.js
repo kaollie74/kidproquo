@@ -3,46 +3,32 @@ import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form } from 'semantic-ui-react';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
 
 
-class FamilyProfilePage extends Component {
+
+class GroupFamPage extends Component {
+
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
-        this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.reduxStore.user.id })
+        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.match.params.id})
+        this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
     }
+
     editFamilyProfile = () => {
 
         this.props.history.push('/edit-my-profile');
     }
+
+    handleBack = () => {
+        this.props.history.push('/group-view');
+    }
+
     render() {
         return (
             <>
-            <div>
-                <CarouselProvider
-                naturalSlideWidth={100}
-                naturalSlideHeight={125}
-                totalSlides={3}
-                dotNumbers={true}
-                >
-                
-                
-            <Slider>
-                <Slide index={0}>#1</Slide>
-                <Slide index={1}>#2</Slide>
-                <Slide index={2}>#3</Slide>
-            </Slider>
-            <ButtonBack>Back</ButtonBack>
-            <ButtonNext>Next</ButtonNext>
-                    </CarouselProvider>
-            </div>
                 <div>
                     {/* {JSON.stringify(this.props.reduxStore)} */}
                     <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1} Family
+                        The {this.props.reduxStore.family.last_name1}
                     </h1>
                 </div>
                 &nbsp;
@@ -50,8 +36,11 @@ class FamilyProfilePage extends Component {
                     <Card>
                         <Card.Content>
                             <Card.Header> </Card.Header>
+
+
+
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
-                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : <>no</>} alt="img 1" />
+                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image: <>no</> } alt="img 1" />
                             <Icon name='pencil alternate' onClick={this.editFamilyProfile} />
                         </Card.Content>
                     </Card>
@@ -88,7 +77,6 @@ class FamilyProfilePage extends Component {
                                 enableScroll={true}
                                 clickable={true}
                                 infiniteScroll={false}
-                                dots={true}
                             >
                                 <div
                                     onClick={() => this.handleChangeFor()}
@@ -121,17 +109,23 @@ class FamilyProfilePage extends Component {
                                                 </Card.Content>
                                             </Card>
                                         </>
+
                                     )
                                 })}
+
                             </Coverflow>
                         </div>
                     </Card>
                 </div>
+                <Button variant="contained" color="primary" onClick={this.handleBack}>Back</Button>
+
             </>
         )
     }
 };
+
 const mapStateToProps = reduxStore => ({
     reduxStore
 });
-export default connect(mapStateToProps)(FamilyProfilePage);
+
+export default connect(mapStateToProps)(GroupFamPage);

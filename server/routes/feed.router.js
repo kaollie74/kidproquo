@@ -20,8 +20,8 @@ router.get('/needed', rejectUnauthenticated,   (req,res)=> {
   // ORDER BY "event_needed"."id";`;
 
   const sqlText = `SELECT * from "event"
-  join "family" on "family"."id" = "requester_id" 
-  join "family" as "family2" on "family2"."id" = "claimer_id" 
+  left join "family" on "family"."id" = "requester_id" 
+  left join "family" as "family2" on "family2"."id" = "claimer_id" 
   where "requester_id" = $1
   ORDER By "event_date";`;
 
