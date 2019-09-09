@@ -56,11 +56,11 @@ router.get('/offered', rejectUnauthenticated,   (req,res)=> {
     
   })
 })
-
+//updates event to claimed
 router.put('/update/:id', (req,res)=> {
-  const sqlText = `UPDATE "event" SET "event_claimed"=$1
-  WHERE id =$2;`;
-  values = [req.body.event_claimed, req.params.id];
+  const sqlText = `UPDATE "event" SET "event_claimed"=$1, "claimer_notes"=$2 WHERE id =$3;`;
+  console.log(req.body.event_claimed)
+  values = [req.body.event_claimed, req.body.claimer_notes, req.params.id];
   pool.query(sqlText, values)
   .then((response) => {
     res.sendStatus(200);
@@ -69,6 +69,21 @@ router.put('/update/:id', (req,res)=> {
     console.log('Error with UPDATING the DB', error);
     res.sendStatus(500);
   })
+})
+//updates event to confirmed
+router.put('/updateConfirm/:id', (req, res) => {
+  console.log('in updateConfirm event', req.body.event_confirmed)
+  const sqlText = `UPDATE "event" SET "event_confirmed"=$1, 
+  WHERE "id" =$3`;
+  values = [req.body.event_confirmed, req.params.id];
+  pool.query(sqlText, values)
+    .then((response) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log('Error with UPDATING EVENT CONFIRM the DB', error);
+      res.sendStatus(500);
+    })
 })
 
 router.post('/addRequest', (req,res)=> {
