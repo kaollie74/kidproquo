@@ -87,8 +87,8 @@ class EditMyProfilePage extends Component {
     updateFamily = () => {
 
         console.log('this is STATE', this.state)
-   
-          Swal.fire({
+
+        Swal.fire({
             title: 'Are you sure?',
             text: "You want to Submit Changes to Profile!",
             type: 'warning',
@@ -97,30 +97,27 @@ class EditMyProfilePage extends Component {
             confirmButtonText: 'Yes!',
             cancelButtonText: 'No!',
             reverseButtons: true
-          }).then((result) => {
+        }).then((result) => {
             if (result.value) {
-              this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
-              this.props.history.push('/family-profile')
+                this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
+                this.props.history.push('/family-profile')
             } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
             ) {
-              Swal.fire(
-                'Cancelled',
-                'Your Changes have not been updated',
-                'error'
-              )
+                Swal.fire(
+                    'Cancelled',
+                    'Your Changes have not been updated',
+                    'error'
+                )
             }
-          })
-
-
-        
+        })
     }
 
     render() {
         console.log('THIS IS STATE', this.state)
         return (
-          
+
             <div className="ui container center aligned" className='formBackground'>
                 <div className='editProfileHeader'>
                     <h2>Edit Your Profile</h2>
@@ -149,14 +146,14 @@ class EditMyProfilePage extends Component {
                         </Card.Content>
                     </Card>
                     <div className='addKidBtn'>
-                            <Button
-                                floated='right'
-                                color='blue'
-                                size='mini'
-                                onClick={this.addKidModal}>
-                                Add Kid
+                        <Button
+                            floated='right'
+                            color='blue'
+                            size='mini'
+                            onClick={this.addKidModal}>
+                            Add Kid
                              </Button>
-                        </div>
+                    </div>
                 </div>
                 <div className='formInputsBtns'>
                     <Form.Input
@@ -241,13 +238,13 @@ class EditMyProfilePage extends Component {
                                 onClick={this.updateFamily}
                                 size='mini'>
                                 Save Changes
-                                </Button>
+                            </Button>
                         </div>
 
                     </div>
                 </div>
-               
-            
+
+
 
                 <div>
                     {/************************************** Edit Profile Pic ************************************************/}
