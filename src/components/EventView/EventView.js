@@ -114,6 +114,7 @@ class EventView extends Component {
     notes: '',
     offer_needed: true,
     claimer_notes: '',
+    claimer_id: '',
   };
 
   componentDidMount() {
@@ -170,13 +171,13 @@ class EventView extends Component {
         })
         let newObject = {
           id: item.id,
-          claimer_id: this.props.reduxStore.user.id,
+          claimer_id: this.props.reduxStore.family.id,
           event_claimed: true,
           event_date: item.event_date,
           event_time_start: item.event_time_start,
           event_time_end: item.event_time_end,
           last_name1: item.last_name1,
-          claimer_notes: this.state.claimer_notes
+          claimer_notes: this.state.claimer_notes,
         }
         this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject })
       } else if (response.dismiss === Swal.DismissReason.cancel) {
