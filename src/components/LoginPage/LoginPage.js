@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
+import '../App/App.css';
 
 class LoginPage extends Component {
   state = {
@@ -33,7 +33,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="formBackground">
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -44,7 +44,7 @@ class LoginPage extends Component {
         )}
         <form onSubmit={this.login}>
           <h1>Login</h1>
-          <div>
+          <div className="loginInputs">
             <label htmlFor="username">
               Username:
               <input
@@ -54,8 +54,6 @@ class LoginPage extends Component {
                 onChange={this.handleInputChangeFor('username')}
               />
             </label>
-          </div>
-          <div>
             <label htmlFor="password">
               Password:
               <input
@@ -65,7 +63,7 @@ class LoginPage extends Component {
                 onChange={this.handleInputChangeFor('password')}
               />
             </label>
-          </div>
+            </div>
           <div>
             <input
               className="log-in"
