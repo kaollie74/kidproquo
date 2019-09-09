@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './HamNav.css';
-import { Bars } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 
 
@@ -23,9 +24,15 @@ closeNav = () => {
 
   render() {
     return (
+      <>
+      <Icon name='bars' className='bars icon' onClick={(event) => this.openNav(event)} />
+      
+
       <div id="sidenav" className="sidenav">
+      
         <div>
-          <Bars onClick={(event) => this.openNav(event)}></Bars>
+         
+          
          
                 <ul>
                     <li><Link className="sidenav-a" to="/calendar">Calendar</Link></li>
@@ -37,10 +44,12 @@ closeNav = () => {
                     <li><Link className="sidenav-a" to="/about">About</Link></li>
                     <li><LogOutButton className="sidenav-a" /></li>
                 </ul>
+            <Icon name='x' className='x icon' onClick={(event) => this.closeNav(event)} />
 
          
         </div>
       </div>
+      </>
     )
   }
 }
