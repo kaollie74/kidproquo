@@ -56,7 +56,15 @@ class EditMyProfilePage extends Component {
         this.props.dispatch({ type: 'ADD_NEW_KID', payload: this.state })
 
         this.setState({
-            open: false
+            open: false,
+            first_name: '',
+            last_name: '',
+            image: '',
+            birthdate: '',
+            allergies: '',
+            medication: '',
+            notes: ''
+
         })
     }
 
