@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Input } from 'semantic-ui-react';
+import Swal from 'sweetalert2'
 
 
 
@@ -21,6 +22,8 @@ class EditMyProfilePage extends Component {
         family_first_name1: this.props.reduxStore.family.first_name1,
         family_first_name2: this.props.reduxStore.family.first_name2,
         family_last_name2: this.props.reduxStore.family.last_name2,
+        first_name: '',
+        last_name: '',
         email: this.props.reduxStore.family.email,
         street_address: this.props.reduxStore.family.street_address,
         city: this.props.reduxStore.family.city,
