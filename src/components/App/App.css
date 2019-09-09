@@ -14,19 +14,19 @@ body {
     margin: 50px;
 }
 
-form {
+/* form {
     background-color: #dbd5d5;
     width: 30%;
     height: 250px;
     margin: 20px auto;
     padding: 25px;
     border-radius: 2px;
-}
+} */
 
-input {
+/* input {
     margin: 5px;
     margin-bottom: 10px;
-}
+} */
 
 .log-in, .log-out, .register {
   background-color: #00acb0;
@@ -138,6 +138,20 @@ input {
     border: solid 1px white;
     border-radius: 5px
     }
+    .formBackground {
+    background-color: #8298ca;
+    margin-top: 15vh;
+    margin-left: 8vh;
+    margin-right: 8vh;
+    padding: 20px;
+    width: 40vh;
+    height: 60vh;
+    }
+    .loginInputs {
+    padding-top: 1vh;
+    width: 40vh
+    }
+
 }
 
 @media only screen and (min-height: 812px) {
@@ -193,7 +207,7 @@ input {
     }
     .formInputsBtns{
         margin-left: 10vh
-    
+        
     }
     .editInputs {
         padding-top: 1vh;

@@ -13,7 +13,7 @@ function* getYourFeed () {
   try {
     const response = yield axios.get('/feed/needed');
     yield put ({type: 'SET_YOUR_NEEDED_FEED', payload: response.data});
-    // const responseTwo= yield axios.get('/feed/offered');
+    console.log('in get your feed with:', response.data)
     // yield put ({type: 'SET_YOUR_OFFERED_FEED', payload: responseTwo.data});
    
   }
