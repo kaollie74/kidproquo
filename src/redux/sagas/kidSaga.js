@@ -32,8 +32,16 @@ function* addNewKid (action) {
 function* updateKid (action) {
   
   try {
-    yield axios.put(`kid/update/${action.payload.id}`, action.payload)
-    yield axios.put({type: 'FETCH_KIDS', payload: action.payload.user_id})
+    yield axios.put(`kid/update/${action.payload.id}`, action.payload);
+    yield put({type: 'FETCH_KIDS', payload: action.payload.user_id});
+
+    yield put(Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: `${action.payload.first_name}'s card has been updated`,
+      showConfirmButton: false,
+      timer: 1500
+    }))
   }
   catch(error) {
     console.log('Unable to Update Kid in DB', error)
