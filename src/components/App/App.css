@@ -87,6 +87,10 @@ input {
 
 }
 
+ .cardFeed{
+    padding: 6vh;
+}
+
 .editIcon {
     padding-top: 6%;
 }
@@ -215,6 +219,13 @@ input {
         margin-left: 3vh;
         width: 70vh;
     }
+     .cardFeed {
+    padding: 6vh;
+    width: 100vh;
+    text-align: left;
+
+    }
+
     .formInputsBtns{
         margin-left: 15vh
     
