@@ -108,8 +108,8 @@ class GroupView extends Component {
                        
                         return (
                             <>
-                            <Card className="cardFeed">
-                             <Card.Content>
+                            <Card >
+                                    <Card.Content className="cardFeed">
                             <Feed>
                         <Feed.Event>
                             <Feed.Label>

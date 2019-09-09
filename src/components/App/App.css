@@ -175,6 +175,13 @@ input {
         border: solid 1px white;
         border-radius: 5px
         }
+
+.cardFeed {
+    padding: 6vh;
+    width: 200vh;
+    text-align: center;
+
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -210,6 +217,13 @@ input {
         padding: 1vh;
         width: 1000px
     }
+
+     .cardFeed {
+    padding: 6vh;
+    width: 200vh;
+    text-align: center;
+
+    }
 }
 
 @media only screen and (min-width: 1000px) {
@@ -221,8 +235,8 @@ input {
     }
      .cardFeed {
     padding: 6vh;
-    width: 100vh;
-    text-align: left;
+    width: 200vh;
+    text-align: center;
 
     }
 
