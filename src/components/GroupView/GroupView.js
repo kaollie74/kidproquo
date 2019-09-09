@@ -20,7 +20,7 @@ class GroupView extends Component {
     
     handleClaim = (item) => {
             let newObject = {
-                id: item.id,
+                id: this.props.reduxStore.family.id
                 // claimer_id: this.props.reduxStore.user.id,
                 event_claimed: true,
             }
