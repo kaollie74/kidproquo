@@ -72,7 +72,7 @@ class MyProfilePage extends Component {
 
         return (
             <>
-                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
                 <Progress
                     value={this.progressBar()}
                     total='100'

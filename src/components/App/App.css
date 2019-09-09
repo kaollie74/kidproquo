@@ -87,6 +87,10 @@ body {
 
 }
 
+ .cardFeed{
+    padding: 6vh;
+}
+
 .editIcon {
     padding-top: 6%;
 }
@@ -185,6 +189,13 @@ body {
         border: solid 1px white;
         border-radius: 5px
         }
+
+.cardFeed {
+    padding: 6vh;
+    width: 200vh;
+    text-align: center;
+
+    }
 }
 
 @media only screen and (min-width: 768px) {
@@ -220,22 +231,36 @@ body {
         padding: 1vh;
         width: 1000px
     }
+
+     .cardFeed {
+    padding: 6vh;
+    width: 200vh;
+    text-align: center;
+
+    }
 }
 
 @media only screen and (min-width: 1000px) {
     .formBackground {
         background-color: #8298ca;
-        margin-top: 2vh;
-        margin-left: 38vh;
-        width: 100vh;
+        margin-top: 3vh;
+        margin-left: 3vh;
+        width: 70vh;
     }
+     .cardFeed {
+    padding: 6vh;
+    width: 200vh;
+    text-align: center;
+
+    }
+
     .formInputsBtns{
         margin-left: 15vh
     
     }
     .editInputs {
         padding-top: 1vh;
-        width: 70vh;
+        width: 50vh;
     
     }
     .editProfileBtns {

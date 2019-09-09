@@ -8,7 +8,7 @@ function* groupNotificationsSaga() {
 //Get notifications for user home page that pertain to this group id
 function* fetchGroupNotifications(action) {
     try {
-        console.log('In fetch group notiofications saga action.payload:')
+        console.log('In fetch group notiofications saga with:', action.payload)
         const response = yield Axios.get(`/group/notifications/${action.payload.group_id.id}`, action.payload);
         console.log('back from group notifications db response.data', response.data);
         yield put({ type: 'SET_GROUP_NOTIFICATIONS', payload: response.data })

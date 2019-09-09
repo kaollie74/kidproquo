@@ -6,7 +6,7 @@ function* groupSaga () {
     yield takeEvery('FETCH_FAM_GROUP', fetchFamGroup)
 }
 
-//Get group info for groupview
+//Get group feed info for groupview
 function* fetchGroup(action) {
     try {
         console.log('In fetch group saga action.payload:', action.payload.id)

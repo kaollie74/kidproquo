@@ -19,16 +19,21 @@ class KidPage extends Component {
         open: false
     }
 
+    // Capture the values of the Inputs and Set them to State
     handleChangeFor = (event, propsName) => {
         this.setState({ [propsName]: event.target.value })
     }
 
+    //sets this.state.open to true,
+    // which activates the Modal for the Kid Pic
     kidPicModal = () => {
         this.setState({
             open: !this.state.open
         })
     }
 
+    // Sets Kid Pic to the value 
+    // and closes the Pic Modal
     setKidImageLocally = () => {
         this.setState({
             image: this.state.image,
@@ -36,8 +41,9 @@ class KidPage extends Component {
         })
     }
 
+    // Run a dispatch based on a conditional in the Sweet Alert
+    // 
     updateKid = () => {
-
         Swal.fire({
             title: 'Are you sure?',
             text: `You want to submit changes to ${this.state.first_name}'s profile!`,

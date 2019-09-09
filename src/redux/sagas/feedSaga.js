@@ -36,6 +36,7 @@ function* claimEvent (action) {
     console.log(event_date)
     console.log('this is action.payload.event_date', action.payload.event_date)
     yield put({type: 'FETCH_EVENTS', payload: event_date})
+    yield put({ type: 'FETCH_GROUP', payload: action.payload.group_id });
     yield put(Swal.fire({
       position: 'center',
       type: 'success',
