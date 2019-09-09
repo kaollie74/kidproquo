@@ -10,7 +10,6 @@ body {
     background-color: #ff4545;
     margin: 50px;
 }
-
 form {
     background-color: #dbd5d5;
     width: 30%;
@@ -23,7 +22,6 @@ input {
     margin: 5px;
     margin-bottom: 10px;
 }
-
 .log-in, .log-out, .register {
   background-color: #00acb0;
   border-radius: 4px;
@@ -72,7 +70,6 @@ input {
  .card{
     padding: 2vh;
 }
-
 .editIcon {
     padding-top: 6%;
 }
@@ -80,16 +77,16 @@ input {
     padding-top: 1vh;
     width: 30vh
 }
-.formBackground {
+/* .formBackground {
     background-color: #8298ca;
     border-radius: 2%;
     margin-top: 1vh;
     margin-left: 3vh;
     width: 50vh
-}
-.formInputsBtns{
+} */
+/* .formInputsBtns{
     margin-left: 10vh
-}
+} */
 .modalBtns {
     display: inline-flex;
     padding: 2vh;
@@ -115,18 +112,22 @@ input {
     }
     .formBackground {
     background-color: #8298ca;
-    margin-top: 15vh;
-    margin-left: 8vh;
-    margin-right: 8vh;
+    margin-top: 5vh;
+    margin-left: 3vh;
+    margin-right: 3vh;
     padding: 20px;
+    width: 50vh;
+    height: 140vh;
+    }
+    .editInputs {
+    padding-top: 1vh;
     width: 40vh;
-    height: 60vh;
+    margin-left: 13px;
     }
     .loginInputs {
     padding-top: 1vh;
     width: 40vh
     }
-
 }
 @media only screen and (min-height: 812px) {
     .timeAndDatePicker {
@@ -160,13 +161,6 @@ input {
         outline: none;
         border: solid 1px white;
         border-radius: 5px
-        }
-
-.cardFeed {
-    padding: 6vh;
-    width: 200vh;
-    text-align: center;
-
     }
 }
 @media only screen and (min-width: 768px) {
@@ -201,13 +195,6 @@ input {
         padding: 1vh;
         width: 1000px
     }
-
-     .cardFeed {
-    padding: 6vh;
-    width: 200vh;
-    text-align: center;
-
-    }
 }
 @media only screen and (min-width: 1000px) {
     .formBackground {
@@ -215,14 +202,8 @@ input {
         margin-top: 2vh;
         margin-left: 38vh;
         width: 100vh;
+        height: 132vh
     }
-     .cardFeed {
-    padding: 6vh;
-    width: 200vh;
-    text-align: center;
-
-    }
-
     .formInputsBtns{
         margin-left: 15vh
     
@@ -243,8 +224,3 @@ input {
         width: 1000vh
     }
 }
-
-
-
-
-
