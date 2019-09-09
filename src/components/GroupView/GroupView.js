@@ -101,7 +101,7 @@ class GroupView extends Component {
                 </div>
                 {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
                 {/* the group reducer actually holds requests relevant to group */}
-                <div className="cardFeed"></div>
+                
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
                         if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) {
@@ -109,7 +109,7 @@ class GroupView extends Component {
                         return (
                             <>
                             <Card >
-                                    <Card.Content className="cardFeed">
+                             <Card.Content>
                             <Feed>
                         <Feed.Event>
                             <Feed.Label>
@@ -129,7 +129,7 @@ class GroupView extends Component {
                         else {
                             return(
                             <>
-                                    <Card className="cardFeed">
+                                    <Card >
                                 <Feed>
                                     <Feed.Event>
                                         <Feed.Label>
