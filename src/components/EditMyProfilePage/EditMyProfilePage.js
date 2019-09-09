@@ -123,10 +123,8 @@ class EditMyProfilePage extends Component {
           
             <div className="ui container center aligned" className='formBackground'>
                 <div className='editProfileHeader'>
-                    <h2>Edit Profile</h2>
+                    <h2>Edit Your Profile</h2>
                 </div>
-
-
                 <div className="ui container center aligned" className="card">
                     <Card className="ui container center aligned" >
                         <Card.Content>
@@ -148,10 +146,17 @@ class EditMyProfilePage extends Component {
                                     Edit Pic
                             </a>
                             </div>
-
-
                         </Card.Content>
                     </Card>
+                    <div className='addKidBtn'>
+                            <Button
+                                floated='right'
+                                color='blue'
+                                size='mini'
+                                onClick={this.addKidModal}>
+                                Add Kid
+                             </Button>
+                        </div>
                 </div>
                 <div className='formInputsBtns'>
                     <Form.Input
@@ -229,14 +234,6 @@ class EditMyProfilePage extends Component {
                     />
                     <div className='editProfileBtns'>
 
-                        <div className='addKidBtn'>
-                            <Button
-                                color='blue'
-                                size='mini'
-                                onClick={this.addKidModal}>
-                                Add Kid
-                             </Button>
-                        </div>
 
                         <div className='saveChangesBtn'>
                             <Button

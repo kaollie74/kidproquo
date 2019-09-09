@@ -1,8 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('in /kid with this id:', req.params.id);
     const values = req.params.id;
     const sqlText = `SELECT kid.first_name, kid.last_name, kid.id, kid.allergies, kid.birthdate, kid.image, kid.medication, kid.notes from "kid"  join
@@ -19,7 +20,7 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.post('/addKid', (req, res) => {
+router.post('/addKid', rejectUnauthenticated, (req, res) => {
     console.log('THIS IS RED.BODY', req.body)
 
     const sqlText = `INSERT INTO "kid" ("first_name","last_name", "birthdate", "allergies", "medication", "image", "family_id", "notes")
@@ -36,7 +37,7 @@ router.post('/addKid', (req, res) => {
         })
 })
 
-router.put('/update/:id', (req,res)=> {
+router.put('/update/:id', rejectUnauthenticated, (req,res)=> {
     console.log('THIS IS REQ.PARAMS', req.params);
     console.log('THIS IS REQ.BODY', req.body);
 
