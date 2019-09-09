@@ -18,10 +18,15 @@ class FamilyProfilePage extends Component {
 
         this.props.history.push('/edit-my-profile');
     }
+
+    updateKid = (event, item) => {
+        this.props.dispatch({type: 'UPDATE_KID', payload: item})
+        this.props.history.push('/kid-page')
+    }
     render() {
         return (
             <>
-            <div>
+            {/* <div>
                 <CarouselProvider
                 naturalSlideWidth={100}
                 naturalSlideHeight={125}
@@ -38,7 +43,7 @@ class FamilyProfilePage extends Component {
             <ButtonBack>Back</ButtonBack>
             <ButtonNext>Next</ButtonNext>
                     </CarouselProvider>
-            </div>
+            </div> */}
                 <div>
                     {/* {JSON.stringify(this.props.reduxStore)} */}
                     <h1 align="center">
@@ -104,7 +109,8 @@ class FamilyProfilePage extends Component {
                                                 <Card.Content>
                                                     <Image className='ui centered small image' src={item.image} alt="img 1" />
                                                     <Card.Header align="center">{item.first_name}</Card.Header>
-                                                    <Modal trigger={<Button align="center"></Button>}>
+                                                    <Modal 
+                                                    trigger={<Button align="center">{item.first_name}</Button>}>
                                                         <Modal.Header>{item.first_name} {item.last_name}</Modal.Header>
                                                         <Modal.Content image>
                                                             <Image wrapped size='medium' src={item.image} />
@@ -117,8 +123,11 @@ class FamilyProfilePage extends Component {
                                                                 <p>{item.medication}</p>
                                                             </Modal.Description>
                                                         </Modal.Content>
+                                                        <Button onClick={(event)=> this.updateKid(event, item)}>Edit</Button>
+                                                        <Button>Close</Button>
                                                     </Modal>
                                                 </Card.Content>
+                                                
                                             </Card>
                                         </>
                                     )

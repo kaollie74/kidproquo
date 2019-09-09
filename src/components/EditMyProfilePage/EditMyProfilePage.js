@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Input } from 'semantic-ui-react';
+import Swal from 'sweetalert2';
 
 
 
@@ -21,6 +22,8 @@ class EditMyProfilePage extends Component {
         family_first_name1: this.props.reduxStore.family.first_name1,
         family_first_name2: this.props.reduxStore.family.first_name2,
         family_last_name2: this.props.reduxStore.family.last_name2,
+        first_name: '',
+        last_name: '',
         email: this.props.reduxStore.family.email,
         street_address: this.props.reduxStore.family.street_address,
         city: this.props.reduxStore.family.city,
@@ -53,7 +56,15 @@ class EditMyProfilePage extends Component {
         this.props.dispatch({ type: 'ADD_NEW_KID', payload: this.state })
 
         this.setState({
-            open: false
+            open: false,
+            first_name: '',
+            last_name: '',
+            image: '',
+            birthdate: '',
+            allergies: '',
+            medication: '',
+            notes: ''
+
         })
     }
 
@@ -75,24 +86,41 @@ class EditMyProfilePage extends Component {
 
     updateFamily = () => {
 
-        let newObjectToSend = {
-            id: this.state.family_id,
-            family_image: this.state.family_image,
-            family_last_name: this.state.family_last_name,
-            user_id: this.props.reduxStore.user.id
-        }
+        console.log('this is STATE', this.state)
+   
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to Submit Changes to Profile!",
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!',
+            cancelButtonText: 'No!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.value) {
+              this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
+              this.props.history.push('/family-profile')
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              Swal.fire(
+                'Cancelled',
+                'Your Changes have not been updated',
+                'error'
+              )
+            }
+          })
 
-        console.log('this is newObjectToSend', this.state)
 
-        this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
+        
     }
 
     render() {
         console.log('THIS IS STATE', this.state)
         return (
           
-            
-            
             <div className="ui container center aligned" className='formBackground'>
                 <div className='editProfileHeader'>
                     <h2>Edit Profile</h2>

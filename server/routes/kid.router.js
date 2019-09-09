@@ -36,4 +36,22 @@ router.post('/addKid', (req, res) => {
         })
 })
 
+router.put('/update/:id', (req,res)=> {
+    console.log('THIS IS REQ.PARAMS', req.params);
+    console.log('THIS IS REQ.BODY', req.body);
+
+    const sqlText = `UPDATE "kid" SET "first_name"=$1, "last_name"=$2, "birthdate"=$3, "allergies"=$4, "medication"=$5,
+                        "image"=$6, "notes"=$7 WHERE "id"=$8;`;
+    values=[req.body.first_name, req.body.last_name, req.body.birthdate,req.body.allergies, req.body.medication, 
+            req.body.image, req.body.notes, req.params.id];
+
+    pool.query(sqlText, values)
+    .then((response)=> {
+        res.sendStatus(200);
+    })
+    .catch((error)=> {
+        console.log('Error with UPDATING the DB', error)
+        res.sendStatus(500);
+    })
+})
 module.exports = router;

@@ -88,8 +88,8 @@ class CalendarView extends Component {
         return (
           <>
           <div>
-            <Calendar
-              className={classes.calendar}
+            <Calendar 
+              className="calendar"
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}
@@ -110,7 +110,7 @@ class CalendarView extends Component {
           <>
           <div>
             <Calendar
-              className={classes.calendar}
+              className="calendar"
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}

@@ -6,7 +6,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-color: #fa8072;
+    background-color: #3f3163;
 }
 
 .alert {
@@ -79,6 +79,7 @@ input {
     margin: 1vh;
     padding: 1vh;
     text-align: center;
+    font-size: 50px !important;
 }
 
  .card{
@@ -97,7 +98,8 @@ input {
 }
 
 .formBackground {
-    background-color: #8298ca;
+    background-color:  #8298ca;
+    border-radius: 2%;
     margin-top: 1vh;
     margin-left: 3vh;
     width: 50vh
@@ -111,6 +113,127 @@ input {
 .modalBtns {
     display: inline-flex;
     padding: 2vh;
+}
+
+@media only screen and (min-width: 375px) and (min-height: 667px) {
+    .calendar {
+        width: 375px
+    }
+    .timeAndDatePicker {
+    background-color:white;
+    position: absolute;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 85px;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 51px;
+    margin-bottom: 51px;
+    box-shadow: 5px;
+    outline: none;
+    border: solid 1px white;
+    border-radius: 5px
+    }
+}
+
+@media only screen and (min-height: 812px) {
+    .timeAndDatePicker {
+        background-color: white;
+        position: absolute;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 85px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 124px;
+        margin-bottom: 124px;
+        box-shadow: 5px;
+        outline: none;
+        border: solid 1px white;
+        border-radius: 5px
+        }
+}
+
+
+@media only screen and (min-height: 736px) {
+    .timeAndDatePicker {
+        background-color: white;
+        position: absolute;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 85px;
+        margin-right: 20px;
+        margin-left: 20px;
+        margin-top: 86.50px;
+        margin-bottom: 86.50px;
+        box-shadow: 5px;
+        outline: none;
+        border: solid 1px white;
+        border-radius: 5px
+        }
+}
+
+@media only screen and (min-width: 768px) {
+    .formBackground {
+        background-color: #8298ca;
+        margin-top: 2vh;
+        margin-left: 8vh;
+        width: 60vh
+    }
+    .formInputsBtns{
+        margin-left: 10vh
+    
+    }
+    .editInputs {
+        padding-top: 1vh;
+        width: 40vh
+    
+    }
+    .editProfileBtns {
+        display: inline-flex;
+        padding: 2vh;
+        padding-left: 12vh;
+    }
+
+    .editProfileHeader {
+        margin: 1vh;
+        padding: 1vh;
+        text-align: center;
+        font-size: 20px
+    }
+    .calendar {
+        margin: 1vh;
+        padding: 1vh;
+        width: 1000px
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .formBackground {
+        background-color: #8298ca;
+        margin-top: 2vh;
+        margin-left: 38vh;
+        width: 100vh;
+    }
+    .formInputsBtns{
+        margin-left: 15vh
+    
+    }
+    .editInputs {
+        padding-top: 1vh;
+        width: 70vh;
+    
+    }
+    .editProfileBtns {
+        display: inline-flex;
+        padding: 2vh;
+        padding-left: 24vh;
+    }
+    .calendar {
+        margin: 1vh;
+        padding: 1vh;
+        width: 1000vh
+    }
 }
 
 
