@@ -87,20 +87,13 @@ class EditMyProfilePage extends Component {
     updateFamily = () => {
 
         console.log('this is STATE', this.state)
-
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-          })
-          
-          swalWithBootstrapButtons.fire({
+   
+          Swal.fire({
             title: 'Are you sure?',
             text: "You want to Submit Changes to Profile!",
             type: 'warning',
             showCancelButton: true,
+            cancelButtonColor: '#d33',
             confirmButtonText: 'Yes!',
             cancelButtonText: 'No!',
             reverseButtons: true
@@ -112,9 +105,9 @@ class EditMyProfilePage extends Component {
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
             ) {
-              swalWithBootstrapButtons.fire(
+              Swal.fire(
                 'Cancelled',
-                'Your imaginary file is safe :)',
+                'Your Changes have not been updated',
                 'error'
               )
             }
