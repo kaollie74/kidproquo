@@ -29,12 +29,12 @@ class FamilyProfilePage extends Component {
                 dotNumbers={true}
                 >
                 
-                
-            <Slider>
-                <Slide index={0}>#1</Slide>
-                <Slide index={1}>#2</Slide>
-                <Slide index={2}>#3</Slide>
-            </Slider>
+                    
+                <Slider>
+                    <Slide index={0}>#1</Slide>
+                    <Slide index={1}>#2</Slide>
+                    <Slide index={2}>#3</Slide>
+                </Slider>
             <ButtonBack>Back</ButtonBack>
             <ButtonNext>Next</ButtonNext>
                     </CarouselProvider>

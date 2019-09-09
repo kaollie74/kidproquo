@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Feed, Container, Header, Label, Progress, Card, FeedContent } from 'semantic-ui-react';
+import { Feed, Container, Header, Label, Progress, Card, Message  } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Moment from 'react-moment';
 
@@ -10,7 +10,8 @@ class MyProfilePage extends Component {
 
     state = {
         color: '',
-        total: ''
+        total: '',
+        visible: false
     }
 
     componentDidMount() {
@@ -20,6 +21,8 @@ class MyProfilePage extends Component {
                     user_id: this. props.reduxStore.user.id} });
 
     }
+    
+   
 
     progressBar = () => {
         let feedNeed= this.props.reduxStore.feedNeed;
@@ -34,8 +37,6 @@ class MyProfilePage extends Component {
                 offeredHours += Number(hour.offered_total_hours)
             }
         }
-
-        
         // console.log(needHours)
         // console.log(offeredHours)
         let total = ( needHours - offeredHours );
@@ -43,17 +44,35 @@ class MyProfilePage extends Component {
         return total;
     }
 
+    handleConfirm = (item) => {
+        console.log('confirming event with this id:',item.id)
+        let newObject = {
+            id: item.id,
+            event_confirmed: true,
+        };
+        this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
+
+    }
+
+    handleCancel = (item) => {
+        console.log('confirming event with this id:', item.id)
+        // let newObject = {
+        //     id: item.id,
+        //     //probs can just send req user id on server
+        //     // claimer_id: this.props.reduxStore.user.id,
+        //     event_confirmed: true,
+        // };
+
+        // this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
+
+    }
 
 
     render() {
 
-        // console.log('this is state', this.state)
-
         return (
             <>
                 <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
-
-            {/* {JSON.stringify(this.props.reduxStore)} */}
                 <Progress
                     value={this.progressBar()}
                     total='100'
@@ -82,23 +101,22 @@ class MyProfilePage extends Component {
                         if (item.event_claimed === true && item.event_confirmed === false) {
                        
                         return (
-                            <>
+                            
                             <Card>
-                             You have a notification!
-
-                     </Card>
-                            </>
+                                {item.claimer_name} is available to help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                <button onClick={() => this.handleConfirm(item)}>CONFIRM</button><button onClick={() => this.handleCancel(item)}>CANCEL</button>
+                            </Card>
+                        
                         )}
                         else {
                             return(
                             <>
-                            <Card>
-                              No New Notifications
-                                </Card>
                             </>
                     )}
                     })
                     : <p></p>} 
+
+
                     {this.props.reduxStore.feedNeed.map((item, i) => (
                     <div key={i}>
                         <Feed size='large'>
