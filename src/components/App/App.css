@@ -10,6 +10,7 @@ body {
     background-color: #ff4545;
     margin: 50px;
 }
+
 form {
     background-color: #dbd5d5;
     width: 30%;
@@ -22,6 +23,7 @@ input {
     margin: 5px;
     margin-bottom: 10px;
 }
+
 .log-in, .log-out, .register {
   background-color: #00acb0;
   border-radius: 4px;
@@ -70,6 +72,7 @@ input {
  .card{
     padding: 2vh;
 }
+
 .editIcon {
     padding-top: 6%;
 }
@@ -110,6 +113,20 @@ input {
     border: solid 1px white;
     border-radius: 5px
     }
+    .formBackground {
+    background-color: #8298ca;
+    margin-top: 15vh;
+    margin-left: 8vh;
+    margin-right: 8vh;
+    padding: 20px;
+    width: 40vh;
+    height: 60vh;
+    }
+    .loginInputs {
+    padding-top: 1vh;
+    width: 40vh
+    }
+
 }
 @media only screen and (min-height: 812px) {
     .timeAndDatePicker {
@@ -144,6 +161,13 @@ input {
         border: solid 1px white;
         border-radius: 5px
         }
+
+.cardFeed {
+    padding: 6vh;
+    width: 200vh;
+    text-align: center;
+
+    }
 }
 @media only screen and (min-width: 768px) {
     .formBackground {
@@ -154,7 +178,7 @@ input {
     }
     .formInputsBtns{
         margin-left: 10vh
-    
+        
     }
     .editInputs {
         padding-top: 1vh;
@@ -177,6 +201,13 @@ input {
         padding: 1vh;
         width: 1000px
     }
+
+     .cardFeed {
+    padding: 6vh;
+    width: 200vh;
+    text-align: center;
+
+    }
 }
 @media only screen and (min-width: 1000px) {
     .formBackground {
@@ -185,6 +216,13 @@ input {
         margin-left: 38vh;
         width: 100vh;
     }
+     .cardFeed {
+    padding: 6vh;
+    width: 200vh;
+    text-align: center;
+
+    }
+
     .formInputsBtns{
         margin-left: 15vh
     
