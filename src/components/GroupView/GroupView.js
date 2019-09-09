@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Image, Icon, Button, Feed, Modal, Form } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
+import Swal from 'sweetalert2';
 
 
 class GroupView extends Component {
@@ -12,21 +13,71 @@ class GroupView extends Component {
         this.props.dispatch({ type: 'FETCH_FAM_GROUP', payload: this.props.reduxStore.userGroups[0] });
     }
 
+    state = {
+        event_date: new Date(),
+        event_time_start: new Date(),
+        event_time_end: new Date(),
+        open: false,
+        request_id: '',
+        notes: '',
+        offer_needed: true,
+        claimer_notes: '',
+        claimer_id: '',
+    };
+
+
     viewFam = (item) => {
         console.log('view fam item', item)
         this.props.history.push(`/view/${item.user_id}`);
         
     }
     
-    handleClaim = (item) => {
-            let newObject = {
-                id: this.props.reduxStore.family.id,
-                // claimer_id: this.props.reduxStore.user.id,
-                event_claimed: true
-            }
-            this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject });
+    // handleClaim = (item) => {
+    //         let newObject = {
+    //             id: this.props.reduxStore.family.id,
+    //             // claimer_id: this.props.reduxStore.user.id,
+    //             event_claimed: true
+    //         }
+    //         this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject });
+    // }
 
-    }
+    handleClaim = (item) => {
+        console.log('in handle Claim', item)
+        let inputValue = this.state.claimer_notes;
+        Swal.fire({
+            title: 'Are you sure you want to claim this request?',
+            type: 'question',
+            html:
+                '<input style="width: 300px; outline: none; border: solid #c9dae1 2px; border-radius: 3px; padding: 5px;" placeholder="Add Notes (optional)" id="swal-input1">',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, claim it!'
+        }).then((response) => {
+            if (response.value) {
+                this.setState({
+                    claimer_notes: document.getElementById('swal-input1').value
+                })
+                let newObject = {
+                    id: item.id,
+                    claimer_id: this.props.reduxStore.family.id,
+                    event_claimed: true,
+                    event_date: item.event_date,
+                    event_time_start: item.event_time_start,
+                    event_time_end: item.event_time_end,
+                    last_name1: this.props.reduxStore.family.last_name1,
+                    claimer_notes: this.state.claimer_notes,
+                    group_id: this.props.reduxStore.userGroups[0],
+                }
+                this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject })
+            } else if (response.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelled Claim'
+                )
+            }
+        })
+    }  
 
     
 
@@ -35,7 +86,8 @@ class GroupView extends Component {
     render() {
     
         return (
-            <div align="center">
+            <div align="center" >
+                {JSON.stringify(this.props.reduxStore.family)}
                 <h1 align="center">
                    Welcome to the {this.props.reduxStore.userGroups && this.props.reduxStore.userGroups.length > 0 ?
                      this.props.reduxStore.userGroups[0].group_name : <p></p>} group!
@@ -48,16 +100,16 @@ class GroupView extends Component {
                     </Button.Group>
                 </div>
                 {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
-                
+                {/* the group reducer actually holds requests relevant to group */}
+                <div className="cardFeed"></div>
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
-                        if (item.event_claimed === false) {
+                        if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) {
                        
                         return (
                             <>
-                            <Card>
-                                    <Card.Content>
-
+                            <Card className="cardFeed">
+                             <Card.Content>
                             <Feed>
                         <Feed.Event>
                             <Feed.Label>
@@ -65,29 +117,19 @@ class GroupView extends Component {
                             <Feed.Content>
                                  The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
                                  <></>             
-                                                    <Modal trigger={<Button basic color='blue'>CLAIM</Button>}>
-                                                        <Modal.Header>{item.event_time_start} - {item.event_time_end} on {item.event_date}</Modal.Header>
-                                                        <Modal.Content image>
-                                                            <Image wrapped size='facebook' src={item.requester_image ? item.requester_image : <>No</>}/>
-                                                            
-                                                                <h5>Are you sure you want to deal with us?</h5>
-                                                            <Button class="circular icon" size="mini" basic color='green' onClick={() => this.handleClaim(item)}>CLAIM</Button><br/><Button size="mini"  basic color='red'>CANCEL</Button>
-                                                        
-                                                        </Modal.Content>
-                                                    </Modal>
-                                                    
+                                 {<Button basic color='blue' onClick={() => this.handleClaim(item)}>CLAIM</Button>}                  
                             </Feed.Content>
                         </Feed.Event>
                     </Feed>
-                                        </Card.Content>
-
+                    </Card.Content>
                      </Card>
                             </>
                         )}
+            
                         else {
                             return(
                             <>
-                            <Card>
+                                    <Card className="cardFeed">
                                 <Feed>
                                     <Feed.Event>
                                         <Feed.Label>
@@ -121,7 +163,7 @@ class GroupView extends Component {
                         this.props.reduxStore.groupFam.map((item) => {
                             return (
                                 <>
-                                    <Card key={item.id} onClick={() => this.viewFam(item)}>
+                                    <Card className="car" key={item.id} onClick={() => this.viewFam(item)}>
                                         <Image wrapped size='medium' src={item.image} />
                                     <Card.Content>
                                         <Card.Header>{item.last_name1} Family</Card.Header>

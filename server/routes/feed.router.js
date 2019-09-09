@@ -57,7 +57,7 @@ router.get('/offered', rejectUnauthenticated,   (req,res)=> {
   })
 })
 //updates event to claimed
-router.put('/update/:id', (req,res)=> {
+router.put('/update/:id', rejectUnauthenticated,  (req,res)=> {
   const sqlText = `UPDATE "event" SET "event_claimed"=$1, "claimer_id"=$2, "claimer_notes"=$3 WHERE id =$4;`;
   console.log(req.body.event_claimed)
   values = [req.body.event_claimed, req.body.claimer_id, req.body.claimer_notes, req.params.id];
@@ -71,7 +71,7 @@ router.put('/update/:id', (req,res)=> {
   })
 })
 //updates event to confirmed
-router.put('/updateConfirm/:id', (req, res) => {
+router.put('/updateConfirm/:id', rejectUnauthenticated,  (req, res) => {
   console.log('in updateConfirm event', req.body.event_confirmed)
   const sqlText = `UPDATE "event" SET "event_confirmed"=$1, 
   WHERE "id" =$3`;
@@ -86,7 +86,7 @@ router.put('/updateConfirm/:id', (req, res) => {
     })
 })
 
-router.post('/addRequest', (req,res)=> {
+router.post('/addRequest', rejectUnauthenticated, (req,res)=> {
   const sqlText = `insert into "event" ("event_date", "event_time_start", "event_time_end", "group_id", "notes", "requester_id", "offer_needed")
   values($1, $2, $3, $4, $5, $6, $7)`;
   values = [req.body.event_date, req.body.event_time_start, req.body.event_time_end, req.body.group_id, req.body.notes, req.body.requester_id, req.body.offer_needed];
