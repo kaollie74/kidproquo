@@ -79,6 +79,7 @@ input {
     margin: 1vh;
     padding: 1vh;
     text-align: center;
+    font-size: 50px;
 }
 
  .card{
@@ -111,6 +112,60 @@ input {
 .modalBtns {
     display: inline-flex;
     padding: 2vh;
+}
+
+@media only screen and (min-width: 768px) {
+    .formBackground {
+        background-color: #8298ca;
+        margin-top: 2vh;
+        margin-left: 8vh;
+        width: 60vh
+    }
+    .formInputsBtns{
+        margin-left: 10vh
+    
+    }
+    .editInputs {
+        padding-top: 1vh;
+        width: 40vh
+    
+    }
+    .editProfileBtns {
+        display: inline-flex;
+        padding: 2vh;
+        padding-left: 12vh;
+    }
+
+    .editProfileHeader {
+        margin: 1vh;
+        padding: 1vh;
+        text-align: center;
+        font-size: 20px
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .formBackground {
+        background-color: #8298ca;
+        margin-top: 2vh;
+        margin-left: 38vh;
+        width: 100vh;
+    }
+    .formInputsBtns{
+        margin-left: 15vh
+    
+    }
+    .editInputs {
+        padding-top: 1vh;
+        width: 70vh;
+    
+    }
+    .editProfileBtns {
+        display: inline-flex;
+        padding: 2vh;
+        padding-left: 24vh;
+    }
+
 }
 
 
