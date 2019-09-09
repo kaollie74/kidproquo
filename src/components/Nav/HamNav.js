@@ -29,6 +29,8 @@ closeNav = () => {
       
 
       <div id="sidenav" className="sidenav">
+      <Icon name='x' className='x icon' onClick={(event) => this.closeNav(event)} />
+      <div id="sidenav closebtn" className="sidenav closebtn"></div>
       
         <div>
          
@@ -43,8 +45,11 @@ closeNav = () => {
                     <li><Link className="sidenav-a" to="/kid-page">Kid Page</Link></li>
                     <li><Link className="sidenav-a" to="/about">About</Link></li>
                     <li><LogOutButton className="sidenav-a" /></li>
+              
+                    
                 </ul>
-            <Icon name='x' className='x icon' onClick={(event) => this.closeNav(event)} />
+            
+            
 
          
         </div>
