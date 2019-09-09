@@ -186,6 +186,15 @@ class EventView extends Component {
         )
       }
     })}  
+
+  timeStringToFloat = (time) => {
+      let hoursMinutes = time.split(/[.:]/);
+      let hours = parseInt(hoursMinutes[0], 10);
+      let minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
+      let newTime = (hours + minutes / 60);
+      return newTime;
+    }
+    
   
 
   handleCreateRequest = () => {
@@ -197,6 +206,12 @@ class EventView extends Component {
     let newDate = (this.state.event_date.getFullYear() + "-" + 0 + Number(this.state.event_date.getMonth() + 1) + "-" + this.state.event_date.getDate())
     let notes = this.state.notes;
     let offer_needed = this.state.offer_needed;
+    // let hours = Number(newTimeEnd - newTimeStart);
+    let startHours = this.timeStringToFloat(newTimeStart);
+    let endHours = this.timeStringToFloat(newTimeEnd);
+    let newStartHours = startHours.toFixed(1);
+    let newEndHours = endHours.toFixed(1);
+    let total_hours = (newEndHours - newStartHours);
     let newEventToSend = {
       event_date: newDate,
       event_time_start: newTimeStart,
@@ -205,6 +220,7 @@ class EventView extends Component {
       group_id: this.props.reduxStore.userGroups[0].id,
       notes: notes,
       offer_needed: offer_needed,
+      total_hours: total_hours
     }
     console.log(newDate);
     console.log(newTimeStart);
@@ -220,7 +236,7 @@ class EventView extends Component {
     }).then((result) => {
       if (result.value) {
         this.props.dispatch({ type: 'ADD_REQUEST', payload: newEventToSend })
-        this.props.dispatch({ type: 'FETCH_EVENTS', payload: newEventToSend.event_date})
+        // this.props.dispatch({ type: 'FETCH_EVENTS', payload: newEventToSend.event_date})
         this.setState({
           event_date: new Date (),
           event_time_start: new Date (), 
