@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Input } from 'semantic-ui-react';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 
 
@@ -86,24 +86,48 @@ class EditMyProfilePage extends Component {
 
     updateFamily = () => {
 
-        let newObjectToSend = {
-            id: this.state.family_id,
-            family_image: this.state.family_image,
-            family_last_name: this.state.family_last_name,
-            user_id: this.props.reduxStore.user.id
-        }
+        console.log('this is STATE', this.state)
 
-        console.log('this is newObjectToSend', this.state)
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You want to Submit Changes to Profile!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes!',
+            cancelButtonText: 'No!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.value) {
+              this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
+              this.props.history.push('/family-profile')
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your imaginary file is safe :)',
+                'error'
+              )
+            }
+          })
 
-        this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
+
+        
     }
 
     render() {
         console.log('THIS IS STATE', this.state)
         return (
           
-            
-            
             <div className="ui container center aligned" className='formBackground'>
                 <div className='editProfileHeader'>
                     <h2>Edit Profile</h2>

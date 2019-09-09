@@ -13,6 +13,7 @@ function* addNewKid (action) {
   try {
     
   yield axios.post('/kid/addKid', action.payload)
+  
   yield put(Swal.fire({
     position: 'center',
     type: 'success',
