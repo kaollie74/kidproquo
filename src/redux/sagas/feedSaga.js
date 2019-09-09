@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 function* feedSaga () {
   yield takeEvery('FETCH_YOUR_FEED', getYourFeed)
   yield takeEvery('CLAIM_EVENT', claimEvent)
+  yield takeEvery('CONFIRM_EVENT', confirmEvent)
   yield takeEvery('ADD_REQUEST', addRequest)
 }
 
@@ -22,6 +23,7 @@ function* getYourFeed () {
   }
 }
 
+//claims event and shows up on user page of the event creator
 function* claimEvent (action) {
   console.log('this is action.payload', action.payload)
 
@@ -43,6 +45,23 @@ function* claimEvent (action) {
     }))
   }
   catch(error) {
+    console.log('Error with updating event in the DB', error);
+  }
+}
+
+//confirms event and shows up on user page of the event claimer
+function* confirmEvent(action) {
+  console.log('in confirm event with', action.payload)
+  try {
+    yield axios.put(`/feed/updateConfirm/${action.payload.id}`, action.payload)
+    let event_date = {
+      event_date: action.payload.event_date
+    }
+    console.log('this is action.payload.event_date', action.payload.event_date);
+    yield put({ type: 'FETCH_EVENTS', payload: event_date })
+
+  }
+  catch (error) {
     console.log('Error with updating event in the DB', error);
   }
 }

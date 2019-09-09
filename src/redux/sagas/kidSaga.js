@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 
 function* kidSaga () {
   yield takeEvery('ADD_NEW_KID', addNewKid)
+  yield takeEvery('UPDATE_KID_TO_DB', updateKid)
 }
 
 
@@ -13,6 +14,7 @@ function* addNewKid (action) {
   try {
     
   yield axios.post('/kid/addKid', action.payload)
+  
   yield put(Swal.fire({
     position: 'center',
     type: 'success',
@@ -24,6 +26,25 @@ function* addNewKid (action) {
   }
   catch(error){
     console.log('Error with posting KID to DB', error)
+  }
+}
+
+function* updateKid (action) {
+  
+  try {
+    yield axios.put(`kid/update/${action.payload.id}`, action.payload);
+    yield put({type: 'FETCH_KIDS', payload: action.payload.user_id});
+
+    yield put(Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: `${action.payload.first_name}'s card has been updated`,
+      showConfirmButton: false,
+      timer: 1500
+    }))
+  }
+  catch(error) {
+    console.log('Unable to Update Kid in DB', error)
   }
 }
 export default kidSaga;

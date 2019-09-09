@@ -12,6 +12,7 @@ import profileSaga from './groupSaga';
 import kidSaga from './kidSaga';
 import hourSaga from './hourSaga';
 import feedSaga from './feedSaga';
+import notificationsSaga from './notificationsSaga'
 
 
 // rootSaga is the primary saga.
@@ -34,8 +35,8 @@ export default function* rootSaga() {
     profileSaga(),
     kidSaga(),
     hourSaga(),
-    feedSaga()
+    feedSaga(),
+    notificationsSaga(),
     
-
   ]);
 }
