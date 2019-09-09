@@ -18,6 +18,8 @@ import { Link } from 'react-router-dom';
 import { Iconbutton } from 'semantic-ui-react';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
+import Swal from 'sweetalert2';
+
 
 import { Table, Icon, Button, Card} from 'semantic-ui-react';
 import { getThemeProps } from '@material-ui/styles';
@@ -47,7 +49,6 @@ const styles = theme => ({
     fontWeight: '900',
     display: 'inline-block',
     padding: '0px',
-    marginLeft: '3px',
     width: '250px',
     height: '50px',
     backgroundColor: 'white'
@@ -112,6 +113,7 @@ class EventView extends Component {
     request_id: '',
     notes: '',
     offer_needed: true,
+    claimer_notes: '',
   };
 
   componentDidMount() {
@@ -148,20 +150,42 @@ class EventView extends Component {
       offer_needed: event.target.value
     })
   }
-
   handleClaim = (event, item) => {
-    console.log('in handle Claim', item);
-    let newObject = {
-      id: item.id,
-      claimer_id: this.props.reduxStore.user.id,
-      event_claimed: true,
-      event_date: item.event_date
-    }
-
-    console.log('newObject', newObject)
-
-    this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject })
-  }
+    console.log('in handle Claim', item)
+    let inputValue = this.state.claimer_notes;
+    Swal.fire({
+        title: 'Are you sure you want to claim this request?',
+        type: 'question',
+        html:
+      '<input style="width: 300px; outline: none; border: solid #c9dae1 2px; border-radius: 3px; padding: 5px;" placeholder="Add Notes (optional)" id="swal-input1">',
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, claim it!'
+    }).then((response) => {
+      if (response.value) {
+        this.setState({
+          claimer_notes: document.getElementById('swal-input1').value
+        })
+        let newObject = {
+          id: item.id,
+          claimer_id: this.props.reduxStore.user.id,
+          event_claimed: true,
+          event_date: item.event_date,
+          event_time_start: item.event_time_start,
+          event_time_end: item.event_time_end,
+          last_name1: item.last_name1,
+          claimer_notes: this.state.claimer_notes
+        }
+        this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject })
+      } else if (response.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled Claim'
+        )
+      }
+    })}  
+  
 
   handleCreateRequest = () => {
     console.log(this.state)
@@ -185,15 +209,27 @@ class EventView extends Component {
     console.log(newTimeStart);
     console.log(newTimeEnd);
     console.log('THIS IS THE OBJECT TO SEND TO SAGA!!!!!!!!!', newEventToSend);
-    this.props.dispatch({ type: 'ADD_REQUEST', payload: newEventToSend })
-    this.props.dispatch({ type: 'FETCH_EVENTS', payload: newEventToSend.event_date})
-    this.setState({
-      event_date: new Date (),
-      event_time_start: new Date (), 
-      event_time_end: new Date (),
-      notes: '',
-    })
+    Swal.fire({
+      title: 'Are you sure you want to create this request?',
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, create it!'
+    }).then((result) => {
+      if (result.value) {
+        this.props.dispatch({ type: 'ADD_REQUEST', payload: newEventToSend })
+        this.props.dispatch({ type: 'FETCH_EVENTS', payload: newEventToSend.event_date})
+        this.setState({
+          event_date: new Date (),
+          event_time_start: new Date (), 
+          event_time_end: new Date (),
+          notes: '',
+        })
+  }})  
+    
     this.openModal();
+
     this.confirmRequest();
   }
 
@@ -247,7 +283,7 @@ class EventView extends Component {
             open={this.state.open}
             //onClose={this.openModal}
           >
-            <div className={classes.paper}>
+            <div className="timeAndDatePicker">
               <Typography style={{marginLeft: '5px', marginTop: '30px'}} variant="h6" id="modal-title">
                 Select Time/Date
             </Typography>
@@ -384,7 +420,7 @@ class EventView extends Component {
               open={this.state.open}
               //onClose={this.openModal}
             >
-              <div className={classes.paper}>
+              <div className="timeAndDatePicker">
                 <Typography style={{marginLeft: '5px', marginTop: '30px'}} variant="h6" id="modal-title">
                   Select Time/Date
             </Typography>
