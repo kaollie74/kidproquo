@@ -59,8 +59,7 @@ router.put('/update/:id', rejectUnauthenticated,  (req,res)=> {
 
 router.put('/updateConfirm/:id', rejectUnauthenticated,  (req, res) => {
   console.log('in updateConfirm event', req.body.event_confirmed)
-  const sqlText = `UPDATE "event" SET "event_confirmed"=$1, 
-  WHERE "id" =$3`;
+  const sqlText = `UPDATE "event" SET "event_confirmed"=$1 WHERE id =$2;`;
   values = [req.body.event_confirmed, req.params.id];
   pool.query(sqlText, values)
     .then((response) => {
