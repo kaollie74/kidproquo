@@ -195,7 +195,7 @@ class GroupView extends Component {
                             return (
                                 <>
                                     <Card className="car" key={item.id} onClick={() => this.viewFam(item)}>
-                                        <Image wrapped size='medium' src={item.image} />
+                                        <Image wrapped size='medium' src={item.image}  />
                                     <Card.Content>
                                         <Card.Header>{item.last_name1} Family</Card.Header>
                                     </Card.Content>
