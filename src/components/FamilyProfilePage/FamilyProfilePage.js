@@ -108,14 +108,12 @@ class FamilyProfilePage extends Component {
                                     console.log(item)
                                     return (
                                         <>
-                                            <Card key={item.id} onClick={this.openModal}>
+                                            <Card key={item.id}>
                                                 <Card.Content>
                                                     <Image className='ui centered small image' src={item.image} alt="img 1" />
                                                     <Card.Header align="center">{item.first_name}</Card.Header>
                                                     <Modal
-                                                        open={this.state.open}
-                                                        onClose={this.state.open}
-                                                    // trigger={<Button align="center">{item.first_name}</Button>}
+                                                     trigger={<Button align="center">{item.first_name}</Button>}
                                                     >
                                                         <Modal.Header>
                                                             {item.first_name}
