@@ -1,0 +1,17 @@
+.formBackground {
+  margin: 2vh;
+  margin-left: 2.5vh;
+  height: 150vh;
+}
+
+@media only screen and (min-width: 1000px) {
+
+  .formBackground {
+    margin: 2vh;
+    margin-left: 37vh;
+    height: 115vh;
+  }
+
+}
+
+

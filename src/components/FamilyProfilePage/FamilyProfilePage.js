@@ -103,7 +103,9 @@ class FamilyProfilePage extends Component {
                 </div>
                 &nbsp;
                 <div className='kidCard'>
-                    <h1>Meet the Kids</h1>
+                    <div className='meetKidsTitle'>
+                        <h1>Meet the Kids</h1>
+                    </div>
 
                     <Grid stackable container centered columns={2} >
                         {this.props.reduxStore.kid.map((item, i) => {
@@ -153,11 +155,13 @@ class FamilyProfilePage extends Component {
                                 <p>{this.state.allergies}</p>
                                 <h4>Medicine:</h4>
                                 <p>{this.state.medication}</p>
+                                <h4>Notes:</h4>
+                                <p>{this.state.notes}</p>
                             </Modal.Description>
                         </Modal.Content>
                         <div align='center'>
-                        <Button color='green' onClick={this.updateKid}>Edit</Button>
-                        <Button color='red' onClick={this.closeKidModal}>Cancel</Button>
+                            <Button color='green' onClick={this.updateKid}>Edit</Button>
+                            <Button color='red' onClick={this.closeKidModal}>Cancel</Button>
                         </div>
                     </Modal>
 
