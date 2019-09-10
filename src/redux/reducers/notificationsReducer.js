@@ -1,5 +1,5 @@
 // Actually named group and holds group feed info
-const notificationsReducer = (state = {}, action) => {
+const notificationsReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_GROUP_NOTIFICATIONS':
             return action.payload;

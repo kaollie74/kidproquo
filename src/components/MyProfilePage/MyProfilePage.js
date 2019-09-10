@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Feed, Container, Header, Label, Progress, Card, Message  } from 'semantic-ui-react';
+import { Feed, Container, Header, Label, Progress, Card, Button, Message  } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Moment from 'react-moment';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -15,7 +17,6 @@ class MyProfilePage extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_YOUR_FEED' });
         this.props.dispatch({ type: 'FETCH_GROUP_NOTIFICATIONS',
          payload: {group_id: this.props.reduxStore.userGroups[0],
                     user_id: this. props.reduxStore.user.id} });
@@ -45,23 +46,50 @@ class MyProfilePage extends Component {
     }
 
     handleConfirm = (item) => {
+        Swal.fire({
+            title: 'Are you sure you want to confirm this request?',
+            type: 'question',
+            html:
+                '<input style="width: 300px; outline: none; border: solid #c9dae1 2px; border-radius: 3px; padding: 5px;" placeholder="Add Notes (optional)" id="swal-input1">',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, claim it!'
+        }).then((response) => {
+            if (response.value) {
+                this.setState({
+                    claimer_notes: document.getElementById('swal-input1').value
+                })
+                let newObject = {
+                    id: item.id,
+                    event_confirmed: true,
+                    group_id: this.props.reduxStore.userGroups[0],
+                    user_id: this.props.reduxStore.user.id
+                };
+                this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
+
+            } else if (response.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelled Claim'
+                )
+            }
+        })
         console.log('confirming event with this id:',item.id)
-        let newObject = {
-            id: item.id,
-            event_confirmed: true,
-        };
-        this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
 
     }
 
     handleCancel = (item) => {
-        console.log('confirming event with this id:', item.id)
-        // let newObject = {
-        //     id: item.id,
-        //     //probs can just send req user id on server
-        //     // claimer_id: this.props.reduxStore.user.id,
-        //     event_confirmed: true,
-        // };
+        console.log('cancel event with this id:', item.id)
+        let newObject = {
+            id: item.id,
+            group_id: this.props.reduxStore.userGroups[0],
+            user_id: this.props.reduxStore.user.id
+        };
+
+        this.props.dispatch({ type: 'CANCEL_CONF_REQUEST', payload: newObject })
+
+      
 
         // this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
 
@@ -70,6 +98,8 @@ class MyProfilePage extends Component {
 
     render() {
 
+        console.log('this is rendering')
+        console.log('in MY PROFILE PAGE WITH:', this.props.reduxStore.notifications)
         return (
             <>
                 {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
@@ -107,7 +137,7 @@ class MyProfilePage extends Component {
                                         <Feed.Event>
                                             <Feed.Content>
                                 {item.claimer_name} is available to help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                <button onClick={() => this.handleConfirm(item)}>CONFIRM</button><button onClick={() => this.handleCancel(item)}>CANCEL</button>
+                                <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button><Button basic color='blue' onClick={() => this.handleCancel(item)}>CANCEL</Button>
                                             </Feed.Content>
                                         </Feed.Event>
                                     </Feed>
@@ -115,6 +145,20 @@ class MyProfilePage extends Component {
                             </>
                         
                         )}
+                        else if (item.event_claimed === true && item.event_confirmed === true) {
+
+                            return (
+                                <>
+                                    <Card>
+                                        
+                                    The {item.claimer_name} family will help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                    <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+                                        
+                                    </Card>
+                                </>
+
+                            )
+                        }
                         else {
                             return(
                             <>
@@ -124,21 +168,6 @@ class MyProfilePage extends Component {
                     : <p></p>} 
 
 
-                    {this.props.reduxStore.feedNeed.map((item, i) => (
-                     <>
-                                    <Card >
-                                <Feed>
-                                    <Feed.Event>
-                                     <Feed.Content>
-                                                <p>The {item.claimer_name} family is sitting for you on {item.event_date} at {item.event_time_start} - {item.event_time_end}.</p>
-                                                <button onClick={() => this.handleCancel(item)}>CANCEL</button>  &nbsp;
-                                        </Feed.Content>
-                                    </Feed.Event>
-                                </Feed>
-                                </Card>
-                            </>
-            
-                    ))}
                 </Container>
             </>
 
