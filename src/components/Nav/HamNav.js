@@ -37,11 +37,11 @@ closeNav = () => {
           
          
                 <ul>
-                  <li><Link className="sidenav-a" to="/my-profile-page">My Profile</Link></li>
-                  <li><Link className="sidenav-a" to="/group-view">My Groups</Link></li>
-                  <li><Link className="sidenav-a" to="/family-profile">My Family</Link></li>
-                  <li><Link className="sidenav-a" to="/about">About</Link></li> 
-                  <li><LogOutButton className="sidenav-a" /></li>
+                  <li><Link className="sidenav-a" to="/my-profile-page" onClick={this.closeNav}>My Profile</Link></li>
+              <li><Link className="sidenav-a" to="/group-view" onClick={this.closeNav}>My Groups</Link></li>
+              <li><Link className="sidenav-a" to="/family-profile" onClick={this.closeNav}>My Family</Link></li>
+              <li><Link className="sidenav-a" to="/about" onClick={this.closeNav}>About</Link></li> 
+              <li><LogOutButton className="sidenav-a" onClick={this.closeNav}/></li>
                 </ul>
                   
             
