@@ -6,7 +6,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('in /kid with this id:', req.params.id);
     const values = req.params.id;
-    const sqlText = `SELECT kid.first_name, kid.last_name, kid.id, kid.allergies, kid.birthdate, kid.image, kid.medication, kid.notes from "kid"  join
+    const sqlText = `SELECT kid.first_name, kid.last_name, kid.id, kid.allergies, to_char(kid.birthdate, 'MM-DD-YYYY') as birthdate, kid.image, kid.medication, kid.notes from "kid"  join
                     "family" on kid.family_id = family.id
                     join "user" on family.user_id = "user".id
                     where "user".id =$1
