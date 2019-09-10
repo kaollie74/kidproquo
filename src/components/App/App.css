@@ -6,7 +6,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-color: #3f3163;
+    background-color: #fa8072;
 }
 
 .alert {
@@ -76,6 +76,7 @@ input {
 }
 
 .editProfileHeader {
+    display: inline-flex;
     margin: 1vh;
     padding: 1vh;
     text-align: center;
@@ -166,6 +167,21 @@ input {
         padding: 2vh;
         padding-left: 24vh;
     }
+
+    .iconsOnEditFam {
+        padding-top: 2vh;
+        padding-left: 14vh;
+        float: right;
+    }
+
+
+.editProfileHeader {
+    display: inline-flex;
+    margin-left: 18vh;
+    padding: 1vh;
+    text-align: center;
+    font-size: 50px !important;
+}
 
 }
 
