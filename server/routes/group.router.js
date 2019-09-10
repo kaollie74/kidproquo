@@ -27,18 +27,16 @@ router.get('/:id', rejectUnauthenticated,  (req, res) => {
 
 //this will get info from group feed for user home page notifications
 router.get('/notifications/:id', rejectUnauthenticated,  (req, res) => {
+    console.log('in notiofication req.params.id', req.params.id,)
     const id = req.params.id;
-    const sqlText = `select "family2"."user_id", "family"."image" as "claimer_image", 
-                    "family2"."image" as "requester_image", "family2"."last_name1" as "requester_name", 
-                    "family"."last_name1" as "claimer_name", "event"."id", "event"."event_date", "event"."event_time_start", 
-                    "event"."event_time_end", "event"."event_claimed", "event"."event_confirmed" from "event"
-                    left join "family" on
-                    "event"."claimer_id" = "family"."id"
-                    left join "family" as "family2" on
-                    "event"."requester_id" = "family2"."id"
-                    where "event"."group_id"=$1 and "family2"."user_id"=$2 order by id desc;
-`;
-    pool.query(sqlText, [id, req.user.id])
+    const sqlText =`select "family2"."user_id" as "requester_id", "family"."image" as "claimer_image", 
+    "family2"."image" as "requester_image", "family2"."last_name1" as "requester_name", "family"."last_name1" as "claimer_name", 
+    "event"."id", "event"."event_date", "event"."event_time_start", 
+    "event"."event_time_end", "event"."event_claimed", "event"."event_confirmed" from "event"
+    left join "family" on "event"."claimer_id" = "family"."id" 
+    left join "family" as "family2" on "event"."requester_id" = "family2"."id" where "event"."group_id"=$1 order by id desc;`;
+
+    pool.query(sqlText, [id])
         .then((response) => {
             console.log('back from group/ notiofications db response.rows:', response.rows);
             res.send(response.rows)
