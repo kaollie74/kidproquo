@@ -25,11 +25,11 @@ closeNav = () => {
   render() {
     return (
       <>
-      <Icon name='bars' className='bars icon' onClick={(event) => this.openNav(event)} />
+        <Icon name='bars' className='bars icon' size='huge' onClick={(event) => this.openNav(event)} />
       
 
       <div id="sidenav" className="sidenav">
-      <Icon name='x' className='x icon' onClick={(event) => this.closeNav(event)} />
+          <Icon name='x' className='x icon' size='large' onClick={(event) => this.closeNav(event)} />
       <div id="sidenav" className="sidenav closebtn"></div>
       
         <div>
@@ -37,17 +37,13 @@ closeNav = () => {
           
          
                 <ul>
-                    <li><Link className="sidenav-a" to="/calendar">Calendar</Link></li>
-                    <li><Link className="sidenav-a" to="/create-request">Request</Link></li>
-                    <li><Link className="sidenav-a" to="/edit-my-profile">Edit Profile</Link></li>
-                    <li><Link className="sidenav-a" to="/family-profile">Family Profile</Link></li>
-                    <li><Link className="sidenav-a" to="/group-view">Group View</Link></li>
-                    <li><Link className="sidenav-a" to="/kid-page">Kid Page</Link></li>
-                    <li><Link className="sidenav-a" to="/about">About</Link></li>
-                    <li><LogOutButton className="sidenav-a" /></li>
-              
-                    
+                  <li><Link className="sidenav-a" to="/my-profile-page">My Profile</Link></li>
+                  <li><Link className="sidenav-a" to="/group-view">My Groups</Link></li>
+                  <li><Link className="sidenav-a" to="/family-profile">My Family</Link></li>
+                  <li><Link className="sidenav-a" to="/about">About</Link></li> 
+                  <li><LogOutButton className="sidenav-a" /></li>
                 </ul>
+                  
             
             
 
