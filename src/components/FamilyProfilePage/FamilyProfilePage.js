@@ -14,19 +14,25 @@ class FamilyProfilePage extends Component {
         this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.reduxStore.user.id })
     }
+
+    closeKidModal = () => {
+        this.setState({
+            open: false
+        })
+    }
     editFamilyProfile = () => {
 
         this.props.history.push('/edit-my-profile');
     }
 
     updateKid = (event, item) => {
-        this.props.dispatch({type: 'UPDATE_KID', payload: item})
+        this.props.dispatch({ type: 'UPDATE_KID', payload: item })
         this.props.history.push('/kid-page')
     }
     render() {
         return (
             <>
-            {/* <div>
+                {/* <div>
                 <CarouselProvider
                 naturalSlideWidth={100}
                 naturalSlideHeight={125}
@@ -34,12 +40,12 @@ class FamilyProfilePage extends Component {
                 dotNumbers={true}
                 >
                 
-                
-            <Slider>
-                <Slide index={0}>#1</Slide>
-                <Slide index={1}>#2</Slide>
-                <Slide index={2}>#3</Slide>
-            </Slider>
+                    
+                <Slider>
+                    <Slide index={0}>#1</Slide>
+                    <Slide index={1}>#2</Slide>
+                    <Slide index={2}>#3</Slide>
+                </Slider>
             <ButtonBack>Back</ButtonBack>
             <ButtonNext>Next</ButtonNext>
                     </CarouselProvider>
@@ -109,11 +115,21 @@ class FamilyProfilePage extends Component {
                                                 <Card.Content>
                                                     <Image className='ui centered small image' src={item.image} alt="img 1" />
                                                     <Card.Header align="center">{item.first_name}</Card.Header>
-                                                    <Modal 
-                                                    trigger={<Button align="center">{item.first_name}</Button>}>
-                                                        <Modal.Header>{item.first_name} {item.last_name}</Modal.Header>
-                                                        <Modal.Content image>
-                                                            <Image wrapped size='medium' src={item.image} />
+                                                    <Modal
+
+                                                        trigger={<Button align="center">{item.first_name}</Button>}
+                                                    >
+                                                        <Modal.Header>
+                                                            {item.first_name}
+                                                            {item.last_name}
+                                                        </Modal.Header>
+                                                        <Modal.Content 
+                                                        image
+                                                        >
+                                                            <Image 
+                                                            wrapped size='medium' 
+                                                            src={item.image} 
+                                                            />
                                                             <Modal.Description>
                                                                 <h4>Birthdate:</h4>
                                                                 <p>{item.birthdate}</p>
@@ -123,11 +139,11 @@ class FamilyProfilePage extends Component {
                                                                 <p>{item.medication}</p>
                                                             </Modal.Description>
                                                         </Modal.Content>
-                                                        <Button onClick={(event)=> this.updateKid(event, item)}>Edit</Button>
-                                                        <Button>Close</Button>
+                                                        <Button onClick={(event) => this.updateKid(event, item)}>Edit</Button>
+                                                        <Button onClick={this.closeKidModal}>Close</Button>
                                                     </Modal>
                                                 </Card.Content>
-                                                
+
                                             </Card>
                                         </>
                                     )

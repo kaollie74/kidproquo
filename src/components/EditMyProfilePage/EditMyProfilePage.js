@@ -88,52 +88,40 @@ class EditMyProfilePage extends Component {
 
         console.log('this is STATE', this.state)
 
-        const swalWithBootstrapButtons = Swal.mixin({
-            customClass: {
-              confirmButton: 'btn btn-success',
-              cancelButton: 'btn btn-danger'
-            },
-            buttonsStyling: false
-          })
-          
-          swalWithBootstrapButtons.fire({
+        Swal.fire({
             title: 'Are you sure?',
             text: "You want to Submit Changes to Profile!",
             type: 'warning',
             showCancelButton: true,
+            cancelButtonColor: '#d33',
             confirmButtonText: 'Yes!',
             cancelButtonText: 'No!',
             reverseButtons: true
-          }).then((result) => {
+        }).then((result) => {
             if (result.value) {
-              this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
-              this.props.history.push('/family-profile')
+                this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
+                this.props.history.push('/family-profile')
             } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
             ) {
-              swalWithBootstrapButtons.fire(
-                'Cancelled',
-                'Your imaginary file is safe :)',
-                'error'
-              )
+                Swal.fire(
+                    'Cancelled',
+                    'Your Changes have not been updated',
+                    'error'
+                )
             }
-          })
-
-
-        
+        })
     }
 
     render() {
         console.log('THIS IS STATE', this.state)
         return (
-          
+
             <div className="ui container center aligned" className='formBackground'>
                 <div className='editProfileHeader'>
-                    <h2>Edit Profile</h2>
+                    <h2>Edit Your Profile</h2>
                 </div>
-
-
                 <div className="ui container center aligned" className="card">
                     <Card className="ui container center aligned" >
                         <Card.Content>
@@ -155,10 +143,17 @@ class EditMyProfilePage extends Component {
                                     Edit Pic
                             </a>
                             </div>
-
-
                         </Card.Content>
                     </Card>
+                    <div className='addKidBtn'>
+                        <Button
+                            floated='right'
+                            color='blue'
+                            size='mini'
+                            onClick={this.addKidModal}>
+                            Add Kid
+                             </Button>
+                    </div>
                 </div>
                 <div className='formInputsBtns'>
                     <Form.Input
@@ -236,14 +231,6 @@ class EditMyProfilePage extends Component {
                     />
                     <div className='editProfileBtns'>
 
-                        <div className='addKidBtn'>
-                            <Button
-                                color='blue'
-                                size='mini'
-                                onClick={this.addKidModal}>
-                                Add Kid
-                             </Button>
-                        </div>
 
                         <div className='saveChangesBtn'>
                             <Button
@@ -251,13 +238,13 @@ class EditMyProfilePage extends Component {
                                 onClick={this.updateFamily}
                                 size='mini'>
                                 Save Changes
-                                </Button>
+                            </Button>
                         </div>
 
                     </div>
                 </div>
-               
-            
+
+
 
                 <div>
                     {/************************************** Edit Profile Pic ************************************************/}

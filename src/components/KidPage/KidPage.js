@@ -19,16 +19,21 @@ class KidPage extends Component {
         open: false
     }
 
+    // Capture the values of the Inputs and Set them to State
     handleChangeFor = (event, propsName) => {
         this.setState({ [propsName]: event.target.value })
     }
 
+    //sets this.state.open to true,
+    // which activates the Modal for the Kid Pic
     kidPicModal = () => {
         this.setState({
             open: !this.state.open
         })
     }
 
+    // Sets Kid Pic to the value 
+    // and closes the Pic Modal
     setKidImageLocally = () => {
         this.setState({
             image: this.state.image,
@@ -36,9 +41,61 @@ class KidPage extends Component {
         })
     }
 
+    // Run a dispatch based on a conditional in the Sweet Alert
+    // 
     updateKid = () => {
-        this.props.dispatch({type: 'UPDATE_KID_TO_DB', payload: this.state})
-        this.props.history.push('/family-profile')
+        Swal.fire({
+            title: 'Are you sure?',
+            text: `You want to submit changes to ${this.state.first_name}'s profile!`,
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!',
+            cancelButtonText: 'No!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                this.props.dispatch({ type: 'UPDATE_KID_TO_DB', payload: this.state })
+                this.props.history.push('/family-profile')
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                Swal.fire(
+                    'Cancelled',
+                    'Your Changes have not been updated',
+                    'error'
+                )
+            }
+        })
+
+
+    }
+
+    cancelUpdateKid = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Your Changes will not be Saved!",
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!',
+            cancelButtonText: 'No!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                this.props.history.push('/family-profile')
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                Swal.fire(
+                    'Cancelled',
+                    'Your Changes have not been updated',
+                    'error'
+                )
+            }
+        })
     }
 
 
@@ -46,7 +103,7 @@ class KidPage extends Component {
         return (
             <div className="ui container center aligned" className='formBackground'>
                 <div className='editProfileHeader'>
-                    <h2>Edit Kid</h2>
+                    <h2>Edit {this.state.first_name}</h2>
                 </div>
 
 
@@ -110,7 +167,7 @@ class KidPage extends Component {
                     />
                     <Form.Input
                         className='editInputs'
-                        fluid label='State'
+                        fluid label='Medication'
                         value={this.state.medication}
                         onChange={(event) => this.handleChangeFor(event, 'medication')}
 
@@ -146,7 +203,7 @@ class KidPage extends Component {
                             <Button
                                 color='red'
                                 size='mini'
-                                onClick={this.addKidModal}>
+                                onClick={this.cancelUpdateKid}>
                                 Cancel
                              </Button>
                         </div>
@@ -194,106 +251,12 @@ class KidPage extends Component {
                         </div>
 
 
-                    </Modal> */}
+                    </Modal>
                 </div>
                 <div>
                     {/*************************************** Add Kid Modal ********************************************/}
                     <div>
-                        {/* <Responsive>
-                            <Modal
-                                open={this.state.open}
-                                onClose={this.state.open}
-                                className='.addKidModal'
-                            >
-                                <Modal.Header
-                                    className="ui container center aligned"
-                                >
-                                    Add Kid
-                            </Modal.Header>
-
-                                <Image
-                                    className='ui fluid image'
-
-                                    src={this.state.image}
-
-                                />
-                                <Modal.Content
-                                    className="ui container center aligned"
-                                >
-
-                                    <Form.Field>
-                                        <Form.Input
-                                            fluid label='First Name'
-                                            placeholder="(50 character max)"
-                                            value={this.state.first_name}
-                                            onChange={(event) => this.handleChangeFor(event, 'first_name')}
-                                        />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <Form.Input
-                                            fluid label='Last Name'
-                                            placeholder="(50 character max)"
-                                            value={this.state.last_name}
-                                            onChange={(event) => this.handleChangeFor(event, 'last_name')}
-                                        />
-                                    </Form.Field>
-                                    <Form.Input
-                                        fluid label='Birthday'
-                                        placeholder="(MM-DD-YYYY)"
-                                        value={this.state.birthdate}
-                                        onChange={(event) => this.handleChangeFor(event, 'birthdate')}
-                                    />
-
-                                    <Form.Input
-                                        fluid label='Image'
-                                        placeholder="URL"
-                                        value={this.state.image}
-                                        onChange={(event) => this.handleChangeFor(event, 'image')}
-                                    />
-
-                                    <Form.Input
-                                        fluid label='Medication'
-                                        placeholder="(100 character max)"
-                                        value={this.state.medication}
-                                        onChange={(event) => this.handleChangeFor(event, 'medication')}
-                                    />
-
-                                    <Form.Input
-                                        fluid label="Allergies"
-                                        placeholder="Allergies (500 characters max)"
-                                        value={this.state.allergies}
-                                        onChange={(event) => this.handleChangeFor(event, 'allergies')}
-
-                                    />
-
-                                    <Form.Input
-                                        fluid label="Other Information"
-                                        placeholder="Other Info (300 characters max)"
-                                        value={this.state.notes}
-                                        onChange={(event) => this.handleChangeFor(event, 'notes')}
-                                    />
-
-                                </Modal.Content>
-                                <div>
-                                    <Button
-                                        color='red'
-                                        floated='right'
-                                        size='mini'
-                                        onClick={this.addKidModal}>
-                                        Cancel
-                                </Button>
-                                    <Button
-                                        color='blue'
-                                        floated='right'
-                                        size='mini'
-                                        onClick={this.submitNewKid}>
-                                        Submit
-                                </Button>
-                                </div>
-                            </Modal>
-                        </Responsive> */}
-
-
+        
                     </div>
 
 

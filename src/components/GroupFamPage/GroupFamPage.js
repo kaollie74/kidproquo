@@ -36,9 +36,6 @@ class GroupFamPage extends Component {
                     <Card>
                         <Card.Content>
                             <Card.Header> </Card.Header>
-
-
-
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
                             <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image: <>no</> } alt="img 1" />
                             <Icon name='pencil alternate' onClick={this.editFamilyProfile} />
