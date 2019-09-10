@@ -34,7 +34,7 @@ closeNav = () => {
       
         <div>
          
-          
+        
          
                 <ul>
                   <li><Link className="sidenav-a" to="/my-profile-page" onClick={this.closeNav}>My Profile</Link></li>
