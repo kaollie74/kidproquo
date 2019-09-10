@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Feed, Container, Header, Label, Progress, Card, Message  } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Moment from 'react-moment';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -45,12 +47,45 @@ class MyProfilePage extends Component {
     }
 
     handleConfirm = (item) => {
+        Swal.fire({
+            title: 'Are you sure you want to confirm this request?',
+            type: 'question',
+            html:
+                '<input style="width: 300px; outline: none; border: solid #c9dae1 2px; border-radius: 3px; padding: 5px;" placeholder="Add Notes (optional)" id="swal-input1">',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, claim it!'
+        }).then((response) => {
+            if (response.value) {
+                this.setState({
+                    claimer_notes: document.getElementById('swal-input1').value
+                })
+                let newObject = {
+                    id: item.id,
+                    event_confirmed: true,
+                };
+                // let newObject = {
+                //     id: item.id,
+                //     claimer_id: this.props.reduxStore.family.id,
+                //     event_claimed: true,
+                //     event_date: item.event_date,
+                //     event_time_start: item.event_time_start,
+                //     event_time_end: item.event_time_end,
+                //     last_name1: this.props.reduxStore.family.last_name1,
+                //     claimer_notes: this.state.claimer_notes,
+                //     group_id: this.props.reduxStore.userGroups[0],
+                // }
+                this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
+
+            } else if (response.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelled Claim'
+                )
+            }
+        })
         console.log('confirming event with this id:',item.id)
-        let newObject = {
-            id: item.id,
-            event_confirmed: true,
-        };
-        this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
 
     }
 
