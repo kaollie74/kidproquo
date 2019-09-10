@@ -99,10 +99,9 @@ class MyProfilePage extends Component {
     render() {
 
         console.log('this is rendering')
-        console.log('in MY PROFILE PAGE WITH:', this.props.reduxStore.notifications)
-        return (
+                    return (
             <>
-                {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
+                <pre>{JSON.stringify(this.props.reduxStore.notifications, null, 2)}</pre>
                 <Progress
                     value={this.progressBar()}
                     total='100'
@@ -128,15 +127,15 @@ class MyProfilePage extends Component {
                 <Container align="center" className='my_feed'>
                        {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
                     this.props.reduxStore.notifications.map((item) => {
-                        if (item.event_claimed === true && item.event_confirmed === false) {
+                        if (item.event_claimed === true && item.event_confirmed === false && item.requester_id === this.props.reduxStore.user.id) {
                        
                         return (
                             <>
-                            <Card>
+                            <Card background-color="blue">
                                     <Feed>
                                         <Feed.Event>
                                             <Feed.Content>
-                                {item.claimer_name} is available to help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                {item.claimer_name} is available to help out the {item.requester_name} on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
                                 <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button><Button basic color='blue' onClick={() => this.handleCancel(item)}>CANCEL</Button>
                                             </Feed.Content>
                                         </Feed.Event>
@@ -151,7 +150,7 @@ class MyProfilePage extends Component {
                                 <>
                                     <Card>
                                         
-                                    The {item.claimer_name} family will help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                    The {item.claimer_name} family will help out the {item.requester_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
                                     <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
                                         
                                     </Card>

@@ -211,7 +211,9 @@ class EventView extends Component {
     let endHours = this.timeStringToFloat(newTimeEnd);
     let newStartHours = startHours.toFixed(1);
     let newEndHours = endHours.toFixed(1);
-    let total_hours = (newEndHours - newStartHours);
+    let old_total_hours = (newEndHours - newStartHours);
+    let calculated_total_hours = old_total_hours.toFixed(1);
+    let total_hours = Number(calculated_total_hours * 60).toFixed(0);
     let newEventToSend = {
       event_date: newDate,
       event_time_start: newTimeStart,
