@@ -58,6 +58,13 @@ function* confirmEvent(action) {
     let event_date = {
       event_date: action.payload.event_date
     }
+    yield put({
+      type: 'FETCH_GROUP_NOTIFICATIONS',
+      payload: {
+        group_id: this.props.reduxStore.userGroups[0],
+        user_id: this.props.reduxStore.user.id
+      }
+    })
     console.log('this is action.payload.event_date', action.payload.event_date);
     yield put({ type: 'FETCH_EVENTS', payload: event_date })
 
