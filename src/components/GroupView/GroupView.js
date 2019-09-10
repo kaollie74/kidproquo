@@ -87,7 +87,7 @@ class GroupView extends Component {
     
         return (
             <div align="center" >
-                {JSON.stringify(this.props.reduxStore.family)}
+                {/* {JSON.stringify(this.props.reduxStore.family)} */}
                 <h1 align="center">
                    Welcome to the {this.props.reduxStore.userGroups && this.props.reduxStore.userGroups.length > 0 ?
                      this.props.reduxStore.userGroups[0].group_name : <p></p>} group!
@@ -101,32 +101,51 @@ class GroupView extends Component {
                 </div>
                 {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
                 {/* the group reducer actually holds requests relevant to group */}
-                
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
-                        if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) {
-                       
-                        return (
-                            <>
-                            <Card >
-                             <Card.Content>
-                            <Feed>
-                        <Feed.Event>
-                            <Feed.Label>
-                            </Feed.Label>
-                            <Feed.Content>
-                                 The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                 <></>             
-                                 {<Button basic color='blue' onClick={() => this.handleClaim(item)}>CLAIM</Button>}                  
-                            </Feed.Content>
-                        </Feed.Event>
-                    </Feed>
-                    </Card.Content>
-                     </Card>
-                            </>
-                        )}
-            
-                        else {
+                        if (item.event_claimed === false && item.requester_name === this.props.reduxStore.family.last_name1) 
+                        {
+                            return (
+                                <>
+                                    <Card >
+                                        <Feed>
+                                            <Feed.Event>
+                                                <Feed.Label>
+                                                </Feed.Label>
+                                                <Feed.Content>
+                                                    The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                                 <></>
+                                                    {<Button basic color='red' onClick={() => this.handleDelete(item)}>Delete</Button>}
+                                                </Feed.Content>
+                                            </Feed.Event>
+                                        </Feed>
+                                    </Card>
+                                </>
+                            )
+                      }
+                        else if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) 
+                         {
+                            return (
+                                <>
+                                    <Card >
+                                        <Card.Content>
+                                            <Feed>
+                                                <Feed.Event>
+                                                    <Feed.Content>
+                                                        The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                                 <></>
+                                                        {<Button basic color='blue' onClick={() => this.handleClaim(item)}>CLAIM</Button>}
+                                                    </Feed.Content>
+                                                </Feed.Event>
+                                            </Feed>
+                                        </Card.Content>
+                                    </Card>
+                                </>
+                            )
+                           
+                        }
+                        else if (item.event_claimed === true && item.requester_name !== this.props.reduxStore.family.last_name1)
+                        {
                             return(
                             <>
                                     <Card >
@@ -135,11 +154,7 @@ class GroupView extends Component {
                                         <Feed.Label>
                                         </Feed.Label>
                                         <Feed.Content>
-                                            <Feed.Label>
-                                                {/* <img src={item.claimer_image} alt="lol" /> */}
-                                            </Feed.Label>
                                                The {item.claimer_name} family has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                    
                                         </Feed.Content>
                                     </Feed.Event>
                                 </Feed>
@@ -149,6 +164,7 @@ class GroupView extends Component {
                     })
                     : <p></p>} 
                
+               <h3>Calendar</h3>
                 <div>
                     <Button onClick={(event) => this.seeCalendar()} icon labelPosition='right'>
                         View Calendar
@@ -156,6 +172,7 @@ class GroupView extends Component {
                     </Button>
                 </div>
                 
+                <h3>Members</h3>
                 {this.props.reduxStore.groupFam && this.props.reduxStore.groupFam.length > 0 ?
                     
                     
