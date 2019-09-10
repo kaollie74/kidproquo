@@ -119,7 +119,24 @@ class MyProfilePage extends Component {
 
                     {this.props.reduxStore.feedNeed.map((item, i) => (
                     <div key={i}>
-                        <Feed size='large'>
+                          <>
+                                    <Card >
+                                <Feed>
+                                    <Feed.Event>
+                                        <Feed.Label>
+                                        </Feed.Label>
+                                        <Feed.Content>
+                                            <Feed.Label>
+                                                {/* <img src={item.claimer_image} alt="lol" /> */}
+                                            </Feed.Label>
+                                                <p>The {item.claimer_name} family is sitting for you on {item.event_date} at {item.event_time_start} - {item.event_time_end}.</p>  &nbsp;
+                      
+                                        </Feed.Content>
+                                    </Feed.Event>
+                                </Feed>
+                                </Card>
+                            </>
+                        {/* <Feed size='large'>
                             <Feed.Event>
                                 <Feed.Label />
                                 <Feed.Content>
@@ -133,7 +150,7 @@ class MyProfilePage extends Component {
     
                                 </Feed.Content>
                             </Feed.Event>
-                        </Feed>
+                        </Feed> */}
                     </div>
                     ))}
                 </Container>
