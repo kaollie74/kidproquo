@@ -11,7 +11,7 @@ class HamNav extends Component {
 
 // Set the width of the side navigation to 250px and the left margin of the page content to 250px
 openNav = () => {
-    document.getElementById("sidenav").style.width = "250px";
+    document.getElementById("sidenav").style.width = "150px";
     //document.getElementById("main").style.marginLeft = "250px";
 }
 
@@ -25,7 +25,7 @@ closeNav = () => {
   render() {
     return (
       <>
-        <Icon name='bars' className='bars icon' size='huge' onClick={(event) => this.openNav(event)} />
+        <Icon name='bars' className='bars icon' size='large' onClick={(event) => this.openNav(event)} />
       
 
       <div id="sidenav" className="sidenav">
