@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Feed, Container, Header, Label, Progress, Card, Message  } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Moment from 'react-moment';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -45,12 +47,45 @@ class MyProfilePage extends Component {
     }
 
     handleConfirm = (item) => {
+        Swal.fire({
+            title: 'Are you sure you want to confirm this request?',
+            type: 'question',
+            html:
+                '<input style="width: 300px; outline: none; border: solid #c9dae1 2px; border-radius: 3px; padding: 5px;" placeholder="Add Notes (optional)" id="swal-input1">',
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, claim it!'
+        }).then((response) => {
+            if (response.value) {
+                this.setState({
+                    claimer_notes: document.getElementById('swal-input1').value
+                })
+                let newObject = {
+                    id: item.id,
+                    event_confirmed: true,
+                };
+                // let newObject = {
+                //     id: item.id,
+                //     claimer_id: this.props.reduxStore.family.id,
+                //     event_claimed: true,
+                //     event_date: item.event_date,
+                //     event_time_start: item.event_time_start,
+                //     event_time_end: item.event_time_end,
+                //     last_name1: this.props.reduxStore.family.last_name1,
+                //     claimer_notes: this.state.claimer_notes,
+                //     group_id: this.props.reduxStore.userGroups[0],
+                // }
+                this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
+
+            } else if (response.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelled Claim'
+                )
+            }
+        })
         console.log('confirming event with this id:',item.id)
-        let newObject = {
-            id: item.id,
-            event_confirmed: true,
-        };
-        this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
 
     }
 
@@ -72,7 +107,7 @@ class MyProfilePage extends Component {
 
         return (
             <>
-                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
                 <Progress
                     value={this.progressBar()}
                     total='100'
@@ -81,8 +116,8 @@ class MyProfilePage extends Component {
                     color={this.progressBar() > 50 ? 'green' : 'red'}
                 />
                 
-                <Container text className='my_feed'>
-                    <Header as='h1'> {this.props.reduxStore.family.last_name1} Family</Header>
+               
+                    <Header align="center"> {this.props.reduxStore.family.last_name1} Family</Header>
                     <Label>
                         Hours Used: 
                         <Label.Detail>
@@ -94,18 +129,25 @@ class MyProfilePage extends Component {
     <Label.Detail>23</Label.Detail>
 
                     </Label>
-
-
+                <h3 align="center">Feed</h3>
+                <Container align="center" className='my_feed'>
                        {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
                     this.props.reduxStore.notifications.map((item) => {
                         if (item.event_claimed === true && item.event_confirmed === false) {
                        
                         return (
-                            
+                            <>
                             <Card>
+                                    <Feed>
+                                        <Feed.Event>
+                                            <Feed.Content>
                                 {item.claimer_name} is available to help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
                                 <button onClick={() => this.handleConfirm(item)}>CONFIRM</button><button onClick={() => this.handleCancel(item)}>CANCEL</button>
+                                            </Feed.Content>
+                                        </Feed.Event>
+                                    </Feed>
                             </Card>
+                            </>
                         
                         )}
                         else {
@@ -118,23 +160,19 @@ class MyProfilePage extends Component {
 
 
                     {this.props.reduxStore.feedNeed.map((item, i) => (
-                    <div key={i}>
-                        <Feed size='large'>
-                            <Feed.Event>
-                                <Feed.Label />
-                                <Feed.Content>
-                    <Feed.Date content= {<Moment format="MM/DD/YYYY">{item.event_date}</Moment>} />
-                                    <Feed.Summary>
-                                    {item.id === this.props.reduxStore.user.id ? 
-                                    <p>{item.event_time_start} - {item.event_time_end}</p> 
-                                    : 
-                                    <p>The {item.claimer_name} family is sitting for you on {item.event_date} at {item.event_time_start} - {item.event_time_end}.</p> }
-                                    </Feed.Summary>
-    
-                                </Feed.Content>
-                            </Feed.Event>
-                        </Feed>
-                    </div>
+                     <>
+                                    <Card >
+                                <Feed>
+                                    <Feed.Event>
+                                     <Feed.Content>
+                                                <p>The {item.claimer_name} family is sitting for you on {item.event_date} at {item.event_time_start} - {item.event_time_end}.</p>
+                                                <button onClick={() => this.handleCancel(item)}>CANCEL</button>  &nbsp;
+                                        </Feed.Content>
+                                    </Feed.Event>
+                                </Feed>
+                                </Card>
+                            </>
+            
                     ))}
                 </Container>
             </>

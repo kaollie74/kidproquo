@@ -52,7 +52,7 @@ class KidPage extends Component {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes!',
             cancelButtonText: 'No!',
-            reverseButtons: true
+            reverseButtons: false
         }).then((result) => {
             if (result.value) {
                 this.props.dispatch({ type: 'UPDATE_KID_TO_DB', payload: this.state })
@@ -81,7 +81,7 @@ class KidPage extends Component {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes!',
             cancelButtonText: 'No!',
-            reverseButtons: true
+            reverseButtons: false
         }).then((result) => {
             if (result.value) {
                 this.props.history.push('/family-profile')
