@@ -33,6 +33,7 @@ function* updateKid (action) {
   
   try {
     yield axios.put(`kid/update/${action.payload.id}`, action.payload);
+    
     yield put({type: 'FETCH_KIDS', payload: action.payload.user_id});
 
     yield put(Swal.fire({

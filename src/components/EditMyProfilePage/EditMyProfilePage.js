@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Input } from 'semantic-ui-react';
+import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Input, Popup } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
 
 
@@ -47,6 +47,34 @@ class EditMyProfilePage extends Component {
         })
     }
 
+    cancelProfileUpdate = () => {
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Any Changes Will Not Be Saved!",
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!',
+            cancelButtonText: 'No!',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.value) {
+                this.props.history.push('/family-profile')
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                // Swal.fire(
+                //     'Cancelled',
+                //     '',
+                //     'error'
+                // )
+            }
+        })
+
+    }
+
     handleChangeFor = (event, propsName) => {
         this.setState({ [propsName]: event.target.value })
     }
@@ -87,8 +115,8 @@ class EditMyProfilePage extends Component {
     updateFamily = () => {
 
         console.log('this is STATE', this.state)
-   
-          Swal.fire({
+
+        Swal.fire({
             title: 'Are you sure?',
             text: "You want to Submit Changes to Profile!",
             type: 'warning',
@@ -96,34 +124,53 @@ class EditMyProfilePage extends Component {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes!',
             cancelButtonText: 'No!',
-            reverseButtons: true
-          }).then((result) => {
+            reverseButtons: false
+        }).then((result) => {
             if (result.value) {
-              this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
-              this.props.history.push('/family-profile')
+                this.props.dispatch({ type: 'UPDATE_FAMILY', payload: this.state })
+                this.props.history.push('/family-profile')
             } else if (
-              /* Read more about handling dismissals below */
-              result.dismiss === Swal.DismissReason.cancel
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
             ) {
-              Swal.fire(
-                'Cancelled',
-                'Your Changes have not been updated',
-                'error'
-              )
+                Swal.fire(
+                    'Cancelled',
+                    'Your Changes have not been updated',
+                    'error'
+                )
             }
-          })
-
-
-        
+        })
     }
 
     render() {
         console.log('THIS IS STATE', this.state)
         return (
-          
+
             <div className="ui container center aligned" className='formBackground'>
                 <div className='editProfileHeader'>
-                    <h2>Edit Your Profile</h2>
+                    <div className='editProfileHeader'>
+                        <h2>Edit Your Profile</h2>
+                    </div>
+                    <div className='iconsOnEditFam'>
+                        
+                            <Popup
+                                content='Edit Pic'
+                                trigger={<Icon name='pencil alternate' size='small' onClick={this.editFamilyProfile} />}
+
+
+                            />
+                      
+                      
+                            <Popup
+                                content='Add Kid'
+                                trigger={<Icon name='user plus' size='small' onClick={this.addKidModal} />}
+
+                            />
+                       
+                    </div>
+                </div>
+                <div>
+
                 </div>
                 <div className="ui container center aligned" className="card">
                     <Card className="ui container center aligned" >
@@ -135,28 +182,11 @@ class EditMyProfilePage extends Component {
                                 src={this.state.family_image ? this.state.family_image : ''}
                                 alt="img 1"
                             />
-                            <div className='editIcon'>
-                                <a>
-                                    <Icon
-                                        name='pencil alternate'
-                                        size="large"
-                                        onClick={this.editFamilyProfile}
-
-                                    />
-                                    Edit Pic
-                            </a>
-                            </div>
                         </Card.Content>
                     </Card>
-                    <div className='addKidBtn'>
-                            <Button
-                                floated='right'
-                                color='blue'
-                                size='mini'
-                                onClick={this.addKidModal}>
-                                Add Kid
-                             </Button>
-                        </div>
+                    <div //className='addKidBtn'
+                    >
+                    </div>
                 </div>
                 <div className='formInputsBtns'>
                     <Form.Input
@@ -240,14 +270,23 @@ class EditMyProfilePage extends Component {
                                 color='green'
                                 onClick={this.updateFamily}
                                 size='mini'>
-                                Save Changes
-                                </Button>
+                                Submit
+                            </Button>
+                        </div>
+
+                        <div className='saveChangesBtn'>
+                            <Button
+                                color='red'
+                                onClick={this.cancelProfileUpdate}
+                                size='mini'>
+                                Cancel
+                            </Button>
                         </div>
 
                     </div>
                 </div>
-               
-            
+
+
 
                 <div>
                     {/************************************** Edit Profile Pic ************************************************/}

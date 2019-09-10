@@ -3,47 +3,48 @@ import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form } from 'semantic-ui-react';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-import AwesomeSlider from 'react-awesome-slider';
-import 'react-awesome-slider/dist/styles.css';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 
 class FamilyProfilePage extends Component {
+
+    state = {
+        open: false
+    }
+
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.reduxStore.user.id })
+    }
+
+    closeKidModal = () => {
+        this.setState({
+            open: false
+        })
     }
     editFamilyProfile = () => {
 
         this.props.history.push('/edit-my-profile');
     }
 
+    openModal = () => {
+
+        console.log('in openModal')
+        this.setState({
+            open: !this.state.open
+        })
+    }
+
     updateKid = (event, item) => {
-        this.props.dispatch({type: 'UPDATE_KID', payload: item})
+        this.props.dispatch({ type: 'UPDATE_KID', payload: item })
         this.props.history.push('/kid-page')
     }
     render() {
         return (
             <>
-            {/* <div>
-                <CarouselProvider
-                naturalSlideWidth={100}
-                naturalSlideHeight={125}
-                totalSlides={3}
-                dotNumbers={true}
-                >
-                
-                    
-                <Slider>
-                    <Slide index={0}>#1</Slide>
-                    <Slide index={1}>#2</Slide>
-                    <Slide index={2}>#3</Slide>
-                </Slider>
-            <ButtonBack>Back</ButtonBack>
-            <ButtonNext>Next</ButtonNext>
-                    </CarouselProvider>
-            </div> */}
+
                 <div>
                     {/* {JSON.stringify(this.props.reduxStore)} */}
                     <h1 align="center">
@@ -96,8 +97,10 @@ class FamilyProfilePage extends Component {
                                 dots={true}
                             >
                                 <div
-                                    onClick={() => this.handleChangeFor()}
-                                    onKeyDown={() => this.handleChangeFor()}
+                                    // onClick={() => this.handleChangeFor()}
+                                    onClick={this.openModal}
+                                    onKeyDown={this.openModal}
+                                    // onKeyDown={() => this.handleChangeFor()}
                                     role="menuitem"
                                     tabIndex="0"
                                 ></div>
@@ -109,11 +112,20 @@ class FamilyProfilePage extends Component {
                                                 <Card.Content>
                                                     <Image className='ui centered small image' src={item.image} alt="img 1" />
                                                     <Card.Header align="center">{item.first_name}</Card.Header>
-                                                    <Modal 
-                                                    trigger={<Button align="center">{item.first_name}</Button>}>
-                                                        <Modal.Header>{item.first_name} {item.last_name}</Modal.Header>
-                                                        <Modal.Content image>
-                                                            <Image wrapped size='medium' src={item.image} />
+                                                    <Modal
+                                                     trigger={<Button align="center">{item.first_name}</Button>}
+                                                    >
+                                                        <Modal.Header>
+                                                            {item.first_name}
+                                                            {item.last_name}
+                                                        </Modal.Header>
+                                                        <Modal.Content
+                                                            image
+                                                        >
+                                                            <Image
+                                                                wrapped size='medium'
+                                                                src={item.image}
+                                                            />
                                                             <Modal.Description>
                                                                 <h4>Birthdate:</h4>
                                                                 <p>{item.birthdate}</p>
@@ -123,11 +135,11 @@ class FamilyProfilePage extends Component {
                                                                 <p>{item.medication}</p>
                                                             </Modal.Description>
                                                         </Modal.Content>
-                                                        <Button onClick={(event)=> this.updateKid(event, item)}>Edit</Button>
-                                                        <Button>Close</Button>
+                                                        <Button color='green' onClick={(event) => this.updateKid(event, item)}>Edit</Button>
+                                                        <Button color='red' onClick={this.closeKidModal}>Cancel</Button>
                                                     </Modal>
                                                 </Card.Content>
-                                                
+
                                             </Card>
                                         </>
                                     )
@@ -135,6 +147,28 @@ class FamilyProfilePage extends Component {
                             </Coverflow>
                         </div>
                     </Card>
+
+                    <Carousel
+                        showArrows={true} width='50%' height='50%'
+                        autoPlay={true}
+                        stopOnHover={true}
+                        swipeable={true}
+                        infiniteLoop={true}
+                        onClickItem={this.openModal}
+
+                    >
+
+                        {this.props.reduxStore.kid.map(item => (
+                            <div key={item.id}>
+                                <img src={item.image}
+                                />
+
+
+                            </div>
+                        ))}
+
+
+                    </Carousel>
                 </div>
             </>
         )
