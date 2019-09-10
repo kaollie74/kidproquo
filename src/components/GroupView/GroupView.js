@@ -158,7 +158,7 @@ class GroupView extends Component {
                             )
                            
                         }
-                        else if (item.event_claimed === true && item.requester_name !== this.props.reduxStore.family.last_name1)
+                        else if (item.event_claimed === true)
                         {
                             return(
                             <>
