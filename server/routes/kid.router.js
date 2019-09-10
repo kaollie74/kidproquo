@@ -9,7 +9,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     const sqlText = `SELECT kid.first_name, kid.last_name, kid.id, kid.allergies, kid.birthdate, kid.image, kid.medication, kid.notes from "kid"  join
                     "family" on kid.family_id = family.id
                     join "user" on family.user_id = "user".id
-                    where "user".id =$1;`;
+                    where "user".id =$1
+                    ORDER BY "kid"."id";`;
     pool.query(sqlText, [values])
         .then((response) => {
             console.log(response.rows);

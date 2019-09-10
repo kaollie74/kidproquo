@@ -1,0 +1,25 @@
+.kidCard {
+  margin-left: 6vh
+}
+
+.kidCardTitle {
+  padding-bottom: 2vh;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1000px) {
+
+  .grid-container {
+    display: grid
+  }
+
+}
+
+.editProfileBtns {
+  margin-left: 7vh;
+}
+
+.cancelKidBtn {
+  padding-top: 1vh;
+  margin-left: 1vh;
+}
