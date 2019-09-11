@@ -78,11 +78,25 @@ class FamilyProfilePage extends Component {
                 </div>
                 &nbsp;
             <div align="center">
-                    <Card>
+                    <Card className='familyCard'>
                         <Card.Content>
                             <Card.Header> </Card.Header>
-                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : <>no</>} alt="img 1" />
-                            <Icon name='pencil alternate' onClick={this.editFamilyProfile} />
+                            <Image className='ui centered large image'
+                                src={this.props.reduxStore.family.image
+                                    ?
+                                    this.props.reduxStore.family.image
+                                    :
+                                    <>no</>}
+                                alt="img 1"
+                            />
+                            <div>
+                                <Icon
+                                    name='pencil alternate'
+                                    onClick={this.editFamilyProfile}
+
+                                />
+                                Edit Family
+                            </div>
                         </Card.Content>
                     </Card>
                 </div>
@@ -107,13 +121,13 @@ class FamilyProfilePage extends Component {
                         <h1>Meet the Kids</h1>
                     </div>
 
-                    <Grid stackable container centered columns={2} >
+                    <Grid stackable container centered columns={3} >
                         {this.props.reduxStore.kid.map((item, i) => {
 
                             return (
 
                                 <Grid.Column>
-                                    <Card key={item.id} style={{ 'min-height': '350px' }}>
+                                    <Card key={item.id} wrapped ui={false} style={{ 'min-height': '230px' }}>
                                         <Card.Content>
 
                                             <Card.Header className='kidCardTitle'>
