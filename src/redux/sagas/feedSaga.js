@@ -9,6 +9,7 @@ function* feedSaga () {
   yield takeEvery('ADD_REQUEST', addRequest)
   yield takeEvery('CANCEL_REQUEST', cancelRequest)
   yield takeEvery('CANCEL_CONF_REQUEST', cancelConfirmedRequest)
+  
 
 }
 
@@ -99,17 +100,18 @@ function* addRequest (action) {
 }
 
 function* cancelRequest (action) {
+
   try {
     yield axios.delete(`/feed/cancelRequest/${action.payload.id}`)
     console.log('in CANCEL REQ - FEED SAG with:', action.payload);
     yield put({ type: 'FETCH_GROUP', payload: action.payload.group_id})
-    yield put(Swal.fire({
-      position: 'center',
-      type: 'success',
-      title: 'Request Canceled!',
-      showConfirmButton: false,
-      timer: 1500,
-    }))
+    // yield put(Swal.fire({
+    //   position: 'center',
+    //   type: 'success',
+    //   title: 'Request Canceled!',
+    //   showConfirmButton: false,
+    //   timer: 1500,
+    // }))
   }
   catch (error) {
     console.log('Error with CANCELING REQUEST (FEED SAGA)', error);
@@ -129,16 +131,19 @@ function* cancelConfirmedRequest(action) {
         user_id: action.payload.user_id
       }
     })
-    // yield put(Swal.fire({
-    //   position: 'center',
-    //   type: 'success',
-    //   title: 'Request Canceled!',
-    //   showConfirmButton: false,
-    //   timer: 1500,
-    // }))
+    yield put(Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: 'Request Canceled!',
+      showConfirmButton: false,
+      timer: 1500,
+    }))
   }
   catch (error) {
     console.log('Error with CANCELING CONFIRMED REQUEST (FEED SAGA)', error);
   }
 }
+
+
+
 export default feedSaga;
