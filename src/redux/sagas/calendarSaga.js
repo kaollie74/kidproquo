@@ -4,6 +4,7 @@ import axios from 'axios';
 function* calendarSaga () {
 
   yield takeEvery('FETCH_EVENTS', fetchEvents)
+  yield takeEvery('REMOVE_EVENT', removeEvent)
 
 }
 
@@ -19,6 +20,16 @@ function* fetchEvents (action) {
     
   }
 
+}
+
+function* removeEvent(action){
+  try{
+    yield axios.delete(`/feed/cancelRequest/${action.payload.id}`)
+    yield put({type: 'FETCH_EVENTS', payload: action.payload})
+  }
+  catch(error){
+    console.log('Error with removing EVENT from DB (in removeEvent)', error)
+  }
 }
 
 export default calendarSaga;
