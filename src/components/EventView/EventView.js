@@ -261,7 +261,7 @@ class EventView extends Component {
 
   deleteHandleClaim = (event, item) => {
     console.log('this is item', item)
-    this.props.dispatch({type: 'REMOVE_EVENT', payload: item})
+    //this.props.dispatch({type: 'REMOVE_EVENT', payload: item})
   }
 
   openModal = () => {
@@ -417,7 +417,7 @@ class EventView extends Component {
                     {/* <Button className={classes.claimButton} positive icon="plus circle">
                   </Button> */}
                     <br />
-                    {item.requester_id !== this.props.reduxStore.user.id
+                    {item.requester_id !== this.props.reduxStore.family.id
                       ? 
                       <Button
                         style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid red 2px', borderRadius: '3px', backgroundColor: 'red', paddingTop: '-30px' }}
