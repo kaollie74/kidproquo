@@ -5,10 +5,12 @@
 
 .kidformBackground {
   background-color: #8298ca;
+  border: solid;
+  border-radius: 5px;
   margin-top: 2vh;
   margin-left: 3vh;
   width: 50vh;
-  height: 120vh
+  height: 120vh;
 }
 
 .kidFormInputsBtns {
