@@ -176,7 +176,7 @@ render() {
     console.log('THIS IS STATE', this.state)
     return (
 
-        <div className="ui container center aligned" className='formBackground'>
+        <div className="ui container center aligned" className='familyFormBackground'>
             <div className='editProfileHeader'>
                 <div className='editProfileHeader'>
                     <h2>Edit Your Profile</h2>
@@ -219,7 +219,7 @@ render() {
                 >
                 </div>
             </div>
-            <div className='formInputsBtns'>
+            <div className='familyFormInputsBtns'>
                 <Form.Input
                     className='editInputs'
                     placholder='Last Name'

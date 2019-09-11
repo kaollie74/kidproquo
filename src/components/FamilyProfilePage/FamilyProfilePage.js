@@ -118,7 +118,7 @@ class FamilyProfilePage extends Component {
                 &nbsp;
                 <div className='kidCard'>
                     <div className='meetKidsTitle'>
-                        <h1>Meet the Kids</h1>
+                        <h1>Our Kids</h1>
                     </div>
 
                     <Grid stackable container centered columns={3} >

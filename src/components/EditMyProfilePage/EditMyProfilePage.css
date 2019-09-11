@@ -3,10 +3,16 @@
   margin-top: 1vh;
 }
 
-.formBackground {
-  margin: 2vh;
+.familyFormBackground {
+  background-color: #8298ca;
+  margin-top: 2vh;
   margin-left: 3vh;
-  height: 150vh;
+  width: 50vh;
+  height: 155vh
+}
+
+.familyFormInputsBtns {
+  margin-left: 3vh;
 }
 
 h2 {
@@ -36,7 +42,7 @@ h2 {
 
 @media only screen and (min-width: 1000px) {
 
-  .formBackground {
+  .familyFormBackground {
     margin: 2vh;
     margin-left: 37vh;
     height: 125vh;
