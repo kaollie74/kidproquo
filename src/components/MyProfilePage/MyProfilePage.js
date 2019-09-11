@@ -127,30 +127,30 @@ class MyProfilePage extends Component {
                 <Container align="center" className='my_feed'>
                        {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
                     this.props.reduxStore.notifications.map((item) => {
-                        if (item.event_claimed === true && item.event_confirmed === false && item.requester_id === this.props.reduxStore.user.id) {
+                        if (item.claimer_id === this.props.reduxStore.user.id && item.event_confirmed === false) {
                        
                         return (
                             <>
                             <Card background-color="blue">
-                                    <Feed>
+                                    {/* <Feed>
                                         <Feed.Event>
                                             <Feed.Content>
                                 {item.claimer_name} is available to help out the {item.requester_name} on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
                                 <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button><Button basic color='blue' onClick={() => this.handleCancel(item)}>CANCEL</Button>
                                             </Feed.Content>
                                         </Feed.Event>
-                                    </Feed>
+                                    </Feed> */}
                             </Card>
                             </>
                         
                         )}
-                        else if (item.event_claimed === true && item.event_confirmed === true) {
+                        else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === true) {
 
                             return (
                                 <>
                                     <Card>
                                         
-                                    The {item.claimer_name} family will help out the {item.requester_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                    The {item.requester_name} family will help out the {item.claimer_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
                                     <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
                                         
                                     </Card>

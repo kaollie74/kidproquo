@@ -118,7 +118,7 @@ class GroupView extends Component {
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
                         //Renders feed for family needing help
-                        if (item.event_claimed === false && item.requester_id === this.props.reduxStore.user.id && item.offer_needed === false) 
+                        if (item.requester_id === this.props.reduxStore.user.id &&  item.event_claimed === false && item.offer_needed === false) 
                         {
                             return (
                                 <>
@@ -158,45 +158,45 @@ class GroupView extends Component {
                                 </>
                             )
                         }
-                        else if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) 
-                         {
-                            return (
-                                <>
-                                    <Card >
-                                        <Card.Content>
-                                            <Feed>
-                                                <Feed.Event>
-                                                    <Feed.Content>
-                                                        The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                 <></>
+                    //     else if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) 
+                    //      {
+                    //         return (
+                    //             <>
+                    //                 <Card >
+                    //                     <Card.Content>
+                    //                         <Feed>
+                    //                             <Feed.Event>
+                    //                                 <Feed.Content>
+                    //                                     The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                    //              <></>
                                                         
-                                                    </Feed.Content>
-                                                </Feed.Event>
-                                                <Feed.Content className="ui orange label">Needed</Feed.Content>{<Button basic color='blue' onClick={() => this.handleClaim(item)}>CLAIM</Button>}
-                                            </Feed>
-                                        </Card.Content>
-                                    </Card>
-                                </>
-                            )
+                    //                                 </Feed.Content>
+                    //                             </Feed.Event>
+                    //                             <Feed.Content className="ui orange label">Needed</Feed.Content>{<Button basic color='blue' onClick={() => this.handleClaim(item)}>CLAIM</Button>}
+                    //                         </Feed>
+                    //                     </Card.Content>
+                    //                 </Card>
+                    //             </>
+                    //         )
                            
-                        }
-                        else if (item.event_claimed === true)
-                        {
-                            return(
-                            <>
-                                    <Card >
-                                <Feed>
-                                    <Feed.Event>
-                                        <Feed.Label>
-                                        </Feed.Label>
-                                        <Feed.Content>
-                                               The {item.claimer_name} family has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                        </Feed.Content>
-                                    </Feed.Event>
-                                </Feed>
-                                </Card>
-                            </>
-                    )}
+                    //     }
+                    //     else if (item.event_claimed === true)
+                    //     {
+                    //         return(
+                    //         <>
+                    //                 <Card >
+                    //             <Feed>
+                    //                 <Feed.Event>
+                    //                     <Feed.Label>
+                    //                     </Feed.Label>
+                    //                     <Feed.Content>
+                    //                            The {item.claimer_name} family has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                    //                     </Feed.Content>
+                    //                 </Feed.Event>
+                    //             </Feed>
+                    //             </Card>
+                    //         </>
+                    // )}
                     })
                     : <p></p>} 
                
