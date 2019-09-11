@@ -46,14 +46,7 @@ class GroupView extends Component {
         this.props.dispatch({type: 'CANCEL_REQUEST', payload: objectToSend})
     }
     
-    // handleClaim = (item) => {
-    //         let newObject = {
-    //             id: this.props.reduxStore.family.id,
-    //             // claimer_id: this.props.reduxStore.user.id,
-    //             event_claimed: true
-    //         }
-    //         this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject });
-    // }
+
 
     handleClaim = (item) => {
         console.log('in handle Claim', item)
@@ -84,7 +77,20 @@ class GroupView extends Component {
                     claimer_notes: this.state.claimer_notes,
                     group_id: this.props.reduxStore.userGroups[0],
                 }
+
+                let textMessage = {
+                    requester_phone: item.requester_number,
+                    claimer_name: this.props.reduxStore.family.last_name1,
+                    event_date: item.event_date,
+                    event_time_start: item.event_time_start,
+                    event_time_end: item.event_time_end,
+                }
+                console.log('this is the text message object', textMessage)
+
                 this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject })
+                //Trying Twilio
+                this.props.dispatch({ type: 'SEND_TEXT', payload: textMessage });
+
             } else if (response.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
                     'Cancelled Claim'
@@ -101,7 +107,6 @@ class GroupView extends Component {
     
         return (
             <div align="center" >
-                {/* {JSON.stringify(this.props.reduxStore.family)} */}
                 <h1 align="center">
                    Welcome to the {this.props.reduxStore.userGroups && this.props.reduxStore.userGroups.length > 0 ?
                      this.props.reduxStore.userGroups[0].group_name : <p></p>} group!
@@ -113,7 +118,7 @@ class GroupView extends Component {
                         <Button>ADD MEMBERS</Button>
                     </Button.Group>
                 </div>
-                {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
+                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
                 {/* the group reducer actually holds requests relevant to group */}
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
