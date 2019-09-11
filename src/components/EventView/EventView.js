@@ -280,6 +280,7 @@ class EventView extends Component {
   }
 
   render() {
+    console.log('FAMILY REDUCER IN EVENT VIEW:', this.props.reduxStore.family)
     console.log('this is state', this.state)
     console.log('THIS IS THIS.PROPS.DATE:', this.props.date)
     const { classes } = this.props;
