@@ -158,6 +158,20 @@ class MyProfilePage extends Component {
 
                             )
                         }
+                        else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true && item.event_claimed === true) {
+
+                            return (
+                                <>
+                                    <Card>
+
+                                        You are waiting for confirmation to receive help from the {item.requester_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                  <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+
+                                    </Card>
+                                </>
+
+                            )
+                        }
                         else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false && item.event_claimed === true) {
 
                             return (
@@ -165,6 +179,20 @@ class MyProfilePage extends Component {
                                     <Card>
 
                                         You are waiting for confirmation to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                  <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+
+                                    </Card>
+                                </>
+
+                            )
+                        }
+                        else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true && item.event_claimed === false) {
+
+                            return (
+                                <>
+                                    <Card>
+
+                                        You are waiting for some to claim your offer on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
                                   <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
 
                                     </Card>
@@ -186,6 +214,20 @@ class MyProfilePage extends Component {
 
                             )
                         }
+                        else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true) {
+
+                            return (
+                                <>
+                                    <Card>
+
+                                        The {item.claimer_name} family would like to recieve your help on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                   <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button> <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+
+                                    </Card>
+                                </>
+
+                            )
+                        }
                         else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false) {
 
                             return (
@@ -199,14 +241,41 @@ class MyProfilePage extends Component {
                                 </>
 
                             )
+                        } else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === true) {
+
+                            return (
+                                <>
+                                    <Card>
+
+                                        The {item.requester_name} family will help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                        <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+
+                                    </Card>
+                                </>
+
+                            )
                         }
-                        else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === false) {
+                         else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === false) {
 
                             return (
                                 <>
                                     <Card>
 
                                         The {item.claimer_name} family will help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                        <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+
+                                    </Card>
+                                </>
+
+                            )
+                        }
+                        else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === true) {
+
+                            return (
+                                <>
+                                    <Card>
+
+                                        You will help you out the {item.claimer_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
                                         <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
 
                                     </Card>
