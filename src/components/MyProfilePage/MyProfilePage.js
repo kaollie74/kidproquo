@@ -144,15 +144,29 @@ class MyProfilePage extends Component {
                             </>
                         
                         )}
-                        else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === true) {
+                        else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false) {
 
                             return (
                                 <>
                                     <Card>
-                                        
-                                    The {item.requester_name} family will help out the {item.claimer_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                    <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-                                        
+
+                                        The {item.claimer_name} family is available to help you out  on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                   <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button> <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+
+                                    </Card>
+                                </>
+
+                            )
+                        }
+                        else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === false) {
+
+                            return (
+                                <>
+                                    <Card>
+
+                                        The {item.claimer_name} family will help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
+                                        <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+
                                     </Card>
                                 </>
 
