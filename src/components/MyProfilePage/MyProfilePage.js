@@ -127,19 +127,19 @@ class MyProfilePage extends Component {
                 <Container align="center" className='my_feed'>
                        {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
                     this.props.reduxStore.notifications.map((item) => {
-                        if (item.claimer_id === this.props.reduxStore.user.id && item.event_confirmed === false) {
+                        if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === false) {
                        
                         return (
                             <>
                             <Card background-color="blue">
-                                    {/* <Feed>
+                                    <Feed>
                                         <Feed.Event>
                                             <Feed.Content>
-                                {item.claimer_name} is available to help out the {item.requester_name} on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button><Button basic color='blue' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+                                                Your arrangement with the {item.requester_name} family on {item.event_date}is pending... &nbsp;
+                                <Button basic color='blue' onClick={() => this.handleCancel(item)}>CANCEL</Button>
                                             </Feed.Content>
                                         </Feed.Event>
-                                    </Feed> */}
+                                    </Feed>
                             </Card>
                             </>
                         
