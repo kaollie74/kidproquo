@@ -4,7 +4,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-color: rgb(247, 240, 240)
+    background-color: rgb(247, 240, 240);
 }
 .alert {
     background-color: #ff4545;
@@ -30,6 +30,8 @@ input {
   min-width: 100px;
   outline:0;
   cursor: pointer;
+
+  
 }
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #008183;
@@ -75,17 +77,17 @@ input {
 }
 .editInputs {
     padding-top: 1vh;
-    width: 30vh
+    width: 30vh;
 }
 /* .formBackground {
     background-color: #8298ca;
     border-radius: 2%;
     margin-top: 1vh;
     margin-left: 3vh;
-    width: 50vh
-} */
-/* .formInputsBtns{
-    margin-left: 10vh
+    width: 50vh;
+} 
+.formInputsBtns{
+    margin-left: 10vh;
 } */
 .modalBtns {
     display: inline-flex;
@@ -93,7 +95,7 @@ input {
 }
 @media only screen and (min-width: 375px) and (min-height: 667px) {
     .calendar {
-        width: 375px
+        width: 375px;
     }
     .timeAndDatePicker {
     background-color:white;
@@ -108,7 +110,7 @@ input {
     box-shadow: 5px;
     outline: none;
     border: solid 1px white;
-    border-radius: 5px
+    border-radius: 5px;
     }
     .formBackground {
     background-color: #8298ca;
@@ -126,7 +128,7 @@ input {
     }
     .loginInputs {
     padding-top: 1vh;
-    width: 40vh
+    width: 40vh;
     }
 }
 @media only screen and (min-height: 812px) {
@@ -143,7 +145,7 @@ input {
         box-shadow: 5px;
         outline: none;
         border: solid 1px white;
-        border-radius: 5px
+        border-radius: 5px;
         }
 }
 @media only screen and (min-height: 736px) {
@@ -160,7 +162,7 @@ input {
         box-shadow: 5px;
         outline: none;
         border: solid 1px white;
-        border-radius: 5px
+        border-radius: 5px;
     }
 }
 @media only screen and (min-width: 768px) {
@@ -168,15 +170,15 @@ input {
         background-color: #8298ca;
         margin-top: 2vh;
         margin-left: 8vh;
-        width: 60vh
+        width: 60vh;
     }
     .formInputsBtns{
-        margin-left: 10vh
+        margin-left: 10vh;
         
     }
     .editInputs {
         padding-top: 1vh;
-        width: 40vh
+        width: 40vh;
     
     }
     .editProfileBtns {
@@ -188,12 +190,12 @@ input {
         margin: 1vh;
         padding: 1vh;
         text-align: center;
-        font-size: 20px
+        font-size: 20px;
     }
     .calendar {
         margin: 1vh;
         padding: 1vh;
-        width: 1000px
+        width: 1000px;
     }
 }
 @media only screen and (min-width: 1000px) {
@@ -202,7 +204,7 @@ input {
         margin-top: 2vh;
         margin-left: 38vh;
         width: 100vh;
-        height: 132vh
+        height: 132vh;
     }
     .formInputsBtns{
         margin-left: 12vh
@@ -221,7 +223,7 @@ input {
     .calendar {
         margin: 1vh;
         padding: 1vh;
-        width: 1000vh
+        width: 1000vh;
     }
 }
 
