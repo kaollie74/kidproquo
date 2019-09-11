@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Input } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
+import './KidPage.css';
 
 class KidPage extends Component {
 
@@ -49,7 +50,7 @@ class KidPage extends Component {
 
         Swal.fire({
             title: 'Are you sure?',
-            text: `You want to submit changes to ${this.state.first_name}'s profile!`,
+            text: `You want to submit changes to ${this.state.first_name}'s card!`,
             type: 'warning',
             showCancelButton: true,
             cancelButtonColor: '#d33',
@@ -104,19 +105,23 @@ class KidPage extends Component {
 
     render() {
         return (
-            <div className="ui container center aligned" className='formBackground'>
+            <div className="ui container center aligned" className='kidformBackground'>
                 <div className='editProfileHeader'>
                     <h2>Edit {this.state.first_name}</h2>
                 </div>
 
 
                 <div className="ui container center aligned" className="card">
-                    <Card className="ui container center aligned" >
+                    <Card 
+                    className="ui container center aligned" 
+                    style={{'max-height': '250x'}} 
+                    >
                         <Card.Content>
                             <Card.Header></Card.Header>
                             <Image
                                 size='huge'
-                                className="ui fluid image"
+                                className=""
+                                style={{"max-height": '180px'}}
                                 src={this.state.image ? this.state.image : ''}
                                 alt="img 1"
                             />
@@ -136,7 +141,7 @@ class KidPage extends Component {
                         </Card.Content>
                     </Card>
                 </div>
-                <div className='formInputsBtns'>
+                <div className='kidFormInputsBtns'>
                     <Form.Input
                         className='editInputs'
                         placholder='Last Name'

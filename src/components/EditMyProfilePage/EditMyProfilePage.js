@@ -176,7 +176,7 @@ render() {
     console.log('THIS IS STATE', this.state)
     return (
 
-        <div className="ui container center aligned" className='formBackground'>
+        <div className="ui container center aligned" className='familyFormBackground'>
             <div className='editProfileHeader'>
                 <div className='editProfileHeader'>
                     <h2>Edit Your Profile</h2>
@@ -219,10 +219,9 @@ render() {
                 >
                 </div>
             </div>
-            <div className='formInputsBtns'>
+            <div className='familyFormInputsBtns'>
                 <Form.Input
                     className='editInputs'
-                    placholder='Last Name'
                     fluid label='First name 1'
                     value={this.state.family_first_name1}
                     onChange={(event) => this.handleChangeFor(event, 'family_first_name1')}
@@ -365,10 +364,11 @@ render() {
                         <Modal
                             open={this.state.open}
                             onClose={this.state.open}
-                            className='.addKidModal'
+                            style={{'background-color': 'portage', 'border': '1px'}}
                         >
                             <Modal.Header
                                 className="ui container center aligned"
+                                style={{'background-color': 'portage'}}
                             >
                                 <h1>Add Kid</h1>
                             </Modal.Header>
@@ -381,6 +381,7 @@ render() {
                             />
                             <Modal.Content
                                 className="ui container center aligned"
+                                style={{'background-color': 'white'}}
                             >
 
                                 <Form.Field>

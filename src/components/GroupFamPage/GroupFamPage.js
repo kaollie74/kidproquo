@@ -55,7 +55,6 @@ class GroupFamPage extends Component {
         return (
             <>
                 <div>
-                    {/* {JSON.stringify(this.props.reduxStore)} */}
                     <h1 align="center">
                         The {this.props.reduxStore.family.last_name1} Family
                     </h1>
