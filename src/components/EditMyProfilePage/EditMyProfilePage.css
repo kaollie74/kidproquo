@@ -22,7 +22,6 @@ h2 {
 .editProfileHeader {
   margin-bottom: 2vh;
   padding: 1vh;
-
   text-align: center;
   font-size: 50px !important;
 }
@@ -37,7 +36,7 @@ h2 {
 }
 .editProfileBtns {
   margin-top: 2vh;
-  padding-left: 6vh; 
+  padding-left: 9vh; 
 }
 
 @media only screen and (min-width: 1000px) {

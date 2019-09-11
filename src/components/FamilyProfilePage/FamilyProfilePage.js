@@ -117,7 +117,7 @@ class FamilyProfilePage extends Component {
                 </div>
                 &nbsp;
                 <div className='kidCard'>
-                    <div className='meetKidsTitle'>
+                    <div className='ourKidsTitle'>
                         <h1>Our Kids</h1>
                     </div>
 
