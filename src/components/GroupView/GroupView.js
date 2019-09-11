@@ -23,6 +23,7 @@ class GroupView extends Component {
         offer_needed: true,
         claimer_notes: '',
         claimer_id: '',
+        groud_id: '',
     };
 
 
@@ -30,6 +31,19 @@ class GroupView extends Component {
         console.log('view fam item', item)
         this.props.history.push(`/view/${item.user_id}`);
         
+    }
+
+    handleCancel = (item) => {
+        console.log('IN GROUP VIEW / HANDLE CANCEL WITH ITEM:', item)
+        let objectToSend = {
+            event_date: item.event_date,
+            event_time_start: item.event_time_start,
+            event_time_end: item.event_time_end,
+            requester_name: item. requester_name,
+            id: item.id,
+            group_id: this.props.reduxStore.userGroups[0],
+        }
+        this.props.dispatch({type: 'CANCEL_REQUEST', payload: objectToSend})
     }
     
     // handleClaim = (item) => {
@@ -115,7 +129,7 @@ class GroupView extends Component {
                                                 <Feed.Content>
                                                     The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
                                  <></>
-                                                    {<Button basic color='red' onClick={() => this.handleDelete(item)}>Delete</Button>}
+                                                    {<Button basic color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>}
                                                 </Feed.Content>
                                             </Feed.Event>
                                         </Feed>
@@ -144,7 +158,7 @@ class GroupView extends Component {
                             )
                            
                         }
-                        else if (item.event_claimed === true && item.requester_name !== this.props.reduxStore.family.last_name1)
+                        else if (item.event_claimed === true)
                         {
                             return(
                             <>
@@ -178,10 +192,11 @@ class GroupView extends Component {
                     
                     
                         this.props.reduxStore.groupFam.map((item) => {
+                            if(item.user_id !== this.props.reduxStore.user.id){
                             return (
                                 <>
                                     <Card className="car" key={item.id} onClick={() => this.viewFam(item)}>
-                                        <Image wrapped size='medium' src={item.image} />
+                                        <Image wrapped size='medium' src={item.image}  />
                                     <Card.Content>
                                         <Card.Header>{item.last_name1} Family</Card.Header>
                                     </Card.Content>
@@ -189,6 +204,7 @@ class GroupView extends Component {
                                 </>
 
                             )
+                            }
                         })
                     
                     : <p></p>} 

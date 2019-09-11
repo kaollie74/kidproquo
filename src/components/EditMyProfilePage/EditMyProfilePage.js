@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Input, Popup } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
+import './EditMyProfilePage.css';
 
 
 
@@ -413,7 +414,7 @@ class EditMyProfilePage extends Component {
                                         onClick={this.addKidModal}>
                                         Cancel
                                 </Button>
-                                    <Button
+                                <Button
                                         color='blue'
                                         floated='right'
                                         size='mini'

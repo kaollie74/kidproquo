@@ -44,6 +44,9 @@ class KidPage extends Component {
     // Run a dispatch based on a conditional in the Sweet Alert
     // 
     updateKid = () => {
+
+        console.log('this is state', this.state)
+
         Swal.fire({
             title: 'Are you sure?',
             text: `You want to submit changes to ${this.state.first_name}'s profile!`,
@@ -199,7 +202,7 @@ class KidPage extends Component {
                                 </Button>
                         </div>
 
-                        <div className='addKidBtn'>
+                        <div className='cancelKidBtn'>
                             <Button
                                 color='red'
                                 size='mini'
@@ -254,7 +257,7 @@ class KidPage extends Component {
                     </Modal>
                 </div>
                 <div>
-                    {/*************************************** Add Kid Modal ********************************************/}
+                    
                     <div>
         
                     </div>

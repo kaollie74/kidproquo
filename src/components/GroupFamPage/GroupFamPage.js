@@ -2,11 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow';
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form } from 'semantic-ui-react';
+import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Grid } from 'semantic-ui-react';
 
 
 
 class GroupFamPage extends Component {
+
+    state= {
+        open: false
+    }
+
+    closeKidModal = () => {
+        this.setState({
+            open: false
+        })
+    }
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.match.params.id})
@@ -20,6 +30,24 @@ class GroupFamPage extends Component {
 
     handleBack = () => {
         this.props.history.push('/group-view');
+    }
+
+
+    kidModal = (item) => {
+
+        console.log('this is item', item)
+        this.setState({
+            id: item.id,
+            first_name: item.first_name,
+            last_name: item.last_name,
+            allergies: item.allergies,
+            birthdate: item.birthdate,
+            medication: item.medication,
+            image: item.image,
+            notes: item.notes,
+            open: true
+
+        })
     }
 
     render() {
@@ -38,81 +66,73 @@ class GroupFamPage extends Component {
                             <Card.Header> </Card.Header>
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
                             <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image: <>no</> } alt="img 1" />
-                            <Icon name='pencil alternate' onClick={this.editFamilyProfile} />
                         </Card.Content>
                     </Card>
                 </div>
                 &nbsp;
-                <div align="center">
-                    <Card>
-                        <Card.Content>
-                            <Card.Header>Info</Card.Header>
-                            <Card.Description>
-                                {this.props.reduxStore.family.street_address} < br />
-                                {this.props.reduxStore.family.city}  <></>
-                                {this.props.reduxStore.family.state}, <></>
-                                {this.props.reduxStore.family.zip_code}< br />
-                                {this.props.reduxStore.family.phone_number}
-                            </Card.Description>
-                        </Card.Content>
-                    </Card>
-                </div>
-                &nbsp;
-                <div align="center">
-                    <Card>
-                        <h4 align="center">
-                            Kids
-                </h4>
-                        <div>
-                            <Coverflow
-                                width={300}
-                                height={300}
-                                displayQuantityOfSide={1}
-                                navigation={false}
-                                enableHeading={false}
-                                swipeable={true}
-                                enableScroll={true}
-                                clickable={true}
-                                infiniteScroll={false}
-                            >
-                                <div
-                                    onClick={() => this.handleChangeFor()}
-                                    onKeyDown={() => this.handleChangeFor()}
-                                    role="menuitem"
-                                    tabIndex="0"
-                                ></div>
-                                {this.props.reduxStore.kid.map((item, i) => {
-                                    console.log(item)
-                                    return (
-                                        <>
-                                            <Card key={item.id}>
-                                                <Card.Content>
-                                                    <Image className='ui centered small image' src={item.image} alt="img 1" />
-                                                    <Card.Header align="center">{item.first_name}</Card.Header>
-                                                    <Modal trigger={<Button align="center"></Button>}>
-                                                        <Modal.Header>{item.first_name} {item.last_name}</Modal.Header>
-                                                        <Modal.Content image>
-                                                            <Image wrapped size='medium' src={item.image} />
-                                                            <Modal.Description>
-                                                                <h4>Birthdate:</h4>
-                                                                <p>{item.birthdate}</p>
-                                                                <h4>Allergies:</h4>
-                                                                <p>{item.allergies}</p>
-                                                                <h4>Medicine:</h4>
-                                                                <p>{item.medication}</p>
-                                                            </Modal.Description>
-                                                        </Modal.Content>
-                                                    </Modal>
-                                                </Card.Content>
-                                            </Card>
-                                        </>
+                <div className='kidCard'>
+                    <div className='meetKidsTitle'>
+                        <h1>Meet the Kids</h1>
+                    </div>
 
-                                    )
-                                })}
+                    <Grid stackable container centered columns={2} >
+                        {this.props.reduxStore.kid.map((item, i) => {
 
-                            </Coverflow>
+                            return (
+
+                                <Grid.Column>
+                                    <Card key={item.id} style={{ 'min-height': '350px' }}>
+                                        <Card.Content>
+
+                                            <Card.Header className='kidCardTitle'>
+                                                {item.first_name} {item.last_name}
+                                            </Card.Header>
+                                            <Image
+                                                className='ui centered fluid image'
+                                                src={item.image}
+                                                alt="img 1"
+                                                onClick={() => this.kidModal(item)}
+                                            />
+                                        </Card.Content>
+
+                                    </Card>
+                                </Grid.Column>
+                            )
+                        })}
+
+                    </Grid>
+
+                    <Modal
+                        open={this.state.open}
+                        onClose={this.state.open}
+                    >
+                        <Modal.Header align='center'>
+                            <h2>{this.state.first_name} {this.state.last_name}</h2>
+                        </Modal.Header>
+                        <Modal.Content
+                            image
+                        >
+                            <Image
+                                wrapped size='medium'
+                                src={this.state.image}
+                            />
+                            <Modal.Description>
+                                <h4>Birthdate:</h4>
+                                <p>{this.state.birthdate}</p>
+                                <h4>Allergies:</h4>
+                                <p>{this.state.allergies}</p>
+                                <h4>Medicine:</h4>
+                                <p>{this.state.medication}</p>
+                                <h4>Notes:</h4>
+                                <p>{this.state.notes}</p>
+                            </Modal.Description>
+                        </Modal.Content>
+                        <div align='center'>
+                            <Button color='red' onClick={this.closeKidModal}>Cancel</Button>
                         </div>
-                    </Card>
+                    </Modal>
+
+
                 </div>
                 <Button variant="contained" color="primary" onClick={this.handleBack}>Back</Button>
 

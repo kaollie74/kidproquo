@@ -86,6 +86,19 @@ router.post('/addRequest', rejectUnauthenticated, (req,res)=> {
   })
 })
 
+router.delete('/cancelRequest/:id', rejectUnauthenticated, (req, res) => {
+  console.log(req.params.id)
+  const id = req.params.id;
+  const sqlText = `delete from "event" where id = $1;`;
+  pool.query(sqlText, [id])
+    .then((response) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log('Error with DELETING EVENT from DB', error);
+      res.sendStatus(500);
+    })
+})
 
 module.exports = router;
 
