@@ -1,8 +1,6 @@
-
-// Actually named group and holds group feed info
-const groupReducer = (state = {}, action) => {
+const UpdateKidReducer = (state = {}, action) => {
   switch (action.type) {
-    case 'SET_GROUP':
+    case 'UPDATE_KID':
       return action.payload;
     default:
       return state;
@@ -11,4 +9,4 @@ const groupReducer = (state = {}, action) => {
 
 // user will be on the redux state at:
 // state.user
-export default groupReducer;
+export default UpdateKidReducer;
