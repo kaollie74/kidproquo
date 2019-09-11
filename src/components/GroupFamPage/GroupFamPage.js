@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Grid } from 'semantic-ui-react';
+import './GroupFamPage.css';
 
 
 
 class GroupFamPage extends Component {
 
-    state= {
+    state = {
         open: false
     }
 
@@ -19,7 +20,7 @@ class GroupFamPage extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.match.params.id})
+        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
     }
 
@@ -56,7 +57,7 @@ class GroupFamPage extends Component {
                 <div>
                     {/* {JSON.stringify(this.props.reduxStore)} */}
                     <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1}
+                        The {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
@@ -65,7 +66,7 @@ class GroupFamPage extends Component {
                         <Card.Content>
                             <Card.Header> </Card.Header>
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
-                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image: <>no</> } alt="img 1" />
+                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : <>no</>} alt="img 1" />
                         </Card.Content>
                     </Card>
                 </div>
@@ -81,7 +82,7 @@ class GroupFamPage extends Component {
                             return (
 
                                 <Grid.Column>
-                                    <Card key={item.id} style={{ 'min-height': '350px' }}>
+                                    <Card key={item.id} className='kidCard'>
                                         <Card.Content>
 
                                             <Card.Header className='kidCardTitle'>
@@ -134,8 +135,14 @@ class GroupFamPage extends Component {
 
 
                 </div>
-                <Button variant="contained" color="primary" onClick={this.handleBack}>Back</Button>
-
+                <div className='backBtn'>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleBack}>
+                        Back
+                    </Button>
+                </div>
             </>
         )
     }

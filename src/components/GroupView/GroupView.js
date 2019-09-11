@@ -113,11 +113,12 @@ class GroupView extends Component {
                         <Button>ADD MEMBERS</Button>
                     </Button.Group>
                 </div>
-                {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
+                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
                 {/* the group reducer actually holds requests relevant to group */}
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
-                        if (item.event_claimed === false && item.requester_name === this.props.reduxStore.family.last_name1) 
+                        //Renders feed for family needing help
+                        if (item.requester_id === this.props.reduxStore.user.id &&  item.event_claimed === false && item.offer_needed === false) 
                         {
                             return (
                                 <>
@@ -129,6 +130,7 @@ class GroupView extends Component {
                                                 <Feed.Content>
                                                     The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
                                  <></>
+                                                <Feed.Content className="ui orange label">Needed</Feed.Content>
                                                     {<Button basic color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>}
                                                 </Feed.Content>
                                             </Feed.Event>
@@ -136,45 +138,65 @@ class GroupView extends Component {
                                     </Card>
                                 </>
                             )
-                      }
-                        else if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) 
-                         {
+                            // renders feed for familes offering help
+                        } else if (item.event_claimed === false && item.requester_name === this.props.reduxStore.family.last_name1 && item.offer_needed === true) {
                             return (
                                 <>
                                     <Card >
-                                        <Card.Content>
-                                            <Feed>
-                                                <Feed.Event>
-                                                    <Feed.Content>
-                                                        The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                 <></>
-                                                        {<Button basic color='blue' onClick={() => this.handleClaim(item)}>CLAIM</Button>}
-                                                    </Feed.Content>
-                                                </Feed.Event>
-                                            </Feed>
-                                        </Card.Content>
+                                        <Feed>
+                                            <Feed.Event>
+                                                <Feed.Label>
+                                                </Feed.Label>
+                                                <Feed.Content>
+                                                    The {item.requester_name} family is offering help on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                                        </Feed.Content>
+                                            </Feed.Event>
+                                            <Feed.Content className="ui yellow label">Offering</Feed.Content>
+                                            {<Button basic color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>}
+                                        </Feed>
                                     </Card>
                                 </>
                             )
-                           
                         }
-                        else if (item.event_claimed === true)
-                        {
-                            return(
-                            <>
-                                    <Card >
-                                <Feed>
-                                    <Feed.Event>
-                                        <Feed.Label>
-                                        </Feed.Label>
-                                        <Feed.Content>
-                                               The {item.claimer_name} family has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                        </Feed.Content>
-                                    </Feed.Event>
-                                </Feed>
-                                </Card>
-                            </>
-                    )}
+                    //     else if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) 
+                    //      {
+                    //         return (
+                    //             <>
+                    //                 <Card >
+                    //                     <Card.Content>
+                    //                         <Feed>
+                    //                             <Feed.Event>
+                    //                                 <Feed.Content>
+                    //                                     The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                    //              <></>
+                                                        
+                    //                                 </Feed.Content>
+                    //                             </Feed.Event>
+                    //                             <Feed.Content className="ui orange label">Needed</Feed.Content>{<Button basic color='blue' onClick={() => this.handleClaim(item)}>CLAIM</Button>}
+                    //                         </Feed>
+                    //                     </Card.Content>
+                    //                 </Card>
+                    //             </>
+                    //         )
+                           
+                    //     }
+                    //     else if (item.event_claimed === true)
+                    //     {
+                    //         return(
+                    //         <>
+                    //                 <Card >
+                    //             <Feed>
+                    //                 <Feed.Event>
+                    //                     <Feed.Label>
+                    //                     </Feed.Label>
+                    //                     <Feed.Content>
+                    //                            The {item.claimer_name} family has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
+                    //                     </Feed.Content>
+                    //                 </Feed.Event>
+                    //             </Feed>
+                    //             </Card>
+                    //         </>
+                    // )}
                     })
                     : <p></p>} 
                
