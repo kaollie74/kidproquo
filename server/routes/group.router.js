@@ -9,7 +9,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/:id', rejectUnauthenticated,  (req, res) => {
     console.log('in /group with this id:', req.params.id);
     const id = req.params.id;
-    const sqlText = `select "family"."image" as "claimer_image", "family2"."image" as "requester_image", "family2"."last_name1" as "requester_name", "family"."last_name1" as "claimer_name", "event"."id", "event"."event_date", "event"."event_time_start", "event"."event_time_end", "event"."event_claimed"from "event"
+    const sqlText = `select "event"."group_id", "event"."total_hours", "event"."offer_needed", "event"."claimer_id", "event"."requester_id", "family"."image" as "claimer_image", "family2"."image" as "requester_image", "family2"."last_name1" as "requester_name", "family"."last_name1" as "claimer_name", "event"."id", "event"."event_date", "event"."event_time_start", "event"."event_time_end", "event"."event_claimed"from "event"
                     left join "family" on
                     "event"."claimer_id" = "family"."id"
                     left join "family" as "family2" on
@@ -29,10 +29,10 @@ router.get('/:id', rejectUnauthenticated,  (req, res) => {
 router.get('/notifications/:id', rejectUnauthenticated,  (req, res) => {
     console.log('in notiofication req.params.id', req.params.id,)
     const id = req.params.id;
-    const sqlText =`select "family2"."user_id" as "requester_id", "family"."image" as "claimer_image", 
+    const sqlText =`select "family2"."id" as "requester_id", "event"."claimer_id", "family"."image" as "claimer_image", 
     "family2"."image" as "requester_image", "family2"."last_name1" as "requester_name", "family"."last_name1" as "claimer_name", 
     "event"."id", "event"."event_date", "event"."event_time_start", "event"."offer_needed",
-    "event"."event_time_end", "event"."event_claimed", "event"."event_confirmed" from "event"
+    "event"."event_time_end", "event"."event_claimed", "event"."event_confirmed", "event"."group_id", "event"."total_hours" from "event"
     left join "family" on "event"."claimer_id" = "family"."id" 
     left join "family" as "family2" on "event"."requester_id" = "family2"."id" where "event"."group_id"=$1 order by id desc;`;
 
