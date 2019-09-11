@@ -192,6 +192,7 @@ class GroupView extends Component {
                     
                     
                         this.props.reduxStore.groupFam.map((item) => {
+                            if(item.user_id !== this.props.reduxStore.user.id){
                             return (
                                 <>
                                     <Card className="car" key={item.id} onClick={() => this.viewFam(item)}>
@@ -203,6 +204,7 @@ class GroupView extends Component {
                                 </>
 
                             )
+                            }
                         })
                     
                     : <p></p>} 

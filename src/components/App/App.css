@@ -4,7 +4,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
-    background-color: #fa8072;
+    background-color: rgb(247, 240, 240)
 }
 .alert {
     background-color: #ff4545;
@@ -61,12 +61,12 @@ input {
     display: inline-flex;
     padding: 2vh;
 }
-.editProfileHeader {
+/* .editProfileHeader {
     margin: 1vh;
     padding: 1vh;
     text-align: center;
     font-size: 50px !important;
-}
+} */
  .card{
     padding: 2vh;
 }
@@ -205,7 +205,7 @@ input {
         height: 132vh
     }
     .formInputsBtns{
-        margin-left: 15vh
+        margin-left: 12vh
     
     }
     .editInputs {
