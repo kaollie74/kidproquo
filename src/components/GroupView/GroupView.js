@@ -131,15 +131,19 @@ class GroupView extends Component {
                                 <>
                                     <Card >
                                         <Feed>
-                                            <Feed.Event>
-                                                <Feed.Label>
-                                                </Feed.Label>
+                                            <Feed.Label>
+                                                    <a style={{fontWeight: 'bold'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label>
+                                            <Feed.Event style={{display: 'inline-block'}}>
+                                            
                                                 <Feed.Content>
-                                                    The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                 <></>
-                                                <Feed.Content className="ui orange label">Needed</Feed.Content>
+                                                    {item.event_time_start} - {item.event_time_end}
+
+                                                    </Feed.Content>
+                                                    <br/>
+                                                <Feed.Content className="ui orange label" style={{display: 'inline', height: '36px'}}>Needed</Feed.Content>
                                                     {<Button basic color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>}
-                                                </Feed.Content>
+                                                
                                             </Feed.Event>
                                         </Feed>
                                     </Card>
