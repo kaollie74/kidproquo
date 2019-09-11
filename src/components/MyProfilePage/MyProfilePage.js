@@ -13,37 +13,105 @@ class MyProfilePage extends Component {
     state = {
         color: '',
         total: '',
-        visible: false
+        visible: false,
+        minutesUsed: '',
+        minutesGained: '',
     }
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_GROUP_NOTIFICATIONS',
          payload: {group_id: this.props.reduxStore.userGroups[0],
                     user_id: this. props.reduxStore.user.id} });
-
     }
     
-   
-
-    progressBar = () => {
-        let feedNeed= this.props.reduxStore.feedNeed;
-        let needHours = 0
-        let offeredHours = 0
-        for(let hour of feedNeed){
-            // console.log(`this is hour, ${hour.needed_total_hours}` )
-            if(hour === 'hour.needed_total_hours'){
-                needHours += Number(hour.needed_total_hours)
-            }
-            if (hour.offered_totalhours) {
-                offeredHours += Number(hour.offered_total_hours)
-            }
-        }
-        // console.log(needHours)
-        // console.log(offeredHours)
-        let total = ( needHours - offeredHours );
-        // console.log('total', total)
-        return total;
+    handleEquityHoursUsedOne = () => {
+        let array = this.props.reduxStore.notifications;
+        console.log('IN HANDLE EQUITY 1 WITH:', array);
+        let minutesUsed = 0;
+        let minutesGained = 0;
+        for (let item of array ){
+            if (this.props.reduxStore.family.id === item.requester_id && item.offer_needed === false && item.event_confirmed === true){
+                minutesUsed += Number(item.total_hours);
+                console.log(item)
+                console.log('IN FIRST LOOP WITH:', minutesUsed)
+                this.setState({
+                    minutesUsed: minutesUsed
+                })
+                // return minutesUsed;
+            }}
+        this.handleEquityHoursUsedTwo();
     }
+    
+    handleEquityHoursUsedTwo = () => {
+        let array = this.props.reduxStore.notifications;
+        console.log('IN HANDLE EQUITY 2 WITH:', array);
+        let minutesUsed = this.state.minutesUsed;
+        let minutesGained = this.state.minutesGained;
+        for (let item of array) {
+            if (this.props.reduxStore.family.id === item.claimer_id && item.offer_needed === true && item.event_confirmed === true){
+                minutesUsed += Number(item.total_hours);
+                console.log(item)
+                console.log(minutesUsed)
+                this.setState({
+                    minutesUsed: minutesUsed
+                })
+            }}
+        this.handleEquityHoursGainedOne();
+    }
+
+    handleEquityHoursGainedOne = () => {
+        let array = this.props.reduxStore.notifications;
+        console.log('IN HANDLE EQUITY 3 WITH:', array);
+        let minutesUsed = this.state.minutesUsed;
+        let minutesGained = this.state.minutesGained;
+        for (let item of array) {
+            if (this.props.reduxStore.family.id === item.requester_id && item.offer_needed === true && item.event_confirmed === true){
+                minutesGained += Number(item.total_hours);
+                console.log(item)
+                console.log(minutesGained)
+                this.setState({
+                    minutesGained: minutesGained
+                })
+            }}
+        this.handleEquityHoursGainedTwo();
+    }
+
+    handleEquityHoursGainedTwo = () => {
+        let array = this.props.reduxStore.notifications;
+        console.log('IN HANDLE EQUITY 4 WITH:', array);
+        let minutesUsed = this.state.minutesUsed;
+        let minutesGained = this.state.minutesGained;
+        for (let item of array) {
+            if (this.props.reduxStore.family.id === item.claimer_id && item.offer_needed === false && item.event_confirmed === true){
+                    minutesGained += Number(item.total_hours);
+                    console.log(item)
+                    console.log(minutesGained)
+                    this.setState({
+                        minutesGained: minutesGained
+                    })
+                }}
+    }
+
+
+    // progressBar = () => {
+    //     let feedNeed= this.props.reduxStore.feedNeed;
+    //     let needHours = 0
+    //     let offeredHours = 0
+    //     for(let hour of feedNeed){
+    //         // console.log(`this is hour, ${hour.needed_total_hours}` )
+    //         if(hour === 'hour.needed_total_hours'){
+    //             needHours += Number(hour.needed_total_hours)
+    //         }
+    //         if (hour.offered_totalhours) {
+    //             offeredHours += Number(hour.offered_total_hours)
+    //         }
+    //     }
+    //     // console.log(needHours)
+    //     // console.log(offeredHours)
+    //     let total = ( needHours - offeredHours );
+    //     // console.log('total', total)
+    //     return total;
+    // }
 
     handleConfirm = (item) => {
         Swal.fire({
@@ -76,7 +144,6 @@ class MyProfilePage extends Component {
             }
         })
         console.log('confirming event with this id:',item.id)
-
     }
 
     handleCancel = (item) => {
@@ -98,18 +165,14 @@ class MyProfilePage extends Component {
 
     render() {
 
-        console.log('this is rendering')
+        console.log('this is STATE IN MY PROFILE PAGE VIEW:', this.state)
                     return (
             <>
                 <pre>{JSON.stringify(this.props.reduxStore.notifications, null, 2)}</pre>
-                <Progress
-                    value={this.progressBar()}
-                    total='100'
-                    progress='ratio'
-                    label='Hours'
-                    color={this.progressBar() > 50 ? 'green' : 'red'}
-                />
-                
+                {/* <Progress
+                    value={this.handleEquity()}
+                /> */}
+                <Button onClick={()=> this.handleEquityHoursUsedOne()}>EQUITY</Button>
                
                     <Header align="center"> {this.props.reduxStore.family.last_name1} Family</Header>
                     <Label>
@@ -123,161 +186,291 @@ class MyProfilePage extends Component {
     <Label.Detail>23</Label.Detail>
 
                     </Label>
-                <h3 align="center">Feed</h3>
+                
                 <Container align="center" className='my_feed'>
+                    <h3 align="center">CLAIMED REQUESTS</h3>
                        {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
+                
                     this.props.reduxStore.notifications.map((item) => {
+                    // -------------------------------------------------- USER/FAMILY CLAIMED AN EVENT ---------------------------------------------------------------
+
+                        // ------------------  NOT CONFIRMED ---------------------------
+
+                        // care is NEEDED
                         if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false) {
-                       
                         return (
                             <>
-                            <Card background-color="blue">
-                                    <Feed>
-                                        <Feed.Event>
-                                            <Feed.Content>
-                                                Your arrangement with the {item.requester_name} family on {item.event_date}is pending... &nbsp;
-                                <Button basic color='blue' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-                                            </Feed.Content>
-                                        </Feed.Event>
-                                    </Feed>
+                            <Card>
+                                    <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
+                                    <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold'}}>Needed</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                               
+                                                </Feed.Event>
+                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING CONFIRMATION</p>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            </Feed>
                             </Card>
                             </>
                         
-                            )
-                        } else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === false && item.event_claimed === true) {
-
-                            return (
-                                <>
-                                    <Card>
-
-                                        You will help the {item.requester_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                  <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
-                                    </Card>
-                                </>
-
-                            )
-                        }
+                            )                        
+                        } 
+                        // care is OFFERED
                         else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true && item.event_claimed === true) {
 
                             return (
                                 <>
                                     <Card>
-
-                                        You are waiting for confirmation to receive help from the {item.requester_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                  <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING CONFIRMATION</p>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                        </Feed>
                                     </Card>
                                 </>
 
                             )
                         }
-                        else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false && item.event_claimed === true) {
+                        // ----------------- CONFIRMED ------------------------
+
+                        // care is NEEDED
+                        else if
+                        (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === false && item.event_claimed === true) {
+                            return (
+                                <>
+                                    <Card>
+                                    <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
+                                    <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold'}}>Needed</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                               
+                                                </Feed.Event>
+                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            </Feed>
+                                    </Card>
+                                </>
+
+                            )
+                        }
+                        // care is OFFERED
+                        else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === true) {
 
                             return (
                                 <>
                                     <Card>
-
-                                        You are waiting for confirmation to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                  <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                        </Feed>
 
                                     </Card>
                                 </>
 
                             )
-                        }
-                        else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true && item.event_claimed === false) {
+                        }})
+                        : <p></p>}
+                        <hr style={{backgroundColor: '#8298ca', borderRadius: '5px', height: '5px', border: 'none'}} />
+                         <h3 align="center">YOUR REQUESTS</h3>
+                         {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
+                
+                            this.props.reduxStore.notifications.map((item) => {
+                    // -------------------------------------------------- USER/FAMILY REQUESTED AN EVENT ---------------------------------------------------------------
+                        // ------------------ NOT CLAIMED / NOT CONFIRMED ---------------------------
+
+                        // care is NEEDED
+                         if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true && item.event_claimed === false) {
 
                             return (
                                 <>
                                     <Card>
-
-                                        You are waiting for some to claim your offer on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                  <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
+                                    <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
+                                    <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold'}}>Needed</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                               
+                                                </Feed.Event>
+                                                 <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            </Feed>
                                     </Card>
                                 </>
 
                             )
                         }
+                        // care is OFFERED
                         else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false && item.event_claimed === false) {
 
                             return (
                                 <>
                                     <Card>
-
-                                       You are waiting for help on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                  <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                        </Feed>
                                     </Card>
                                 </>
 
                             )
                         }
+                        // ------------------ CLAIMED / NOT CONFIRMED ---------------------------
+
+                        // care is OFFERED
                         else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true) {
 
                             return (
                                 <>
                                     <Card>
-
-                                        The {item.claimer_name} family would like to recieve your help on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                   <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button> <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                <Button style={{padding: '10px', marginBottom: '10px'}} color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                        </Feed>
                                     </Card>
                                 </>
 
                             )
                         }
+                        // care is NEEDED
                         else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false) {
 
                             return (
                                 <>
                                     <Card>
-
-                                        The {item.claimer_name} family is available to help you out  on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                   <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button> <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                <Button style={{padding: '10px', marginBottom: '10px'}} color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                        </Feed>
                                     </Card>
                                 </>
 
                             )
-                        } else if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === true) {
+                        } 
+                        
+                        // ---------------------- CLAIMED AND CONFIRMED -------------------
 
-                            return (
-                                <>
-                                    <Card>
-
-                                        The {item.requester_name} family will help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                        <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
-                                    </Card>
-                                </>
-
-                            )
-                        }
+                        // care is NEEDED
                          else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === false) {
 
                             return (
                                 <>
                                     <Card>
-
-                                        The {item.claimer_name} family will help you out on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                        <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                        </Feed>
                                     </Card>
                                 </>
 
                             )
                         }
+                        // care is OFFERED 
                         else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === true) {
 
                             return (
                                 <>
                                     <Card>
-
-                                        You will help you out the {item.claimer_name} family on {item.event_date} from {item.event_time_start} to {item.event_time_end}! &nbsp;
-                                        <Button basic color='red' onClick={() => this.handleCancel(item)}>CANCEL</Button>
-
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                        </Feed>
                                     </Card>
                                 </>
 
