@@ -130,21 +130,21 @@ class GroupView extends Component {
                             return (
                                 <>
                                     <Card >
-                                        <Feed>
-                                            <Feed.Label>
+                                        <Feed style={{borderRight: 'solid orange 3px', borderBottom: 'solid orange 3px', borderRadius: '5px'}}>
+                                        <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
                                                     <a style={{fontWeight: 'bold'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label>
-                                            <Feed.Event style={{display: 'inline-block'}}>
-                                            
-                                                <Feed.Content>
-                                                    {item.event_time_start} - {item.event_time_end}
-
-                                                    </Feed.Content>
-                                                    <br/>
-                                                <Feed.Content className="ui orange label" style={{display: 'inline', height: '36px'}}>Needed</Feed.Content>
-                                                    {<Button basic color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>}
-                                                
-                                            </Feed.Event>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '15px', marginRight: '-5px', width: '65px', textAlign: 'center', color: 'orange'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                           
                                         </Feed>
                                     </Card>
                                 </>
