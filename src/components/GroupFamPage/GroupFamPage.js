@@ -55,7 +55,7 @@ class GroupFamPage extends Component {
         return (
             <>
                 <div>
-                    <h1 align="center">
+                    <h1 className='headerTitleFamily'>
                         The {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
