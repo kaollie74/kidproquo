@@ -7,7 +7,8 @@ import HamNav from './HamNav';
 const Nav = (props) => (
 
   <div className="nav">
-    <HamNav />
+    
+    {props.user.id ? <HamNav /> : ''}
     <Link to="/my-profile-page">
       <h2 className="nav-title">KidProQuo</h2>
     </Link>
