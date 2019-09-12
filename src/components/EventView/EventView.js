@@ -261,7 +261,7 @@ class EventView extends Component {
 
   deleteHandleClaim = (event, item) => {
     console.log('this is item', item)
-    //this.props.dispatch({type: 'REMOVE_EVENT', payload: item})
+    this.props.dispatch({type: 'REMOVE_EVENT', payload: item})
   }
 
   openModal = () => {
