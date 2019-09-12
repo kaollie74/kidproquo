@@ -7,6 +7,10 @@ function* feedSaga () {
   yield takeEvery('CLAIM_EVENT', claimEvent)
   yield takeEvery('CONFIRM_EVENT', confirmEvent)
   yield takeEvery('ADD_REQUEST', addRequest)
+  yield takeEvery('CANCEL_REQUEST', cancelRequest)
+  yield takeEvery('CANCEL_CONF_REQUEST', cancelConfirmedRequest)
+  yield takeEvery('FETCH_HOURS_USED', fetchHoursUsed)
+  yield takeEvery('FETCH_HOURS_GAINED', fetchHoursGained)
 }
 
 function* getYourFeed () {
@@ -55,18 +59,20 @@ function* confirmEvent(action) {
   console.log('in confirm event with', action.payload)
   try {
     yield axios.put(`/feed/updateConfirm/${action.payload.id}`, action.payload)
-    let event_date = {
-      event_date: action.payload.event_date
-    }
+    // let event_date = {
+    //   event_date: action.payload.event_date
+    // }
     yield put({
       type: 'FETCH_GROUP_NOTIFICATIONS',
       payload: {
-        group_id: this.props.reduxStore.userGroups[0],
-        user_id: this.props.reduxStore.user.id
+        group_id: {
+          id: action.payload.group_id.id
+        },
+        user_id: action.payload.user_id
       }
     })
-    console.log('this is action.payload.event_date', action.payload.event_date);
-    yield put({ type: 'FETCH_EVENTS', payload: event_date })
+    // console.log('this is action.payload.event_date', action.payload.event_date);
+    // yield put({ type: 'FETCH_EVENTS', payload: event_date })
 
   }
   catch (error) {
@@ -90,6 +96,75 @@ function* addRequest (action) {
   }
   catch(error) {
     console.log('Error with adding request to the DB', error);
+  }
+}
+
+function* cancelRequest (action) {
+
+  try {
+    yield axios.delete(`/feed/cancelRequest/${action.payload.id}`)
+    console.log('in CANCEL REQ - FEED SAG with:', action.payload);
+    yield put({ type: 'FETCH_GROUP', payload: action.payload.group_id})
+    // yield put(Swal.fire({
+    //   position: 'center',
+    //   type: 'success',
+    //   title: 'Request Canceled!',
+    //   showConfirmButton: false,
+    //   timer: 1500,
+    // }))
+  }
+  catch (error) {
+    console.log('Error with CANCELING REQUEST (FEED SAGA)', error);
+  }
+}
+
+function* cancelConfirmedRequest(action) {
+  try {
+    yield axios.delete(`/feed/cancelRequest/${action.payload.id}`)
+    console.log('in CANCEL CONFIRMED SAG with:', action.payload);
+    yield put({
+      type: 'FETCH_GROUP_NOTIFICATIONS',
+      payload: {
+        group_id: {
+          id: action.payload.group_id.id
+        },
+        user_id: action.payload.user_id
+      }
+    })
+    yield put(Swal.fire({
+      position: 'center',
+      type: 'success',
+      title: 'Request Canceled!',
+      showConfirmButton: false,
+      timer: 1500,
+    }))
+  }
+  catch (error) {
+    console.log('Error with CANCELING CONFIRMED REQUEST (FEED SAGA)', error);
+  }
+}
+
+function* fetchHoursUsed (action) {
+  try {
+    const response = yield axios.get(`/feed/hoursUsed/${action.payload}`);
+    yield put ({type: 'SET_HOURS_USED', payload: response.data});
+    console.log('in fetch hours used, back from server with:', response.data)
+  }
+  catch(error) {
+    console.log('Error with getting your hours used from Server/DB', error);
+    
+  }
+}
+
+function* fetchHoursGained (action) {
+  try {
+    const response = yield axios.get(`/feed/hoursGained/${action.payload}`);
+    yield put ({type: 'SET_HOURS_GAINED', payload: response.data});
+    console.log('in fetch hours gained, back from server with:', response.data)   
+  }
+  catch(error) {
+    console.log('Error with getting your hours gained from Server/DB', error);
+    
   }
 }
 

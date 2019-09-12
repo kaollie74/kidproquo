@@ -1,0 +1,20 @@
+.loginForm {
+  background-color: #dbd5d5;
+  width: 55%;
+  height: 300px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 2px;
+}
+
+.loginFormBackground {
+  height: 40vh;
+}
+
+.loginPageInputs {
+  padding-right: 30px;
+}
+
+.newLink-button {
+  align-content: center;
+}

@@ -23,6 +23,7 @@ class GroupView extends Component {
         offer_needed: true,
         claimer_notes: '',
         claimer_id: '',
+        groud_id: '',
     };
 
 
@@ -30,6 +31,19 @@ class GroupView extends Component {
         console.log('view fam item', item)
         this.props.history.push(`/view/${item.user_id}`);
         
+    }
+
+    handleCancel = (item) => {
+        console.log('IN GROUP VIEW / HANDLE CANCEL WITH ITEM:', item)
+        let objectToSend = {
+            event_date: item.event_date,
+            event_time_start: item.event_time_start,
+            event_time_end: item.event_time_end,
+            requester_name: item. requester_name,
+            id: item.id,
+            group_id: this.props.reduxStore.userGroups[0],
+        }
+        this.props.dispatch({type: 'CANCEL_REQUEST', payload: objectToSend})
     }
     
     // handleClaim = (item) => {
@@ -103,62 +117,121 @@ class GroupView extends Component {
                 {/* the group reducer actually holds requests relevant to group */}
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
-                        if (item.event_claimed === false && item.requester_name === this.props.reduxStore.family.last_name1) 
+                        // if the group page name matches the user's family group page name
+                        // AND the event requester id matches the user's family id
+                        // AND the event isn't claimed yet 
+                        // AND care is needed
+                        if (item.group_id === this.props.reduxStore.family.group_id
+                            && item.requester_id === this.props.reduxStore.family.id
+                            && item.event_claimed === false
+                            && item.offer_needed === false
+                             ) 
                         {
                             return (
                                 <>
                                     <Card >
-                                        <Feed>
-                                            <Feed.Event>
-                                                <Feed.Label>
-                                                </Feed.Label>
-                                                <Feed.Content>
-                                                    The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                 <></>
-                                                    {<Button basic color='red' onClick={() => this.handleDelete(item)}>Delete</Button>}
+                                        <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
+                                        <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold'}}>Needed</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
                                                 </Feed.Content>
-                                            </Feed.Event>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                           
                                         </Feed>
                                     </Card>
                                 </>
                             )
-                      }
-                        else if (item.event_claimed === false && item.requester_name !== this.props.reduxStore.family.last_name1) 
+                        // if the group page name matches the user's family group page name
+                        // AND the event requester id matches the user's family id
+                        // AND the event isn't claimed yet 
+                        // AND care is offered
+                        } else if (item.group_id === this.props.reduxStore.family.group_id
+                            && item.requester_id === this.props.reduxStore.family.id 
+                            &&  item.event_claimed === false 
+                            && item.offer_needed === true) {
+                            return (
+                                <>
+                                    <Card >
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                        </Feed>
+                                    </Card>
+                                </>
+                            )
+                        }
+                        else if (item.group_id === this.props.reduxStore.family.group_id
+                            && item.requester_id != this.props.reduxStore.family.id
+                            && item.event_claimed === false
+                            && item.offer_needed === false
+                            ) 
                          {
                             return (
                                 <>
                                     <Card >
-                                        <Card.Content>
-                                            <Feed>
-                                                <Feed.Event>
-                                                    <Feed.Content>
-                                                        The {item.requester_name} family needs a sitter on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                 <></>
-                                                        {<Button basic color='blue' onClick={() => this.handleClaim(item)}>CLAIM</Button>}
-                                                    </Feed.Content>
+                                        <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
+                                        <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold'}}>Needed</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
                                                 </Feed.Event>
-                                            </Feed>
-                                        </Card.Content>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='green' onClick={() => this.handleClaim(item)}>CLAIM</Button>} 
+                                           
+                                        </Feed>
                                     </Card>
                                 </>
                             )
                            
                         }
-                        else if (item.event_claimed === true && item.requester_name !== this.props.reduxStore.family.last_name1)
+                        else if (item.group_id === this.props.reduxStore.family.group_id
+                            && item.requester_id != this.props.reduxStore.family.id
+                            && item.event_claimed === false
+                            && item.offer_needed === true
+                            )
                         {
                             return(
                             <>
-                                    <Card >
-                                <Feed>
-                                    <Feed.Event>
-                                        <Feed.Label>
-                                        </Feed.Label>
-                                        <Feed.Content>
-                                               The {item.claimer_name} family has agreed to help the {item.requester_name} family on {item.event_date} from {item.event_time_start} - {item.event_time_end}. &nbsp;
-                                        </Feed.Content>
-                                    </Feed.Event>
-                                </Feed>
-                                </Card>
+                                     <Card >
+                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
+                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                            </Feed.Label></Feed.Content>
+                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
+                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
+                                                <Feed.Content style={{float: 'right'}}>
+                                                    from {item.event_time_start} - {item.event_time_end}
+                                                </Feed.Content>
+                                                    <br/> 
+                                                </Feed.Event>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='green' onClick={() => this.handleClaim(item)}>CLAIM</Button>} 
+                                        </Feed>
+                                    </Card>
                             </>
                     )}
                     })
@@ -166,7 +239,7 @@ class GroupView extends Component {
                
                <h3>Calendar</h3>
                 <div>
-                    <Button onClick={(event) => this.seeCalendar()} icon labelPosition='right'>
+                    <Button color='blue' onClick={(event) => this.seeCalendar()} icon labelPosition='right'>
                         View Calendar
       <Icon name='calendar' />
                     </Button>
@@ -178,10 +251,11 @@ class GroupView extends Component {
                     
                     
                         this.props.reduxStore.groupFam.map((item) => {
+                            if(item.user_id !== this.props.reduxStore.user.id){
                             return (
                                 <>
                                     <Card className="car" key={item.id} onClick={() => this.viewFam(item)}>
-                                        <Image wrapped size='medium' src={item.image} />
+                                        <Image wrapped size='medium' src={item.image}  />
                                     <Card.Content>
                                         <Card.Header>{item.last_name1} Family</Card.Header>
                                     </Card.Content>
@@ -189,6 +263,7 @@ class GroupView extends Component {
                                 </>
 
                             )
+                            }
                         })
                     
                     : <p></p>} 

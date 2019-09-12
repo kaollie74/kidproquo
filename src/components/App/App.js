@@ -9,7 +9,6 @@ import {
 import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
-import HamNav from '../Nav/HamNav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -48,7 +47,7 @@ class App extends Component {
       <Router>
         <div>
           <Nav />
-          <HamNav />
+          
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/my-profile-page" />

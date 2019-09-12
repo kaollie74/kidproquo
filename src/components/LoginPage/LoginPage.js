@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import '../App/App.css';
+import './LoginPage.css';
 
 class LoginPage extends Component {
   state = {
@@ -33,7 +33,7 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div className="formBackground">
+      <div className="loginFormBackground">
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
@@ -42,9 +42,9 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
+        <form className="loginForm" onSubmit={this.login}>
           <h1>Login</h1>
-          <div className="loginInputs">
+          <div className="loginPageInputs">
             <label htmlFor="username">
               Username:
               <input
@@ -73,11 +73,12 @@ class LoginPage extends Component {
             />
           </div>
         </form>
+       
         <center>
           <Link
             to="/register"
             type="button"
-            className="link-button"
+            className="newLink-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Register </Link>

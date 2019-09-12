@@ -1,0 +1,58 @@
+
+.addKidIcon {
+  margin-top: 1vh;
+}
+
+.familyFormBackground {
+  background-color: #8298ca;
+  margin-top: 2vh;
+  margin-left: 3vh;
+  width: 50vh;
+  height: 155vh
+}
+
+.familyFormInputsBtns {
+  margin-left: 3vh;
+}
+
+h2 {
+  font-size: 36px
+}
+
+.editProfileHeader {
+  margin-bottom: 2vh;
+  padding: 1vh;
+  text-align: center;
+  font-size: 50px !important;
+}
+
+.iconsOnEditFamForm {
+  display: inline-flex;
+}
+
+.editIcon {
+  margin-right: 5vh;
+  
+}
+.editProfileBtns {
+  margin-top: 2vh;
+  padding-left: 9vh; 
+}
+
+@media only screen and (min-width: 1000px) {
+
+  .familyFormBackground {
+    margin: 2vh;
+    margin-left: 37vh;
+    height: 125vh;
+  }
+
+  .cancelSubmitKidModalBtn {
+    padding-right: 1vh;
+  }
+
+
+
+}
+
+
