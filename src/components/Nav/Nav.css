@@ -5,13 +5,17 @@
     padding-right: 5vh;
     display: inline-block;
     color: #f2f2f2;
-    padding-left: 10px;
-    
+    /* padding-left: 10px; */
+    float: right;
+    margin-left: 0px;
+    margin-right: 20px
 }
 
 .nav {
   overflow: hidden;
   background-color: #8298ca;
+  display: inline-block;
+  width: 100%;
 }
 
 .nav-link {
