@@ -103,19 +103,21 @@ class GroupView extends Component {
         return (
             <div align='center' >
                 {/* {JSON.stringify(this.props.reduxStore.family)} */}
-                <h1>
+                <h1 style={{marginBottom: '0px'}}>
                     Welcome to the {this.props.reduxStore.userGroups && this.props.reduxStore.userGroups.length > 0 ?
                         this.props.reduxStore.userGroups[0].group_name : <p></p>} group!
                 </h1>
-                <div>
+                {/* <div>
                     <Button.Group size='small'>
                         <Button>EDIT</Button>
                         <Button.Or />
                         <Button>ADD MEMBERS</Button>
                     </Button.Group>
-                </div>
+                </div> */}
                 {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
                 {/* the group reducer actually holds requests relevant to group */}
+                <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '0px', marginBottom: '20px'}} />
+                <h3 style={{textAlign: 'center'}}> Requests </h3>
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
                         // if the group page name matches the user's family group page name
@@ -288,15 +290,14 @@ class GroupView extends Component {
                     :
                     <p></p>
                 }
-
-                <h3>Calendar</h3>
+                <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px', marginBottom: '20px'}} />
                 <div>
                     <Button color='blue' onClick={(event) => this.seeCalendar()} icon labelPosition='right'>
                         View Calendar
       <Icon name='calendar' />
                     </Button>
                 </div>
-
+                <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '20px', marginBottom: '20px'}} />
                 <h3>Members</h3>
                 {this.props.reduxStore.groupFam && this.props.reduxStore.groupFam.length > 0 ?
 
