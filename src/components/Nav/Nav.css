@@ -1,14 +1,15 @@
 .nav-title {
-    font-size: 5rem;
+    font-size: 4.5rem;
     font-weight: 700;
     text-align: center;
-    padding-right: 5vh;
+    padding-right: 0px;
     display: inline-block;
     color: #f2f2f2;
     /* padding-left: 10px; */
     float: right;
     margin-left: 0px;
-    margin-right: 20px
+    margin-right: 15px;
+    margin-top: -20px;
 }
 
 .nav {
@@ -16,6 +17,7 @@
   background-color: #8298ca;
   display: inline-block;
   width: 100%;
+  height: 90px;
 }
 
 .nav-link {
