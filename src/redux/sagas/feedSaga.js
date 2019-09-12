@@ -9,8 +9,8 @@ function* feedSaga () {
   yield takeEvery('ADD_REQUEST', addRequest)
   yield takeEvery('CANCEL_REQUEST', cancelRequest)
   yield takeEvery('CANCEL_CONF_REQUEST', cancelConfirmedRequest)
-  
-
+  yield takeEvery('FETCH_HOURS_USED', fetchHoursUsed)
+  yield takeEvery('FETCH_HOURS_GAINED', fetchHoursGained)
 }
 
 function* getYourFeed () {
@@ -144,6 +144,28 @@ function* cancelConfirmedRequest(action) {
   }
 }
 
+function* fetchHoursUsed (action) {
+  try {
+    const response = yield axios.get(`/feed/hoursUsed/${action.payload}`);
+    yield put ({type: 'SET_HOURS_USED', payload: response.data});
+    console.log('in fetch hours used, back from server with:', response.data)
+  }
+  catch(error) {
+    console.log('Error with getting your hours used from Server/DB', error);
+    
+  }
+}
 
+function* fetchHoursGained (action) {
+  try {
+    const response = yield axios.get(`/feed/hoursGained/${action.payload}`);
+    yield put ({type: 'SET_HOURS_GAINED', payload: response.data});
+    console.log('in fetch hours gained, back from server with:', response.data)   
+  }
+  catch(error) {
+    console.log('Error with getting your hours gained from Server/DB', error);
+    
+  }
+}
 
 export default feedSaga;
