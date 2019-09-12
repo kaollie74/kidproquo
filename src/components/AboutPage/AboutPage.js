@@ -11,9 +11,7 @@ class AboutPage extends Component {
     return (
       <div>
         <div>
-          <h1>About KidProQuo</h1>
-        </div>
-        <div>
+          <h2>About KidProQuo</h2>
          <ul>
             <li>KidProQuo taps into your most trusted but underutilized resource: Your friends who also have children.</li>  <br></br>
             <li>Building off of the time tested concept of the babysitting co-op, KidProQuo provides a platform that allows for parents 
@@ -22,6 +20,7 @@ class AboutPage extends Component {
           </ul>
         </div>
         <div>
+         
         
           <h2>Why?</h2>
           <ul>
