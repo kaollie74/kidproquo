@@ -19,10 +19,12 @@ import { Iconbutton } from 'semantic-ui-react';
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 import Swal from 'sweetalert2';
+import './EventView.css'
 
 
 import { Table, Icon, Button, Card } from 'semantic-ui-react';
 import { getThemeProps } from '@material-ui/styles';
+import { teal } from '@material-ui/core/colors';
 
 const offeringColor = yellow['500'];
 
@@ -54,7 +56,8 @@ const styles = theme => ({
     backgroundColor: 'white'
   },
   date: {
-    textAlign: 'center',
+    marginLeft: '14.5vh',
+    paddingBottom: '2vh'
   },
   openRequests: {
     textAlign: 'center'
@@ -100,6 +103,12 @@ const styles = theme => ({
   },
   cards: {
     width: '375px'
+  }, 
+  offering: {
+    
+  }, 
+  needed: {
+
   }
 });
 
@@ -261,7 +270,7 @@ class EventView extends Component {
 
   deleteHandleClaim = (event, item) => {
     console.log('this is item', item)
-    this.props.dispatch({type: 'REMOVE_EVENT', payload: item})
+    this.props.dispatch({ type: 'REMOVE_EVENT', payload: item })
   }
 
   openModal = () => {
@@ -294,15 +303,17 @@ class EventView extends Component {
     if (this.props.reduxStore.calendar.length !== 0) {
       return (
         <>
-          <Button
-            // className={classes.button} 
-            variant="contained" color="primary" onClick={this.openModal}
-            style={{ marginLeft: '108px', marginTop: '30px' }}
-          >
-            CREATE REQUEST
-          </Button>
+          <div className='createRequestBtn'>
+            <Button
+              // className={classes.button} 
+              variant="contained" color="primary" onClick={this.openModal}
+
+            >
+              CREATE REQUEST
+            </Button>
+          </div>
           <h2 className={classes.date}> {this.props.date}</h2>
-          <hr className={classes.hr} />
+          <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '20px', marginBottom: '20px'}} />
           <h3 className={classes.openRequests}> Open Requests </h3>
           <Modal
             aria-labelledby="simple-modal-title"
@@ -377,7 +388,7 @@ class EventView extends Component {
               </Grid>
             </div>
           </Modal>
-          <div className={classes.cards}>
+          <div className="ui two column grid">
             <Card.Group
               itemsPerRow={2}
               style={{ margin: '15px' }}
@@ -397,18 +408,23 @@ class EventView extends Component {
                 <Card
                   className="ui centered cards"
                   raised key={item.id}>
-                  <Card.Content>
+                  <Card.Content 
+                  className={item.offer_needed ? 'teal card' : 'orange card'}>
+                  {/* <div class="ui teal circular empty label" style={{float: 'right', marginRight: '5px', marginTop: '3px'}}></div> */}
                     <Card.Header>{item.last_name1} </Card.Header>
                     <Card.Meta>{item.event_time_start} - {item.event_time_end}</Card.Meta>
                     <Card.Description>{item.notes}</Card.Description>
-                    <Card.Description className={item.offer_needed ? "ui yellow label" : "ui orange label"}
-                      style={{ width: '110px' }}>
-                      <p
-                        // className={classes.offering_needed}
-                        style={{ marginLeft: '20px', marginRight: '20px', color: 'black', fontWeight: '600' }}
+                    <h3 
+                      className={item.offer_needed ? 'teal' : 'orange'}
+                      // style={{ width: '110px' }}
                       >
-                        {item.offer_needed ? 'Offering' : 'Needed'}</p>
-                    </Card.Description>
+                      {/* <p */}
+                        {/* // className={classes.offering_needed}
+                        // style={{ marginLeft: '20px', marginRight: '20px', fontWeight: '600' }}
+                      // > */}
+                        {item.offer_needed ? 'Offering' : 'Needed'}
+                        {/* </p> */}
+                    </h3>
                     {/* <div className={classes.claimRequestButton}>
                   <Button className={classes.claimRequestButton} color="green"  onClick={(event) => this.handleClaim(event, item)}>
                   <Icon floated="right" name="plus circle" size="large" basic color="white"></Icon>
@@ -418,17 +434,18 @@ class EventView extends Component {
                   </Button> */}
                     <br />
                     {item.requester_id === this.props.reduxStore.family.id
-                      ? 
+                      ?
                       <Button
-                        style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid red 2px', borderRadius: '3px', backgroundColor: 'red', paddingTop: '-30px' }}
+                        color='red'
+                        // style={{ fontWeight: 'bold', margin: '5px 10px', width: '115px', height: '37px', border: 'solid white 2px', borderRadius: '5px'}}
                         onClick={(event) => this.deleteHandleClaim(event, item)}
                       >
-                        Delete
+                        Cancel
                       </Button>
                       :
                       <Button onClick={(event) => this.handleClaim(event, item)}
                         // className={classes.addButton}
-                        style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid green 2px', borderRadius: '3px', backgroundColor: '#89E894', paddingTop: '-30px' }}
+                        style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid green 2px', borderRadius: '3px', backgroundColor: '#89E894'}}
                       >
                         CLAIM +
                       </Button>
@@ -446,9 +463,12 @@ class EventView extends Component {
       return (
         <>
           <div>
-            <Button className={classes.button} variant="contained" color="primary" onClick={this.openModal}
-              style={{ marginLeft: '108px', marginTop: '30px' }}
-            >CREATE REQUEST</Button>
+            <div className='createRequestBtn'>
+              <Button className={classes.button} variant="contained" color="primary" onClick={this.openModal}
+              >
+                CREATE REQUEST
+            </Button>
+            </div>
             <h2 className={classes.date}> {this.props.date}</h2>
             <hr className={classes.hr} />
             <h3 className={classes.openRequests}> No Requests </h3>

@@ -181,24 +181,27 @@ class MyProfilePage extends Component {
         console.log('IN PROFILE WITH TOTAL HOURS:', hours_used, hours_gained, total_hours)
                     return (
             <>
-                <pre>{JSON.stringify(this.props.reduxStore.notifications, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(this.props.reduxStore.notifications, null, 2)}</pre> */}
                 {/* <Progress
                     value={this.handleEquity()}
                 /> */}
+                <h1 style={{textAlign: 'center'}}> The {this.props.reduxStore.family.last_name1} Profile </h1>
+                <h3 style={{textAlign: 'center'}}> Equity</h3>
                 <div className="slidecontainer">
                         <p className="negative"> - </p><input type="range" min="-20" max="20" value={total_hours} className="slider" id="myRange"></input><p className="positive">+</p>
                     </div>
                     <div className="totalHours">
                         <div className="hoursUsed">
-                        <p>Hours Used: {hours_used}  </p>
+                        <p style={{fontWeight: 'bold'}}> Hours Used: {hours_used} </p>
                     </div>
                     <div className="hoursBanked">
-                        <p>Hours Gained: {hours_gained}</p>
+                        <p style={{fontWeight: 'bold'}}> Hours Gained: {hours_gained} </p>
                     </div>
                 </div>
-                <Button onClick={()=> this.handleEquityHoursUsedOne()}>EQUITY</Button>
+                <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px', marginBottom: '30px'}} />
+                {/* <Button onClick={()=> this.handleEquityHoursUsedOne()}>EQUITY</Button> */}
                
-                    <Header align="center"> {this.props.reduxStore.family.last_name1} Family</Header>
+                    {/* <Header align="center"> {this.props.reduxStore.family.last_name1} Family</Header>
                     <Label>
                         Hours Used: 
                         <Label.Detail>
@@ -210,7 +213,7 @@ class MyProfilePage extends Component {
     <Label.Detail>23</Label.Detail>
 
                     </Label>
-                
+                 */}
                 <Container align="center" className='my_feed'>
                     <h3 align="center">CLAIMED REQUESTS</h3>
                        {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
@@ -331,7 +334,7 @@ class MyProfilePage extends Component {
                             )
                         }})
                         : <p></p>}
-                        <hr style={{backgroundColor: '#8298ca', borderRadius: '5px', height: '5px', border: 'none'}} />
+                        <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px'}} />
                          <h3 align="center">YOUR REQUESTS</h3>
                          {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
                 
@@ -359,7 +362,6 @@ class MyProfilePage extends Component {
                                                     <br/> 
                                                
                                                 </Feed.Event>
-                                                 <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
                                     </Card>
@@ -385,7 +387,6 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
                                                     <br/> 
                                                 </Feed.Event>
-                                                <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                         </Feed>
                                     </Card>

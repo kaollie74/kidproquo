@@ -103,8 +103,9 @@ router.delete('/cancelRequest/:id', rejectUnauthenticated, (req, res) => {
 router.get('/hoursUsed/:id', rejectUnauthenticated,   (req,res)=> {
   console.log('In FEED ROUTER GET HOURS USED')
   const sqlText = `select sum(total_hours) as hours_used from event where requester_id = $1 
-  AND offer_needed = false 
-  OR claimer_id = $1 AND offer_needed = true;`;
+  AND offer_needed = false AND event_confirmed = true
+  OR claimer_id = $1 AND offer_needed = true
+  AND event_confirmed = true;`;
   const value = [req.params.id];
   pool.query(sqlText, value)
   .then((response)=> {
@@ -120,8 +121,9 @@ router.get('/hoursUsed/:id', rejectUnauthenticated,   (req,res)=> {
 router.get('/hoursGained/:id', rejectUnauthenticated,   (req,res)=> {
   console.log('In FEED ROUTER GET HOURS GAINED')
   const sqlText = `select sum(total_hours) as hours_gained from event where requester_id = $1 
-  AND offer_needed = true 
-  OR claimer_id = $1 AND offer_needed = false;`;
+  AND offer_needed = true AND event_confirmed = true
+  OR claimer_id = $1 AND offer_needed = false
+  AND event_confirmed = true;`;
   const value = [req.params.id];
   pool.query(sqlText, value)
   .then((response)=> {
