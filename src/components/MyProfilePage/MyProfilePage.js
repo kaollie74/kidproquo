@@ -359,7 +359,6 @@ class MyProfilePage extends Component {
                                                     <br/> 
                                                
                                                 </Feed.Event>
-                                                 <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
                                     </Card>
@@ -385,7 +384,6 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
                                                     <br/> 
                                                 </Feed.Event>
-                                                <Button basic color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                         </Feed>
                                     </Card>
