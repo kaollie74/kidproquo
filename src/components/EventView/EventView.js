@@ -55,7 +55,7 @@ const styles = theme => ({
     backgroundColor: 'white'
   },
   date: {
-    marginLeft: '14vh',
+    marginLeft: '14.5vh',
     paddingBottom: '2vh'
   },
   openRequests: {
