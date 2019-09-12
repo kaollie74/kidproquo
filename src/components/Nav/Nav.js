@@ -9,6 +9,7 @@ const Nav = (props) => (
   <div className="nav">
     
     {props.user.id ? <HamNav /> : ''}
+  
     <Link to="/my-profile-page">
       <h2 className="nav-title">KidProQuo</h2>
     </Link>
