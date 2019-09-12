@@ -1,24 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
+import HamNav from './HamNav';
 
 const Nav = (props) => (
 
   <div className="nav">
+    <HamNav />
     <Link to="/my-profile-page">
       <h2 className="nav-title">KidProQuo</h2>
     </Link>
-    <div className="nav-right">
-      <Link className="nav-link" to="/my-profile-page">
+    {/* <div className="nav-right">
+      <Link className="nav-link" to="/my-profile-page"> */}
         {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? 'Home' : 'Login / Register'}
-      </Link>
+        {/* {props.user.id ? 'Home' : 'Login / Register'}
+      </Link> */}
       {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
+      {/* {props.user.id && (
         <>
           <Link className="nav-link" to="/calendar">Calendar</Link>
           <Link className="nav-link" to="/create-request">Request</Link>
@@ -28,11 +29,11 @@ const Nav = (props) => (
           <Link className="nav-link" to="/kid-page">Kid Page</Link>
           <Link className="nav-link" to="/about">About</Link>
           <LogOutButton className="nav-link"/>
-        </>
-      )}
+        </> */}
+      {/* )} */}
       {/* Always show this link since the about page is not protected */}
     
-    </div>
+    {/* </div> */}
   </div>
 );
 

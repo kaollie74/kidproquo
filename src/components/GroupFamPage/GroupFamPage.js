@@ -3,28 +3,14 @@ import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Grid } from 'semantic-ui-react';
-import { Carousel } from 'react-responsive-carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import './FamilyProfilePage.css';
+import './GroupFamPage.css';
 
 
 
-class FamilyProfilePage extends Component {
+class GroupFamPage extends Component {
 
     state = {
-        first_name: '',
-        last_name: '',
-        allergies: '',
-        birthdate: '',
-        medication: '',
-        image: '',
-        notes: '',
         open: false
-    }
-
-    componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
-        this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.reduxStore.user.id })
     }
 
     closeKidModal = () => {
@@ -32,10 +18,21 @@ class FamilyProfilePage extends Component {
             open: false
         })
     }
+
+    componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.match.params.id })
+        this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
+    }
+
     editFamilyProfile = () => {
 
         this.props.history.push('/edit-my-profile');
     }
+
+    handleBack = () => {
+        this.props.history.push('/group-view');
+    }
+
 
     kidModal = (item) => {
 
@@ -54,80 +51,37 @@ class FamilyProfilePage extends Component {
         })
     }
 
-    openModal = () => {
-
-        console.log('in openModal')
-        this.setState({
-            open: !this.state.open
-        })
-    }
-
-    updateKid = () => {
-        this.props.dispatch({ type: 'UPDATE_KID', payload: this.state })
-        this.props.history.push('/kid-page')
-    }
     render() {
         return (
             <>
-
                 <div>
-
-                    <h1 align="center">
+                    <h1 className='headerTitleFamily'>
                         The {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
             <div align="center">
-                    <Card className='familyCard'>
-                        <Card.Content>
-                            <Card.Header> </Card.Header>
-                            <Image className='ui centered large image'
-                                src={this.props.reduxStore.family.image
-                                    ?
-                                    this.props.reduxStore.family.image
-                                    :
-                                    <>no</>}
-                                alt="img 1"
-                            />
-                            <div>
-                                <Icon
-                                    name='pencil alternate'
-                                    onClick={this.editFamilyProfile}
-
-                                />
-                                Edit Family
-                            </div>
-                        </Card.Content>
-                    </Card>
-                </div>
-                &nbsp;
-                <div align="center">
                     <Card>
                         <Card.Content>
-                            <Card.Header>Info</Card.Header>
-                            <Card.Description>
-                                {this.props.reduxStore.family.street_address} < br />
-                                {this.props.reduxStore.family.city}  <></>
-                                {this.props.reduxStore.family.state}, <></>
-                                {this.props.reduxStore.family.zip_code}< br />
-                                {this.props.reduxStore.family.phone_number}
-                            </Card.Description>
+                            <Card.Header> </Card.Header>
+                            {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
+                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : <>no</>} alt="img 1" />
                         </Card.Content>
                     </Card>
                 </div>
                 &nbsp;
                 <div className='kidCard'>
-                    <div className='ourKidsTitle'>
-                        <h1>Our Kids</h1>
+                    <div className='meetKidsTitle'>
+                        <h1>Meet the Kids</h1>
                     </div>
 
-                    <Grid stackable container centered columns={3} >
+                    <Grid stackable container centered columns={2} >
                         {this.props.reduxStore.kid.map((item, i) => {
 
                             return (
 
                                 <Grid.Column>
-                                    <Card key={item.id} wrapped ui={false} style={{ 'min-height': '230px' }}>
+                                    <Card key={item.id} className='kidCard'>
                                         <Card.Content>
 
                                             <Card.Header className='kidCardTitle'>
@@ -174,18 +128,27 @@ class FamilyProfilePage extends Component {
                             </Modal.Description>
                         </Modal.Content>
                         <div align='center'>
-                            <Button color='green' onClick={this.updateKid}>Edit</Button>
                             <Button color='red' onClick={this.closeKidModal}>Cancel</Button>
                         </div>
                     </Modal>
 
 
                 </div>
+                <div className='backBtn'>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleBack}>
+                        Back
+                    </Button>
+                </div>
             </>
         )
     }
 };
+
 const mapStateToProps = reduxStore => ({
     reduxStore
 });
-export default connect(mapStateToProps)(FamilyProfilePage);
+
+export default connect(mapStateToProps)(GroupFamPage);

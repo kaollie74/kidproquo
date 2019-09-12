@@ -27,6 +27,7 @@ import NewUserForm from '../NewUserForm/NewUserForm';
 import UserPage from '../UserPage/UserPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import LoginPage from '../LoginPage/LoginPage';
+import GroupFamPage from '../GroupFamPage/GroupFamPage';
 
 import './App.css';
 
@@ -46,6 +47,7 @@ class App extends Component {
       <Router>
         <div>
           <Nav />
+          
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/my-profile-page" />
@@ -85,7 +87,7 @@ class App extends Component {
               path="/new-user-form"
               component={NewUserForm}
             />
-
+            
             <ProtectedRoute
               exact
               path="/my-profile-page"
@@ -109,6 +111,10 @@ class App extends Component {
               path="/family-profile"
               component={FamilyProfilePage}
             />
+            <ProtectedRoute 
+              exact
+              path="/view/:id" 
+              component={GroupFamPage} />
 
             <ProtectedRoute
               exact
