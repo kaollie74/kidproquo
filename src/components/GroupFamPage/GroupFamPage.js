@@ -55,8 +55,8 @@ class GroupFamPage extends Component {
         return (
             <>
                 <div>
-                    <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1} Family
+                    <h1 className='headerTitleFamily'>
+                        {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
@@ -72,7 +72,7 @@ class GroupFamPage extends Component {
                 &nbsp;
                 <div className='kidCard'>
                     <div className='meetKidsTitle'>
-                        <h1>Meet the Kids</h1>
+                        <h1>Kids</h1>
                     </div>
 
                     <Grid stackable container centered columns={2} >
