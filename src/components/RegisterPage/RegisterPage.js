@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { Link } from 'react-router-dom';
+import './RegisterPage.css';
 
 
 class RegisterPage extends Component {
@@ -34,7 +35,7 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="loginFormBackground">
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -43,9 +44,9 @@ class RegisterPage extends Component {
             {this.props.errors.registrationMessage}
           </h2>
         )}
-        <form onSubmit={this.registerUser}>
-          <h1>Choose a Username and Password</h1>
-          <div>
+        <form className="registerForm" onSubmit={this.registerUser}>
+          <h3 className="directions">Choose a Username and Password</h3>
+          <div className="registerPageInputs">
               <input
                 type="text"
                 name="username"
@@ -54,7 +55,7 @@ class RegisterPage extends Component {
                 onChange={this.handleInputChangeFor('username')}
               />
           </div>
-          <div>
+          <div className="registerPageInputs">
               <input
                 type="password"
                 name="password"
@@ -73,7 +74,7 @@ class RegisterPage extends Component {
         <center>
           <Link to="/login"
             type="button"
-            className="link-button"
+            className="registerLink-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_LOGIN_MODE'})}}
           >
             Login

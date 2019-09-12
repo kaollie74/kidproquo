@@ -73,7 +73,7 @@ class FamilyProfilePage extends Component {
                 <div>
 
                     <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1} Family
+                        {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
