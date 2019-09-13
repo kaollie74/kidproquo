@@ -70,7 +70,7 @@ class CalendarView extends Component {
         console.log('in format date', value)
        //let newDate = ( value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear());
       let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
-        
+  
       let newObjectToSend = {event_date: newDate}
       this.props.dispatch({type: 'FETCH_EVENTS', payload: newObjectToSend})
       console.log('NEW OBJECT TO SEND (CALENDAR VIEW):', newObjectToSend);

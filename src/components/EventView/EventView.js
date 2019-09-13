@@ -417,44 +417,31 @@ class EventView extends Component {
                 <Card
                   className="ui centered cards"
                   raised key={item.id}>
-                  <Card.Content
-                    className={item.offer_needed ? 'teal card' : 'orange card'}>
-                    {/* <div class="ui teal circular empty label" style={{float: 'right', marginRight: '5px', marginTop: '3px'}}></div> */}
-                    <Card.Header>{item.last_name1} </Card.Header>
+
+                  <Card.Content 
+                  className={item.offer_needed ? 'teal card' : 'orange card'}>
+                    
+                    <Card.Header style={{display: 'inline-block'}}>{item.last_name1} <Icon style={{marginLeft: '50px'}} size="large" name="black file alternate outline"></Icon></Card.Header>
                     <Card.Meta>{item.event_time_start} - {item.event_time_end}</Card.Meta>
                     <Card.Description>{item.notes}</Card.Description>
-                    <h3
-                      className={item.offer_needed ? 'teal' : 'orange'}
-                    // style={{ width: '110px' }}
-                    >
-                      {/* <p */}
-                      {/* // className={classes.offering_needed}
-                        // style={{ marginLeft: '20px', marginRight: '20px', fontWeight: '600' }}
-                      // > */}
-                      {item.offer_needed ? 'Offering' : 'Needed'}
-                      {/* </p> */}
+                    <h3 className={item.offer_needed ? 'teal' : 'orange'}>
+                        {item.offer_needed ? 'Offering' : 'Needed'}
+
                     </h3>
-                    {/* <div className={classes.claimRequestButton}>
-                  <Button className={classes.claimRequestButton} color="green"  onClick={(event) => this.handleClaim(event, item)}>
-                  <Icon floated="right" name="plus circle" size="large" basic color="white"></Icon>
-                  </Button>
-                  </div> */}
-                    {/* <Button className={classes.claimButton} positive icon="plus circle">
-                  </Button> */}
                     <br />
                     {item.requester_id === this.props.reduxStore.family.id
                       ?
                       <Button
                         color='red'
-                        // style={{ fontWeight: 'bold', margin: '5px 10px', width: '115px', height: '37px', border: 'solid white 2px', borderRadius: '5px'}}
-                        onClick={(event) => this.deleteHandleClaim(event, item)}
-                      >
+                        onClick={(event) => this.deleteHandleClaim(event, item)}>
                         Cancel
                       </Button>
                       :
                       <Button onClick={(event) => this.handleClaim(event, item)}
-                        // className={classes.addButton}
-                        style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid green 2px', borderRadius: '3px', backgroundColor: '#89E894' }}
+
+
+                        style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid green 2px', borderRadius: '3px', backgroundColor: '#89E894'}}
+
                       >
                         CLAIM +
                       </Button>
