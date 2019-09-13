@@ -439,8 +439,8 @@ class EventView extends Component {
                       :
                       <Button onClick={(event) => this.handleClaim(event, item)}
 
-                        // className={classes.addButton}
 
+                        // className={classes.addButton}
 
                         style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid green 2px', borderRadius: '3px', backgroundColor: '#89E894'}}
 
