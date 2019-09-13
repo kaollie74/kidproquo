@@ -25,7 +25,9 @@ closeNav = () => {
   render() {
     return (
       <>
-        <Icon name='bars' style={{paddingTop: '15px', paddingLeft: '17px'}}className='bars icon' size='huge' onClick={(event) => this.openNav(event)} />
+        <Icon name='bars' 
+        style={{paddingTop: '15px', paddingLeft: '17px'}}
+        className='bars icon' size='huge' onClick={(event) => this.openNav(event)} />
       
       <div id="sidenav" className="sidenav">
           <Icon name='x' className='x icon' size='large' onClick={(event) => this.closeNav(event)} />
