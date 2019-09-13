@@ -24,6 +24,8 @@ class MyProfilePage extends Component {
                     user_id: this. props.reduxStore.user.id} });
         this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.family.id});
         this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.family.id});
+        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
+
     }
     
     // handleEquityHoursUsedOne = () => {
@@ -163,6 +165,18 @@ class MyProfilePage extends Component {
         };
 
         this.props.dispatch({ type: 'CANCEL_CONF_REQUEST', payload: newObject })
+
+        let textMessage = {
+            requester_phone: item.requester_number,
+            claimer_name: this.props.reduxStore.family.last_name1,
+            event_date: item.event_date,
+            event_time_start: item.event_time_start,
+            event_time_end: item.event_time_end,
+        }
+        console.log('this is the text message object in CANCEL event', textMessage)
+
+        //Trying Twilio
+        this.props.dispatch({ type: 'SEND_CANCEL_TEXT', payload: textMessage });
 
       
 

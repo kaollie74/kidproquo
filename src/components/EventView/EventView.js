@@ -182,6 +182,17 @@ class EventView extends Component {
           claimer_notes: this.state.claimer_notes,
         }
         this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject })
+        //creating text to send
+        let textMessage = {
+          requester_phone: item.requester_number,
+          claimer_name: this.props.reduxStore.family.last_name1,
+          event_date: item.event_date,
+          event_time_start: item.event_time_start,
+          event_time_end: item.event_time_end,
+        }
+        console.log('this is the text message object from event view', textMessage)
+        //Twilio
+        this.props.dispatch({ type: 'SEND_TEXT', payload: textMessage });
       } else if (response.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
           'Cancelled Claim'
