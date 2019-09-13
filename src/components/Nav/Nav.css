@@ -1,12 +1,13 @@
 .nav-title {
     font-size: 4.5rem;
     font-weight: 700;
-    text-align: center;
+    padding-left: 6vh;
     padding-right: 0px;
     display: inline-block;
     color: #f2f2f2;
     /* padding-left: 10px; */
-    float: right;
+    /* float: right; */
+
     margin-left: 0px;
     margin-right: 15px;
     margin-top: -20px;

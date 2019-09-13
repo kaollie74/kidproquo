@@ -63,8 +63,8 @@ class LoginPage extends Component {
                 onChange={this.handleInputChangeFor('password')}
               />
             </label>
-            </div>
-          <div>
+          </div>
+          <div className='loginBtn'>
             <input
               className="log-in"
               type="submit"
@@ -73,13 +73,13 @@ class LoginPage extends Component {
             />
           </div>
         </form>
-       
+
         <center>
           <Link
             to="/register"
             type="button"
             className="newLink-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register </Link>
         </center>
