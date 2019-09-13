@@ -11,9 +11,7 @@ class AboutPage extends Component {
     return (
       <div>
         <div>
-          <h1>About KidProQuo</h1>
-        </div>
-        <div>
+          <h2>About KidProQuo</h2>
          <ul>
             <li>KidProQuo taps into your most trusted but underutilized resource: Your friends who also have children.</li>  <br></br>
             <li>Building off of the time tested concept of the babysitting co-op, KidProQuo provides a platform that allows for parents 
@@ -22,12 +20,13 @@ class AboutPage extends Component {
           </ul>
         </div>
         <div>
+         
         
           <h2>Why?</h2>
           <ul>
             <li>Having a night out can get expensive when the cost of a babysitter is included, so parents tend to postpone going out to save money.</li>
             <br></br>
-            <li>During our market research, most parents said the when asked by a friend to watch their children, the answer was typically "Yes". 
+            <li>During our market research, most parents said that when asked by a friend to watch their children, the answer was typically "Yes". 
               But when asked if they would ask a friend to watch their child, the answer was frequently "No" with the reason being that they "didn't want to 
               inconvenience a friend".
             </li>
