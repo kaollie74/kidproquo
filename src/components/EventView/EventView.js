@@ -103,10 +103,10 @@ const styles = theme => ({
   },
   cards: {
     width: '375px'
-  }, 
+  },
   offering: {
-    
-  }, 
+
+  },
   needed: {
 
   }
@@ -212,8 +212,10 @@ class EventView extends Component {
     let timeStart = this.state.event_time_start.toTimeString();
     let newTimeStart = timeStart.substring(0, 5);
     let timeEnd = this.state.event_time_end.toTimeString();
+
     let newTimeEnd = timeEnd.substring(0, 5);
     let newDate = (this.state.event_date.getFullYear() + "-" + 0 + Number(this.state.event_date.getMonth() + 1) + "-" + this.state.event_date.getDate())
+
     let notes = this.state.notes;
     let offer_needed = this.state.offer_needed;
     // let hours = Number(newTimeEnd - newTimeStart);
@@ -295,6 +297,13 @@ class EventView extends Component {
     this.openModal();
   }
 
+  dummyData = () => {
+    this.setState({
+      notes: 'Anniversary. Looking for someone to watch the kids',
+
+    })
+  }
+
   render() {
     console.log('FAMILY REDUCER IN EVENT VIEW:', this.props.reduxStore.family)
     console.log('this is state', this.state)
@@ -313,7 +322,7 @@ class EventView extends Component {
             </Button>
           </div>
           <h2 className={classes.date}> {this.props.date}</h2>
-          <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '20px', marginBottom: '20px'}} />
+          <hr style={{ backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '20px', marginBottom: '20px' }} />
           <h3 className={classes.openRequests}> Open Requests </h3>
           <Modal
             aria-labelledby="simple-modal-title"
@@ -408,22 +417,22 @@ class EventView extends Component {
                 <Card
                   className="ui centered cards"
                   raised key={item.id}>
-                  <Card.Content 
-                  className={item.offer_needed ? 'teal card' : 'orange card'}>
-                  {/* <div class="ui teal circular empty label" style={{float: 'right', marginRight: '5px', marginTop: '3px'}}></div> */}
+                  <Card.Content
+                    className={item.offer_needed ? 'teal card' : 'orange card'}>
+                    {/* <div class="ui teal circular empty label" style={{float: 'right', marginRight: '5px', marginTop: '3px'}}></div> */}
                     <Card.Header>{item.last_name1} </Card.Header>
                     <Card.Meta>{item.event_time_start} - {item.event_time_end}</Card.Meta>
                     <Card.Description>{item.notes}</Card.Description>
-                    <h3 
+                    <h3
                       className={item.offer_needed ? 'teal' : 'orange'}
-                      // style={{ width: '110px' }}
-                      >
+                    // style={{ width: '110px' }}
+                    >
                       {/* <p */}
-                        {/* // className={classes.offering_needed}
+                      {/* // className={classes.offering_needed}
                         // style={{ marginLeft: '20px', marginRight: '20px', fontWeight: '600' }}
                       // > */}
-                        {item.offer_needed ? 'Offering' : 'Needed'}
-                        {/* </p> */}
+                      {item.offer_needed ? 'Offering' : 'Needed'}
+                      {/* </p> */}
                     </h3>
                     {/* <div className={classes.claimRequestButton}>
                   <Button className={classes.claimRequestButton} color="green"  onClick={(event) => this.handleClaim(event, item)}>
@@ -445,7 +454,7 @@ class EventView extends Component {
                       :
                       <Button onClick={(event) => this.handleClaim(event, item)}
                         // className={classes.addButton}
-                        style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid green 2px', borderRadius: '3px', backgroundColor: '#89E894'}}
+                        style={{ fontWeight: 'bold', margin: '5px 0px', width: '110px', height: '37px', border: 'solid green 2px', borderRadius: '3px', backgroundColor: '#89E894' }}
                       >
                         CLAIM +
                       </Button>
@@ -479,9 +488,14 @@ class EventView extends Component {
             //onClose={this.openModal}
             >
               <div className="timeAndDatePicker">
-                <Typography style={{ marginLeft: '5px', marginTop: '30px' }} variant="h6" id="modal-title">
+                <Typography
+                  style={{ marginLeft: '5px', marginTop: '30px' }}
+                  variant="h6"
+                  id="modal-title"
+                  onClick={this.dummyData}
+                >
                   Select Time/Date
-            </Typography>
+              </Typography>
                 <Typography variant="subtitle1" id="simple-modal-description">
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid container className={classes.grid} justify="space-around">
