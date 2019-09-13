@@ -70,6 +70,21 @@ class GroupFamPage extends Component {
                     </Card>
                 </div>
                 &nbsp;
+                <div align="center">
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>Info</Card.Header>
+                            <Card.Description>
+                                {this.props.reduxStore.family.street_address} < br />
+                                {this.props.reduxStore.family.city}  <></>
+                                {this.props.reduxStore.family.state}, <></>
+                                {this.props.reduxStore.family.zip_code}< br />
+                                {this.props.reduxStore.family.phone_number}
+                            </Card.Description>
+                        </Card.Content>
+                    </Card>
+                </div>
+                &nbsp;
                 <div className='kidCard'>
                     <div className='meetKidsTitle'>
                         <h1>Kids</h1>
