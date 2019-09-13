@@ -44,7 +44,14 @@ class EditMyProfilePage extends Component {
 
     addKidModal = () => {
         this.setState({
-            open: !this.state.open
+            open: !this.state.open,
+            first_name: '',
+            last_name: '',
+            birthdate: '',
+            image:'',
+            medication: '',
+            allergies: '',
+            notes: ''
         })
     }
 
@@ -169,6 +176,18 @@ updateFamily = () => {
                 'error'
             )
         }
+    })
+}
+
+dummyData = () => {
+    this.setState({
+        first_name: 'George',
+        last_name: 'Johnson',
+        birthdate: '12-10-1987',
+        image:'https://www.sharp.com/health-news/images/My-Child-Swallowed-a-Coin-HN884-Babies-IStock-515683938-Sized.jpg',
+        medication: 'None',
+        allergies: 'No Allergies',
+        notes: 'cool kid'
     })
 }
 
@@ -369,6 +388,7 @@ render() {
                             <Modal.Header
                                 className="ui container center aligned"
                                 style={{'background-color': 'portage'}}
+                                onClick={this.dummyData}
                             >
                                 <h1>Add Kid</h1>
                             </Modal.Header>
