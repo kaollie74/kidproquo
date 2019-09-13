@@ -215,7 +215,7 @@ class MyProfilePage extends Component {
                     </Label>
                  */}
                 <Container align="center" className='my_feed'>
-                    <h3 align="center">CLAIMED REQUESTS</h3>
+                    <h3 align="center"> YOUR CLAIMED REQUESTS</h3>
                        {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
                 
                     this.props.reduxStore.notifications.map((item) => {
@@ -229,19 +229,23 @@ class MyProfilePage extends Component {
                             <>
                             <Card>
                                     <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
-                                    <Feed.Content>
-                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
                                             <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold'}}>Needed</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                                    <a style={{fontWeight: 'bold', color: 'black', color: '#FE9A76', fontSize: '15px'}}>The {item.requester_name} Family Needs Care</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                               
-                                                </Feed.Event>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
                                                  <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING CONFIRMATION</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
@@ -257,21 +261,27 @@ class MyProfilePage extends Component {
                                 <>
                                     <Card>
                                     <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
-                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
-                                        <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                        <Feed.Content>
+                                        <div class="ui teal circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black', color: '#008080', fontSize: '15px'}}>The {item.requester_name} Family is Offering Care</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                                </Feed.Event>
-                                                <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING CONFIRMATION</p>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
+                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING CONFIRMATION</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
-                                        </Feed>
-                                    </Card>
+                                            </Feed>
+                            </Card>
                                 </>
 
                             )
@@ -285,23 +295,27 @@ class MyProfilePage extends Component {
                                 <>
                                     <Card>
                                     <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
-                                    <Feed.Content>
-                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
                                             <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold'}}>Needed</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                                    <a style={{fontWeight: 'bold', color: 'black', color: '#FE9A76', fontSize: '15px'}}>The {item.requester_name} Family Needs Care</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                               
-                                                </Feed.Event>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
                                                  <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
-                                    </Card>
+                            </Card>
                                 </>
 
                             )
@@ -313,22 +327,27 @@ class MyProfilePage extends Component {
                                 <>
                                     <Card>
                                     <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
-                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
-                                        <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
-                                                </Feed.Content>
-                                                    <br/> 
-                                                </Feed.Event>
-                                                <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
-                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
-                                        </Feed>
+                                        <Feed.Content>
+                                        <div class="ui teal circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black', color: '#008080', fontSize: '15px'}}>The {item.requester_name} Family is Offering Care</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
 
-                                    </Card>
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                                </Feed.Content>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
+                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            </Feed>
+                            </Card>
                                 </>
 
                             )
@@ -349,22 +368,27 @@ class MyProfilePage extends Component {
                                 <>
                                     <Card>
                                     <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
-                                    <Feed.Content>
-                                        <div class="ui orange circular empty label" style={{float: 'left', margin: '10px'}}></div>
+                                        <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
                                             <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold'}}>Needed</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                                    <a style={{fontWeight: 'bold', color: '#FE9A76', fontSize: '15px'}}>You Need Care</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                               
-                                                </Feed.Event>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
+                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>NOT CLAIMED YET</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
-                                    </Card>
+                            </Card>
                                 </>
 
                             )
@@ -376,20 +400,27 @@ class MyProfilePage extends Component {
                                 <>
                                     <Card>
                                     <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
-                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
-                                        <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                        <Feed.Content>
+                                        <div class="ui teal circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: '#008080', fontSize: '15px'}}>You're Offering Care</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                                </Feed.Event>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
+                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>NOT CLAIMED YET</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
-                                        </Feed>
-                                    </Card>
+                                            </Feed>
+                            </Card>
                                 </>
 
                             )
@@ -403,22 +434,32 @@ class MyProfilePage extends Component {
                                 <>
                                     <Card>
                                     <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
-                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
-                                        <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                        <Feed.Content>
+                                        <div class="ui teal circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black', fontSize: '15px'}}>The {item.claimer_name} Family Claimed Your Request!</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+
+                                                <Feed.Content style={{textAlign: 'center'}}>
+                                                    <a style={{fontWeight: 'bold', color: '#008080'}}>You're Offering Care </a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                                </Feed.Event>
-                                                <Button style={{padding: '10px', marginBottom: '10px'}} color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
-                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
-                                        </Feed>
-                                    </Card>
-                                </>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                                </Feed.Content>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
+                                            <Button style={{padding: '10px', marginBottom: '10px'}} color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
+                                            {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            </Feed>
+                                        </Card>
+                              </>
 
                             )
                         }
@@ -428,21 +469,30 @@ class MyProfilePage extends Component {
                             return (
                                 <>
                                     <Card>
-                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
-                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
-                                        <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                    <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
+                                        <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black', fontSize: '15px'}}>The {item.claimer_name} Family Claimed Your Request!</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+
+                                            <Feed.Content style={{textAlign: 'center'}}>
+                                                    <a style={{color: '#FE9A76',  fontWeight: 'bold'}}>You Need Care </a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                                </Feed.Event>
-                                                <Button style={{padding: '10px', marginBottom: '10px'}} color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
-                                                {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
-                                        </Feed>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                                </Feed.Content>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+                                            </Feed.Event>
+                                            <Button style={{padding: '10px', marginBottom: '10px'}} color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
+                                            {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            </Feed>
                                     </Card>
                                 </>
 
@@ -457,20 +507,31 @@ class MyProfilePage extends Component {
                             return (
                                 <>
                                     <Card>
-                                    <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
-                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
-                                        <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                    <Feed style={{borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px'}}>
+                                        <Feed.Content>
+                                        <div class="ui orange circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black', fontSize: '15px'}}>The {item.claimer_name} Family Claimed Your Request!</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+                                                
+                                                <Feed.Content style={{textAlign: 'center'}}>
+                                                    <a style={{color: '#FE9A76',  fontWeight: 'bold'}}>You Need Care </a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                                </Feed.Event>
-                                                <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
-                                        </Feed>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                                </Feed.Content>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
+                                            <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                            {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            </Feed>
                                     </Card>
                                 </>
 
@@ -483,19 +544,30 @@ class MyProfilePage extends Component {
                                 <>
                                     <Card>
                                     <Feed style={{borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px'}}>
-                                        <Feed.Content><div class="ui teal circular empty label" style={{float: 'left', margin: '10px'}}></div>
-                                        <Feed.Label style={{paddingTop: '10px'}}>
-                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.requester_name}</a> | <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
-                                            </Feed.Label></Feed.Content>
-                                            <Feed.Event style={{display: 'inline-flex', margin: '10px 0px', textAlign: 'center'}}>
-                                                <Feed.Content style={{marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold'}}>Offering</Feed.Content>
-                                                <Feed.Content style={{float: 'right'}}>
-                                                    from {item.event_time_start} - {item.event_time_end}
+                                        <Feed.Content>
+                                        <div class="ui teal circular empty label" style={{float: 'left', marginLeft: '10px', marginTop: '10px'}}></div>
+                                            <Feed.Label style={{paddingTop: '10px'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black', fontSize: '15px'}}>The {item.claimer_name} Family Claimed Your Request!</a>
+                                            </Feed.Label>
+                                        </Feed.Content>
+                                            <Feed.Event style={{display: 'block', margin: '10px 0px', textAlign: 'center'}}>
+                                                
+                                            <Feed.Content style={{textAlign: 'center'}}>
+                                                    <a style={{fontWeight: 'bold', color: '#008080'}}>You're Offering Care </a>
                                                 </Feed.Content>
-                                                    <br/> 
-                                                </Feed.Event>
-                                                <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
-                                        </Feed>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    <a style={{fontWeight: 'bold', color: 'black'}}>{item.event_date}</a>
+                                                </Feed.Content>
+
+                                                <Feed.Content style={{textAlign: 'center', fontWeight: 'bold'}}>
+                                                    {item.event_time_start} - {item.event_time_end} 
+                                                </Feed.Content>
+ 
+                                            </Feed.Event>
+                                            <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                            {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            </Feed>
                                     </Card>
                                 </>
 
