@@ -146,10 +146,22 @@ class MyProfilePage extends Component {
                     user_id: this.props.reduxStore.user.id
                 };
                 this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
+                //Twilio
+                let textMessage = {
+                    claimer_phone: item.claimer_number,
+                    requester_name: this.props.reduxStore.family.last_name1,
+                    event_date: item.event_date,
+                    event_time_start: item.event_time_start,
+                    event_time_end: item.event_time_end,
+                }
+                console.log('this is the text message object in CONFIRM event', textMessage)
+
+                //Twilio
+                this.props.dispatch({ type: 'SEND_CONFIRM_TEXT', payload: textMessage });
 
             } else if (response.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
-                    'Cancelled Claim'
+                    'Cancelled Confirm'
                 )
             }
         })
@@ -165,7 +177,7 @@ class MyProfilePage extends Component {
         };
 
         this.props.dispatch({ type: 'CANCEL_CONF_REQUEST', payload: newObject })
-
+        //Twilio
         let textMessage = {
             requester_phone: item.requester_number,
             claimer_name: this.props.reduxStore.family.last_name1,
@@ -175,12 +187,8 @@ class MyProfilePage extends Component {
         }
         console.log('this is the text message object in CANCEL event', textMessage)
 
-        //Trying Twilio
+        //Twilio
         this.props.dispatch({ type: 'SEND_CANCEL_TEXT', payload: textMessage });
-
-      
-
-        // this.props.dispatch({ type: 'CONFIRM_EVENT', payload: newObject });
 
     }
 

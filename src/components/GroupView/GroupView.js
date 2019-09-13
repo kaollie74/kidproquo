@@ -51,7 +51,6 @@ class GroupView extends Component {
 
     handleClaim = (item) => {
         console.log('in handle Claim', item)
-        let inputValue = this.state.claimer_notes;
         Swal.fire({
             title: 'Are you sure you want to claim this request?',
             type: 'question',
