@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Image, Icon, Button, Feed, Modal, Form } from 'semantic-ui-react';
+import { Card, Image, Icon, Button, Feed, Modal, Form, Header} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Swal from 'sweetalert2';
 import './GroupView.css';
@@ -25,6 +25,7 @@ class GroupView extends Component {
         claimer_notes: '',
         claimer_id: '',
         groud_id: '',
+        openModal: false,
     };
 
 
@@ -100,7 +101,20 @@ class GroupView extends Component {
         })
     }
 
+    notesModal = (item) => {
+        console.log('IN NOTES MODAL WITH THIS ITEM:', item);
+        this.setState({
+            notes: item.notes,
+            requester_name: item.requester_name,
+            openModal: !this.state.openModal,
+        })
+    }
 
+    close = () => {
+        this.setState({
+            openModal: false
+        })
+    }
 
     seeCalendar = () => { this.props.history.push('/calendar') }
 
@@ -144,6 +158,7 @@ class GroupView extends Component {
                                                 <div class="ui orange circular empty label" style={{ float: 'left', margin: '10px' }}></div>
                                                 <Feed.Label style={{ paddingTop: '10px' }}>
                                                     <a style={{ fontWeight: 'bold', color: 'black' }}>{item.requester_name}</a> | <a style={{ fontWeight: 'bold', color: 'black' }}>{item.event_date}</a>
+                                                    <Icon onClick={() => this.notesModal(item)} style={{float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px'}} size="large" name="black file alternate outline"></Icon>
                                                 </Feed.Label></Feed.Content>
                                             <Feed.Event style={{ display: 'inline-flex', margin: '10px 0px', textAlign: 'center' }}>
                                                 <Feed.Content style={{ marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold' }}>Needed</Feed.Content>
@@ -173,6 +188,7 @@ class GroupView extends Component {
                                             <Feed.Content><div class="ui teal circular empty label" style={{ float: 'left', margin: '10px' }}></div>
                                                 <Feed.Label style={{ paddingTop: '10px' }}>
                                                     <a style={{ fontWeight: 'bold', color: 'black' }}>{item.requester_name}</a> | <a style={{ fontWeight: 'bold', color: 'black' }}>{item.event_date}</a>
+                                                    <Icon onClick={() => this.notesModal(item)} style={{float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px'}} size="large" name="black file alternate outline"></Icon>
                                                 </Feed.Label></Feed.Content>
                                             <Feed.Event style={{ display: 'inline-flex', margin: '10px 0px', textAlign: 'center' }}>
                                                 <Feed.Content style={{ marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold' }}>Offering</Feed.Content>
@@ -203,6 +219,7 @@ class GroupView extends Component {
                                                 <Feed.Label
                                                     style={{ paddingTop: '10px' }}>
                                                     <a style={{ fontWeight: 'bold', color: 'black' }}>{item.requester_name}</a> | <a style={{ fontWeight: 'bold', color: 'black' }}>{item.event_date}</a>
+                                                    <Icon onClick={() => this.notesModal(item)} style={{float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px'}} size="large" name="black file alternate outline"></Icon>
                                                 </Feed.Label></Feed.Content>
                                             <Feed.Event
                                                 style={{ display: 'inline-flex', margin: '10px 0px', textAlign: 'center' }}
@@ -265,6 +282,7 @@ class GroupView extends Component {
                                                     >
                                                         {item.event_date}
                                                     </a>
+                                                    <Icon onClick={() => this.notesModal(item)} style={{float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px'}} size="large" name="black file alternate outline"></Icon>
                                                 </Feed.Label></Feed.Content>
                                             <Feed.Event
                                                 style={{ display: 'inline-flex', margin: '10px 0px', textAlign: 'center' }}
@@ -298,6 +316,20 @@ class GroupView extends Component {
                     :
                     <p></p>
                 }
+                
+                <Modal
+                    open={this.state.openModal}
+                    onClose={this.close}
+                >         
+                        <Modal.Header style={{textAlign: 'center'}}>Notes from the {this.state.requester_name} Family</Modal.Header>
+                            <Modal.Content>
+                            <Modal.Description>
+                                <p style={{fontSize: '17px', textAlign: 'center'}}>
+                               {this.state.notes}
+                                </p>
+                            </Modal.Description>
+                        </Modal.Content>  
+                </Modal>
                 <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px', marginBottom: '20px'}} />
                 <div>
                     <Button color='blue' onClick={(event) => this.seeCalendar()} icon labelPosition='right'>
