@@ -44,7 +44,7 @@ function* claimEvent (action) {
     yield put(Swal.fire({
       position: 'center',
       type: 'success',
-      title: `You have claimed the ${action.payload.last_name1}'s request for ${action.payload.event_time_start} - ${action.payload.event_time_end} on ${action.payload.event_date}`,
+      title: `You have claimed the ${action.payload.requester_name}'s request for ${action.payload.event_time_start} - ${action.payload.event_time_end} on ${action.payload.event_date}`,
       showConfirmButton: false,
       timer: 4000,
     }))
