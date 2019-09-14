@@ -16,6 +16,19 @@ function* addNewFamily(action) {
     }
 }
 
+function* clickFetchFamily(action) {
+    try{
+        console.log(action.payload)
+        const response = yield Axios.get(`/family/user/${action.payload}`);
+        console.log(response.data);
+        yield put({ type: 'SET_CLICK_FAMILY', payload: response.data})
+    } catch(error) {
+        console.log('error fetching family data', error)
+    }
+}
+
+
+
 function* fetchFamily(action) {
     try{
         console.log(action.payload)
@@ -59,6 +72,7 @@ function* fetchKids(action) {
 }
 
 function* familySaga() {
+    yield takeEvery('CLICK_FETCH_FAMILY', clickFetchFamily)
     yield takeEvery('FETCH_FAMILY', fetchFamily)
     yield takeEvery('FETCH_KIDS', fetchKids)
     yield takeEvery('ADD_NEW_FAMILY', addNewFamily)
