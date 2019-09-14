@@ -10,7 +10,7 @@ const Nav = (props) => (
     
     {props.user.id ? <HamNav /> : ''}
   
-    <Link to="/my-profile-page">
+    <Link to="/">
       <h2 className={props.user.id ? "nav-title" : "nav-title-two"} style={{display: 'inline-flex'}}>KidProQuo</h2>
     </Link>
     {/* <div className="nav-right">
