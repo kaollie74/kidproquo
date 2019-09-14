@@ -76,6 +76,7 @@ class GroupView extends Component {
                     last_name1: this.props.reduxStore.family.last_name1,
                     claimer_notes: this.state.claimer_notes,
                     group_id: this.props.reduxStore.userGroups[0],
+                    requester_name: item.requester_name
                 }
 
                 let textMessage = {
@@ -188,6 +189,7 @@ class GroupView extends Component {
                             && item.event_claimed === false
                             && item.offer_needed === false
                         ) {
+                            //this is the return for when you are claiming someones event who needs help
                             return (
                                 <>
                                     <Card >

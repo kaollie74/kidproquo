@@ -24,7 +24,7 @@ function* sendConfirmText(action) {
         yield Axios.post('/api/text/confirm', action.payload);
 
     } catch (error) {
-        console.log('Error with Sending cancel Text:', error);
+        console.log('Error with Sending confirm Text:', error);
     }
 }
 

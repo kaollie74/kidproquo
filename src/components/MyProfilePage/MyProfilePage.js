@@ -179,7 +179,7 @@ class MyProfilePage extends Component {
         this.props.dispatch({ type: 'CANCEL_CONF_REQUEST', payload: newObject })
         //Twilio
         let textMessage = {
-            requester_phone: item.requester_number,
+            claimer_phone: item.claimer_number,
             claimer_name: this.props.reduxStore.family.last_name1,
             event_date: item.event_date,
             event_time_start: item.event_time_start,
