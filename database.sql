@@ -260,3 +260,9 @@ Values
     ('111', 'Emily', 'Olson', '02/21/2015', 'http://www.bruna.cat/imgdownload/full/135/1356307/beautiful-cute-girl-hd-wallpaper.jpg', '1006', 'She likes playing outside.'),
     ('112', 'Nicole', 'Olson', '05/03/2017', 'http://www.youandkids.com/wp-content/uploads/2018/04/Curls-With-Lob-For-A-Cute-Look-735x450.jpg', '1006', 'She likes playing with her sisters.'),
     ('113', 'Anna', 'Olson', '09/10/2018', 'https://jooinn.com/images/cute-little-girl-15.jpg', '1006', 'She likes playing with her toys.');
+
+INSERT INTO "event"
+    ("id", "event_date", "event_time_start", "event_time_end", "total_hours", "event_confirmed", "requester_id", "claimer_id", "group_id", "notes", "offer_needed", "event_claimed")
+VALUES('50', '2019-09-28', '5:00pm', '9:00pm', '4', 'true', '504', '502', '5000', 'Anniversary date', true, true),
+    ('2019-10-02', '6:00pm', '9:00pm', '3', 'false', '505', '503', '5000', 'We need help!', true, false),
+    ('2019-10-31', '7:00pm', '11:00pb', '4', 'false', '504', '502', '5000', 'Free time for Halloween', false, false); 
