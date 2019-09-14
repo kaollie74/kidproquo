@@ -23,6 +23,8 @@ function* loginUser(action) {
     
     // this.props.history.push('/my-profile-page');
 
+  
+
 
 
   } catch (error) {

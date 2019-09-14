@@ -25,11 +25,11 @@ function* fetchUser() {
     console.log('user groups responseTwo:',responseTwo.data)
     yield put({ type: 'SET_GROUPS', payload: responseTwo.data });
 
-    // if(this.props.reduxStore.user.id){
-    //   yield put({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id });
-    // }
+    const responseThree = yield axios.get('/help');
+    console.log('user /helpresponseThree:', responseThree.data)
+    yield put({ type: 'SET_USER_FAMILY', payload: responseThree.data });
 
-    
+  
     // yield put({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.family.id});
     // yield put({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.family.id});
 
