@@ -400,7 +400,7 @@ class EventView extends Component {
           <div className="ui two column grid">
             <Card.Group
               itemsPerRow={2}
-              style={{ margin: '15px' }}
+              style={{ marginLeft: '25px', marginTop: '20px', width: '100%' }}
             >
               {/* <Table.Header>
               <Table.Row>
@@ -415,19 +415,25 @@ class EventView extends Component {
 
               {this.props.reduxStore.calendar.map(item => (
                 <Card
+                  style={{height: '154px', width: '154px'}} 
                   className="ui centered cards"
                   raised key={item.id}>
 
-                  <Card.Content 
+                  <Card.Content
                   className={item.offer_needed ? 'teal card' : 'orange card'}>
                     
-                    <Card.Header style={{display: 'inline-block'}}>{item.last_name1} <Icon style={{marginLeft: '50px'}} size="large" name="black file alternate outline"></Icon></Card.Header>
-                    <Card.Meta>{item.event_time_start} - {item.event_time_end}</Card.Meta>
+                    <Card.Header style={{display: 'inline-block', float: 'left', 
+                    // marginLeft: '-35px'
+                    }}
+                    >{item.last_name1} <Icon style={{float: 'right', marginLeft: '30px', marginRight: '-5px', height: '25px', width: '20px'}} name="black file alternate outline"></Icon></Card.Header>
+                    <Card.Meta 
+                    // style={{marginLeft: '-35px'}}
+                    >{item.event_time_start} - {item.event_time_end}</Card.Meta>
                     <Card.Description>{item.notes}</Card.Description>
-                    <h3 className={item.offer_needed ? 'teal' : 'orange'}>
+                    <h4 style={{fontSize: '20px', textAlign: 'center'}} className={item.offer_needed ? 'teal' : 'orange'}>
                         {item.offer_needed ? 'Offering' : 'Needed'}
 
-                    </h3>
+                    </h4>
                     <br />
                     {item.requester_id === this.props.reduxStore.family.id
                       ?
