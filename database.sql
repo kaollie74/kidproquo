@@ -225,3 +225,38 @@ Values
 --         'https://cdn.pixabay.com/photo/2014/07/11/22/05/baby-390555_960_720.jpg', 1001);
 
 
+
+-- These are the inserts for presentation data
+
+INSERT INTO "family"
+    ("id","first_name1", "last_name1", "first_name2", "last_name2", "email", "street_address", "city", "state", "zip_code", "phone_number", "image", "user_id", "family_passcode", "group_id")
+VALUES('1005', 'Sam', 'Flavin', 'Jill', 'Flavin', 'sam@hawkins.com', '500 Maple Drive', 'Minneapolis', 'MN', '55411', '984-494-2943', 'https://www.thecharlestonphotographer.com/wp-content/uploads/2015/02/family-pictures-by-charleston-family-photographers-king-street-studios-37.jpg', '502', '1234', '5000'),
+    ('1006', 'Sean', 'Olson', 'Lara', 'Olson', 'sean@hawkins.com', '333 Derry Drive', 'Minneapolis', 'MN', '55411', '984-345-3464', '', '503', '1234', '5000'),
+    ('1007', 'Kyle', 'Olson', 'Amanda', 'Olson', 'kyle@hawkins.com', '607 Lincoln Avenue', 'Minneapolis', 'MN', '55411', '984-356-4569', 'https://www.weverfinancial.com/sites/weverfinancial.com/files/styles/medium/public/young-family.jpg?itok=JdVeI_5_', '504', '1234', '5000'),
+    ('1008', 'Danielle', 'Martain', 'Josh', 'Martain', 'danielle@hawkins.com', '808 Frank Drive', 'Minneapolis', 'MN', '55411', '984-454-2745', 'https://www.sccpre.cat/mypng/detail/132-1320629_current-programs-fun-biracial-family.png', '505', '1234', '5000');
+
+
+INSERT INTO "user"
+    ("id", "username", "password")
+VALUES('502', 'sam', '1234'),
+    ('503', 'sean', '1234'),
+    ('504', 'kyle', '1234'),
+    ('505', 'danielle', '1234');
+
+-- Sam's Family
+
+INSERT INTO "kid"
+    ("id", "first_name","last_name", "birthdate", "allergies", "medication", "image", "family_id", "notes")
+Values
+    ('105', 'Sara', 'Flavin', '01-05-2014', 'none', 'none',
+        'https://www.babycenter.com/ims/2015/09/715x536xiStock_66240995_4x3.jpg.pagespeed.ic.pQJrgrtqf9.jpg', '1005', 'Her favorite toy is her teddy bear.'),
+    ('106', 'Josh', 'Flavin', '06/15/2019', 'none', 'none', 'https://cdn.cdnparenting.com/articles/2018/02/345101900-H.jpg', '1005', 'He sleeps well in his crib.'),
+
+    -- Sean's Family
+    ('107', 'Mary', 'Olson', '01/15/2007', 'bees', 'epi-pen', 'https://marketplace.canva.com/MADapRlTwlk/1/thumbnail_large-1/canva-childhood-time.-cute-little-girl-listening-to-music-with-mobile-phone-and-headphones-MADapRlTwlk.jpg', '1006', 'She likes listening to music.'),
+    ('108', 'Lily', 'Olson', '08/12/2009', 'none', 'none', 'https://www.carters.com/on/demandware.static/-/Sites-Carters-Library/default/dw7a7f95ac/content/carters/images/nav/KG_Fall_2019.jpg', '1006', 'She likes playing games on the computer.'),
+    ('109', 'Jessica', 'Olson', '10/18/2011', 'peanuts', 'benadryl', 'https://ak8.picdn.net/shutterstock/videos/27180628/thumb/1.jpg', '1006', 'She likes to read.'),
+    ('110', 'Danielle', 'Olson', '04/03/2013', 'none', 'none', 'https://www.sheknows.com/wp-content/uploads/2018/08/girl-with-eyeglasses_walzri.jpeg', '1006', 'Loves TV.'),
+    ('111', 'Emily', 'Olson', '02/21/2015', 'http://www.bruna.cat/imgdownload/full/135/1356307/beautiful-cute-girl-hd-wallpaper.jpg', '1006', 'She likes playing outside.'),
+    ('112', 'Nicole', 'Olson', '05/03/2017', 'http://www.youandkids.com/wp-content/uploads/2018/04/Curls-With-Lob-For-A-Cute-Look-735x450.jpg', '1006', 'She likes playing with her sisters.'),
+    ('113', 'Anna', 'Olson', '09/10/2018', 'https://jooinn.com/images/cute-little-girl-15.jpg', '1006', 'She likes playing with her toys.');
