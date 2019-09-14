@@ -440,7 +440,7 @@ class EventView extends Component {
                     <Card.Meta 
                     // style={{marginLeft: '-35px'}}
                     >{item.event_time_start} - {item.event_time_end}</Card.Meta>
-                    <Card.Description>{item.notes}</Card.Description>
+                    {/* <Card.Description>{item.notes}</Card.Description> */}
                     <h4 style={{fontSize: '20px', textAlign: 'center'}} className={item.offer_needed ? 'teal' : 'orange'}>
                         {item.offer_needed ? 'Offering' : 'Needed'}
 

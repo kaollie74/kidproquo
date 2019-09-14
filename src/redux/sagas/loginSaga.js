@@ -20,7 +20,7 @@ function* loginUser(action) {
     // after the user has logged in
     // get the user information from the server
     yield put({type: 'FETCH_USER'});
-    // this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id });
+    
     // this.props.history.push('/my-profile-page');
 
 
