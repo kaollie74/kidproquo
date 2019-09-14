@@ -46,19 +46,11 @@ class GroupView extends Component {
         }
         this.props.dispatch({ type: 'CANCEL_REQUEST', payload: objectToSend })
     }
+    
 
-    // handleClaim = (item) => {
-    //         let newObject = {
-    //             id: this.props.reduxStore.family.id,
-    //             // claimer_id: this.props.reduxStore.user.id,
-    //             event_claimed: true
-    //         }
-    //         this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject });
-    // }
 
     handleClaim = (item) => {
         console.log('in handle Claim', item)
-        let inputValue = this.state.claimer_notes;
         Swal.fire({
             title: 'Are you sure you want to claim this request?',
             type: 'question',
@@ -84,8 +76,22 @@ class GroupView extends Component {
                     last_name1: this.props.reduxStore.family.last_name1,
                     claimer_notes: this.state.claimer_notes,
                     group_id: this.props.reduxStore.userGroups[0],
+                    requester_name: item.requester_name
                 }
+
+                let textMessage = {
+                    requester_phone: item.requester_number,
+                    claimer_name: this.props.reduxStore.family.last_name1,
+                    event_date: item.event_date,
+                    event_time_start: item.event_time_start,
+                    event_time_end: item.event_time_end,
+                }
+                console.log('this is the text message object', textMessage)
+
                 this.props.dispatch({ type: 'CLAIM_EVENT', payload: newObject })
+                //Trying Twilio
+                this.props.dispatch({ type: 'SEND_TEXT', payload: textMessage });
+
             } else if (response.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
                     'Cancelled Claim'
@@ -113,8 +119,9 @@ class GroupView extends Component {
                         <Button.Or />
                         <Button>ADD MEMBERS</Button>
                     </Button.Group>
+                </div>
+                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
                 </div> */}
-                {/* <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre> */}
                 {/* the group reducer actually holds requests relevant to group */}
                 <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '0px', marginBottom: '20px'}} />
                 <h3 style={{textAlign: 'center'}}> Requests </h3>
@@ -185,6 +192,7 @@ class GroupView extends Component {
                             && item.event_claimed === false
                             && item.offer_needed === false
                         ) {
+                            //this is the return for when you are claiming someones event who needs help
                             return (
                                 <>
                                     <Card >

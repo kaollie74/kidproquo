@@ -38,7 +38,8 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-icon": "^2.3.3",
     "semantic-ui-react": "^0.88.0",
-    "sweetalert2": "^8.17.1"
+    "sweetalert2": "^8.17.1",
+    "twilio": "^3.34.0"
   },
   "scripts": {
     "start": "node server/server.js",

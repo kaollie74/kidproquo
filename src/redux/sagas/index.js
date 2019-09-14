@@ -13,6 +13,9 @@ import kidSaga from './kidSaga';
 import hourSaga from './hourSaga';
 import feedSaga from './feedSaga';
 import notificationsSaga from './notificationsSaga'
+//Twilio
+import textSaga from './textSaga';
+
 
 
 // rootSaga is the primary saga.
@@ -37,6 +40,8 @@ export default function* rootSaga() {
     hourSaga(),
     feedSaga(),
     notificationsSaga(),
+    //Twilio
+    textSaga(),
     
   ]);
 }
