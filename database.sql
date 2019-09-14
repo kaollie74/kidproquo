@@ -249,8 +249,8 @@ INSERT INTO "kid"
     ("id", "first_name","last_name", "birthdate", "allergies", "medication", "image", "family_id", "notes")
 Values
     ('105', 'Sara', 'Flavin', '01-05-2014', 'none', 'none',
-        'https://www.babycenter.com/ims/2015/09/715x536xiStock_66240995_4x3.jpg.pagespeed.ic.pQJrgrtqf9.jpg', '1005', 'Her favorite toy is her teddy bear.'),
-    ('106', 'Josh', 'Flavin', '06/15/2019', 'none', 'none', 'https://cdn.cdnparenting.com/articles/2018/02/345101900-H.jpg', '1005', 'He sleeps well in his crib.'),
+        'https://www.babycenter.com/ims/2015/09/715x536xiStock_66240995_4x3.jpg.pagespeed.ic.pQJrgrtqf9.jpg', '1001', 'Her favorite toy is her teddy bear.'),
+    ('106', 'Josh', 'Flavin', '06/15/2019', 'none', 'none', 'https://cdn.cdnparenting.com/articles/2018/02/345101900-H.jpg', '1001', 'He sleeps well in his crib.'),
 
     -- Sean's Family
     ('107', 'Mary', 'Olson', '01/15/2007', 'bees', 'epi-pen', 'https://marketplace.canva.com/MADapRlTwlk/1/thumbnail_large-1/canva-childhood-time.-cute-little-girl-listening-to-music-with-mobile-phone-and-headphones-MADapRlTwlk.jpg', '1006', 'She likes listening to music.'),
