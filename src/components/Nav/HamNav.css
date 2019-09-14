@@ -6,7 +6,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #8295ca;
+    background-color: #3f3163;
     overflow-x: hidden;
     padding-top: 60px;
     transition: 0.5s;
@@ -36,8 +36,6 @@
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
-    
-    
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */

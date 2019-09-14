@@ -57,7 +57,7 @@ class NewUserForm extends Component {
     if (this.state.first_name1 && this.state.last_name1 && this.state.street_address && this.state.city
         && this.state.state && this.state.zip_code && this.state.email && this.state.phone_number) {
         this.props.dispatch({type: 'ADD_NEW_FAMILY', payload: newObjectToSend});
-        this.props.history.push('/my-profile-page');
+        this.props.history.push('/');
     } else {
         this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }

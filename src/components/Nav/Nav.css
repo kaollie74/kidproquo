@@ -1,14 +1,26 @@
 .nav-title {
-    font-size: 5rem;
+    font-size: 4.5rem;
     font-weight: 700;
-    text-align: center;
-    padding-right: 5vh;
-    display: inline-block;
+    padding-left: 0vh;
+    padding-right: 10px;
     color: #f2f2f2;
     /* padding-left: 10px; */
     float: right;
     margin-left: 0px;
-    margin-right: 20px
+    /* margin-right: 15px; */
+    margin-top: -20px;
+}
+
+.nav-title-two {
+  font-size: 4.5rem;
+  font-weight: 700;
+  padding-left: 0vh;
+  padding-right: 10px;
+  color: #f2f2f2;
+  /* padding-left: 10px; */
+  text-align: center;
+  /* margin-right: 15px; */
+  margin-top: -20px;
 }
 
 .nav {
@@ -16,6 +28,11 @@
   background-color: #8298ca;
   display: inline-block;
   width: 100%;
+  height: 90px;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 .nav-link {
