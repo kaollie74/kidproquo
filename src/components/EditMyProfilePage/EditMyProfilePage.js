@@ -181,13 +181,13 @@ updateFamily = () => {
 
 dummyData = () => {
     this.setState({
-        first_name: 'George',
-        last_name: 'Johnson',
-        birthdate: '12-10-1987',
+        first_name: 'Michelle',
+        last_name: 'Olson',
+        birthdate: '9-15-2019',
         image:'https://www.sharp.com/health-news/images/My-Child-Swallowed-a-Coin-HN884-Babies-IStock-515683938-Sized.jpg',
         medication: 'None',
         allergies: 'No Allergies',
-        notes: 'cool kid'
+        notes: ''
     })
 }
 
