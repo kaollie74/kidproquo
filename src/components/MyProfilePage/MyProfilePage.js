@@ -188,7 +188,7 @@ class MyProfilePage extends Component {
                 <h1 style={{textAlign: 'center'}}> The {this.props.reduxStore.family.last_name1} Profile </h1>
                 <h3 style={{textAlign: 'center'}}> Equity</h3>
                 <div className="slidecontainer">
-                        <p className="negative"> - </p><input type="range" min="-20" max="20" value={total_hours} className="slider" id="myRange"></input><p className="positive">+</p>
+                        <p className="negative"> - </p><input type="range" min="-20" max="20" value={total_hours} className={total_hours >= 0 ? "GreenSlider" : "RedSlider"} id="myRange"></input><p className="positive">+</p>
                     </div>
                     <div className="totalHours">
                         <div className="hoursUsed">
@@ -222,7 +222,6 @@ class MyProfilePage extends Component {
                     // -------------------------------------------------- USER/FAMILY CLAIMED AN EVENT ---------------------------------------------------------------
 
                         // ------------------  NOT CONFIRMED ---------------------------
-
                         // care is NEEDED
                         if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false) {
                         return (
@@ -246,7 +245,7 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
  
                                             </Feed.Event>
-                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING CONFIRMATION</p>
+                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING APPROVAL</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
                             </Card>
@@ -278,7 +277,7 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
  
                                             </Feed.Event>
-                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING CONFIRMATION</p>
+                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>PENDING APPROVAL</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
                             </Card>
@@ -312,7 +311,7 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
  
                                             </Feed.Event>
-                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                                 <p style={{fontWeight: 'bold', color: 'green'}}>CONFIRMED</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
                             </Card>
@@ -344,7 +343,7 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
  
                                             </Feed.Event>
-                                                 <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                                 <p style={{fontWeight: 'bold', color: 'green'}}>CONFIRMED</p>
                                                 {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
                             </Card>
@@ -352,7 +351,7 @@ class MyProfilePage extends Component {
 
                             )
                         }})
-                        : <p></p>}
+                        : <h4 style={{fontSize: '20px', color: 'grey'}}> You have no claimed requests </h4>}
                         <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px'}} />
                          <h3 align="center">YOUR REQUESTS</h3>
                          {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
@@ -455,8 +454,8 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
  
                                             </Feed.Event>
-                                            <Button style={{padding: '10px', marginBottom: '10px'}} color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
-                                            {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            <Button style={{padding: '10px', marginBottom: '10px'}} color='green' onClick={() => this.handleConfirm(item)}>APPROVE</Button>
+                                            {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>DENY</Button>} 
                                             </Feed>
                                         </Card>
                               </>
@@ -490,8 +489,8 @@ class MyProfilePage extends Component {
                                                     {item.event_time_start} - {item.event_time_end} 
                                                 </Feed.Content>
                                             </Feed.Event>
-                                            <Button style={{padding: '10px', marginBottom: '10px'}} color='blue' onClick={() => this.handleConfirm(item)}>CONFIRM</Button>
-                                            {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
+                                            <Button style={{padding: '10px', marginBottom: '10px'}} color='green' onClick={() => this.handleConfirm(item)}>APPROVE</Button>
+                                            {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>DENY</Button>} 
                                             </Feed>
                                     </Card>
                                 </>
@@ -529,7 +528,7 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
  
                                             </Feed.Event>
-                                            <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                            <p style={{fontWeight: 'bold', color: 'green'}}>APRROVED</p>
                                             {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
                                     </Card>
@@ -565,7 +564,7 @@ class MyProfilePage extends Component {
                                                 </Feed.Content>
  
                                             </Feed.Event>
-                                            <p style={{fontWeight: 'bold', color: 'grey'}}>CONFIRMED</p>
+                                            <p style={{fontWeight: 'bold', color: 'green'}}>APPROVED</p>
                                             {<Button style={{padding: '10px', marginBottom: '10px'}} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>} 
                                             </Feed>
                                     </Card>
@@ -579,7 +578,7 @@ class MyProfilePage extends Component {
                             </>
                     )}
                     })
-                    : <p></p>} 
+                    : <h4 style={{fontSize: '20px', color: 'grey'}}> You have no requests </h4>} 
 
 
                 </Container>
