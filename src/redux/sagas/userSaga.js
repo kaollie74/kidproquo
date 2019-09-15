@@ -19,12 +19,14 @@ function* fetchUser() {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
-
+    console.log('IN USER SAGA WITH RESPONSE.DATA:', response.data)
     //getting user groups for later user i.e. 'group view'
     const responseTwo = yield axios.get('/group');
     console.log('user groups responseTwo:',responseTwo.data)
     yield put({ type: 'SET_GROUPS', payload: responseTwo.data });
-
+    const responseThree = yield axios.get(`/family/userFamily/${response.data.id}`);
+    console.log('IN USER SAGA WITH RESPONSE THREE (USER FAMILY):', responseThree.data);
+    yield put({ type: 'SET_USER_FAMILY', payload: responseThree.data})
     // if(this.props.reduxStore.user.id){
     //   yield put({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id });
     // }
