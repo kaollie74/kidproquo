@@ -20,7 +20,7 @@ class GroupFamPage extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.match.params.id })
+        this.props.dispatch({ type: 'CLICK_FETCH_FAMILY', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
     }
 
@@ -56,7 +56,7 @@ class GroupFamPage extends Component {
             <>
                 <div>
                     <h1 className='headerTitleFamily'>
-                        {this.props.reduxStore.family.last_name1} Family
+                        {this.props.reduxStore.singleFam.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
@@ -65,7 +65,7 @@ class GroupFamPage extends Component {
                         <Card.Content>
                             <Card.Header> </Card.Header>
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
-                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : <>no</>} alt="img 1" />
+                            <Image className='ui centered medium image' src={this.props.reduxStore.singleFam.image ? this.props.reduxStore.singleFam.image : <>no</>} alt="img 1" />
                         </Card.Content>
                     </Card>
                 </div>
@@ -75,11 +75,11 @@ class GroupFamPage extends Component {
                         <Card.Content>
                             <Card.Header>Info</Card.Header>
                             <Card.Description>
-                                {this.props.reduxStore.family.street_address} < br />
-                                {this.props.reduxStore.family.city}  <></>
-                                {this.props.reduxStore.family.state}, <></>
-                                {this.props.reduxStore.family.zip_code}< br />
-                                {this.props.reduxStore.family.phone_number}
+                                {this.props.reduxStore.singleFam.street_address} < br />
+                                {this.props.reduxStore.singleFam.city}  <></>
+                                {this.props.reduxStore.singleFam.state}, <></>
+                                {this.props.reduxStore.singleFam.zip_code}< br />
+                                {this.props.reduxStore.singleFam.phone_number}
                             </Card.Description>
                         </Card.Content>
                     </Card>
