@@ -58,11 +58,23 @@ function* fetchKids(action) {
     }
 }
 
+function* fetchUserFamily(action) {
+    try{
+        console.log(action.payload)
+        const response = yield Axios.get(`/family/userFamily`, action.payload);
+        console.log(response.data);
+        yield put({ type: 'SET_USER_FAMILY', payload: response.data})
+    } catch(error) {
+        console.log('error fetching users family data', error)
+    }
+}
+
 function* familySaga() {
     yield takeEvery('FETCH_FAMILY', fetchFamily)
     yield takeEvery('FETCH_KIDS', fetchKids)
     yield takeEvery('ADD_NEW_FAMILY', addNewFamily)
     yield takeEvery('UPDATE_FAMILY', updateFamily)
+    yield takeEvery('FETCH_USER_FAMILY', fetchUserFamily)
 }
 
 
