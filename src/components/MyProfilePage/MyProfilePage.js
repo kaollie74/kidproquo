@@ -22,7 +22,15 @@ class MyProfilePage extends Component {
     }
 
     componentDidMount() {
+
+        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
+
         console.log('IN PROFILE COMP DID MOUNT WITH:', this.props.reduxStore.userFamily)
+
         this.props.dispatch({
             type: 'FETCH_GROUP_NOTIFICATIONS',
             payload: {
@@ -30,18 +38,9 @@ class MyProfilePage extends Component {
                 user_id: this.props.reduxStore.user.id
             }
         });
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
-        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
-        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
-        // let hours_used = (this.props.reduxStore.hoursUsed.hours_used / 60).toFixed(1);
-        // let hours_gained = (this.props.reduxStore.hoursGained.hours_gained / 60).toFixed(1);
-        // let total_hours = Number(hours_gained - hours_used).toFixed(1);
-        // this.setState({
-        //     hours_used: hours_used,
-        //     hours_gained:hours_gained,
-        //     total_hours: total_hours
-        // })
+
     }
+
 
     // handleEquityHoursUsedOne = () => {
     //     let array = this.props.reduxStore.notifications;
@@ -225,7 +224,7 @@ class MyProfilePage extends Component {
 
     render() {
 
-        console.log('this is STATE IN MY PROFILE PAGE VIEW:', this.state)
+        // console.log('this is STATE IN MY PROFILE PAGE VIEW:', this.state)
         console.log('IN PROFILE WITH:', this.props.reduxStore.hoursUsed, this.props.reduxStore.hoursGained)
         let hours_used = (this.props.reduxStore.hoursUsed.hours_used / 60).toFixed(1);
         let hours_gained = (this.props.reduxStore.hoursGained.hours_gained / 60).toFixed(1);
@@ -234,7 +233,7 @@ class MyProfilePage extends Component {
                     return (
 
             <>
-                {/* <pre>{JSON.stringify(this.props.reduxStore.notifications, null, 2)}</pre> */}
+                <pre>{JSON.stringify(this.props.reduxStore.userFamily, null, 2)}</pre>
                 {/* <Progress
                     value={this.handleEquity()}
                 /> */}
@@ -243,14 +242,14 @@ class MyProfilePage extends Component {
                 <Button color='blue' onClick={()=> this.calculateEquity()}>CALCULATE EQUITY</Button></center>
                 <h3 style={{textAlign: 'center'}}> Equity</h3>
                 <div className="slidecontainer">
-                        <p className="negative"> - </p><input type="range" min="-20" max="20" value={this.state.total_hours} className={this.state.total_hours >= 0 ? "GreenSlider" : "RedSlider"} id="myRange"></input><p className="positive">+</p>
+                        <p className="negative"> - </p><input type="range" min="-20" max="20" value={total_hours} className={total_hours >= 0 ? "GreenSlider" : "RedSlider"} id="myRange"></input><p className="positive">+</p>
                     </div>
                     <div className="totalHours">
                         <div className="hoursUsed">
-                        <p style={{fontWeight: 'bold'}}> Hours Used: {this.state.hours_used} </p>
+                        <p style={{fontWeight: 'bold'}}> Hours Used: {hours_used} </p>
                     </div>
                     <div className="hoursBanked">
-                        <p style={{fontWeight: 'bold'}}> Hours Gained: {this.state.hours_gained} </p>
+                        <p style={{fontWeight: 'bold'}}> Hours Gained: {hours_gained} </p>
                     </div>
                 </div>
                 <hr style={{ backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px', marginBottom: '30px' }} />

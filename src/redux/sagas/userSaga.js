@@ -8,6 +8,10 @@ function* fetchUser() {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
+    const responseThree = yield axios.get('/help');
+    console.log('user /helpresponseThree:', responseThree.data)
+    yield put({ type: 'SET_USER_FAMILY', payload: responseThree.data });
+
 
     // the config includes credentials which
     // allow the server session to recognize the user
@@ -24,14 +28,16 @@ function* fetchUser() {
     const responseTwo = yield axios.get('/group');
     console.log('user groups responseTwo:',responseTwo.data)
     yield put({ type: 'SET_GROUPS', payload: responseTwo.data });
-    const responseThree = yield axios.get(`/family/userFamily/${response.data.id}`);
-    console.log('IN USER SAGA WITH RESPONSE THREE (USER FAMILY):', responseThree.data);
-    yield put({ type: 'SET_USER_FAMILY', payload: responseThree.data})
-    // if(this.props.reduxStore.user.id){
-    //   yield put({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id });
-    // }
 
-    
+
+    //const responseFour = yield axios.get(`/feed/hoursUsed/${responseThree.data.id}`);
+    //console.log('user /feed response four:', responseFour.data)
+    //yield put({ type: 'SET_HOURS_USED', payload: responseFour.data });
+
+
+
+
+  
     // yield put({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.family.id});
     // yield put({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.family.id});
 
