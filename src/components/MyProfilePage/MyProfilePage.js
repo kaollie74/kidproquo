@@ -41,102 +41,6 @@ class MyProfilePage extends Component {
 
     }
 
-
-    // handleEquityHoursUsedOne = () => {
-    //     let array = this.props.reduxStore.notifications;
-    //     console.log('IN HANDLE EQUITY 1 WITH:', array);
-    //     let minutesUsed = 0;
-    //     let minutesGained = 0;
-    //     // CALCULATE TOTAL MINUTES USED
-    //     for (let item of array ){
-    //         if (this.props.reduxStore.family.id === item.requester_id && item.offer_needed === false && item.event_confirmed === true){
-    //             minutesUsed += Number(item.total_hours);
-    //             console.log(item)
-    //             console.log('IN FIRST LOOP WITH:', minutesUsed)
-    //         }}
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.claimer_id && item.offer_needed === true && item.event_confirmed === true){
-    //             minutesUsed += Number(item.total_hours);
-    //             console.log(item)
-    //             console.log('IN SECOND LOOP WITH:', minutesUsed)
-    //         }}
-    //     let totalMinutesUsed = minutesUsed;
-    //     this.setState({
-    //         minutesUsed: totalMinutesUsed
-    //     })
-    //     console.log('IN FUNCTION WITH TOTAL MINUTES USED:', totalMinutesUsed)
-    //     // CALCULATE TOTAL MINUTES GAINED
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.requester_id && item.offer_needed === true && item.event_confirmed === true){
-    //             minutesGained += Number(item.total_hours);
-    //             console.log(item)
-    //             console.log('IN THIRD LOOP WITH:', minutesGained)
-    //         }}
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.claimer_id && item.offer_needed === false && item.event_confirmed === true){
-    //                 minutesGained += Number(item.total_hours);
-    //                 console.log(item)
-    //                 console.log('IN FOURTH LOOP WITH:', minutesGained)
-    //             }}
-    //     let totalMinutesGained = minutesGained;
-    //     this.setState({
-    //         minutesGained: totalMinutesGained
-    //     })
-    // }
-
-    // handleEquityHoursGainedOne = () => {
-    //     let array = this.props.reduxStore.notifications;
-    //     console.log('IN HANDLE EQUITY 3 WITH:', array);
-    //     let minutesGained = this.state.minutesGained;
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.requester_id && item.offer_needed === true && item.event_confirmed === true){
-    //             minutesGained += Number(item.total_hours);
-    //             console.log(item)
-    //             console.log('IN THIRD LOOP WITH:', minutesGained)
-    //             this.setState({
-    //                 minutesGained: minutesGained
-    //             })
-    //         }}
-    //     this.handleEquityHoursGainedTwo();
-    // }
-
-    // handleEquityHoursGainedTwo = () => {
-    //     let array = this.props.reduxStore.notifications;
-    //     console.log('IN HANDLE EQUITY 4 WITH:', array);
-    //     let minutesUsed = this.state.minutesUsed;
-    //     let minutesGained = this.state.minutesGained;
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.claimer_id && item.offer_needed === false && item.event_confirmed === true){
-    //                 minutesGained += Number(item.total_hours);
-    //                 console.log(item)
-    //                 console.log('IN FOURTH LOOP WITH:', minutesGained)
-    //                 this.setState({
-    //                     minutesGained: minutesGained
-    //                 })
-    //             }}
-    // }
-
-
-    // progressBar = () => {
-    //     let feedNeed= this.props.reduxStore.feedNeed;
-    //     let needHours = 0
-    //     let offeredHours = 0
-    //     for(let hour of feedNeed){
-    //         // console.log(`this is hour, ${hour.needed_total_hours}` )
-    //         if(hour === 'hour.needed_total_hours'){
-    //             needHours += Number(hour.needed_total_hours)
-    //         }
-    //         if (hour.offered_totalhours) {
-    //             offeredHours += Number(hour.offered_total_hours)
-    //         }
-    //     }
-    //     // console.log(needHours)
-    //     // console.log(offeredHours)
-    //     let total = ( needHours - offeredHours );
-    //     // console.log('total', total)
-    //     return total;
-    // }
-
     calculateEquity = () => {
         console.log('IN CALCULATE EQUITY WITH:', this.props.reduxStore.userFamily)
         this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
@@ -179,7 +83,7 @@ class MyProfilePage extends Component {
                 //Twilio
                 let textMessage = {
                     claimer_phone: item.claimer_number,
-                    requester_name: this.props.reduxStore.family.last_name1,
+                    requester_name: this.props.reduxStore.userFamily.last_name1,
                     event_date: item.event_date,
                     event_time_start: item.event_time_start,
                     event_time_end: item.event_time_end,
