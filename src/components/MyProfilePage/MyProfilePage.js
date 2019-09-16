@@ -234,7 +234,7 @@ class MyProfilePage extends Component {
                     return (
 
             <>
-                <pre>{JSON.stringify(this.props.reduxStore.userFamily, null, 2)}</pre>
+                
                 {/* <Progress
                     value={this.handleEquity()}
                 /> */}
@@ -584,7 +584,7 @@ class MyProfilePage extends Component {
                                                     </Feed.Content>
 
                                                 </Feed.Event>
-                                                <p style={{ fontWeight: 'bold', color: 'green' }}>APRROVED</p>
+                                                <p style={{ fontWeight: 'bold', color: 'green' }}>APPROVED</p>
                                                 {<Button style={{ padding: '10px', marginBottom: '10px' }} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>}
                                             </Feed>
                                         </Card>
