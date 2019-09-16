@@ -24,7 +24,6 @@ import InfoPage from '../InfoPage/InfoPage';
 import KidPage from '../KidPage/KidPage';
 import MyProfilePage from '../MyProfilePage/MyProfilePage';
 import NewUserForm from '../NewUserForm/NewUserForm';
-import UserPage from '../UserPage/UserPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import LoginPage from '../LoginPage/LoginPage';
 import GroupFamPage from '../GroupFamPage/GroupFamPage';
@@ -32,14 +31,10 @@ import GroupFamPage from '../GroupFamPage/GroupFamPage';
 import './App.css';
 
 
-
-
-
-
-
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_USER' })
+    this.props.dispatch({ type: 'FETCH_USER' });
+
   }
 
   render() {
@@ -50,7 +45,7 @@ class App extends Component {
           
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-            <Redirect exact from="/" to="/my-profile-page" />
+            
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
             <Route
@@ -58,15 +53,8 @@ class App extends Component {
               path="/about"
               component={AboutPage}
             />
-            {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/home will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
-            Even though it seems like they are different pages, the user is always on localhost:3000/home */}
-            <ProtectedRoute
-              exact
-              path="/home"
-              component={UserPage}
-            />
+    
+          
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
             <ProtectedRoute
@@ -90,7 +78,7 @@ class App extends Component {
             
             <ProtectedRoute
               exact
-              path="/my-profile-page"
+              path="/"
               component={MyProfilePage}
             />
 

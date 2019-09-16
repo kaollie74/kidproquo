@@ -3,10 +3,17 @@
   margin-top: 1vh;
 }
 
-.formBackground {
-  margin: 2vh;
+.familyFormBackground {
+  background-color: #8298ca;
+  margin-top: 2vh;
   margin-left: 3vh;
-  height: 150vh;
+  width: 50vh;
+  height: 167vh;
+  border: solid;
+}
+
+.familyFormInputsBtns {
+  margin-left: 3vh;
 }
 
 h2 {
@@ -16,7 +23,6 @@ h2 {
 .editProfileHeader {
   margin-bottom: 2vh;
   padding: 1vh;
-
   text-align: center;
   font-size: 50px !important;
 }
@@ -31,12 +37,12 @@ h2 {
 }
 .editProfileBtns {
   margin-top: 2vh;
-  padding-left: 6vh; 
+  padding-left: 9vh; 
 }
 
 @media only screen and (min-width: 1000px) {
 
-  .formBackground {
+  .familyFormBackground {
     margin: 2vh;
     margin-left: 37vh;
     height: 125vh;

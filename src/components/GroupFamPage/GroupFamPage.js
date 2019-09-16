@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import Coverflow from 'react-coverflow';
 import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Grid } from 'semantic-ui-react';
+import './GroupFamPage.css';
 
 
 
 class GroupFamPage extends Component {
 
-    state= {
+    state = {
         open: false
     }
 
@@ -19,7 +20,7 @@ class GroupFamPage extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.match.params.id})
+        this.props.dispatch({ type: 'CLICK_FETCH_FAMILY', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
     }
 
@@ -54,9 +55,8 @@ class GroupFamPage extends Component {
         return (
             <>
                 <div>
-                    {/* {JSON.stringify(this.props.reduxStore)} */}
-                    <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1}
+                    <h1 className='headerTitleFamily'>
+                        {this.props.reduxStore.singleFam.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
@@ -65,14 +65,29 @@ class GroupFamPage extends Component {
                         <Card.Content>
                             <Card.Header> </Card.Header>
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
-                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image: <>no</> } alt="img 1" />
+                            <Image className='ui centered medium image' src={this.props.reduxStore.singleFam.image ? this.props.reduxStore.singleFam.image : <>no</>} alt="img 1" />
+                        </Card.Content>
+                    </Card>
+                </div>
+                &nbsp;
+                <div align="center">
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>Info</Card.Header>
+                            <Card.Description>
+                                {this.props.reduxStore.singleFam.street_address} < br />
+                                {this.props.reduxStore.singleFam.city}  <></>
+                                {this.props.reduxStore.singleFam.state}, <></>
+                                {this.props.reduxStore.singleFam.zip_code}< br />
+                                {this.props.reduxStore.singleFam.phone_number}
+                            </Card.Description>
                         </Card.Content>
                     </Card>
                 </div>
                 &nbsp;
                 <div className='kidCard'>
                     <div className='meetKidsTitle'>
-                        <h1>Meet the Kids</h1>
+                        <h1>Kids</h1>
                     </div>
 
                     <Grid stackable container centered columns={2} >
@@ -81,7 +96,7 @@ class GroupFamPage extends Component {
                             return (
 
                                 <Grid.Column>
-                                    <Card key={item.id} style={{ 'min-height': '350px' }}>
+                                    <Card key={item.id} className='kidCard'>
                                         <Card.Content>
 
                                             <Card.Header className='kidCardTitle'>
@@ -134,8 +149,14 @@ class GroupFamPage extends Component {
 
 
                 </div>
-                <Button variant="contained" color="primary" onClick={this.handleBack}>Back</Button>
-
+                <div className='backBtn'>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleBack}>
+                        Back
+                    </Button>
+                </div>
             </>
         )
     }

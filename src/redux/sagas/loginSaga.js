@@ -11,7 +11,7 @@ function* loginUser(action) {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
-
+    console.log('action payload IN LOGIN SAGA:', action.payload)
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
@@ -20,6 +20,11 @@ function* loginUser(action) {
     // after the user has logged in
     // get the user information from the server
     yield put({type: 'FETCH_USER'});
+    yield put({type: 'FETCH_USER_FAMILY', payload: action.payload})
+    // this.props.history.push('/my-profile-page');
+
+
+
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {
@@ -48,11 +53,11 @@ function* logoutUser(action) {
     // when the server recognizes the user session
     // it will end the session
     yield axios.post('/api/user/logout', config);
-
     // now that the session has ended on the server
     // remove the client-side user object to let
     // the client-side code know the user is logged out
     yield put({ type: 'UNSET_USER' });
+   
 
   } catch (error) {
     console.log('Error with user logout:', error);

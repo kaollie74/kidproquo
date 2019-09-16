@@ -73,7 +73,7 @@ class FamilyProfilePage extends Component {
                 <div>
 
                     <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1} Family
+                        {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
@@ -117,8 +117,8 @@ class FamilyProfilePage extends Component {
                 </div>
                 &nbsp;
                 <div className='kidCard'>
-                    <div className='meetKidsTitle'>
-                        <h1>Meet the Kids</h1>
+                    <div className='ourKidsTitle'>
+                        <h1>Our Kids</h1>
                     </div>
 
                     <Grid stackable container centered columns={3} >

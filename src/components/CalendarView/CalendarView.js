@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { Day } from 'material-ui-pickers';
 import { withStyles } from '@material-ui/core/styles';
+import './CalendarView.css';
 
 
 const styles = theme => ({
@@ -69,7 +70,7 @@ class CalendarView extends Component {
         console.log('in format date', value)
        //let newDate = ( value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear());
       let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
-        
+  
       let newObjectToSend = {event_date: newDate}
       this.props.dispatch({type: 'FETCH_EVENTS', payload: newObjectToSend})
       console.log('NEW OBJECT TO SEND (CALENDAR VIEW):', newObjectToSend);
@@ -87,7 +88,8 @@ class CalendarView extends Component {
         if (this.state.dateToDisplay === this.state.dateToSend) {
         return (
           <>
-          <div>
+          <div className='calendarView'>
+        
             <Calendar 
               className="calendar"
               onChange={(event) => this.formatDate(event)}
@@ -108,9 +110,9 @@ class CalendarView extends Component {
         )} else {
           return (
           <>
-          <div>
+          <div className='calendarView'>
             <Calendar
-              className="calendar"
+              className='calendar'
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}

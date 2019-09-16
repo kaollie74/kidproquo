@@ -25,9 +25,10 @@ closeNav = () => {
   render() {
     return (
       <>
-        <Icon name='bars' className='bars icon' size='large' onClick={(event) => this.openNav(event)} />
+        <Icon name='bars' 
+        style={{paddingTop: '15px', paddingLeft: '17px'}}
+        className='bars icon' size='huge' onClick={(event) => this.openNav(event)} />
       
-
       <div id="sidenav" className="sidenav">
           <Icon name='x' className='x icon' size='large' onClick={(event) => this.closeNav(event)} />
       <div id="sidenav" className="sidenav closebtn"></div>
@@ -37,9 +38,9 @@ closeNav = () => {
         
          
                 <ul>
-                  <li><Link className="sidenav-a" to="/my-profile-page" onClick={this.closeNav}>My Profile</Link></li>
-              <li><Link className="sidenav-a" to="/group-view" onClick={this.closeNav}>My Groups</Link></li>
-              <li><Link className="sidenav-a" to="/family-profile" onClick={this.closeNav}>My Family</Link></li>
+                  <li><Link className="sidenav-a" to="/" onClick={this.closeNav}>Profile</Link></li>
+              <li><Link className="sidenav-a" to="/group-view" onClick={this.closeNav}>Groups</Link></li>
+              <li><Link className="sidenav-a" to="/family-profile" onClick={this.closeNav}>Family</Link></li>
               <li><Link className="sidenav-a" to="/about" onClick={this.closeNav}>About</Link></li> 
               <li><LogOutButton className="sidenav-a" onClick={this.closeNav}/></li>
                 </ul>
