@@ -169,6 +169,7 @@ class MyProfilePage extends Component {
                     claimer_notes: document.getElementById('swal-input1').value
                 })
                 let newObject = {
+                    family_id: this.props.reduxStore.userFamily.id,
                     id: item.id,
                     event_confirmed: true,
                     group_id: this.props.reduxStore.userGroups[0],
@@ -238,8 +239,8 @@ class MyProfilePage extends Component {
                     value={this.handleEquity()}
                 /> */}
                 <h1 style={{textAlign: 'center'}}> The {this.props.reduxStore.family.last_name1} Profile </h1>
-                <center>
-                <Button color='blue' onClick={()=> this.calculateEquity()}>CALCULATE EQUITY</Button></center>
+                
+                {/* <Button color='blue' onClick={()=> this.calculateEquity()}>CALCULATE EQUITY</Button></center> */}
                 <h3 style={{textAlign: 'center'}}> Equity</h3>
                 <div className="slidecontainer">
                         <p className="negative"> - </p><input type="range" min="-20" max="20" value={total_hours} className={total_hours >= 0 ? "GreenSlider" : "RedSlider"} id="myRange"></input><p className="positive">+</p>
