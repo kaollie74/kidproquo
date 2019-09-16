@@ -23,16 +23,18 @@ function* fetchUser() {
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
-
+    console.log('IN USER SAGA WITH RESPONSE.DATA:', response.data)
     //getting user groups for later user i.e. 'group view'
     const responseTwo = yield axios.get('/group');
     console.log('user groups responseTwo:',responseTwo.data)
     yield put({ type: 'SET_GROUPS', payload: responseTwo.data });
 
-  
-    const responseFour = yield axios.get(`/feed/hoursUsed/${responseThree.data.id}`);
-    console.log('user /feed response four:', responseFour.data)
-    yield put({ type: 'SET_HOURS_USED', payload: responseFour.data });
+
+    //const responseFour = yield axios.get(`/feed/hoursUsed/${responseThree.data.id}`);
+    //console.log('user /feed response four:', responseFour.data)
+    //yield put({ type: 'SET_HOURS_USED', payload: responseFour.data });
+
+
 
 
   

@@ -16,17 +16,21 @@ class MyProfilePage extends Component {
         visible: false,
         minutesUsed: '',
         minutesGained: '',
-        hours_used: '',
-        hours_gained: '',
-        total_hours: '',
+        hours_used: 0,
+        hours_gained: 0,
+        total_hours: 0,
     }
 
     componentDidMount() {
+
         this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
         this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
         this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
         this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
         this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
+
+        console.log('IN PROFILE COMP DID MOUNT WITH:', this.props.reduxStore.userFamily)
+
         this.props.dispatch({
             type: 'FETCH_GROUP_NOTIFICATIONS',
             payload: {
@@ -35,9 +39,6 @@ class MyProfilePage extends Component {
             }
         });
 
-        
-        // this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.family.id });
-        // this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.family.id });
     }
 
 
@@ -136,6 +137,21 @@ class MyProfilePage extends Component {
     //     return total;
     // }
 
+    calculateEquity = () => {
+        console.log('IN CALCULATE EQUITY WITH:', this.props.reduxStore.userFamily)
+        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        let hours_used = (this.props.reduxStore.hoursUsed.hours_used / 60).toFixed(1);
+        let hours_gained = (this.props.reduxStore.hoursGained.hours_gained / 60).toFixed(1);
+        let total_hours = Number(hours_gained - hours_used).toFixed(1);
+        console.log('IN CALCULATE EQUITY WITH hours:', hours_used, hours_gained, total_hours)
+        this.setState({
+            hours_used: hours_used,
+            hours_gained:hours_gained,
+            total_hours: total_hours
+        })
+    }
+
     handleConfirm = (item) => {
         Swal.fire({
             title: 'Are you sure you want to confirm this request?',
@@ -222,6 +238,8 @@ class MyProfilePage extends Component {
                     value={this.handleEquity()}
                 /> */}
                 <h1 style={{textAlign: 'center'}}> The {this.props.reduxStore.family.last_name1} Profile </h1>
+                <center>
+                <Button color='blue' onClick={()=> this.calculateEquity()}>CALCULATE EQUITY</Button></center>
                 <h3 style={{textAlign: 'center'}}> Equity</h3>
                 <div className="slidecontainer">
                         <p className="negative"> - </p><input type="range" min="-20" max="20" value={total_hours} className={total_hours >= 0 ? "GreenSlider" : "RedSlider"} id="myRange"></input><p className="positive">+</p>
