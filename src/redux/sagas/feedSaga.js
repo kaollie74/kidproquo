@@ -73,7 +73,8 @@ function* confirmEvent(action) {
     })
     // console.log('this is action.payload.event_date', action.payload.event_date);
     // yield put({ type: 'FETCH_EVENTS', payload: event_date })
-
+    yield put({ type: 'FETCH_HOURS_USED', payload: action.payload.family_id });
+   yield put({ type: 'FETCH_HOURS_GAINED', payload: action.payload.family_id });
   }
   catch (error) {
     console.log('Error with updating event in the DB', error);
