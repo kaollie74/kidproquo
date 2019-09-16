@@ -22,8 +22,11 @@ class MyProfilePage extends Component {
     }
 
     componentDidMount() {
-       console.log( 'userFAM:', this.props.reduxStore.userFamily)
-     
+        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
         this.props.dispatch({
             type: 'FETCH_GROUP_NOTIFICATIONS',
             payload: {
@@ -31,9 +34,8 @@ class MyProfilePage extends Component {
                 user_id: this.props.reduxStore.user.id
             }
         });
-        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
-        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
-        // this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
+
+        
         // this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.family.id });
         // this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.family.id });
     }
