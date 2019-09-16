@@ -23,6 +23,8 @@ function* loginUser(action) {
     yield put({type: 'FETCH_USER_FAMILY', payload: action.payload})
     // this.props.history.push('/my-profile-page');
 
+  
+
 
 
   } catch (error) {
