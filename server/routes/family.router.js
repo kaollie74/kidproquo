@@ -26,6 +26,7 @@ router.post('/:id', rejectUnauthenticated, (req, res) => {
         })
 });
 
+// get family based on family id using req.params.id
 router.get('/user/:id', rejectUnauthenticated, (req, res) => {
     console.log('in /family with this id:', req.params.id);
     const values = req.params.id;
@@ -40,6 +41,8 @@ router.get('/user/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// update family information by identifying with family id and 
+// inserting any other data into the family table
 router.put('/update/:id', rejectUnauthenticated, (req, res) => {
     console.log('IN ROUTER.PUT', req.params.id)
     console.log('IN ROUTER.PUT', req.body)
@@ -62,6 +65,7 @@ router.put('/update/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+//getting family by using the user id in req.params.id
 router.get('/userFamily/:id', rejectUnauthenticated, (req, res) => {
     console.log('in /family with this id:', req.params.id);
     const values = req.params.id;
