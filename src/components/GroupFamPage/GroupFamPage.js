@@ -9,31 +9,35 @@ import './GroupFamPage.css';
 
 class GroupFamPage extends Component {
 
-    state = {
-        open: false
-    }
 
-    closeKidModal = () => {
-        this.setState({
-            open: false
-        })
-    }
 
     componentDidMount() {
         this.props.dispatch({ type: 'CLICK_FETCH_FAMILY', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
     }
 
-    editFamilyProfile = () => {
-
-        this.props.history.push('/edit-my-profile');
+    state = {
+        open: false
     }
 
+    // setState to false when user clicks the cancel button.
+    // This closes the modal.
+    closeKidModal = () => {
+        this.setState({
+            open: false
+        })
+    }
+
+
+    // when the back button is clicked, this function is activated
+    // to send the user back to the group-view page.
     handleBack = () => {
         this.props.history.push('/group-view');
     }
 
-
+    // the user clicks on a kid card which will capture the values of the card.
+    // passes item into this function.
+    // setState to those values which will display within the modal.
     kidModal = (item) => {
 
         console.log('this is item', item)
@@ -65,7 +69,16 @@ class GroupFamPage extends Component {
                         <Card.Content>
                             <Card.Header> </Card.Header>
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
-                            <Image className='ui centered medium image' src={this.props.reduxStore.singleFam.image ? this.props.reduxStore.singleFam.image : <>no</>} alt="img 1" />
+                            <Image
+                                className='ui centered medium image'
+                                src={this.props.reduxStore.singleFam.image
+                                    ?
+                                    this.props.reduxStore.singleFam.image
+                                    :
+                                    <>no</>
+                                }
+                                alt="img 1"
+                            />
                         </Card.Content>
                     </Card>
                 </div>
