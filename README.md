@@ -49,12 +49,12 @@ CREATE TABLE "user" (
 ## Screen Shot
 
 ![Login-Page](public/images/login-page.png)
-![Equity-Bar](equity-bar.png)
-![Family-Page](family-page.png)
-![Group-Page](group-page.png)
-![Calendar-Page](calendar-page.png)
-![Select-Page](select-page.png)
-![Clock-Page](clock-page.png)
+![Equity-Bar](public/images/equity-bar.png)
+![Family-Page](public/images/family-page.png)
+![Group-Page](public/images/group-page.png)
+![Calendar-Page](public/images/calendar-page.png)
+![Select-Page](public/images/select-page.png)
+![Clock-Page](public/images/clock-page.png)
 
 
 ## Documentation
