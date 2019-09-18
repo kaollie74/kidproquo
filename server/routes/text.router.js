@@ -32,7 +32,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in send claim text', req.body)
     client.messages
         .create({
-            body: `Hey there! KidProQuo user: ${req.body.claimer_name} has claimed to your event on ${req.body.event_date} from ${req.body.event_time_start}} to ${req.body.event_time_end}.  Log-in or call them ASAP to confirm plans. `,
+            body: `Hey there! KidProQuo user: ${req.body.claimer_name} has claimed to your event on ${req.body.event_date} from ${req.body.event_time_start} to ${req.body.event_time_end}.  Log-in or call them ASAP to confirm plans. `,
             from: '+12055499527',
             to: `+1${req.body.requester_phone}`
         })
@@ -93,7 +93,7 @@ router.post('/confirm', rejectUnauthenticated, (req, res) => {
     client.messages
         .create({
             body: `Hey there! KidProQuo user: 
-                    ${req.body.claimer_name} has confirmed thier event on ${req.body.event_date} 
+                    ${req.body.requester_name} has confirmed thier event on ${req.body.event_date} 
                     from ${req.body.event_time_start}} to ${req.body.event_time_end}.  
                     Log-in or call them ASAP to confirm plans. `,
             from: '+12055499527',
