@@ -57,6 +57,7 @@ Coming soon...
 ### Completed Features
 
 - [x] User can login and navigate to the group they are a member of and see other member's profiles
+- [x] User can track their `hour equity` easily by the 'hour bar' on their profile page
 - [x] User can create a request for 'time needed' or 'time offered' and leave notes for other users about the event
 - [x] User can update their family's profile and 'add a child'
 - [x] User will get a text message when an event of theirs has been claimed or confirmed
