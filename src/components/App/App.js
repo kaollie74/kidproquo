@@ -16,11 +16,9 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 // Importing Components
 import AboutPage from '../AboutPage/AboutPage';
 import CalendarView from '../CalendarView/CalendarView';
-import CreateRequest from '../CreateRequest/CreateRequest';
 import EditMyProfilePage from '../EditMyProfilePage/EditMyProfilePage';
 import FamilyProfilePage from '../FamilyProfilePage/FamilyProfilePage';
 import GroupView from '../GroupView/GroupView';
-import InfoPage from '../InfoPage/InfoPage';
 import KidPage from '../KidPage/KidPage';
 import MyProfilePage from '../MyProfilePage/MyProfilePage';
 import NewUserForm from '../NewUserForm/NewUserForm';
@@ -57,11 +55,7 @@ class App extends Component {
           
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
-            <ProtectedRoute
-              exact
-              path="/info"
-              component={InfoPage}
-            />
+         
             <Route 
               exact path="/login"
               component={LoginPage}
@@ -86,12 +80,6 @@ class App extends Component {
               exact
               path="/calendar"
               component={CalendarView}
-            />
-
-            <ProtectedRoute
-              exact
-              path="/create-request"
-              component={CreateRequest}
             />
 
             <ProtectedRoute
