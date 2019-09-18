@@ -1,12 +1,26 @@
-/* form {
+.loginForm {
   background-color: #dbd5d5;
-  width: 30%;
-  height: 50px;
+  width: 60%;
+  height: 340px;
   margin: 20px auto;
   padding: 25px;
   border-radius: 2px;
-} */
+}
 
-.formBackground {
-  height: 10vh;
+.loginFormBackground {
+  height: 40vh;
+}
+
+.loginPageInputs {
+  padding-left: 21px;
+}
+
+.newLink-button {
+  align-content: center;
+}
+
+.loginBtn {
+  margin-left: 6vh;
+  padding-top: 2vh;
+
 }

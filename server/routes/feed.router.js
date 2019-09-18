@@ -23,23 +23,23 @@ router.get('/needed', rejectUnauthenticated,   (req,res)=> {
     })
 })
 
-router.get('/offered', rejectUnauthenticated,   (req,res)=> {
-  console.log('In FEED ROUTER GET YOUR FEED')
-  const sqlText = `SELECT * from event_offered
-  WHERE requester_id= $1;`;
-  const value = [req.user.id];
-  pool.query(sqlText, value)
-  .then((response)=> {
-    console.log('respnse from DB', response);
-    res.send(response.rows[0]);
+// router.get('/offered', rejectUnauthenticated,   (req,res)=> {
+//   console.log('In FEED ROUTER GET YOUR FEED')
+//   const sqlText = `SELECT * from event_offered
+//   WHERE requester_id= $1;`;
+//   const value = [req.user.id];
+//   pool.query(sqlText, value)
+//   .then((response)=> {
+//     console.log('respnse from DB', response);
+//     res.send(response.rows[0]);
     
-  })
-  .catch((error) => {
-    console.log('Error getting from event_offered table', error);
-    res.sendStatus(500);
+//   })
+//   .catch((error) => {
+//     console.log('Error getting from event_offered table', error);
+//     res.sendStatus(500);
     
-  })
-})
+//   })
+// })
 //updates event to claimed
 
 router.put('/update/:id', rejectUnauthenticated,  (req,res)=> {
@@ -98,6 +98,43 @@ router.delete('/cancelRequest/:id', rejectUnauthenticated, (req, res) => {
       console.log('Error with DELETING EVENT from DB', error);
       res.sendStatus(500);
     })
+})
+
+router.get('/hoursUsed/:id', rejectUnauthenticated,   (req,res)=> {
+  console.log('In FEED ROUTER GET HOURS USED')
+  const sqlText = `select sum(total_hours) as hours_used from event where requester_id = $1 
+  AND offer_needed = false AND event_confirmed = true
+  OR claimer_id = $1 AND offer_needed = true
+  AND event_confirmed = true;`;
+  const value = [req.params.id];
+  pool.query(sqlText, value)
+  .then((response)=> {
+    console.log('response from DB (HOURS USED):', response.rows[0]);
+    res.send(response.rows[0]);
+  })
+  .catch((error) => {
+    console.log('Error getting hours used', error);
+    res.sendStatus(500);
+  })
+})
+
+router.get('/hoursGained/:id', rejectUnauthenticated,   (req,res)=> {
+  console.log('In FEED ROUTER GET HOURS GAINED')
+  const sqlText = `select sum(total_hours) as hours_gained from event where requester_id = $1 
+  AND offer_needed = true AND event_confirmed = true
+  OR claimer_id = $1 AND offer_needed = false
+  AND event_confirmed = true;`;
+  const value = [req.params.id];
+  pool.query(sqlText, value)
+  .then((response)=> {
+    console.log('response from DB (HOURS GAINED):', response.rows[0]);
+    res.send(response.rows[0]);
+  })
+  .catch((error) => {
+    console.log('Error getting hours gained', error);
+    res.sendStatus(500);
+    
+  })
 })
 
 module.exports = router;

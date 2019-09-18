@@ -8,7 +8,7 @@
 }
 
 .ourKidsTitle {
-  margin-left: 9vh;
+  margin-left: 5.5vh;
   margin-bottom: 2vh;
 }
 
@@ -19,6 +19,10 @@
 .cancelKidBtn {
   padding-top: 1vh;
   margin-left: 1vh;
+}
+
+.kidModalBtns {
+  margin-bottom: 2vh;
 }
 
 @media only screen and (min-width: 1000px) {

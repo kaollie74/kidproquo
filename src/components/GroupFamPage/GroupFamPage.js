@@ -9,31 +9,35 @@ import './GroupFamPage.css';
 
 class GroupFamPage extends Component {
 
+
+
+    componentDidMount() {
+        this.props.dispatch({ type: 'CLICK_FETCH_FAMILY', payload: this.props.match.params.id })
+        this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
+    }
+
     state = {
         open: false
     }
 
+    // setState to false when user clicks the cancel button.
+    // This closes the modal.
     closeKidModal = () => {
         this.setState({
             open: false
         })
     }
 
-    componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.match.params.id })
-        this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
-    }
 
-    editFamilyProfile = () => {
-
-        this.props.history.push('/edit-my-profile');
-    }
-
+    // when the back button is clicked, this function is activated
+    // to send the user back to the group-view page.
     handleBack = () => {
         this.props.history.push('/group-view');
     }
 
-
+    // the user clicks on a kid card which will capture the values of the card.
+    // passes item into this function.
+    // setState to those values which will display within the modal.
     kidModal = (item) => {
 
         console.log('this is item', item)
@@ -55,8 +59,8 @@ class GroupFamPage extends Component {
         return (
             <>
                 <div>
-                    <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1} Family
+                    <h1 className='headerTitleFamily'>
+                        {this.props.reduxStore.singleFam.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
@@ -65,14 +69,38 @@ class GroupFamPage extends Component {
                         <Card.Content>
                             <Card.Header> </Card.Header>
                             {/* <Card.Meta><span>The Olson family</span></Card.Meta> */}
-                            <Image className='ui centered medium image' src={this.props.reduxStore.family.image ? this.props.reduxStore.family.image : <>no</>} alt="img 1" />
+                            <Image
+                                className='ui centered medium image'
+                                src={this.props.reduxStore.singleFam.image
+                                    ?
+                                    this.props.reduxStore.singleFam.image
+                                    :
+                                    <>no</>
+                                }
+                                alt="img 1"
+                            />
+                        </Card.Content>
+                    </Card>
+                </div>
+                &nbsp;
+                <div align="center">
+                    <Card>
+                        <Card.Content>
+                            <Card.Header>Info</Card.Header>
+                            <Card.Description>
+                                {this.props.reduxStore.singleFam.street_address} < br />
+                                {this.props.reduxStore.singleFam.city}  <></>
+                                {this.props.reduxStore.singleFam.state}, <></>
+                                {this.props.reduxStore.singleFam.zip_code}< br />
+                                {this.props.reduxStore.singleFam.phone_number}
+                            </Card.Description>
                         </Card.Content>
                     </Card>
                 </div>
                 &nbsp;
                 <div className='kidCard'>
                     <div className='meetKidsTitle'>
-                        <h1>Meet the Kids</h1>
+                        <h1>Kids</h1>
                     </div>
 
                     <Grid stackable container centered columns={2} >

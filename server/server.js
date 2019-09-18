@@ -17,6 +17,10 @@ const groupRouter = require('./routes/group.router');
 const hourRouter = require('./routes/hour.router');
 const kidRouter = require('./routes/kid.router');
 const profileRouter = require('./routes/profile.router');
+const helpRouter = require('./routes/help.router')
+//Twilio
+const textRouter = require('./routes/text.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -38,6 +42,9 @@ app.use('/group', groupRouter);
 app.use('/hour', hourRouter);
 app.use('/kid', kidRouter);
 app.use('/profile', profileRouter);
+app.use('/help', helpRouter)
+//Twilio
+app.use('/api/text', textRouter);
 
 
 

@@ -73,7 +73,7 @@ class FamilyProfilePage extends Component {
                 <div>
 
                     <h1 align="center">
-                        The {this.props.reduxStore.family.last_name1} Family
+                        {this.props.reduxStore.family.last_name1} Family
                     </h1>
                 </div>
                 &nbsp;
@@ -173,7 +173,7 @@ class FamilyProfilePage extends Component {
                                 <p>{this.state.notes}</p>
                             </Modal.Description>
                         </Modal.Content>
-                        <div align='center'>
+                        <div align='center' className='kidModalBtns'>
                             <Button color='green' onClick={this.updateKid}>Edit</Button>
                             <Button color='red' onClick={this.closeKidModal}>Cancel</Button>
                         </div>

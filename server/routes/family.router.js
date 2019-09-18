@@ -62,4 +62,18 @@ router.put('/update/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+router.get('/userFamily/:id', rejectUnauthenticated, (req, res) => {
+    console.log('in /family with this id:', req.params.id);
+    const values = req.params.id;
+    const sqlText = `SELECT * FROM family where user_id=$1`;
+    pool.query(sqlText, [values])
+        .then((response) => {
+            console.log('IN USER FAMILY ROUTER WITH:', response.rows[0]);
+            res.send(response.rows[0])
+        }).catch((error) => {
+            console.log('error getting family data', error);
+            res.sendStatus(500);
+        })
+})
+
 module.exports = router;

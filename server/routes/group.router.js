@@ -7,9 +7,13 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 //gets all relevant info for feed group view
 router.get('/:id', rejectUnauthenticated,  (req, res) => {
-    console.log('in /group with this id:', req.params.id);
+    console.log('in /group with this idBLAH:', req.params.id);
     const id = req.params.id;
-    const sqlText = `select "event"."group_id", "event"."total_hours", "event"."offer_needed", "event"."claimer_id", "event"."requester_id", "family"."image" as "claimer_image", "family2"."image" as "requester_image", "family2"."last_name1" as "requester_name", "family"."last_name1" as "claimer_name", "event"."id", "event"."event_date", "event"."event_time_start", "event"."event_time_end", "event"."event_claimed"from "event"
+    const sqlText = `select "family2"."phone_number" as "requester_number", "family"."phone_number" as "claimer_number", "event"."group_id", "event"."total_hours", "event"."offer_needed", "event"."claimer_id", 
+                    "event"."requester_id", "family"."image" as "claimer_image", "family2"."image" as "requester_image", 
+                    "family2"."last_name1" as "requester_name", "family"."last_name1" as "claimer_name", "event"."id", 
+                    "event"."event_date", to_char("event"."event_time_start", 'HH:MI') as "event_time_start", 
+                    to_char("event"."event_time_end", 'HH:MI') as "event_time_end", "event"."event_claimed", "event"."notes" from "event"
                     left join "family" on
                     "event"."claimer_id" = "family"."id"
                     left join "family" as "family2" on
@@ -29,10 +33,10 @@ router.get('/:id', rejectUnauthenticated,  (req, res) => {
 router.get('/notifications/:id', rejectUnauthenticated,  (req, res) => {
     console.log('in notiofication req.params.id', req.params.id,)
     const id = req.params.id;
-    const sqlText =`select "family2"."id" as "requester_id", "event"."claimer_id", "family"."image" as "claimer_image", 
+    const sqlText =`select "family2"."id" as "requester_id", "family2"."phone_number" as "requester_number", "family"."phone_number" as "claimer_number", "event"."claimer_id", "family"."image" as "claimer_image", 
     "family2"."image" as "requester_image", "family2"."last_name1" as "requester_name", "family"."last_name1" as "claimer_name", 
-    "event"."id", "event"."event_date", "event"."event_time_start", "event"."offer_needed",
-    "event"."event_time_end", "event"."event_claimed", "event"."event_confirmed", "event"."group_id", "event"."total_hours" from "event"
+    "event"."id", "event"."event_date", to_char("event"."event_time_start", 'HH:MI') as "event_time_start", "event"."offer_needed",
+    to_char("event"."event_time_end", 'HH:MI') as "event_time_end" , "event"."event_claimed", "event"."event_confirmed", "event"."group_id", "event"."total_hours", "event"."notes" from "event"
     left join "family" on "event"."claimer_id" = "family"."id" 
     left join "family" as "family2" on "event"."requester_id" = "family2"."id" where "event"."group_id"=$1 order by id desc;`;
 
@@ -81,6 +85,8 @@ router.get('/', rejectUnauthenticated,  (req, res) => {
             res.sendStatus(500);
         })
 })
+
+
 
 
 

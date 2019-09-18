@@ -16,6 +16,11 @@ import userGroups from './userGroupsReducer';
 import groupFam from './groupFamReducer';
 import notifications from './notificationsReducer';
 import updateKid from './updateKidReducer';
+import hoursUsed from './hoursUsedReducer';
+import hoursGained from './hoursGainedReducer';
+import userFamily from './userFamilyReducer'
+import singleFam from './singleFamReducer';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -40,7 +45,11 @@ const rootReducer = combineReducers({
   userGroups,
   groupFam,
   notifications,
-  updateKid
+  updateKid,
+  hoursUsed,
+  hoursGained,
+  userFamily,
+  singleFam
 
 });
 
