@@ -22,7 +22,15 @@ class MyProfilePage extends Component {
     }
 
     componentDidMount() {
+
+        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
+
         console.log('IN PROFILE COMP DID MOUNT WITH:', this.props.reduxStore.userFamily)
+
         this.props.dispatch({
             type: 'FETCH_GROUP_NOTIFICATIONS',
             payload: {
@@ -30,113 +38,8 @@ class MyProfilePage extends Component {
                 user_id: this.props.reduxStore.user.id
             }
         });
-        this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
-        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
-        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
-        // let hours_used = (this.props.reduxStore.hoursUsed.hours_used / 60).toFixed(1);
-        // let hours_gained = (this.props.reduxStore.hoursGained.hours_gained / 60).toFixed(1);
-        // let total_hours = Number(hours_gained - hours_used).toFixed(1);
-        // this.setState({
-        //     hours_used: hours_used,
-        //     hours_gained:hours_gained,
-        //     total_hours: total_hours
-        // })
+
     }
-
-    // handleEquityHoursUsedOne = () => {
-    //     let array = this.props.reduxStore.notifications;
-    //     console.log('IN HANDLE EQUITY 1 WITH:', array);
-    //     let minutesUsed = 0;
-    //     let minutesGained = 0;
-    //     // CALCULATE TOTAL MINUTES USED
-    //     for (let item of array ){
-    //         if (this.props.reduxStore.family.id === item.requester_id && item.offer_needed === false && item.event_confirmed === true){
-    //             minutesUsed += Number(item.total_hours);
-    //             console.log(item)
-    //             console.log('IN FIRST LOOP WITH:', minutesUsed)
-    //         }}
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.claimer_id && item.offer_needed === true && item.event_confirmed === true){
-    //             minutesUsed += Number(item.total_hours);
-    //             console.log(item)
-    //             console.log('IN SECOND LOOP WITH:', minutesUsed)
-    //         }}
-    //     let totalMinutesUsed = minutesUsed;
-    //     this.setState({
-    //         minutesUsed: totalMinutesUsed
-    //     })
-    //     console.log('IN FUNCTION WITH TOTAL MINUTES USED:', totalMinutesUsed)
-    //     // CALCULATE TOTAL MINUTES GAINED
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.requester_id && item.offer_needed === true && item.event_confirmed === true){
-    //             minutesGained += Number(item.total_hours);
-    //             console.log(item)
-    //             console.log('IN THIRD LOOP WITH:', minutesGained)
-    //         }}
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.claimer_id && item.offer_needed === false && item.event_confirmed === true){
-    //                 minutesGained += Number(item.total_hours);
-    //                 console.log(item)
-    //                 console.log('IN FOURTH LOOP WITH:', minutesGained)
-    //             }}
-    //     let totalMinutesGained = minutesGained;
-    //     this.setState({
-    //         minutesGained: totalMinutesGained
-    //     })
-    // }
-
-    // handleEquityHoursGainedOne = () => {
-    //     let array = this.props.reduxStore.notifications;
-    //     console.log('IN HANDLE EQUITY 3 WITH:', array);
-    //     let minutesGained = this.state.minutesGained;
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.requester_id && item.offer_needed === true && item.event_confirmed === true){
-    //             minutesGained += Number(item.total_hours);
-    //             console.log(item)
-    //             console.log('IN THIRD LOOP WITH:', minutesGained)
-    //             this.setState({
-    //                 minutesGained: minutesGained
-    //             })
-    //         }}
-    //     this.handleEquityHoursGainedTwo();
-    // }
-
-    // handleEquityHoursGainedTwo = () => {
-    //     let array = this.props.reduxStore.notifications;
-    //     console.log('IN HANDLE EQUITY 4 WITH:', array);
-    //     let minutesUsed = this.state.minutesUsed;
-    //     let minutesGained = this.state.minutesGained;
-    //     for (let item of array) {
-    //         if (this.props.reduxStore.family.id === item.claimer_id && item.offer_needed === false && item.event_confirmed === true){
-    //                 minutesGained += Number(item.total_hours);
-    //                 console.log(item)
-    //                 console.log('IN FOURTH LOOP WITH:', minutesGained)
-    //                 this.setState({
-    //                     minutesGained: minutesGained
-    //                 })
-    //             }}
-    // }
-
-
-    // progressBar = () => {
-    //     let feedNeed= this.props.reduxStore.feedNeed;
-    //     let needHours = 0
-    //     let offeredHours = 0
-    //     for(let hour of feedNeed){
-    //         // console.log(`this is hour, ${hour.needed_total_hours}` )
-    //         if(hour === 'hour.needed_total_hours'){
-    //             needHours += Number(hour.needed_total_hours)
-    //         }
-    //         if (hour.offered_totalhours) {
-    //             offeredHours += Number(hour.offered_total_hours)
-    //         }
-    //     }
-    //     // console.log(needHours)
-    //     // console.log(offeredHours)
-    //     let total = ( needHours - offeredHours );
-    //     // console.log('total', total)
-    //     return total;
-    // }
 
     calculateEquity = () => {
         console.log('IN CALCULATE EQUITY WITH:', this.props.reduxStore.userFamily)
@@ -170,6 +73,7 @@ class MyProfilePage extends Component {
                     claimer_notes: document.getElementById('swal-input1').value
                 })
                 let newObject = {
+                    family_id: this.props.reduxStore.userFamily.id,
                     id: item.id,
                     event_confirmed: true,
                     group_id: this.props.reduxStore.userGroups[0],
@@ -179,7 +83,7 @@ class MyProfilePage extends Component {
                 //Twilio
                 let textMessage = {
                     claimer_phone: item.claimer_number,
-                    requester_name: this.props.reduxStore.family.last_name1,
+                    requester_name: this.props.reduxStore.userFamily.last_name1,
                     event_date: item.event_date,
                     event_time_start: item.event_time_start,
                     event_time_end: item.event_time_end,
@@ -225,7 +129,7 @@ class MyProfilePage extends Component {
 
     render() {
 
-        console.log('this is STATE IN MY PROFILE PAGE VIEW:', this.state)
+        // console.log('this is STATE IN MY PROFILE PAGE VIEW:', this.state)
         console.log('IN PROFILE WITH:', this.props.reduxStore.hoursUsed, this.props.reduxStore.hoursGained)
         let hours_used = (this.props.reduxStore.hoursUsed.hours_used / 60).toFixed(1);
         let hours_gained = (this.props.reduxStore.hoursGained.hours_gained / 60).toFixed(1);
@@ -234,23 +138,23 @@ class MyProfilePage extends Component {
                     return (
 
             <>
-                {/* <pre>{JSON.stringify(this.props.reduxStore.notifications, null, 2)}</pre> */}
+                
                 {/* <Progress
                     value={this.handleEquity()}
                 /> */}
                 <h1 style={{textAlign: 'center'}}> The {this.props.reduxStore.family.last_name1} Profile </h1>
-                <center>
-                <Button color='blue' onClick={()=> this.calculateEquity()}>CALCULATE EQUITY</Button></center>
+                
+                {/* <Button color='blue' onClick={()=> this.calculateEquity()}>CALCULATE EQUITY</Button></center> */}
                 <h3 style={{textAlign: 'center'}}> Equity</h3>
                 <div className="slidecontainer">
-                        <p className="negative"> - </p><input type="range" min="-20" max="20" value={this.state.total_hours} className={this.state.total_hours >= 0 ? "GreenSlider" : "RedSlider"} id="myRange"></input><p className="positive">+</p>
+                        <p className="negative"> - </p><input type="range" min="-20" max="20" value={total_hours} className={total_hours >= 0 ? "GreenSlider" : "RedSlider"} id="myRange"></input><p className="positive">+</p>
                     </div>
                     <div className="totalHours">
                         <div className="hoursUsed">
-                        <p style={{fontWeight: 'bold'}}> Hours Used: {this.state.hours_used} </p>
+                        <p style={{fontWeight: 'bold'}}> Hours Used: {hours_used} </p>
                     </div>
                     <div className="hoursBanked">
-                        <p style={{fontWeight: 'bold'}}> Hours Gained: {this.state.hours_gained} </p>
+                        <p style={{fontWeight: 'bold'}}> Hours Gained: {hours_gained} </p>
                     </div>
                 </div>
                 <hr style={{ backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px', marginBottom: '30px' }} />
@@ -584,7 +488,7 @@ class MyProfilePage extends Component {
                                                     </Feed.Content>
 
                                                 </Feed.Event>
-                                                <p style={{ fontWeight: 'bold', color: 'green' }}>APRROVED</p>
+                                                <p style={{ fontWeight: 'bold', color: 'green' }}>APPROVED</p>
                                                 {<Button style={{ padding: '10px', marginBottom: '10px' }} color='red' onClick={() => this.handleCancel(item)}>Cancel</Button>}
                                             </Feed>
                                         </Card>

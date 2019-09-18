@@ -7,7 +7,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 //gets all relevant info for feed group view
 router.get('/:id', rejectUnauthenticated,  (req, res) => {
-    console.log('in /group with this id:', req.params.id);
+    console.log('in /group with this idBLAH:', req.params.id);
     const id = req.params.id;
     const sqlText = `select "family2"."phone_number" as "requester_number", "family"."phone_number" as "claimer_number", "event"."group_id", "event"."total_hours", "event"."offer_needed", "event"."claimer_id", 
                     "event"."requester_id", "family"."image" as "claimer_image", "family2"."image" as "requester_image", 
@@ -85,6 +85,8 @@ router.get('/', rejectUnauthenticated,  (req, res) => {
             res.sendStatus(500);
         })
 })
+
+
 
 
 
