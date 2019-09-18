@@ -3,12 +3,17 @@
   margin-top: 1vh;
 }
 
+.cancelSubmitKidModalBtn {
+  padding-right: 16.5vh;
+  padding-bottom: 5vh;
+}
+
 .familyFormBackground {
   background-color: #8298ca;
   margin-top: 2vh;
   margin-left: 3vh;
   width: 50vh;
-  height: 167vh;
+  height: 160vh;
   border: solid;
 }
 

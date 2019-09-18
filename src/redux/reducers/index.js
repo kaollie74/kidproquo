@@ -18,7 +18,7 @@ import notifications from './notificationsReducer';
 import updateKid from './updateKidReducer';
 import hoursUsed from './hoursUsedReducer';
 import hoursGained from './hoursGainedReducer';
-import userFamily from './userFamilyReducer';
+import userFamily from './userFamilyReducer'
 import singleFam from './singleFamReducer';
 
 
@@ -50,6 +50,7 @@ const rootReducer = combineReducers({
   hoursGained,
   userFamily,
   singleFam
+
 });
 
 export default rootReducer;

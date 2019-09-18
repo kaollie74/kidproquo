@@ -23,23 +23,23 @@ router.get('/needed', rejectUnauthenticated,   (req,res)=> {
     })
 })
 
-router.get('/offered', rejectUnauthenticated,   (req,res)=> {
-  console.log('In FEED ROUTER GET YOUR FEED')
-  const sqlText = `SELECT * from event_offered
-  WHERE requester_id= $1;`;
-  const value = [req.user.id];
-  pool.query(sqlText, value)
-  .then((response)=> {
-    console.log('respnse from DB', response);
-    res.send(response.rows[0]);
+// router.get('/offered', rejectUnauthenticated,   (req,res)=> {
+//   console.log('In FEED ROUTER GET YOUR FEED')
+//   const sqlText = `SELECT * from event_offered
+//   WHERE requester_id= $1;`;
+//   const value = [req.user.id];
+//   pool.query(sqlText, value)
+//   .then((response)=> {
+//     console.log('respnse from DB', response);
+//     res.send(response.rows[0]);
     
-  })
-  .catch((error) => {
-    console.log('Error getting from event_offered table', error);
-    res.sendStatus(500);
+//   })
+//   .catch((error) => {
+//     console.log('Error getting from event_offered table', error);
+//     res.sendStatus(500);
     
-  })
-})
+//   })
+// })
 //updates event to claimed
 
 router.put('/update/:id', rejectUnauthenticated,  (req,res)=> {
@@ -113,7 +113,7 @@ router.get('/hoursUsed/:id', rejectUnauthenticated,   (req,res)=> {
     res.send(response.rows[0]);
   })
   .catch((error) => {
-    console.log('Error getting from event_offered table', error);
+    console.log('Error getting hours used', error);
     res.sendStatus(500);
   })
 })
@@ -131,7 +131,7 @@ router.get('/hoursGained/:id', rejectUnauthenticated,   (req,res)=> {
     res.send(response.rows[0]);
   })
   .catch((error) => {
-    console.log('Error getting from event_offered table', error);
+    console.log('Error getting hours gained', error);
     res.sendStatus(500);
     
   })

@@ -3,13 +3,13 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 
-
+// Master Root generator function
 function* kidSaga() {
   yield takeEvery('ADD_NEW_KID', addNewKid)
   yield takeEvery('UPDATE_KID_TO_DB', updateKid)
 }
 
-
+// adds new kid based on family id and additional data
 function* addNewKid(action) {
   try {
 
@@ -27,14 +27,11 @@ function* addNewKid(action) {
   catch (error) {
     console.log('Error with posting KID to DB', error)
 
-    // yield put(Swal.fire({
-    //   type: 'error',
-    //   title: 'Oops...',
-    //   text: `${action.payload.first_name} ${action.payload.last_name} was not added, please try again`,
-    // }))
   }
 }
 
+// update current kid with family id and additional data that will
+// be modified in the DB
 function* updateKid(action) {
 
   try {
