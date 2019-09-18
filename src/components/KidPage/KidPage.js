@@ -43,7 +43,9 @@ class KidPage extends Component {
     }
 
     // Run a dispatch based on a conditional in the Sweet Alert
-    // 
+    // If user clicks yes, a dispatch is ran to update kids info by sending
+    // a payload of this.state
+    // then this.props.history.push runs to go back to family-profile page
     updateKid = () => {
 
         console.log('this is state', this.state)
@@ -76,6 +78,12 @@ class KidPage extends Component {
 
     }
 
+    // If the the cancel button on the kid-page is clicked.
+    // a sweet alert is triggered which setups a conditional
+    // if they click yes then the a history.push is run which will
+    // send the user to family-profile
+    // if cancel is clicked in the sweet alert then the alert closes 
+    // and the user will remain on the kid-page
     cancelUpdateKid = () => {
         Swal.fire({
             title: 'Are you sure?',
