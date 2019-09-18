@@ -10,7 +10,9 @@ import './GroupFamPage.css';
 class GroupFamPage extends Component {
 
 
-
+    // Two dipatches run on page load
+    // both use the params.id which is the id that is specific for each family
+    // this will get the right family and their kids to appear in the GroupFamPage
     componentDidMount() {
         this.props.dispatch({ type: 'CLICK_FETCH_FAMILY', payload: this.props.match.params.id })
         this.props.dispatch({ type: 'FETCH_KIDS', payload: this.props.match.params.id })
