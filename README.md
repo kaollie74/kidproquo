@@ -48,7 +48,7 @@ CREATE TABLE "user" (
 
 ## Screen Shot
 
-![Login-Page](images/login-page.png)
+![Login-Page](public/images/login-page.png)
 ![Equity-Bar](equity-bar.png)
 ![Family-Page](family-page.png)
 ![Group-Page](group-page.png)
