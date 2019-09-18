@@ -21,6 +21,7 @@ const styles = theme => ({
 });
 
 class CalendarView extends Component {
+
     state = {
         date: new Date(),
         event_date:{event_date: new Date().getFullYear() + "-" +  0+Number(new Date().getMonth()+1) + "-" + new Date().getDate()},
@@ -28,15 +29,18 @@ class CalendarView extends Component {
         dateToDisplay: '',
       }
 
+      // when page loads: 
+      // declare day variable as current date 
+      // declare day to display on DOM to be reformatted date 
+      // set date to display in state 
+      // declare formatted date object to send in dispatch 
       componentDidMount() {
         let day = new Date();
         let newDayToDisplay = ( day.getFullYear() + "-" +  0+Number(day.getMonth()+1) + "-" + day.getDate())
-        // newDayToDisplay.toString().substring(1,10)
         this.setState({
           dateToDisplay: newDayToDisplay
         })
-        let newDate = ( day.getFullYear() + "-" +  0+Number(day.getMonth()+1) + "-" + day.getDate())
-        let newObjectToSend = {event_date: newDate}
+        let newObjectToSend = {event_date: newDayToDisplay}
         console.log('IN HANDLE CHANGE WITH NEW DATE:', newObjectToSend);
         this.setState({
           dateToSend: newObjectToSend
@@ -44,6 +48,10 @@ class CalendarView extends Component {
         this.props.dispatch({type: 'FETCH_EVENTS', payload: this.state.event_date})
       }
 
+      // on click of of a day in the calendar: 
+      // capture values of clicked day 
+      // reformat clicked date
+      // set state to reformatted date 
       handleChange = (value) => {
         this.setState({
           event: !this.state.event
@@ -56,35 +64,19 @@ class CalendarView extends Component {
         })
       }
 
-      // getEvents =  () => {
-      //   console.log('in get events');
-        //this.props.dispatch({type: 'FETCH_EVENTS', payload: this.state})
-      // }
-     
-      //onChange = date => this.setState({ date })
-
-      // Formate value which is date to read as YY-MM-DD
+      // Format value which is date to read as YY-MM-DD
       // Set value to a variable and run a dispatch to fetch
       // that value from the DB.
       formatDate =(value)=>{
         console.log('in format date', value)
-       //let newDate = ( value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear());
-      let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
-  
-      let newObjectToSend = {event_date: newDate}
-      this.props.dispatch({type: 'FETCH_EVENTS', payload: newObjectToSend})
-      console.log('NEW OBJECT TO SEND (CALENDAR VIEW):', newObjectToSend);
-      }
-
-      newDayToSend = (value) => {
         let newDate = ( value.getFullYear() + "-" +  0+Number(value.getMonth()+1) + "-" + value.getDate())
+  
         let newObjectToSend = {event_date: newDate}
-        console.log('IN NEW DAY TO SEND WITH NEW DATE:', newObjectToSend);
+        this.props.dispatch({type: 'FETCH_EVENTS', payload: newObjectToSend})
       }
      
       render() {
         const { classes } = this.props;
-        console.log('this is state', this.state)
         if (this.state.dateToDisplay === this.state.dateToSend) {
         return (
           <>
@@ -95,15 +87,10 @@ class CalendarView extends Component {
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}
-              onClick={this.newDayToSend}
             />
-            {/* <Typography>
-            {this.state.dateToDisplay.toString().substring(0, 10)}
-            </Typography> */}
           </div>
           <div>
             <EventView date={this.state.dateToSend.event_date}
-            //  dateToSendToSaga={this.state.dateToSendToSaga}
             />
           </div>
           </>
@@ -116,7 +103,6 @@ class CalendarView extends Component {
               onChange={(event) => this.formatDate(event)}
               value={this.state.date}
               onClickDay={this.handleChange}
-              onClick={this.newDayToSend}
             />
             </div>
             <div>
