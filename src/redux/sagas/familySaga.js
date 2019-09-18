@@ -85,7 +85,7 @@ function* fetchKids(action) {
     }
 }
 
-// 
+// on login fetch the user family by using the user.id
 function* fetchUserFamily(action) {
     try{
         console.log(action.payload)
