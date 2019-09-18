@@ -246,7 +246,7 @@ class KidPage extends Component {
                                     size='small'
                                     onClick={this.setKidImageLocally}>
                                     Ok
-                            </Button>
+                                </Button>
                             </div>
                             <div>
                                 <Button
