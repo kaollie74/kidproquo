@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Icon, Card, Image, Modal, Responsive, Segment, Form, Input, Popup } from 'semantic-ui-react';
+import { Button, Icon, Card, Image, Modal, Responsive, Form, Input } from 'semantic-ui-react';
 import Swal from 'sweetalert2';
 import './EditMyProfilePage.css';
 
@@ -11,6 +10,8 @@ import './EditMyProfilePage.css';
 
 class EditMyProfilePage extends Component {
 
+    // run a disptach to fetch family information by sending the user.id as the payload.
+    // This runs to the saga where it will then run to the server to retrieve the Data. 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
     }
@@ -42,6 +43,9 @@ class EditMyProfilePage extends Component {
 
     }
 
+    // If the user clicks the pencil alternate icon, it will activate this function.
+    // setState to empty values and switch the open property to the opposite of value which
+    // activates the addKidModal. 
     addKidModal = () => {
         this.setState({
             open: !this.state.open,
@@ -55,6 +59,11 @@ class EditMyProfilePage extends Component {
         })
     }
 
+    // If the user clicks the cancel button, this function will activate.
+    // A 'Sweet Alert' will appear will appear.
+    // A condition is setup to where if they click yes, then function will send the
+    // DOM to family-profile page with this.props.history.push.
+    // If they click cancel, then the Sweet alert closes and nothing happens. 
     cancelProfileUpdate = () => {
 
         Swal.fire({
@@ -103,8 +112,10 @@ class EditMyProfilePage extends Component {
             cancelButtonText: 'No, CANCEL!',
             reverseButtons: false
         }).then((result) => {
+
             if (result.value) {
                 return (
+                    
                     this.props.dispatch({ type: 'ADD_NEW_KID', payload: this.state }),
                     this.setState({
                         open: false,
@@ -119,7 +130,7 @@ class EditMyProfilePage extends Component {
                 )
 
             } else if (
-                /* Read more about handling dismissals below */
+                
                 result.dismiss === Swal.DismissReason.cancel
             ) {
                 Swal.fire(
@@ -129,7 +140,7 @@ class EditMyProfilePage extends Component {
                 )
             }
         })
-        // this.props.dispatch({ type: 'ADD_NEW_KID', payload: this.state })
+      
 
 
     }
@@ -354,7 +365,7 @@ class EditMyProfilePage extends Component {
 
 
                 <div>
-                    {/************************************** Edit Profile Pic ************************************************/}
+                    {/************************************** Edit Profile Pic Modal ************************************************/}
                     <Modal
                         open={this.state.open2}
                         onClose={this.state.open2}

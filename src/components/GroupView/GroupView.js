@@ -8,6 +8,9 @@ import './GroupView.css';
 
 class GroupView extends Component {
 
+    // Run two dispatches
+    // First, runs a disptach to Fetch all members that are part of the group by using the 
+    // userGroups Reducer.
     componentDidMount() {
         // this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
         this.props.dispatch({ type: 'FETCH_GROUP', payload: this.props.reduxStore.userGroups[0] });
