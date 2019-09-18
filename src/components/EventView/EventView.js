@@ -311,7 +311,7 @@ class EventView extends Component {
   dummyData = () => {
     this.setState({
       notes: `Anniversary. Looking for someone to watch the kids. Please check Sara's updates on her card`,
-
+      
     })
   }
 
