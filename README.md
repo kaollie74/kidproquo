@@ -34,15 +34,8 @@ Before you get started, make sure you have the following software installed on y
 3. `npm run server`
 4. `npm run client`
 
-Create a new database called `KidProQuo` and create a `user` table:
+Create a new database called `KidProQuo`, use data from `database.sql` file.
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
 
 
 
