@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+// get all kids based on family id
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     console.log('in /kid with this id:', req.params.id);
     const values = req.params.id;
@@ -21,6 +22,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// add kid with all data and family id
 router.post('/addKid', rejectUnauthenticated, (req, res) => {
     console.log('THIS IS RED.BODY', req.body)
 
@@ -38,6 +40,7 @@ router.post('/addKid', rejectUnauthenticated, (req, res) => {
         })
 })
 
+// update kid based on family id and and any data that needs to be modified
 router.put('/update/:id', rejectUnauthenticated, (req,res)=> {
     console.log('THIS IS REQ.PARAMS', req.params);
     console.log('THIS IS REQ.BODY', req.body);

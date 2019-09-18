@@ -38,7 +38,6 @@ app.use('/calendar', calendarRouter);
 app.use('/family', familyRouter);
 app.use('/feed', feedRouter);
 app.use('/group', groupRouter);
-
 app.use('/kid', kidRouter);
 app.use('/profile', profileRouter);
 app.use('/help', helpRouter)
