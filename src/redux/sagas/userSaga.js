@@ -8,6 +8,7 @@ function* fetchUser() {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     };
+    
     const responseThree = yield axios.get('/help');
     console.log('user /helpresponseThree:', responseThree.data)
     yield put({ type: 'SET_USER_FAMILY', payload: responseThree.data });

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Image, Icon, Button, Feed, Modal, Form, Header} from 'semantic-ui-react';
+import { Card, Image, Icon, Button, Feed, Modal, Form, Header } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import Swal from 'sweetalert2';
 import './GroupView.css';
@@ -50,7 +50,7 @@ class GroupView extends Component {
         }
         this.props.dispatch({ type: 'CANCEL_REQUEST', payload: objectToSend })
     }
-    
+
 
 
     handleClaim = (item) => {
@@ -125,23 +125,15 @@ class GroupView extends Component {
 
         return (
             <div align='center' >
-                {/* {JSON.stringify(this.props.reduxStore.family)} */}
-                <h1 style={{marginBottom: '0px'}}>
+
+                <h1 style={{ marginBottom: '0px' }}>
                     Welcome to the {this.props.reduxStore.userGroups && this.props.reduxStore.userGroups.length > 0 ?
                         this.props.reduxStore.userGroups[0].group_name : <p></p>} group!
                 </h1>
-                {/* <div>
-                    <Button.Group size='small'>
-                        <Button>EDIT</Button>
-                        <Button.Or />
-                        <Button>ADD MEMBERS</Button>
-                    </Button.Group>
-                </div>
-                <pre>{JSON.stringify(this.props.reduxStore, null, 2)}</pre>
-                </div> */}
+
                 {/* the group reducer actually holds requests relevant to group */}
-                <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '0px', marginBottom: '20px'}} />
-                <h3 style={{textAlign: 'center'}}> Requests </h3>
+                <hr style={{ backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '0px', marginBottom: '20px' }} />
+                <h3 style={{ textAlign: 'center' }}> Requests </h3>
                 {this.props.reduxStore.group && this.props.reduxStore.group.length > 0 ?
                     this.props.reduxStore.group.map((item) => {
                         // if the group page name matches the user's family group page name
@@ -161,7 +153,7 @@ class GroupView extends Component {
                                                 <div class="ui orange circular empty label" style={{ float: 'left', margin: '10px' }}></div>
                                                 <Feed.Label style={{ paddingTop: '10px' }}>
                                                     <a style={{ fontWeight: 'bold', color: 'black' }}>{item.requester_name}</a> | <a style={{ fontWeight: 'bold', color: 'black' }}>{item.event_date}</a>
-                                                    <Icon onClick={() => this.notesModal(item)} style={{float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px'}} size="large" name="black file alternate outline"></Icon>
+                                                    <Icon onClick={() => this.notesModal(item)} style={{ float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px' }} size="large" name="black file alternate outline"></Icon>
                                                 </Feed.Label></Feed.Content>
                                             <Feed.Event style={{ display: 'inline-flex', margin: '10px 0px', textAlign: 'center' }}>
                                                 <Feed.Content style={{ marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#FE9A76', fontWeight: 'bold' }}>Needed</Feed.Content>
@@ -187,15 +179,47 @@ class GroupView extends Component {
                             return (
                                 <>
                                     <Card >
-                                        <Feed style={{ borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px' }}>
-                                            <Feed.Content><div class="ui teal circular empty label" style={{ float: 'left', margin: '10px' }}></div>
-                                                <Feed.Label style={{ paddingTop: '10px' }}>
-                                                    <a style={{ fontWeight: 'bold', color: 'black' }}>{item.requester_name}</a> | <a style={{ fontWeight: 'bold', color: 'black' }}>{item.event_date}</a>
-                                                    <Icon onClick={() => this.notesModal(item)} style={{float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px'}} size="large" name="black file alternate outline"></Icon>
+                                        <Feed
+                                            style={{ borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px' }}
+                                        >
+                                            <Feed.Content>
+                                                <div
+                                                    class="ui teal circular empty label"
+                                                    style={{ float: 'left', margin: '10px' }}
+                                                >
+
+                                                </div>
+                                                <Feed.Label
+                                                    style={{ paddingTop: '10px' }}
+                                                >
+                                                    <a
+                                                        style={{ fontWeight: 'bold', color: 'black' }}
+                                                    >
+                                                        {item.requester_name}
+                                                    </a>
+                                                    |
+                                                    <a
+                                                        style={{ fontWeight: 'bold', color: 'black' }}
+                                                    >
+                                                        {item.event_date}
+                                                    </a>
+                                                    <Icon
+                                                        onClick={() => this.notesModal(item)}
+                                                        style={{ float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px' }}
+                                                        size="large" name="black file alternate outline"
+                                                    >
+
+                                                    </Icon>
                                                 </Feed.Label></Feed.Content>
                                             <Feed.Event style={{ display: 'inline-flex', margin: '10px 0px', textAlign: 'center' }}>
-                                                <Feed.Content style={{ marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold' }}>Offering</Feed.Content>
-                                                <Feed.Content style={{ float: 'right' }}>
+                                                <Feed.Content
+                                                    style={{ marginLeft: '20px', marginRight: '-5px', width: '65px', textAlign: 'center', color: '#008080', fontWeight: 'bold' }}
+                                                >
+                                                    Offering
+                                                    </Feed.Content>
+                                                <Feed.Content 
+                                                style={{ float: 'right' }}
+                                                >
                                                     from {item.event_time_start} - {item.event_time_end}
                                                 </Feed.Content>
                                                 <br />
@@ -222,7 +246,7 @@ class GroupView extends Component {
                                                 <Feed.Label
                                                     style={{ paddingTop: '10px' }}>
                                                     <a style={{ fontWeight: 'bold', color: 'black' }}>{item.requester_name}</a> | <a style={{ fontWeight: 'bold', color: 'black' }}>{item.event_date}</a>
-                                                    <Icon onClick={() => this.notesModal(item)} style={{float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px'}} size="large" name="black file alternate outline"></Icon>
+                                                    <Icon onClick={() => this.notesModal(item)} style={{ float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px' }} size="large" name="black file alternate outline"></Icon>
                                                 </Feed.Label></Feed.Content>
                                             <Feed.Event
                                                 style={{ display: 'inline-flex', margin: '10px 0px', textAlign: 'center' }}
@@ -285,7 +309,7 @@ class GroupView extends Component {
                                                     >
                                                         {item.event_date}
                                                     </a>
-                                                    <Icon onClick={() => this.notesModal(item)} style={{float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px'}} size="large" name="black file alternate outline"></Icon>
+                                                    <Icon onClick={() => this.notesModal(item)} style={{ float: 'right', marginLeft: '0px', marginRight: '10px', height: '30x', width: '25px' }} size="large" name="black file alternate outline"></Icon>
                                                 </Feed.Label></Feed.Content>
                                             <Feed.Event
                                                 style={{ display: 'inline-flex', margin: '10px 0px', textAlign: 'center' }}
@@ -319,28 +343,28 @@ class GroupView extends Component {
                     :
                     <p></p>
                 }
-                
+
                 <Modal
                     open={this.state.openModal}
                     onClose={this.close}
-                >         
-                        <Modal.Header style={{textAlign: 'center'}}>Notes from the {this.state.requester_name} Family</Modal.Header>
-                            <Modal.Content>
-                            <Modal.Description>
-                                <p style={{fontSize: '17px', textAlign: 'center'}}>
-                               {this.state.notes}
-                                </p>
-                            </Modal.Description>
-                        </Modal.Content>  
+                >
+                    <Modal.Header style={{ textAlign: 'center' }}>Notes from the {this.state.requester_name} Family</Modal.Header>
+                    <Modal.Content>
+                        <Modal.Description>
+                            <p style={{ fontSize: '17px', textAlign: 'center' }}>
+                                {this.state.notes}
+                            </p>
+                        </Modal.Description>
+                    </Modal.Content>
                 </Modal>
-                <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px', marginBottom: '20px'}} />
+                <hr style={{ backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px', marginBottom: '20px' }} />
                 <div>
                     <Button color='blue' onClick={(event) => this.seeCalendar()} icon labelPosition='right'>
                         View Calendar
       <Icon name='calendar' />
                     </Button>
                 </div>
-                <hr style={{backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '20px', marginBottom: '20px'}} />
+                <hr style={{ backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '20px', marginBottom: '20px' }} />
                 <h3>Members</h3>
                 {this.props.reduxStore.groupFam && this.props.reduxStore.groupFam.length > 0 ?
 

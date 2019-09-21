@@ -23,10 +23,10 @@ class MyProfilePage extends Component {
 
     componentDidMount() {
 
-        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
-        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
-        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
-        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        // this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.userFamily.id });
+        // this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.userFamily.id });
+        this.props.dispatch({ type: 'FETCH_HOURS_USED', payload: this.props.reduxStore.user.family_id });
+        this.props.dispatch({ type: 'FETCH_HOURS_GAINED', payload: this.props.reduxStore.user.family_id });
         this.props.dispatch({ type: 'FETCH_FAMILY', payload: this.props.reduxStore.user.id })
 
         console.log('IN PROFILE COMP DID MOUNT WITH:', this.props.reduxStore.userFamily)
@@ -139,12 +139,8 @@ class MyProfilePage extends Component {
 
             <>
                 
-                {/* <Progress
-                    value={this.handleEquity()}
-                /> */}
                 <h1 style={{textAlign: 'center'}}> The {this.props.reduxStore.family.last_name1} Profile </h1>
                 
-                {/* <Button color='blue' onClick={()=> this.calculateEquity()}>CALCULATE EQUITY</Button></center> */}
                 <h3 style={{textAlign: 'center'}}> Equity</h3>
                 <div className="slidecontainer">
                         <p className="negative"> - </p><input type="range" min="-20" max="20" value={total_hours} className={total_hours >= 0 ? "GreenSlider" : "RedSlider"} id="myRange"></input><p className="positive">+</p>
@@ -160,19 +156,7 @@ class MyProfilePage extends Component {
                 <hr style={{ backgroundColor: '#8298ca', width: '80%', borderRadius: '5px', height: '5px', border: 'none', marginTop: '30px', marginBottom: '30px' }} />
                 {/* <Button onClick={()=> this.handleEquityHoursUsedOne()}>EQUITY</Button> */}
 
-                {/* <Header align="center"> {this.props.reduxStore.family.last_name1} Family</Header>
-                    <Label>
-                        Hours Used: 
-                        <Label.Detail>
-                            20
-                        </Label.Detail>
-                    </Label>
-                    <Label>
-                        Hours Banked:
-    <Label.Detail>23</Label.Detail>
-
-                    </Label>
-                 */}
+            
                 <Container align="center" className='my_feed'>
                     <h3 align="center"> YOUR CLAIMED REQUESTS</h3>
                     {this.props.reduxStore.notifications && this.props.reduxStore.notifications.length > 0 ?
@@ -185,7 +169,7 @@ class MyProfilePage extends Component {
                             if (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false) {
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui orange circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
@@ -217,7 +201,7 @@ class MyProfilePage extends Component {
 
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui teal circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
@@ -251,7 +235,7 @@ class MyProfilePage extends Component {
                                 (item.claimer_id === this.props.reduxStore.family.id && item.event_confirmed === true && item.offer_needed === false && item.event_claimed === true) {
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui orange circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
@@ -283,7 +267,7 @@ class MyProfilePage extends Component {
 
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui teal circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
@@ -321,11 +305,11 @@ class MyProfilePage extends Component {
                             // ------------------ NOT CLAIMED / NOT CONFIRMED ---------------------------
 
                             // care is NEEDED
-                            if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true && item.event_claimed === false) {
+                            if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false && item.event_claimed === false) {
 
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui orange circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
@@ -353,11 +337,11 @@ class MyProfilePage extends Component {
                                 )
                             }
                             // care is OFFERED
-                            else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === false && item.event_claimed === false) {
+                            else if (item.requester_id === this.props.reduxStore.family.id && item.event_confirmed === false && item.offer_needed === true && item.event_claimed === false) {
 
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui teal circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
@@ -391,7 +375,7 @@ class MyProfilePage extends Component {
 
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui teal circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
@@ -427,7 +411,7 @@ class MyProfilePage extends Component {
 
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui orange circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
@@ -465,10 +449,10 @@ class MyProfilePage extends Component {
 
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #FE9A76 3px', borderBottom: 'solid #FE9A76 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
-                                                    <div class="ui orange circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
+                                                    <div className="ui orange circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
                                                     <Feed.Label style={{ paddingTop: '10px' }}>
                                                         <a style={{ fontWeight: 'bold', color: 'black', fontSize: '15px' }}>The {item.claimer_name} Family Claimed Your Request!</a>
                                                     </Feed.Label>
@@ -501,7 +485,7 @@ class MyProfilePage extends Component {
 
                                 return (
                                     <>
-                                        <Card>
+                                        <Card key={item.id}>
                                             <Feed style={{ borderRight: 'solid #008080 3px', borderBottom: 'solid #008080 3px', borderRadius: '5px' }}>
                                                 <Feed.Content>
                                                     <div class="ui teal circular empty label" style={{ float: 'left', marginLeft: '10px', marginTop: '10px' }}></div>
