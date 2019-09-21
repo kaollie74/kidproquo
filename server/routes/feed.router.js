@@ -3,6 +3,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// gets events (requests) that match the user's id 
 router.get('/needed', rejectUnauthenticated,   (req,res)=> {
 
   console.log('in /needed with this id:', req.user.id);
@@ -23,25 +24,7 @@ router.get('/needed', rejectUnauthenticated,   (req,res)=> {
     })
 })
 
-// router.get('/offered', rejectUnauthenticated,   (req,res)=> {
-//   console.log('In FEED ROUTER GET YOUR FEED')
-//   const sqlText = `SELECT * from event_offered
-//   WHERE requester_id= $1;`;
-//   const value = [req.user.id];
-//   pool.query(sqlText, value)
-//   .then((response)=> {
-//     console.log('respnse from DB', response);
-//     res.send(response.rows[0]);
-    
-//   })
-//   .catch((error) => {
-//     console.log('Error getting from event_offered table', error);
-//     res.sendStatus(500);
-    
-//   })
-// })
 //updates event to claimed
-
 router.put('/update/:id', rejectUnauthenticated,  (req,res)=> {
   const sqlText = `UPDATE "event" SET "event_claimed"=$1, "claimer_id"=$2, "claimer_notes"=$3 WHERE id =$4;`;
   console.log(req.body.event_claimed)
@@ -55,8 +38,8 @@ router.put('/update/:id', rejectUnauthenticated,  (req,res)=> {
     res.sendStatus(500);
   })
 })
-//updates event to confirmed
 
+//updates event to confirmed
 router.put('/updateConfirm/:id', rejectUnauthenticated,  (req, res) => {
   console.log('in updateConfirm event', req.body.event_confirmed)
   const sqlText = `UPDATE "event" SET "event_confirmed"=$1 WHERE id =$2;`;
@@ -71,6 +54,7 @@ router.put('/updateConfirm/:id', rejectUnauthenticated,  (req, res) => {
     })
 })
 
+// adds request to event table 
 router.post('/addRequest', rejectUnauthenticated, (req,res)=> {
   const sqlText = `insert into "event" ("event_date", "event_time_start", "event_time_end", "group_id", "notes", "requester_id", "offer_needed", "total_hours")
   values($1, $2, $3, $4, $5, $6, $7, $8)`;
@@ -86,6 +70,7 @@ router.post('/addRequest', rejectUnauthenticated, (req,res)=> {
   })
 })
 
+// deletes request/event 
 router.delete('/cancelRequest/:id', rejectUnauthenticated, (req, res) => {
   console.log(req.params.id)
   const id = req.params.id;
@@ -100,6 +85,9 @@ router.delete('/cancelRequest/:id', rejectUnauthenticated, (req, res) => {
     })
 })
 
+// gets all hours used 
+// if requester is offering and user claimed
+// OR if requester is user and needs
 router.get('/hoursUsed/:id', rejectUnauthenticated,   (req,res)=> {
   console.log('In FEED ROUTER GET HOURS USED')
   const sqlText = `select sum(total_hours) as hours_used from event where requester_id = $1 
@@ -118,6 +106,9 @@ router.get('/hoursUsed/:id', rejectUnauthenticated,   (req,res)=> {
   })
 })
 
+// gets all hours gained 
+// if requester is user and is offering
+// OR if user claims a need request
 router.get('/hoursGained/:id', rejectUnauthenticated,   (req,res)=> {
   console.log('In FEED ROUTER GET HOURS GAINED')
   const sqlText = `select sum(total_hours) as hours_gained from event where requester_id = $1 
